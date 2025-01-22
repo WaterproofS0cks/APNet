@@ -40,7 +40,8 @@
             width: 45%;
             border-radius: 8px;
             left: 13%;
-            font-size: 12px;
+            font-size: 16px;
+            text-align: center;
         }
 
         .main-container input::placeholder {
