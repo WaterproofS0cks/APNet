@@ -1,3 +1,4 @@
+/* STYLING FONTS */
 @font-face {
     font-family: 'Roboto';
     src: url('/font/Roboto-Regular.ttf');
@@ -7,4 +8,16 @@
     font-family: "Roboto";
     font-weight: normal;
     font-size: 16px;
+}
+
+.font-heading {
+    font-family: "Roboto";
+    font-weight: bold;
+    font-size: 30px;
+}
+
+.font-footer-list {
+    font-family: "Roboto";
+    font-weight: normal;
+    font-size: 18px;
 }
