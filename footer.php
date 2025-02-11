@@ -3,11 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="src/favicon/favicon.ico">
     <link rel="stylesheet" href="style.css">    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
-    <title>Document</title>
+    <title>Footer</title>
     <style>
         body {
             margin: 0;
@@ -80,7 +81,7 @@
     <footer>
         <div class="footer-content">
             <div class="footer-section-logo">
-                <img src="img/APNet_Logo.png" alt="APNet Logo">
+                <img src="src/img/APNet_Logo.png" alt="APNet Logo">
             </div>
             <div class="footer-section resources">
                 <h2 class="font-heading">Resources</h2>
@@ -88,7 +89,7 @@
                     <li><a href="#" class="font-footer-list">Home</a></li>
                     <li><a href="#" class="font-footer-list">About Us</a></li>
                     <li><a href="#" class="font-footer-list">FAQ</a></li>
-                    <li><a href="#" class="font-footer-list">User  Agreement</a></li>
+                    <li><a href="#" class="font-footer-list">User Agreement</a></li>
                 </ul>
             </div>
             <div class="footer-section contacts">
@@ -99,7 +100,7 @@
                     <li><a href="https://www.linkedin.com/in/yewshanooi/" class="font-footer-list">Yew Shan</a></li>
                     <li><a href="https://www.linkedin.com/in/karlson-thien-700715275/" class="font-footer-list">Karlson Thien</a></li>
                     <li><a href="https://www.linkedin.com/in/jeremiah-sii-yi-4272232a3/" class="font-footer-list">Jeremiah Sii</a></li>
-                    <li><a href="#" class="font-footer-list">Zheng Yang</a></li>
+                    <li><a href="https://www.linkedin.com/in/darren-kong-zheng-yang-65a23834b/" class="font-footer-list">Zheng Yang</a></li>
                 </ul>
             </div>
         </div>

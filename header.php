@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link rel="icon" type="image/x-icon" href="src/favicon/favicon.ico">
+    <title>Header</title>
     <link rel="stylesheet" href="style.css">
     <style>
 
@@ -66,11 +67,11 @@
 
             
 
-            <a href="home.php" class="font-regular"><img src="img/APNet_Logo.png" alt="APNet Logo" id="logo"></a>
+            <a href="home.php" class="font-regular"><img src="src/img/apnet-logo.png" alt="APNet Logo" id="logo"></a>
 
             <input type="text" name="" id="" placeholder="Search APNet..." class="font-regular">
 
-            <img src="img/Default_pfp.png" alt="APNet Logo" id="pfp">
+            <img src="src/img/default-pfp.png" alt="Default Profile Picture" id="pfp">
 
     </div>
 </header>
