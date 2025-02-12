@@ -209,6 +209,7 @@
     </style>
 </head>
 <body>
+    <?php include "header.php"; ?>
     <div class="content">
         <div class="profile">
             <div class="profile-img">

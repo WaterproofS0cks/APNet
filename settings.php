@@ -94,6 +94,7 @@
     </style>
 </head>
 <body>
+    <?php include "header.php"; ?>
     <div class="content">
         <h2>Settings</h2>
         <div class="user-account">
