@@ -15,7 +15,7 @@
         }
        
         .main-container {
-            position: absolute;
+            position: relative;
             align-items: center;
             display: flex;
             border: 0px solid;
