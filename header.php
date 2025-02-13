@@ -49,7 +49,7 @@
             text-align: center;
         }
 
-        #pfp {
+        #profile-img {
             position: relative;
             height: 55px;
             width: 55px;
@@ -71,7 +71,7 @@
 
             <input type="text" name="" id="" placeholder="Search APNet..." class="font-regular">
 
-            <img src="src/img/default-pfp.png" alt="Default Profile Picture" id="pfp">
+            <img src="src/img/default-pfp.png" alt="Default Profile Picture" id="profile-img">
 
     </div>
 </header>

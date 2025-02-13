@@ -36,7 +36,7 @@
             flex-shrink: 0;
             width: 150px;
             height: 150px;
-            border-radius: 8px;
+            border-radius: 100%;
             overflow: hidden;
             background-color: #f0f0f0;
         }

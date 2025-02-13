@@ -57,6 +57,12 @@
             font-size: 16px;
         }
 
+        input[type="file"] {
+            padding: 10px;
+            margin-bottom: 20px;
+            box-sizing: border-box;
+        }
+
         input[type="submit"] {
             padding: 10px 20px;
             background-color: #111827;
@@ -97,29 +103,30 @@
     <?php include "header.php"; ?>
     <div class="content">
         <h2>Settings</h2>
-        <div class="user-account">
-            <h3>Account</h3>
-            <form action="#">
-                <label for="name">Name</label>
-                <input type="text" id="name" name="name">
-                <label for="email">Email address</label>
-                <input type="email" id="email" name="email">
-                <label for="phone">Phone number</label>
-                <input type="tel" id="phone" name="phone">
-                <!-- [TO-DO] Add option to change user's pfp -->
-
-                <input type="submit" value="Update account" />
-            </form>
-        </div>
         <div class="user-profile">
             <h3>Profile</h3>
             <form action="#">
                 <label for="username">Username</label>
                 <input type="text" id="username" name="username">
-                <label for="about">About me</label>
-                <input type="text" id="about" name="about">
+                <label for="bio">Bio</label>
+                <input type="text" id="bio" name="bio">
 
                 <input type="submit" value="Update profile" />
+            </form>
+        </div>
+        <div class="user-account">
+            <h3>Account</h3>
+            <form action="#">
+                <label for="name">Name</label>
+                <input type="text" id="name" name="name">
+                <label for="pfp">Profile Picture</label>
+                <input type="file" id="pfp" name="pfp" accept=".jpg, .jpeg, .png">
+                <label for="email">Email Address</label>
+                <input type="email" id="email" name="email">
+                <label for="phone">Phone Number</label>
+                <input type="tel" id="phone" name="phone">
+
+                <input type="submit" value="Update account" />
             </form>
         </div>
         <div class="user-security">
