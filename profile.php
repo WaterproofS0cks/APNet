@@ -4,28 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/x-icon" href="src/favicon/favicon.ico">
+    <link rel="stylesheet" href="style.css">
     <title>Profile</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f8f9fa;
-        }
-
-        .content {
-            max-width: 800px;
-            margin: 20px auto;
-            padding: 20px;
-            background-color: #fff;
-            border-radius: 8px;
-            box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-        }
-
         .profile {
             display: flex;
             margin-bottom: 20px;

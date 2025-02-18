@@ -1,26 +1,25 @@
-/* STYLING FONTS */
-/* @font-face {
-    font-family: 'Roboto';
-    src: url('/font/Roboto-Regular.ttf');
-} */
-
-.font-regular {
-    font-family: "Roboto", sans-serif;
-    font-weight: normal;
-    font-size: 16px;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-.font-heading {
-    font-family: "Roboto", sans-serif;
-    font-weight: bold;
-    font-size: 30px;
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f8f9fa;
 }
 
-/* .font-footer-list {
-    font-family: "Roboto", sans-serif;
-    font-weight: normal;
-    font-size: 18px;
-} */
+.content {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+
+/* FOOTER */
 
 .footer-section a.font-footer-list {
     font-family: "Roboto", sans-serif;
