@@ -9,8 +9,113 @@
     <link rel="stylesheet" href="style.css">
     <title>Login</title>
     <style>
+        *  {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
          body{
-            background-color: lightblue;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            margin-top: 150px;
+            height: 50vh;
+            background: linear-gradient(to right, #b3e0ff, #ffffff);
+        }
+
+        .formbox {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 400px;
+            
+        }
+
+        .inputbox {
+            position: relative;
+            width: 100%;
+            margin-bottom: 15px;
+        }
+
+        .inputbox ion-icon {
+            position: absolute;
+            left: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 18px;
+            color: #333;
+        }
+
+        .inputbox input {
+            width: 100%;
+            padding: 10px 10px 10px 35px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            outline: none;
+        }
+
+        .inputbox label {
+            position: absolute;
+            left: 35px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 14px;
+            color: gray;
+            transition: all 0.3s ease-in-out;
+            pointer-events: none;
+        }
+
+        .inputbox input:focus ~ label,
+        .inputbox input:valid ~ label {
+            opacity: 0;
+            visibility: hidden;
+            font-size: 12px;
+            color: #007bff;
+        }
+
+        .forget {
+            width: 100%;
+            text-align: right;
+            margin-bottom: 10px;
+        }
+
+        .forget a {
+            font-size: 12px;
+            color: #007bff;
+            text-decoration: none;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background: #0056b3;
+        }
+
+        .register {
+            margin-top: 15px;
+            font-size: 14px;
+        }
+
+        .register a {
+            color: #007bff;
+            text-decoration: none;
+            font-weight: bold;
         }
 
         .img-title{
@@ -20,16 +125,15 @@
             display: flex;
             justify-content: center;
             align-items: center;
-
-    
-            margin-left: 4vw;  /* Moves it to the right */
-            margin-top: 4vh;   /* Moves it downward */
+            margin-left: -20px;
+           
+            margin-top: 4vh;  
         }
 
         .img-title img{
-            font-size: 2rem; /* Reduce the title size */
+            font-size: 2rem; 
             font-weight: bold;
-            color: #2a3f5f; /* Darker text color for better contrast */
+            color: #2a3f5f; 
             width: 500px;
             
         }
@@ -38,33 +142,58 @@
             position: absolute;
             right: 0;
             top: 0;
-            width: 50vw; /* 50% of the viewport width */
-            height: 100vh; /* Full viewport height */
+            width: 100vw; 
+            height: 100vh; 
             display: flex;
             justify-content: center;
             align-items: center;
-            overflow: hidden; /* Prevents overflow */
+            overflow: hidden; 
+            z-index: -1;
         }
 
         .img-loginbackground img {
-            max-width: 100%; /* Ensures it does not exceed container width */
-            max-height: 100%; /* Ensures it does not exceed container height */
-            width: auto; 
+            width:1920px;
+            height:1080px;
             height: auto;
-            object-fit: cover; /* Ensures it fills the area properly */
-            max-width: 1920px;
+            object-fit: cover; 
+            
         }
 
     </style>
 </head>
 <body>
+    <div class= "img-loginbackground">
+        <img src="https://images.unsplash.com/photo-1506252374453-ef5237291d83?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+         alt="login background" >
+    </div>
+
+
     <div class = "img-title">
         <img src="src/img/apnet-logo.png" alt="login title">
     </div>
-    <div class= "img-loginbackground">
-        <img src="https://www.xtrafondos.com/wallpapers/ola-en-el-oceano-arte-digital-10134.jpg"
-         alt="login background" >
+
+    <div class = "formbox">
+        <div class="inputbox">
+            <ion-icon name="mail-outline"></ion-icon>
+            <input type="email" required>
+            <label for="">Email</label>
+        </div>
+
+        <div class="inputbox">
+            <ion-icon name="lock-closed-outline"></ion-icon>
+            <input type="password" required>
+            <label for="">Password</label>
+        </div>
+
+        <div class="forget">
+            <a href="#">Forget Password</a>
+        </div>
+        <button>Log in</button>
+        <div class="register">
+            <p>Don't have an account? <a href="#">Register Now</a></p>
+        </div>
     </div>
-    
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 </body>
 </html>
