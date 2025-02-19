@@ -16,8 +16,54 @@
             color: #666;
             padding: 20px;
             margin: 0;
+            padding: 0;
             line-height: 1.6;
+            max-width: 100%;
+            overflow-x: hidden;
         }
+        .header-main-container {
+            position: relative;
+            align-items: center;
+            display: flex;
+            border: 0px solid;
+            background-color:	#292a2d;
+            width: 100%;
+            height: 80px;
+            padding: 0 10px;
+            margin-bottom: 20px;
+        }
+
+        #header-logo {
+            position: relative;
+            height: 55px;
+            width: auto;
+            padding: 3px;
+            margin: 3px;
+        }
+
+        .header-main-container input {
+            position: relative;  
+            height: 30px;
+            width: 45%;
+            border-radius: 8px;
+            left: 13%;
+            font-size: 16px;
+            text-align: center;
+        }
+
+        .header-main-container input::placeholder {
+            font-size: 16px;
+            text-align: center;
+        }
+
+        #header-profile-img {
+            position: relative;
+            height: 120px;
+            width: 120px;
+            padding: 30px;
+            margin-left: auto;
+        }
+
         .container {
             max-width: 80%;
             margin: auto;
@@ -25,28 +71,35 @@
             border-radius: 8px;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
             padding: 20px;
+            margin-bottom: 20px;
         }
+
         h1, h2, h3 {
             color: #000;
             margin-top: 20px;
         }
+
         hr {
             border: 1px solid #ccc;
             margin: 20px 0;
         }
+
         a {
             color: #0066cc; 
             text-decoration: none;
             transition: color 0.3s ease;
         }
+
         a:hover {
             color: #004999; 
             text-decoration: underline;
         }
+
         ul {
             list-style-type: disc;
             margin-left: 20px;
         }
+
         .section {
             margin-bottom: 30px;
             padding: 15px;
@@ -54,114 +107,205 @@
             background-color: #f9f9f9;
             transition: background-color 0.3s ease;
         }
+
         .section:hover {
             background-color: #e9f5ff; 
+        }
+
+        footer {
+            background-color: #292a2d;
+            color: white;
+            padding: 20px 0; 
+        }
+
+        .footer-content {
+            display: flex;
+            margin: auto;
+            max-width: 90%;
+        }
+
+        .footer-section {
+            flex: 1;
+            padding: 20px;
+        }
+
+        .footer-section-logo {
+            width: 50%;
+            padding: 20px;
+        }
+
+        .footer-section-logo img {
+            height: 75px;
+            width: auto;
+            padding: 10px;
+        }
+
+        .footer-section h2 {
+            font-size: 26px;
+            margin-bottom: 10px;
+            color:  #5495ce;
+        }
+
+        .footer-section ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .footer-section ul li {
+            margin: 20px 0;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding: 10px 0;
+            background-color: #222;
         }
     </style>
 </head>
 <body>
 
-<div class="container">
-    <h1>APNet Terms of Service/User Agreement</h1>
-    <p><strong>Effective Date: 1st February 2025</strong></p>
-    <p>Welcome to APNet, a social media platform exclusively designed for the Asia Pacific University (APU) community. By accessing or using APNet, you agree to comply with the terms and conditions outlined below. If you do not agree with these terms, please refrain from using our platform.</p>
+    <header>
+        <div class="header-main-container">
     
-    <hr>
+                <a href="home.php" class="font-regular"><img src="src/img/apnet-logo.png" alt="APNet Logo" id="header-logo"></a>
+    
+                <input type="text" name="" id="" placeholder="Search APNet..." class="font-regular">
+    
+                <img src="src/img/default-pfp.png" alt="Default Profile Picture" id="header-profile-img">
+    
+        </div>
+    </header>
+    
+    <div class="container">
+        <h1>APNet Terms of Service/User Agreement</h1>
+        <p><strong>Effective Date: 1st February 2025</strong></p>
+        <p>Welcome to APNet, a social media platform exclusively designed for the Asia Pacific University (APU) community. By accessing or using APNet, you agree to comply with the terms and conditions outlined below. If you do not agree with these terms, please refrain from using our platform.</p>
+        
+        <hr>
 
-    <div class="section">
-        <h2>1. Eligibility and Scope</h2>
-        <h3>1.1 Restricted Access</h3>
-        <p>APNet is specifically created for current staff and students of APU. Users from other universities may register, but the platform’s features and content are tailored exclusively to the APU community. As a result, users outside of APU may experience limited engagement or relevance.</p>
+        <div class="section">
+            <h2>1. Eligibility and Scope</h2>
+            <h3>1.1 Restricted Access</h3>
+            <p>APNet is specifically created for current staff and students of APU. Users from other universities may register, but the platform’s features and content are tailored exclusively to the APU community. As a result, users outside of APU may experience limited engagement or relevance.</p>
 
-        <h3>1.2 Age Requirement</h3>
-        <p>You must be at least 18 years old to create an account and use APNet.</p>
+            <h3>1.2 Age Requirement</h3>
+            <p>You must be at least 18 years old to create an account and use APNet.</p>
 
-        <h3>1.3 Account Creation</h3>
-        <p>All users must provide accurate and truthful information during registration. Impersonation of others, including APU faculty, staff, or students, is strictly prohibited.</p>
+            <h3>1.3 Account Creation</h3>
+            <p>All users must provide accurate and truthful information during registration. Impersonation of others, including APU faculty, staff, or students, is strictly prohibited.</p>
+        </div>
+
+        <div class="section">
+            <h2>2. User Responsibilities</h2>
+            <h3>2.1 Account Security</h3>
+            <p>You are responsible for safeguarding your APNet login credentials. Notify us immediately if you suspect unauthorized access or a security breach.</p>
+
+            <h3>2.2 Content Guidelines</h3>
+            <p>You are solely responsible for any content you post, including text, images, and videos. APNet prohibits content that:</p>
+            <ul>
+                <li>Violates local laws or APU policies.</li>
+                <li>Contains hate speech, harassment, or explicit material.</li>
+                <li>Promotes illegal or unethical behavior.</li>
+            </ul>
+
+            <h3>2.3 Respectful Community Behavior</h3>
+            <p>All interactions on APNet must be respectful. Harassment, discrimination, or any form of cyberbullying is not tolerated and will lead to account suspension or termination.</p>
+
+            <h3>2.4 Prohibited Activities</h3>
+            <p>You agree not to:</p>
+            <ul>
+                <li>Post false, misleading, or defamatory content.</li>
+                <li>Exploit APNet for unauthorized commercial purposes.</li>
+                <li>Use bots, automated tools, or scripts to engage with the platform.</li>
+                <li>Interfere with the normal operation of the platform.</li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h2>3. Platform Features</h2>
+            <h3>3.1 Forums and Posting</h3>
+            <p>Users can view forum pages, post their own content (including images and videos), comment on posts, like posts, and bookmark content. All posts and comments must adhere to the guidelines stated in Section 2.</p>
+
+            <h3>3.2 Club and Group Recruitment</h3>
+            <p>APNet allows users to apply for and recruit members for APU-specific clubs, events, and group assignments. Recruitment unrelated to APU activities may be removed at our discretion.</p>
+
+            <h3>3.3 Profile Management</h3>
+            <p>Users can view their own profile and those of other users. They may also edit their profile information. Misrepresentation (e.g., providing false affiliations or achievements) is prohibited.</p>
+        </div>
+
+        <div class="section">
+            <h2>4. Privacy and Data Usage</h2>
+            <h3>4.1 Data Collection</h3>
+            <p>We collect user information during registration and track activity logs (e.g., posts, likes, and comments) to enhance your experience on APNet.</p>
+
+            <h3>4.2 Data Sharing</h3>
+            <p>Your data will not be shared with third parties except as required by law or to maintain the safety and integrity of the platform.</p>
+
+            <h3>4.3 Content Visibility</h3>
+            <p>Content posted on public forums or profiles is visible to all APNet users. Please exercise discretion when sharing personal or sensitive information.</p>
+        </div>
+
+        <div class="section">
+            <h2>5. Account Suspension and Termination</h2>
+            <h3>5.1 Violations</h3>
+            <p>We reserve the right to suspend or terminate accounts for violating these terms, applicable laws, or APU policies.</p>
+
+            <h3>5.2 Reporting Violations</h3>
+            <p>Users can report inappropriate content or behavior using APNet’s reporting tools. All reports will be reviewed, and appropriate actions will be taken based on our findings.</p>
+        </div>
+
+        <div class="section">
+            <h2>6. Limitations of Liability</h2>
+            <h3>6.1 No Guarantee of Availability</h3>
+            <p>While we strive to ensure continuous availability of APNet, we cannot guarantee uninterrupted access due to maintenance, technical issues, or other unforeseen circumstances.</p>
+
+            <h3>6.2 User-Generated Content</h3>
+            <p>APNet is not responsible for the content posted by its users. However, we reserve the right to review and remove content that violates these terms.</p>
+        </div>
+
+        <div class="section">
+            <h2>7. Modifications to Terms</h2>
+            <p>We may update these terms of service periodically. Significant changes will be communicated to users. Continued use of APNet after updates constitutes acceptance of the revised terms.</p>
+        </div>
+
+        <div class="section">
+            <h2>8. Contact Information</h2>
+            <p>For questions, concerns, or support, please contact us at <a href="mailto:[Insert Support Email]">apnetsupport@gmail.com</a> or use our <a href="[Insert Contact Form URL]">Contact Form</a>.</p>
+        </div>
+
+        <hr>
+
+        <p>By creating an account on APNet or logging into the platform, you acknowledge that you have read, understood, and agree to these Terms of Service.</p>
     </div>
 
-    <div class="section">
-        <h2>2. User Responsibilities</h2>
-        <h3>2.1 Account Security</h3>
-        <p>You are responsible for safeguarding your APNet login credentials. Notify us immediately if you suspect unauthorized access or a security breach.</p>
+    <footer>
+        <div class="footer-content">
 
-        <h3>2.2 Content Guidelines</h3>
-        <p>You are solely responsible for any content you post, including text, images, and videos. APNet prohibits content that:</p>
-        <ul>
-            <li>Violates local laws or APU policies.</li>
-            <li>Contains hate speech, harassment, or explicit material.</li>
-            <li>Promotes illegal or unethical behavior.</li>
-        </ul>
+            <div class="footer-section-logo">
+                <img src="src/img/apnet-logo.png" alt="APNet Logo">
+            </div>
 
-        <h3>2.3 Respectful Community Behavior</h3>
-        <p>All interactions on APNet must be respectful. Harassment, discrimination, or any form of cyberbullying is not tolerated and will lead to account suspension or termination.</p>
-
-        <h3>2.4 Prohibited Activities</h3>
-        <p>You agree not to:</p>
-        <ul>
-            <li>Post false, misleading, or defamatory content.</li>
-            <li>Exploit APNet for unauthorized commercial purposes.</li>
-            <li>Use bots, automated tools, or scripts to engage with the platform.</li>
-            <li>Interfere with the normal operation of the platform.</li>
-        </ul>
-    </div>
-
-    <div class="section">
-        <h2>3. Platform Features</h2>
-        <h3>3.1 Forums and Posting</h3>
-        <p>Users can view forum pages, post their own content (including images and videos), comment on posts, like posts, and bookmark content. All posts and comments must adhere to the guidelines stated in Section 2.</p>
-
-        <h3>3.2 Club and Group Recruitment</h3>
-        <p>APNet allows users to apply for and recruit members for APU-specific clubs, events, and group assignments. Recruitment unrelated to APU activities may be removed at our discretion.</p>
-
-        <h3>3.3 Profile Management</h3>
-        <p>Users can view their own profile and those of other users. They may also edit their profile information. Misrepresentation (e.g., providing false affiliations or achievements) is prohibited.</p>
-    </div>
-
-    <div class="section">
-        <h2>4. Privacy and Data Usage</h2>
-        <h3>4.1 Data Collection</h3>
-        <p>We collect user information during registration and track activity logs (e.g., posts, likes, and comments) to enhance your experience on APNet.</p>
-
-        <h3>4.2 Data Sharing</h3>
-        <p>Your data will not be shared with third parties except as required by law or to maintain the safety and integrity of the platform.</p>
-
-        <h3>4.3 Content Visibility</h3>
-        <p>Content posted on public forums or profiles is visible to all APNet users. Please exercise discretion when sharing personal or sensitive information.</p>
-    </div>
-
-    <div class="section">
-        <h2>5. Account Suspension and Termination</h2>
-        <h3>5.1 Violations</h3>
-        <p>We reserve the right to suspend or terminate accounts for violating these terms, applicable laws, or APU policies.</p>
-
-        <h3>5.2 Reporting Violations</h3>
-        <p>Users can report inappropriate content or behavior using APNet’s reporting tools. All reports will be reviewed, and appropriate actions will be taken based on our findings.</p>
-    </div>
-
-    <div class="section">
-        <h2>6. Limitations of Liability</h2>
-        <h3>6.1 No Guarantee of Availability</h3>
-        <p>While we strive to ensure continuous availability of APNet, we cannot guarantee uninterrupted access due to maintenance, technical issues, or other unforeseen circumstances.</p>
-
-        <h3>6.2 User-Generated Content</h3>
-        <p>APNet is not responsible for the content posted by its users. However, we reserve the right to review and remove content that violates these terms.</p>
-    </div>
-
-    <div class="section">
-        <h2>7. Modifications to Terms</h2>
-        <p>We may update these terms of service periodically. Significant changes will be communicated to users. Continued use of APNet after updates constitutes acceptance of the revised terms.</p>
-    </div>
-
-    <div class="section">
-        <h2>8. Contact Information</h2>
-        <p>For questions, concerns, or support, please contact us at <a href="mailto:[Insert Support Email]">apnetsupport@gmail.com</a> or use our <a href="[Insert Contact Form URL]">Contact Form</a>.</p>
-    </div>
-
-    <hr>
-
-    <p>By creating an account on APNet or logging into the platform, you acknowledge that you have read, understood, and agree to these Terms of Service.</p>
-</div>
-
+            <div class="footer-section resources">
+                <h2 class="font-heading">Resources</h2>
+                <ul>
+                    <li><a href="#" class="font-footer-list">Home</a></li>
+                    <li><a href="#" class="font-footer-list">About Us</a></li>
+                    <li><a href="#" class="font-footer-list">FAQ</a></li>
+                    <li><a href="#" class="font-footer-list">User Agreement</a></li>
+                </ul>
+            </div>
+            <div class="footer-section contacts">
+                <h2 class="font-heading">Follow Our Socials</h2>
+                <ul>
+                    <li><a href="https://www.linkedin.com/in/marcuschanrenzhi/" class="font-footer-list">Marcus Chan</a></li>
+                    <li><a href="https://www.linkedin.com/in/sean-yap-9b69022a2/" class="font-footer-list">Sean Yap</a></li>
+                    <li><a href="https://www.linkedin.com/in/yewshanooi/" class="font-footer-list">Yew Shan</a></li>
+                    <li><a href="https://www.linkedin.com/in/karlsonthien/" class="font-footer-list">Karlson Thien</a></li>
+                    <li><a href="https://www.linkedin.com/in/jeremiah-sii-yi-4272232a3/" class="font-footer-list">Jeremiah Sii</a></li>
+                    <li><a href="https://www.linkedin.com/in/darren-kong-zheng-yang-65a23834b/" class="font-footer-list">Zheng Yang</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
 </body>
 </html>
