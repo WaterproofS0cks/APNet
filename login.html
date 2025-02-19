@@ -1,0 +1,70 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="src/favicon/favicon.ico">
+    <link rel="stylesheet" href="style.css">
+    <title>Login</title>
+    <style>
+         body{
+            background-color: lightblue;
+        }
+
+        .img-title{
+            width: 40vw;
+            height: 20vw;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+    
+            margin-left: 4vw;  /* Moves it to the right */
+            margin-top: 4vh;   /* Moves it downward */
+        }
+
+        .img-title img{
+            font-size: 2rem; /* Reduce the title size */
+            font-weight: bold;
+            color: #2a3f5f; /* Darker text color for better contrast */
+            width: 500px;
+            
+        }
+
+        .img-loginbackground {
+            position: absolute;
+            right: 0;
+            top: 0;
+            width: 50vw; /* 50% of the viewport width */
+            height: 100vh; /* Full viewport height */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden; /* Prevents overflow */
+        }
+
+        .img-loginbackground img {
+            max-width: 100%; /* Ensures it does not exceed container width */
+            max-height: 100%; /* Ensures it does not exceed container height */
+            width: auto; 
+            height: auto;
+            object-fit: cover; /* Ensures it fills the area properly */
+            max-width: 1920px;
+        }
+
+    </style>
+</head>
+<body>
+    <div class = "img-title">
+        <img src="src/img/apnet-logo.png" alt="login title">
+    </div>
+    <div class= "img-loginbackground">
+        <img src="https://www.xtrafondos.com/wallpapers/ola-en-el-oceano-arte-digital-10134.jpg"
+         alt="login background" >
+    </div>
+    
+</body>
+</html>
