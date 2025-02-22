@@ -239,14 +239,20 @@ input[type="submit"]:hover {
     background-color: #3D6D99;
 }
 
-.settings-icon {
+.profile-btn-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.btn-icon {
     display: inline-block;
     width: 32px;
     height: 32px;
     cursor: pointer;
 }
 
-.settings-icon img {
+.btn-icon img {
     width: 100%;
     height: 100%;
     object-fit: contain;
@@ -310,7 +316,7 @@ input[type="submit"]:hover {
     gap: 10px;
 }
 
-.user-account, .user-profile, .user-security {
+.user-account, .user-profile, .user-notification, .user-security {
     background-color: #fff;
     padding: 40px; /* Padding intentionally set to 40px instead of 20px */
     border-radius: 8px;
@@ -323,4 +329,18 @@ input[type="submit"]:hover {
     gap: 10px;
     align-items: center;
     margin-top: 20px;
+}
+
+.checkbox-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin-bottom: 20px;
+    width: 50%; /* Width is 50% to ensure sufficient spacing between label and checkbox */
+}
+
+.checkbox-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
