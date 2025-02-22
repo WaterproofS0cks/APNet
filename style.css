@@ -9,7 +9,7 @@ body {
     background-color: #f8f9fa;
 }
 
-.content {
+.profile-content, .settings-content {
     max-width: 800px;
     margin: 20px auto;
     padding: 20px;
@@ -20,7 +20,6 @@ body {
 
 
 /* FOOTER */
-
 .footer-section a.font-footer-list {
     font-family: "Roboto", sans-serif;
     font-weight: bold;
