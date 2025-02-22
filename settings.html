@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="src/favicon/favicon.ico">
+    <link rel="stylesheet" href="style.css">
+    <title>Settings</title>
+</head>
+<body>
+    <div class="content">
+        <div class="card-header">
+            <a href="/profile.html" class="btn-icon">
+                <img src="src/icon/icons8-back-96.png" alt="Back Icon">
+            </a>
+            <h2>Settings</h2>
+        </div>
+        <div class="card-section">
+            <h3>Profile</h3>
+            <form action="#">
+                <label for="username">Username</label>
+                <input type="text" id="username" name="username">
+                <label for="bio">Bio</label>
+                <input type="text" id="bio" name="bio">
+                <label for="pfp">Profile Picture</label>
+                <input type="file" id="pfp" name="pfp" accept=".jpg, .jpeg, .png">
+
+                <input type="submit" value="Update profile">
+            </form>
+        </div>
+        <div class="card-section">
+            <h3>Account</h3>
+            <form action="#">
+                <label for="name">Name</label>
+                <input type="text" id="name" name="name">
+                <label for="email">Email Address</label>
+                <input type="email" id="email" name="email">
+                <label for="phone">Phone Number</label>
+                <input type="tel" id="phone" name="phone">
+
+                <input type="submit" value="Update account">
+            </form>
+        </div>
+        <div class="card-section">
+            <h3>Notification</h3>
+            <form action="#">
+                <div class="checkbox-container">
+                    <div class="checkbox-item">
+                        <label for="likes">Likes</label>
+                        <input type="checkbox" id="likes" name="likes" value="true">
+                    </div>
+                    <div class="checkbox-item">
+                        <label for="comments">Comments</label>
+                        <input type="checkbox" id="comments" name="comments" value="true">
+                    </div>
+                    <div class="checkbox-item">
+                        <label for="bookmarks">Bookmarks</label>
+                        <input type="checkbox" id="bookmarks" name="bookmarks" value="true">
+                    </div>
+                </div>
+
+                <input type="submit" value="Update notification">
+            </form>
+        </div>
+        <div class="card-section">
+            <h3>Security</h3>
+            <div class="button-component">
+                <a href="/resetpassword.html" style="text-decoration: none;">
+                    <button class="button-black">Reset password</button>
+                </a>
+                <button class="button-red">Delete account</button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
