@@ -39,6 +39,12 @@ body {
 
 /* BUTTONS */
 
+button img {
+    width: 15px;
+    height: 15px;
+    object-fit: contain;
+}
+
 .button-black {
     padding: 10px 20px;
     background-color: #111827;
@@ -56,10 +62,38 @@ body {
     background-color: #374151;
 }
 
-.button-black img {
-    width: 15px;
-    height: 15px;
-    object-fit: contain;
+.button-grey {
+    padding: 10px 20px;
+    background-color: #6c757d;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.button-grey:hover {
+    background-color: #5c636a;
+}
+
+.button-red {
+    padding: 10px 20px;
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.button-red:hover {
+    background-color: #bb2d3b;
 }
 
 
@@ -146,6 +180,12 @@ input[type="submit"]:hover {
     align-items: center;
 }
 
+.profile-desc p {
+    margin-top: 8px;
+    font-size: 1rem;
+    color: #666;
+}
+
 .verify-badge, .role-badge {
     width: 20px;
     height: 20px;
@@ -182,24 +222,21 @@ input[type="submit"]:hover {
     margin-left: 10px;
 }
 
-.profile-desc p {
-    margin-top: 8px;
-    font-size: 1rem;
-    color: #666;
+.profile-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 50%;
 }
 
 .profile-btn button {
-    padding: 10px 20px;
-    background-color: #111827;
-    color: white;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: background-color 0.3s;
+    width: 100%;
+    background-color: #5796CC;
+    text-align: center;
 }
 
 .profile-btn button:hover {
-    background-color: #374151;
+    background-color: #3D6D99;
 }
 
 .settings-icon {
@@ -223,13 +260,8 @@ input[type="submit"]:hover {
 
 .navigation button {
     width: 100%;
-    background-color: #5796CC;
     display: inline-block;
     text-align: center;
-}
-
-.navigation button:hover {
-    background-color: #3D6D99;
 }
 
 .post {
@@ -271,6 +303,12 @@ input[type="submit"]:hover {
 
 
 /* settings.html (Yew Shan) */
+
+.user-settings {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
 
 .user-account, .user-profile, .user-security {
     background-color: #fff;
