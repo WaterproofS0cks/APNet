@@ -1,3 +1,5 @@
+/* BODY & CONTENT CARD */
+
 * {
     margin: 0;
     padding: 0;
@@ -6,7 +8,6 @@
 
 body {
     font-family: Arial, sans-serif;
-    background-color: #f8f9fa;
 }
 
 .profile-content, .settings-content {
@@ -17,6 +18,7 @@ body {
     border-radius: 8px;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
+
 
 
 /* FOOTER */
@@ -30,4 +32,343 @@ body {
 
 .footer-section a.font-footer-list:hover {
     text-decoration: underline;
+}
+
+
+
+/* BUTTONS */
+
+button img {
+    width: 15px;
+    height: 15px;
+    object-fit: contain;
+}
+
+.button-black {
+    padding: 10px 20px;
+    background-color: #111827;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.button-black:hover {
+    background-color: #374151;
+}
+
+.button-grey {
+    padding: 10px 20px;
+    background-color: #6c757d;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.button-grey:hover {
+    background-color: #5c636a;
+}
+
+.button-red {
+    padding: 10px 20px;
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.button-red:hover {
+    background-color: #bb2d3b;
+}
+
+
+
+/* FORM */
+
+form {
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+}
+
+label {
+    font-size: 1rem;
+    color: #666;
+    margin-bottom: 5px;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="tel"] {
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-sizing: border-box;
+    font-size: 16px;
+}
+
+input[type="file"] {
+    padding: 10px;
+    margin-bottom: 20px;
+    box-sizing: border-box;
+}
+
+input[type="submit"] {
+    padding: 10px 20px;
+    background-color: #111827;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+input[type="submit"]:hover {
+    background-color: #374151;
+}
+
+
+
+/* profile.html (Yew Shan) */
+
+.profile {
+    display: flex;
+    margin-bottom: 20px;
+    gap: 20px;
+}
+
+.profile-img {
+    flex-shrink: 0;
+    width: 150px;
+    height: 150px;
+    border-radius: 100%;
+    overflow: hidden;
+    background-color: #f0f0f0;
+}
+
+.profile-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.profile-desc {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.profile-desc h2 {
+    display: inline-flex;
+    align-items: center;
+}
+
+.profile-desc p {
+    margin-top: 8px;
+    font-size: 1rem;
+    color: #666;
+}
+
+.verify-badge, .role-badge {
+    width: 20px;
+    height: 20px;
+    margin-left: 10px;
+    border-radius: 50%;
+}
+
+.verify-badge {
+    background-color: #5796CC;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 10px;
+}
+
+.verify-badge img {
+    width: 75%;
+    height: 75%;
+    object-fit: contain;
+}
+
+.role-badge {
+    background-color: grey;
+    color: white;
+    padding: 15px 40px;
+    border-radius: 20px;
+    font-size: 0.875rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 10px;
+}
+
+.profile-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 50%;
+}
+
+.profile-btn button {
+    width: 100%;
+    background-color: #5796CC;
+    text-align: center;
+}
+
+.profile-btn button:hover {
+    background-color: #3D6D99;
+}
+
+.profile-btn-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.btn-icon {
+    display: inline-block;
+    width: 32px;
+    height: 32px;
+    cursor: pointer;
+}
+
+.btn-icon img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.navigation {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.navigation button {
+    width: 100%;
+    display: inline-block;
+    text-align: center;
+}
+
+.post {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.post-attr {
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.post-title {
+    padding: 10px 20px;
+    margin-top: 5px;
+}
+
+.post-img {
+    margin-top: 20px;
+    height: 250px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+}
+
+.post-inter {
+    padding: 10px 20px;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    margin-top: 10px;
+}
+
+
+
+/* settings.html (Yew Shan) */
+
+.card-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.card-section {
+    background-color: #fff;
+    padding: 40px; /* Padding intentionally set to 40px instead of 20px */
+    border-radius: 8px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    margin-top: 20px;
+}
+
+.button-component {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.checkbox-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin-bottom: 20px;
+    width: 50%; /* Width is 50% to ensure sufficient spacing between label and checkbox */
+}
+
+.checkbox-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+
+
+/* notification.html (Yew Shan) */
+
+.card-section p {
+    margin-top: 20px;
+    color: #666;
+}
+
+.card-section a {
+    text-decoration: none;
+    font-weight: bold;
+    color: #666;
+}
+
+.card-section a:hover {
+    text-decoration: underline;
+    font-weight: bold;
+    color: #666;
+}
+
+
+
+/* resetpassword.html (Yew Shan) */
+
+.reset-password-flow {
+    margin-bottom: 20px;
 }
