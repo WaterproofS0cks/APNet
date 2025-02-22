@@ -365,3 +365,11 @@ input[type="submit"]:hover {
     font-weight: bold;
     color: #666;
 }
+
+
+
+/* resetpassword.html (Yew Shan) */
+
+.reset-password-flow {
+    margin-bottom: 20px;
+}
