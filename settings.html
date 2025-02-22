@@ -6,79 +6,6 @@
     <link rel="icon" type="image/x-icon" href="src/favicon/favicon.ico">
     <link rel="stylesheet" href="style.css">
     <title>Settings</title>
-    <style>
-        .user-account, .user-profile, .user-security {
-            background-color: #fff;
-            padding: 40px; /* Padding intentionally set to 40px instead of 20px */
-            border-radius: 8px;
-            box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-            margin-top: 20px;
-        }
-
-        form {
-            display: flex;
-            flex-direction: column;
-            margin-top: 20px;
-        }
-
-        label {
-            font-size: 1rem;
-            color: #666;
-            margin-bottom: 5px;
-        }
-
-        input[type="text"],
-        input[type="email"],
-        input[type="tel"] {
-            padding: 10px;
-            margin-bottom: 20px;
-            border: 1px solid #ccc;
-            border-radius: 8px;
-            box-sizing: border-box;
-            font-size: 16px;
-        }
-
-        input[type="file"] {
-            padding: 10px;
-            margin-bottom: 20px;
-            box-sizing: border-box;
-        }
-
-        input[type="submit"] {
-            padding: 10px 20px;
-            background-color: #111827;
-            color: white;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-
-        input[type="submit"]:hover {
-            background-color: #374151;
-        }
-
-        .button-component {
-            display: flex;
-            gap: 10px;
-            align-items: center;
-            margin-top: 20px;
-        }
-
-        .button-component button {
-            padding: 10px 20px;
-            background-color: #111827;
-            color: white;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-
-        .button-component button:hover {
-            background-color: #374151;
-        }
-    </style>
 </head>
 <body>
     <div class="content">
@@ -112,8 +39,8 @@
         <div class="user-security">
             <h3>Security</h3>
             <div class="button-component">
-                <button>Reset password</button>
-                <button>Delete account</button>
+                <button class="button-black">Reset password</button>
+                <button class="button-black">Delete account</button>
             </div>
         </div>
     </div>
