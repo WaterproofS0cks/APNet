@@ -310,13 +310,13 @@ input[type="submit"]:hover {
 
 /* settings.html (Yew Shan) */
 
-.user-settings {
+.card-header {
     display: flex;
     align-items: center;
     gap: 10px;
 }
 
-.user-account, .user-profile, .user-notification, .user-security {
+.card-section {
     background-color: #fff;
     padding: 40px; /* Padding intentionally set to 40px instead of 20px */
     border-radius: 8px;
@@ -343,4 +343,25 @@ input[type="submit"]:hover {
     display: flex;
     justify-content: space-between;
     align-items: center;
+}
+
+
+
+/* notification.html (Yew Shan) */
+
+.card-section p {
+    margin-top: 20px;
+    color: #666;
+}
+
+.card-section a {
+    text-decoration: none;
+    font-weight: bold;
+    color: #666;
+}
+
+.card-section a:hover {
+    text-decoration: underline;
+    font-weight: bold;
+    color: #666;
 }
