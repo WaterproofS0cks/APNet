@@ -25,9 +25,9 @@ def login():
             if check[0]:
                 return redirect(url_for('profile.view_profile'))
             else:
-                return Response(response="Username or email incorrect", status=401)
+                return render_template("login.html", errmsg="Username or Email incorrect. Please try again")
         except Exception as e:
-            return Response(response=f"Username or email already exists. {e}", status=400)
+            return 0
     else:
         return render_template("login.html")
     
@@ -45,7 +45,7 @@ def register():
             conn.close()
             return redirect(url_for('profile.view_profile'))
         except psycopg2.errors.UniqueViolation as e:
-            return Response(response=f"Username or email already exists. {e}", status=400)
+            return render_template("register.html", errmsg="Username or Email already exist. Please try again")
     else:
         return render_template("register.html")
     
