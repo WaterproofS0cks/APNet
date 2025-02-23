@@ -48,4 +48,21 @@ def register():
             return render_template("register.html", errmsg="Username or Email already exist. Please try again")
     else:
         return render_template("register.html")
-    
+
+@auth.route('/resetpassword', methods=["POST", "GET"])
+def resetpassword():
+    conn = psycopg2.connect(dbname=DBNAME, user=USER, password=PASSWORD)
+    cur = conn.cursor()
+    code = 1234
+    if request.method == "POST":
+        email = request.form['email']
+        cur.execute("SELECT EXISTS (SELECT 1 FROM Users WHERE email = %s)", (email,))
+        check = cur.fetchone()
+        print(email)
+        conn.close()
+        if check[0] == False:
+            return render_template("login.html", errmsg="Email not found. Please try again")
+        elif code != 1234:
+            return render_template("login.html", errcode="Wrong code. Please try again")
+    else:
+        return render_template("resetpassword.html")    
