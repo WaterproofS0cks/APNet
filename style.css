@@ -114,7 +114,8 @@ label {
 
 input[type="text"],
 input[type="email"],
-input[type="tel"] {
+input[type="tel"],
+input[type="password"] {
     padding: 10px;
     margin-bottom: 20px;
     border: 1px solid #ccc;
@@ -349,7 +350,7 @@ input[type="submit"]:hover {
 
 /* notification.html (Yew Shan) */
 
-.card-section p {
+.card-section p, .reset-password-card p {
     margin-top: 20px;
     color: #666;
 }
@@ -372,4 +373,11 @@ input[type="submit"]:hover {
 
 .reset-password-flow {
     margin-bottom: 20px;
+}
+
+.reset-password-card {
+    background-color: #fff;
+    padding: 40px; /* Padding intentionally set to 40px instead of 20px */
+    border-radius: 8px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
