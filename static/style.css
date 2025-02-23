@@ -10,7 +10,7 @@ body {
     font-family: Arial, sans-serif;
 }
 
-.profile-content, .settings-content {
+.content-card {
     max-width: 800px;
     margin: 20px auto;
     padding: 20px;
