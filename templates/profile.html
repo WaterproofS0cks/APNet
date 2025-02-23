@@ -1,12 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/x-icon" href="src/favicon/favicon.ico">
-    <link rel="stylesheet" href="style.css">
-    <title>Profile</title>
-</head>
+{% extends "layout.html" %}
+{% block title %}Profile{% endblock title %}
+{% block content %}
 <body>
     <div class="content">
         <div class="profile">
@@ -15,22 +9,22 @@
             </div>
             <div class="profile-desc">
                 <h2>John Doe
-                    <div class="verify-badge"><img src="src/icon/icons8-verify-96.png" alt="Verified Checkmark"></div>
+                    <div class="verify-badge"><img src="{{ url_for('static', filename='src/icon/icons8-verify-96.png') }}" alt="Verified Checkmark"></div>
                     <div class="role-badge">Student</div>
                 </h2>
                 <p>Lorem ipsum dolor si amet</p>
             </div>
             <div class="profile-btn">
                 <div class="profile-btn-group">
-                    <a href="/notification.html" class="btn-icon">
-                        <img src="src/icon/icons8-notification-96.png" alt="Notification Icon">
+                    <a href="notification.html" class="btn-icon">
+                        <img src="{{ url_for('static', filename='src/icon/icons8-notification-96.png') }}" alt="Notification Icon">
                     </a>
-                    <a href="/settings.html" class="btn-icon">
-                        <img src="src/icon/icons8-settings-96.png" alt="Settings Icon">
+                    <a href="settings.html" class="btn-icon">
+                        <img src="{{ url_for('static', filename='src/icon/icons8-settings-96.png') }}" alt="Settings Icon">
                     </a>
                 </div>
                 <button class="button-black">
-                    <img src="src/icon/icons8-add-96.png" alt="Add Icon">Follow
+                    <img src="{{ url_for('static', filename='src/icon/icons8-add-96.png') }}" alt="Add Icon">Follow
                 </button>
             </div>
         </div>
@@ -53,16 +47,16 @@
             </div>
             <div class="post-inter">
                 <button class="button-grey">
-                    <img src="src/icon/icons8-like-96.png" alt="Like Icon">Like
+                    <img src="{{ url_for('static', filename='src/icon/icons8-like-96.png') }}" alt="Like Icon">Like
                 </button>
                 <button class="button-grey">
-                    <img src="src/icon/icons8-comment-96.png" alt="Comment Icon">Comment
+                    <img src="{{ url_for('static', filename='src/icon/icons8-comment-96.png') }}" alt="Comment Icon">Comment
                 </button>
                 <button class="button-grey">
-                    <img src="src/icon/icons8-bookmark-96.png" alt="Bookmark Icon">Bookmark
+                    <img src="{{ url_for('static', filename='src/icon/icons8-bookmark-96.png') }}" alt="Bookmark Icon">Bookmark
                 </button>
             </div>
         </div>
     </div>
 </body>
-</html>
+{% endblock content %}
