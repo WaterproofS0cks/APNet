@@ -1,12 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/x-icon" href="src/favicon/favicon.ico">
-    <link rel="stylesheet" href="style.css">
-    <title>Settings</title>
-</head>
+{% extends "layout.html" %}
+{% block title %}Settings{% endblock title %}
+{% block content %}
 <body>
     <div class="content">
         <div class="card-header">
@@ -73,4 +67,4 @@
         </div>
     </div>
 </body>
-</html>
+{% endblock content %}

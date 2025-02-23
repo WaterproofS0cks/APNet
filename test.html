@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sticky Header Example</title>
+    <style>
+        body {
+            height: 2000px; /* Just to create a scrollable page */
+            margin: 0;
+            padding-top: 60px; /* Add padding to the top to create space for the header */
+        }
+        .sticky {
+            position: fixed; /* Fixes the element to the viewport */
+            top: 0; /* Position it at the top of the viewport */
+            left: 0; /* Align it to the left */
+            width: 100%; /* Make it full width */
+            background-color: white; /* Background color to cover content behind */
+            padding: 20px; /* Some padding for aesthetics */
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Optional shadow for depth */
+            z-index: 1000; /* Ensures it stays on top of other elements */
+        }
+    </style>
+</head>
+<body>
+
+    <div class="sticky">
+        I am a sticky header!
+    </div>
+
+    <p>Scroll down to see the effect. The content below will not go behind the header.</p>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+    <p>More content here...</p>
+    <p>Keep scrolling...</p>
+    <p>Even more content...</p>
+    <p>And more...</p>
+
+</body>
+</html>

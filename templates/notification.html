@@ -1,17 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/x-icon" href="src/favicon/favicon.ico">
-    <link rel="stylesheet" href="style.css">
-    <title>Notification</title>
+{% extends "layout.html" %}
+{% block title %}Notification{% endblock title %}
+{% block content %}
 </head>
 <body>
     <div class="content">
         <div class="card-header">
             <a href="/profile.html" class="btn-icon">
-                <img src="src/icon/icons8-back-96.png" alt="Back Icon">
+                <img src="{{ url_for('static','src/icon/icons8-back-96.png') }}" alt="Back Icon">
             </a>
             <h2>Notification</h2>
         </div>
@@ -31,4 +26,4 @@
         </div>
     </div>
 </body>
-</html>
+{% endblock content %}
