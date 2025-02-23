@@ -21,8 +21,6 @@ def login():
         try:
             cur.execute("SELECT EXISTS (SELECT 1 FROM Users WHERE email = %s AND password = %s)", user)
             check = cur.fetchone()
-            print(check)
-            print(type(check))
             conn.close()
             if check[0]:
                 return redirect(url_for('profile.view_profile'))
