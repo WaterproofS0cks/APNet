@@ -27,6 +27,7 @@ def login():
                 conn.commit()
                 cur.execute("SELECT * FROM Users WHERE email = %s LIMIT 1", (client['email'],))
                 user_data = cur.fetchone()
+                print(user_data)
                 conn.close()
                 session.permanent = True
                 session['id'] = user_data[0]
@@ -73,7 +74,7 @@ def register():
             session['pfp'] = user_data[10]
             session['penalty'] = user_data[11]
             return redirect('/user/profile')
-        except psycopg2.errors.UniqueViolation as e:
+        except psycopg2.errors.UniqueViolation:
             return render_template("register.html", errmsg="Username or Email already exist. Please try again")
     else:
         return render_template("register.html")

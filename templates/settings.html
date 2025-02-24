@@ -4,7 +4,7 @@
 <body>
     <div class="content-card">
         <div class="card-header">
-            <a href="profile.html" class="btn-icon">
+            <a href="profile" class="btn-icon">
                 <img src="{{ url_for('static', filename='src/icon/icons8-back-96.png') }}" alt="Back Icon">
             </a>
             <h2>Settings</h2>
@@ -14,6 +14,7 @@
             <form action="" method="POST">
                 <label for="username">Username</label>
                 <input type="text" id="username" name="username">
+                <p style="width: 90%; margin-top: -10px; margin-bottom: 10px; color: red;">{{errmsg}}</p>
                 <label for="bio">Bio</label>
                 <input type="text" id="bio" name="bio">
                 <label for="pfp">Profile Picture</label>
@@ -29,13 +30,11 @@
                 <input type="text" id="name" name="name">
                 <label for="email">Email Address</label>
                 <input type="email" id="email" name="email">
-                <label for="phone">Phone Number</label>
-                <input type="tel" id="phone" name="phone">
-
+                <p style="width: 90%; margin-top: -10px; margin-bottom: 10px; color: red;">{{erremail}}</p>
                 <input type="submit" value="Update account">
             </form>
         </div>
-        <div class="card-section">
+        <!-- <div class="card-section">
             <h3>Notification</h3>
             <form action="" method="POST">
                 <div class="checkbox-container">
@@ -55,7 +54,7 @@
 
                 <input type="submit" value="Update notification">
             </form>
-        </div>
+        </div> -->
         <div class="card-section">
             <h3>Security</h3>
             <div class="button-component">
