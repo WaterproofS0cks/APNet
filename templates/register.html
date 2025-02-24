@@ -1,4 +1,4 @@
-{% extends "layout.html" %}
+{% extends "authlayout.html" %}
 {% block title %}Register{% endblock title %}
 {% block content %}
 <head>
@@ -227,7 +227,7 @@
                 </div>
                 <div class="checkbox">
                     <input type="checkbox" id="agree" required>
-                    <label for="agree">I agree to the Terms & Conditions</label>
+                    <label for="agree">I agree to the <a href="/ts">Terms of Service</a></label>
                 </div>
                 <button type="submit" class="btn">Register</button>
             </form>
