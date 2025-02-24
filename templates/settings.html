@@ -4,14 +4,14 @@
 <body>
     <div class="content-card">
         <div class="card-header">
-            <a href="/profile.html" class="btn-icon">
-                <img src="src/icon/icons8-back-96.png" alt="Back Icon">
+            <a href="profile.html" class="btn-icon">
+                <img src="{{ url_for('static', filename='src/icon/icons8-back-96.png') }}" alt="Back Icon">
             </a>
             <h2>Settings</h2>
         </div>
         <div class="card-section">
             <h3>Profile</h3>
-            <form action="#">
+            <form action="" method="POST">
                 <label for="username">Username</label>
                 <input type="text" id="username" name="username">
                 <label for="bio">Bio</label>
@@ -24,7 +24,7 @@
         </div>
         <div class="card-section">
             <h3>Account</h3>
-            <form action="#">
+            <form action="" method="POST">
                 <label for="name">Name</label>
                 <input type="text" id="name" name="name">
                 <label for="email">Email Address</label>
@@ -37,7 +37,7 @@
         </div>
         <div class="card-section">
             <h3>Notification</h3>
-            <form action="#">
+            <form action="" method="POST">
                 <div class="checkbox-container">
                     <div class="checkbox-item">
                         <label for="likes">Likes</label>
@@ -59,7 +59,7 @@
         <div class="card-section">
             <h3>Security</h3>
             <div class="button-component">
-                <a href="/resetpassword.html" style="text-decoration: none;">
+                <a href="{{ url_for('auth.resetpassword') }}" style="text-decoration: none;">
                     <button class="button-black">Reset password</button>
                 </a>
                 <button class="button-red">Delete account</button>

@@ -5,21 +5,21 @@
     <div class="content-card">
         <div class="profile">
             <div class="profile-img">
-                <img src="https://tr.rbxcdn.com/180DAY-d2aa8b558f4c73dc77ab184210a56788/420/420/Hat/Png/noFilter" alt="Cat">
+                <img src="{{ pfp }}" alt="Cat">
             </div>
             <div class="profile-desc">
-                <h2>John Doe
+                <h2>{{ name }}
                     <div class="verify-badge"><img src="{{ url_for('static', filename='src/icon/icons8-verify-96.png') }}" alt="Verified Checkmark"></div>
                     <div class="role-badge">Student</div>
                 </h2>
-                <p>Lorem ipsum dolor si amet</p>
+                <p>{{ bio }}</p>
             </div>
             <div class="profile-btn">
                 <div class="profile-btn-group">
-                    <a href="notification.html" class="btn-icon">
+                    <a href="notification" class="btn-icon">
                         <img src="{{ url_for('static', filename='src/icon/icons8-notification-96.png') }}" alt="Notification Icon">
                     </a>
-                    <a href="settings.html" class="btn-icon">
+                    <a href="setting" class="btn-icon">
                         <img src="{{ url_for('static', filename='src/icon/icons8-settings-96.png') }}" alt="Settings Icon">
                     </a>
                 </div>
