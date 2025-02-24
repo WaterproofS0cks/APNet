@@ -1,6 +1,7 @@
 from flask import Flask
 from auth import auth
 from user_profile import user_profile
+from page import page
 import psycopg2
 import os
 from dotenv import load_dotenv
@@ -15,6 +16,7 @@ SECRET_KEY = os.getenv("SECRET_KEY")
 app = Flask(__name__)
 app.register_blueprint(auth, url_prefix="/auth")
 app.register_blueprint(user_profile, url_prefix="/user")
+app.register_blueprint(page, url_prefix="/page")
 app.secret_key = SECRET_KEY
 app.permanent_session_lifetime = timedelta(days=1)
 
