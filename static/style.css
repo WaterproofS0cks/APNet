@@ -393,10 +393,11 @@ input[type="submit"]:hover {
     margin-bottom: 20px;
 }
 
-.navigation button {
+.navigation a {
     width: 100%;
     display: inline-block;
     text-align: center;
+    font-size: 14px;
 }
 
 .post {

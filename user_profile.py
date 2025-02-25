@@ -20,7 +20,7 @@ def profile():
     else:
         return redirect(url_for('auth.login'))
     
-@user_profile.route('/setting', methods=['POST', 'GET'])
+@user_profile.route('/settings', methods=['POST', 'GET'])
 def setting():
     if "user" in session:
         if request.method == "POST":
@@ -93,3 +93,7 @@ def updateAccount():
 @user_profile.route('/notification', methods=['POST', 'GET'])
 def notification():
     return render_template("notification.html")
+
+@user_profile.route('/events', methods=['POST', 'GET'])
+def events():
+    return render_template("events.html")
