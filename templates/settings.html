@@ -11,12 +11,13 @@
         </div>
         <div class="card-section">
             <h3>Profile</h3>
-            <form action="" method="POST">
+            <form action="/user/updateProfile" method="POST">
                 <label for="username">Username</label>
                 <input type="text" id="username" name="username">
-                <p style="width: 90%; margin-top: -10px; margin-bottom: 10px; color: red;">{{errmsg}}</p>
+                <p style="width: 90%; margin-top: -10px; margin-bottom: 10px; color: red;">{{erruser}}</p>
                 <label for="bio">Bio</label>
                 <input type="text" id="bio" name="bio">
+                <p style="width: 90%; margin-top: -10px; margin-bottom: 10px; color: red;">{{errbio}}</p>
                 <label for="pfp">Profile Picture</label>
                 <input type="file" id="pfp" name="pfp" accept=".jpg, .jpeg, .png">
 
@@ -25,9 +26,9 @@
         </div>
         <div class="card-section">
             <h3>Account</h3>
-            <form action="" method="POST">
+            <form action="/user/updateAccount" method="POST">
                 <label for="name">Name</label>
-                <input type="text" id="name" name="name">
+                <input type="text" id="name" name="fullname">
                 <label for="email">Email Address</label>
                 <input type="email" id="email" name="email">
                 <p style="width: 90%; margin-top: -10px; margin-bottom: 10px; color: red;">{{erremail}}</p>
