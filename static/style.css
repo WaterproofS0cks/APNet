@@ -273,7 +273,7 @@ input[type="submit"]:hover {
 
 
 
-/* profile.html (Yew Shan) */
+/* profile.html */
 
 .profile {
     display: flex;
@@ -436,7 +436,7 @@ input[type="submit"]:hover {
 
 
 
-/* settings.html (Yew Shan) */
+/* settings.html */
 
 .card-header {
     display: flex;
@@ -475,7 +475,7 @@ input[type="submit"]:hover {
 
 
 
-/* notification.html (Yew Shan) */
+/* notification.html */
 
 .card-section p, .reset-password-card p {
     margin-top: 20px;
@@ -496,7 +496,7 @@ input[type="submit"]:hover {
 
 
 
-/* resetpassword.html (Yew Shan) */
+/* resetpassword.html */
 
 .reset-password-flow {
     margin-bottom: 20px;
@@ -507,4 +507,93 @@ input[type="submit"]:hover {
     padding: 40px; /* Padding intentionally set to 40px instead of 20px */
     border-radius: 8px;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+
+
+/* dashboard.html */
+
+.dashboard-filter {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.filter {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.button-filter {
+    background-color: #fafbfc;
+    border: 1px solid rgba(27, 31, 35, 0.15);
+    border-radius: 6px;
+    box-shadow: rgba(27, 31, 35, 0.04) 0 1px 0, rgba(255, 255, 255, 0.25) 0 1px 0 inset;
+    box-sizing: border-box;
+    color: #71717A;
+    cursor: pointer;
+    display: inline-block;
+    font-family: "Segoe UI", Arial, sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 20px;
+    padding: 6px 16px;
+    position: relative;
+    vertical-align: middle;
+    white-space: nowrap;
+    word-wrap: break-word;
+}
+
+.button-filter:focus {
+    background-color: #212121;
+    color: #ffffff;
+    text-decoration: none;
+}
+
+.dashboard-wrap p {
+    margin-bottom: 10px;
+}
+
+.dashboard-row {
+    margin: 0 -5px;
+}
+
+.dashboard-row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.dashboard-column-sm {
+    float: left;
+    width: 50%;
+    padding: 0 10px;
+}
+
+.dashboard-column-lg {
+    float: left;
+    width: 100%;
+    padding: 0 10px;
+    margin-top: 20px; /* Spacing between graph card and title */
+}
+
+.dashboard-card {
+    padding: 16px;
+    text-align: center;
+    background-color: #e7e9eb;
+    border: 1px solid #71717A;
+    border-radius: 8px;
+}
+
+.dashboard-card h3 {
+    margin-bottom: 5px;
+}
+
+@media screen and (max-width: 600px) {
+    .dashboard-column-sm {
+        width: 100%;
+        display: block;
+        margin-bottom: 20px;
+    }
 }

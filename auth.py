@@ -38,12 +38,10 @@ def login():
                 session['gender'] = user_data[7]
                 session['pfp'] = user_data[10]
                 session['penalty'] = user_data[11]
-                print(session)
                 return redirect('/user/profile')
             else:
                 return render_template("login.html", errmsg="Username or Email incorrect. Please try again")
         except Exception as e:
-            print('1')
             return Response(response=e)
     else:
         return render_template("login.html")
@@ -57,7 +55,7 @@ def register():
         conn = psycopg2.connect(dbname=DBNAME, user=USER, password=PASSWORD)
         cur = conn.cursor()
         try:
-            cur.execute("INSERT INTO Users (username, fullname, bio, role, email, password, gender, RegisterDate, LastLogin, ProfilePicture, Penalty) VALUES (%s, %s, NULL, %s, %s, %s, %s, %s, %s, NULL, NULL)", user)          
+            cur.execute("INSERT INTO Users (username, fullname, bio, link, role, email, password, gender, RegisterDate, LastLogin, ProfilePicture, Penalty) VALUES (%s, %s, NULL, NULL, %s, %s, %s, %s, %s, %s, NULL, NULL)", user)          
             conn.commit()
             cur.execute("SELECT * FROM Users WHERE email = %s LIMIT 1", (client['email'],))
             user_data = cur.fetchone()
@@ -67,38 +65,39 @@ def register():
             session['user'] = user_data[1]
             session['fname'] = user_data[2]
             session['bio'] = user_data[3]
-            session['role'] = user_data[4]
-            session['email'] = user_data[5]
-            session['gender'] = user_data[7]
-            session['pfp'] = user_data[10]
-            session['penalty'] = user_data[11]
+            session['link'] = user_data[4]
+            session['role'] = user_data[5]
+            session['email'] = user_data[6]
+            session['gender'] = user_data[8]
+            session['pfp'] = user_data[11]
+            session['penalty'] = user_data[12]
             return redirect('/user/profile')
-        except psycopg2.errors.UniqueViolation as e:
+        except psycopg2.errors.UniqueViolation:
             return render_template("register.html", errmsg="Username or Email already exist. Please try again")
     else:
         return render_template("register.html")
 
 @auth.route('/resetpassword', methods=["POST", "GET"])
 def resetpassword():
+    return render_template("resetpassword.html")
+
+@auth.route('/resetpassword/email', methods=["POST"])
+def resetpassword_email():
+    email = request.form['email']
     conn = psycopg2.connect(dbname=DBNAME, user=USER, password=PASSWORD)
     cur = conn.cursor()
-    code = 1234
-    if request.method == "POST":
-        email = request.form['email']
-        cur.execute("SELECT EXISTS (SELECT 1 FROM Users WHERE email = %s)", (email,))
-        check = cur.fetchone()
-        conn.close()
-        if check[0] == False:
-            return render_template("login.html", errmsg="Email not found. Please try again")
-        elif code != 1234:
-            return render_template("login.html", errcode="Wrong code. Please try again")
+    cur.execute("SELECT EXISTS (SELECT 1 FROM Users WHERE email = %s)", (email,))
+    foundEmail = cur.fetchone()
+    print(foundEmail)
+    conn.close()
+    if foundEmail:
+        return 0
     else:
-        return render_template("resetpassword.html")
-
+        return render_template("resetpassword.html", foundEmail = foundEmail)
+    
 @auth.route('/logout')
 def logout():
     session_data = ['id', 'user', 'fname', 'bio', 'role', 'email', 'gender', 'pfp', 'penalty']
     for i in session_data:
         session.pop(i, None)
-    print(session)
     return redirect(url_for('.login'))

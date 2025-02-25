@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, render_template
 from auth import auth
 from user_profile import user_profile
 from page import page
@@ -28,6 +28,7 @@ cur.execute("""CREATE TABLE IF NOT EXISTS Users (
             username VARCHAR(255) UNIQUE NOT NULL,
 			fullname VARCHAR(255) NOT NULL,
             bio VARCHAR(255),
+            link VARCHAR(255),
             role CHAR(1) NOT NULL,
             email VARCHAR(255) UNIQUE NOT NULL,
             password VARCHAR(255) NOT NULL,
@@ -41,6 +42,10 @@ cur.execute("""CREATE TABLE IF NOT EXISTS Users (
 
 conn.commit()
 conn.close()
+
+@app.route('/terms-of-service', methods=['GET'])
+def TermsAndCondition():
+    return render_template("termsofservice.html")
 
 if __name__ == "__main__":
     app.run(debug=True)
