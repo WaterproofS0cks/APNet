@@ -50,6 +50,12 @@ def updateProfile():
             if new_data['pfp'] != '':
                 cur.execute("UPDATE Users SET pfp = %s WHERE username = %s", (new_data['pfp'], session.get('user')))
                 session['pfp'] = new_data['pfp']
+            if new_data['link'] != '':
+                try:
+                    cur.execute("UPDATE Users SET link = %s WHERE username = %s", (new_data['link'], session.get('user')))
+                    session['link'] = new_data['link']
+                except psycopg2.errors.StringDataRightTruncation:
+                    return render_template('settings.html', errbio="Link max length 255 characters.")
             conn.commit()
             conn.close()
             return redirect('/user/profile')

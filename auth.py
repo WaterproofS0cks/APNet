@@ -98,7 +98,7 @@ def resetpassword_email():
     
 @auth.route('/logout')
 def logout():
-    session_data = ['id', 'user', 'fname', 'bio', 'role', 'email', 'gender', 'pfp', 'penalty']
+    session_data = ['id', 'user', 'fname', 'bio', 'link', 'role', 'email', 'gender', 'pfp', 'penalty']
     for i in session_data:
         session.pop(i, None)
     return redirect(url_for('.login'))
