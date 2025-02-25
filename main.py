@@ -43,9 +43,13 @@ cur.execute("""CREATE TABLE IF NOT EXISTS Users (
 conn.commit()
 conn.close()
 
-@app.route('/terms-of-service', methods=['GET'])
-def TermsAndCondition():
+@app.route('/terms', methods=['GET'])
+def TermsOfService():
     return render_template("termsofservice.html")
+
+@app.route('/faq', methods=['GET'])
+def FrequentlyAskedQuestions():
+    return render_template("faq.html")
 
 if __name__ == "__main__":
     app.run(debug=True)

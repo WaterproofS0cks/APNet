@@ -44,7 +44,7 @@ def login():
                 session['penalty'] = user_data[12]
                 return redirect('/user/profile')
             else:
-                return render_template("login.html", errmsg="Username or Email incorrect. Please try again")
+                return render_template("login.html", errmsg="Email or Password incorrect. Please try again")
         except Exception as e:
             return Response(response=e)
     else:
