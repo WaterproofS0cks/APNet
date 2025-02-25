@@ -14,7 +14,7 @@ user_profile = Blueprint("user_profile", __name__, static_folder="static", templ
 def profile():
     if "user" in session:
         if request.method == "GET":
-            return render_template("profile.html", name = session.get('user'), pfp = session['pfp'], bio = session['bio'])
+            return render_template("profile.html", name = session.get('user'), pfp = session.get('pfp'), bio = session.get('bio'), link = session.get('link'))
     else:
         return redirect(url_for('auth.login'))
     
