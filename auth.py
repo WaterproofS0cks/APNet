@@ -55,7 +55,7 @@ def register():
         conn = psycopg2.connect(dbname=DBNAME, user=USER, password=PASSWORD)
         cur = conn.cursor()
         try:
-            cur.execute("INSERT INTO Users (username, fullname, bio, role, email, password, gender, RegisterDate, LastLogin, ProfilePicture, Penalty) VALUES (%s, %s, NULL, %s, %s, %s, %s, %s, %s, NULL, NULL)", user)          
+            cur.execute("INSERT INTO Users (username, fullname, bio, link, role, email, password, gender, RegisterDate, LastLogin, ProfilePicture, Penalty) VALUES (%s, %s, NULL, NULL, %s, %s, %s, %s, %s, %s, NULL, NULL)", user)          
             conn.commit()
             cur.execute("SELECT * FROM Users WHERE email = %s LIMIT 1", (client['email'],))
             user_data = cur.fetchone()
@@ -65,11 +65,12 @@ def register():
             session['user'] = user_data[1]
             session['fname'] = user_data[2]
             session['bio'] = user_data[3]
-            session['role'] = user_data[4]
-            session['email'] = user_data[5]
-            session['gender'] = user_data[7]
-            session['pfp'] = user_data[10]
-            session['penalty'] = user_data[11]
+            session['link'] = user_data[4]
+            session['role'] = user_data[5]
+            session['email'] = user_data[6]
+            session['gender'] = user_data[8]
+            session['pfp'] = user_data[11]
+            session['penalty'] = user_data[12]
             return redirect('/user/profile')
         except psycopg2.errors.UniqueViolation:
             return render_template("register.html", errmsg="Username or Email already exist. Please try again")
@@ -78,7 +79,6 @@ def register():
 
 @auth.route('/resetpassword', methods=["POST", "GET"])
 def resetpassword():
-    print("1\t1\t1\t1\t1\t1\t1")
     return render_template("resetpassword.html")
 
 @auth.route('/resetpassword/email', methods=["POST"])
@@ -95,8 +95,6 @@ def resetpassword_email():
     else:
         return render_template("resetpassword.html", foundEmail = foundEmail)
     
-    return render_template("resetpassword.html")
-
 @auth.route('/logout')
 def logout():
     session_data = ['id', 'user', 'fname', 'bio', 'role', 'email', 'gender', 'pfp', 'penalty']
