@@ -27,7 +27,6 @@ def login():
                 conn.commit()
                 cur.execute("SELECT * FROM Users WHERE email = %s LIMIT 1", (client['email'],))
                 user_data = cur.fetchone()
-                print(user_data)
                 conn.close()
                 session.permanent = True
                 session['id'] = user_data[0]
@@ -39,12 +38,10 @@ def login():
                 session['gender'] = user_data[7]
                 session['pfp'] = user_data[10]
                 session['penalty'] = user_data[11]
-                print(session)
                 return redirect('/user/profile')
             else:
                 return render_template("login.html", errmsg="Username or Email incorrect. Please try again")
         except Exception as e:
-            print('1')
             return Response(response=e)
     else:
         return render_template("login.html")
@@ -81,25 +78,28 @@ def register():
 
 @auth.route('/resetpassword', methods=["POST", "GET"])
 def resetpassword():
+    print("1\t1\t1\t1\t1\t1\t1")
+    return render_template("resetpassword.html")
+
+@auth.route('/resetpassword/email', methods=["POST"])
+def resetpassword_email():
+    email = request.form['email']
     conn = psycopg2.connect(dbname=DBNAME, user=USER, password=PASSWORD)
     cur = conn.cursor()
-    code = 1234
-    if request.method == "POST":
-        email = request.form['email']
-        cur.execute("SELECT EXISTS (SELECT 1 FROM Users WHERE email = %s)", (email,))
-        check = cur.fetchone()
-        conn.close()
-        if check[0] == False:
-            return render_template("login.html", errmsg="Email not found. Please try again")
-        elif code != 1234:
-            return render_template("login.html", errcode="Wrong code. Please try again")
+    cur.execute("SELECT EXISTS (SELECT 1 FROM Users WHERE email = %s)", (email,))
+    foundEmail = cur.fetchone()
+    print(foundEmail)
+    conn.close()
+    if foundEmail:
+        return 0
     else:
-        return render_template("resetpassword.html")
+        return render_template("resetpassword.html", foundEmail = foundEmail)
+    
+    return render_template("resetpassword.html")
 
 @auth.route('/logout')
 def logout():
     session_data = ['id', 'user', 'fname', 'bio', 'role', 'email', 'gender', 'pfp', 'penalty']
     for i in session_data:
         session.pop(i, None)
-    print(session)
     return redirect(url_for('.login'))

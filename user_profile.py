@@ -81,3 +81,7 @@ def updateAccount():
             return redirect("/user/profile")
     else:
         return redirect(url_for("auth.login"))
+    
+@user_profile.route('/notification', methods=['POST', 'GET'])
+def notification():
+    return render_template("notification.html")
