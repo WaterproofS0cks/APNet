@@ -420,12 +420,20 @@ input[type="submit"]:hover {
 }
 
 .post-img {
-    margin-top: 20px;
+    padding: 10px 20px;
+    margin-top: 10px;
     height: 250px;
     display: flex;
     align-items: center;
     justify-content: center;
-    border-radius: 8px;
+    width: 100%;
+    overflow: hidden;
+}
+
+.post-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
 .post-inter {
@@ -598,4 +606,55 @@ input[type="submit"]:hover {
         display: block;
         margin-bottom: 20px;
     }
+}
+
+
+
+/* events.html */
+
+.events-card {
+    display: flex;
+    justify-content: space-between;
+    background-color: #fff;
+    padding: 40px;
+    border-radius: 8px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    margin-top: 20px;
+}
+
+.events-card p {
+    margin-top: 20px;
+    color: #666;
+}
+
+.events-card a {
+    text-decoration: none;
+    font-weight: bold;
+    color: #666;
+}
+
+.events-card a:hover {
+    text-decoration: underline;
+    font-weight: bold;
+    color: #666;
+}
+
+.events-card sub {
+    display: inline-block;
+    margin-bottom: 20px;
+}
+
+.events-attr {
+    flex: 1;
+}
+
+.events-img {
+    flex-shrink: 0;
+    margin-left: 20px;
+}
+
+.events-img img {
+    width: 300px;
+    height: 150px;
+    object-fit: cover;
 }
