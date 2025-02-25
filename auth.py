@@ -33,11 +33,12 @@ def login():
                 session['user'] = user_data[1]
                 session['fname'] = user_data[2]
                 session['bio'] = user_data[3]
-                session['role'] = user_data[4]
-                session['email'] = user_data[5]
-                session['gender'] = user_data[7]
-                session['pfp'] = user_data[10]
-                session['penalty'] = user_data[11]
+                session['link'] = user_data[4]
+                session['role'] = user_data[5]
+                session['email'] = user_data[6]
+                session['gender'] = user_data[8]
+                session['pfp'] = user_data[11]
+                session['penalty'] = user_data[12]
                 return redirect('/user/profile')
             else:
                 return render_template("login.html", errmsg="Username or Email incorrect. Please try again")
