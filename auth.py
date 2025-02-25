@@ -3,11 +3,14 @@ import psycopg2
 import os
 from dotenv import load_dotenv
 from datetime import datetime
+import smtplib
+import random
 
 load_dotenv()
 DBNAME = os.getenv("DBNAME")
 USER = os.getenv("USER")
 PASSWORD = os.getenv("PASSWORD")
+MAILTRAP_PASSWORD = os.getenv("MAILTRAP_PASSWORD")
 
 auth = Blueprint("auth", __name__, static_folder="static", template_folder="templates")
 
@@ -80,22 +83,66 @@ def register():
 
 @auth.route('/resetpassword', methods=["POST", "GET"])
 def resetpassword():
-    return render_template("resetpassword.html")
+    if request.method == "POST":
+        email = request.form['email']
+        code = str(random.randint(100000,999999))
+        sender = "no-reply@demomailtrap.com"
+        receiver = email
+        message = f"""\
+Subject: APNet - Reset Password
+To: {receiver}
+From: {sender}
 
-@auth.route('/resetpassword/email', methods=["POST"])
-def resetpassword_email():
-    email = request.form['email']
-    conn = psycopg2.connect(dbname=DBNAME, user=USER, password=PASSWORD)
-    cur = conn.cursor()
-    cur.execute("SELECT EXISTS (SELECT 1 FROM Users WHERE email = %s)", (email,))
-    foundEmail = cur.fetchone()
-    print(foundEmail)
-    conn.close()
-    if foundEmail:
-        return 0
+Your code is {code}
+
+If you did not attempt to reset your password. Please ignore this message."""
+        
+        session['reset_code'] = code
+        session['target_email'] = email
+
+        with smtplib.SMTP("live.smtp.mailtrap.io", 587) as server:
+            server.starttls()
+            server.login("api", MAILTRAP_PASSWORD)
+            server.sendmail(sender, receiver, message)
+        return redirect(url_for('.resetpassword_code'))
     else:
-        return render_template("resetpassword.html", foundEmail = foundEmail)
+        return render_template("resetpassword.html")
+
+@auth.route("/resetpassword/code", methods=["POST", "GET"])
+def resetpassword_code():
+    if "target_email" in session:
+        if request.method == "POST":
+            if session.get("reset_code") == request.form['code']:
+                return redirect(url_for('.resetpassword_password'))
+            else:
+                return render_template("resetpassword_code.html", errcode="Incorrect code.")
+        else:
+            return render_template("resetpassword_code.html")
+    else:
+        return redirect(url_for(".resetpassword"))
     
+@auth.route("/resetpassword/new-password", methods=['POST', 'GET'])
+def resetpassword_password():
+    if "target_email" in session:
+        if request.method == "POST":
+            conn = psycopg2.connect(dbname=DBNAME, user=USER, password=PASSWORD)
+            cur = conn.cursor()
+            cur.execute("UPDATE Users SET password = %s WHERE email = %s", (request.form['new-password'], session.get('target_email')))
+            conn.commit()
+            conn.close()
+            session.pop("reset_code")
+            session.pop("target_email")
+            return redirect(url_for(".resetpassword_complete"))
+        else: 
+            return render_template("resetpassword_new_password.html")
+    else:
+        return redirect(url_for(".resetpassword"))
+    
+@auth.route("/resetpassword/complete", methods=['GET'])
+def resetpassword_complete():
+    return render_template("resetpassword_complete.html")
+    
+
 @auth.route('/logout')
 def logout():
     session_data = ['id', 'user', 'fname', 'bio', 'link', 'role', 'email', 'gender', 'pfp', 'penalty']
