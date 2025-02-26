@@ -709,7 +709,7 @@ input[type="submit"]:hover {
 .faq-title, .faq-content {
     backface-visibility: hidden;
     transform: translateZ(0);
-    transition: all 0.2s;
+    transition: all 0.3s;
 }
 
 .faq-title {
@@ -728,7 +728,7 @@ input[type="submit"]:hover {
     width: 2px;
     height: 0.75em;
     background-color: #7A7572;
-    transition: all 0.2s;
+    transition: all 0.3s;
 }
 
 .faq-title:after {
@@ -738,7 +738,7 @@ input[type="submit"]:hover {
 .faq-content {
     max-height: 0;
     overflow: hidden;
-    background-color: #fff;
+    background-color: #f9f9f9;
     p {
         margin: 0;
         padding: 0.5em 1em 1em;
@@ -755,7 +755,13 @@ input[type="submit"]:hover {
 }
 
 .faq-toggle:checked {
-    & + .faq-title,
+    & + .faq-title {
+        box-shadow: 3px 3px 6px #ddd, -3px 3px 6px #ddd;
+        border-radius: 8px;
+        max-height: 500px;
+        background-color: #212121;
+        color: #fff;
+    }
     & + .faq-title + .faq-content {
         box-shadow: 3px 3px 6px #ddd, -3px 3px 6px #ddd;
         border-radius: 8px;
