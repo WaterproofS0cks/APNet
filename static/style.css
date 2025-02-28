@@ -125,6 +125,15 @@ input[type="url"] {
     font-size: 16px;
 }
 
+select {
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-sizing: border-box;
+    font-size: 16px;
+}
+
 input[type="file"] {
     padding: 10px;
     margin-bottom: 20px;
@@ -523,42 +532,15 @@ input[type="submit"]:hover {
 
 /* dashboard.html */
 
-.dashboard-filter {
-    display: flex;
-    gap: 10px;
-    align-items: center;
-    margin-top: 10px;
-}
-
-.filter {
-    margin-top: 20px;
+.card-filter {
     margin-bottom: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
-.button-filter {
-    background-color: #fafbfc;
-    border: 1px solid rgba(27, 31, 35, 0.15);
-    border-radius: 6px;
-    box-shadow: rgba(27, 31, 35, 0.04) 0 1px 0, rgba(255, 255, 255, 0.25) 0 1px 0 inset;
-    box-sizing: border-box;
-    color: #71717A;
-    cursor: pointer;
-    display: inline-block;
-    font-family: "Segoe UI", Arial, sans-serif;
-    font-size: 14px;
-    font-weight: 500;
-    line-height: 20px;
-    padding: 6px 16px;
-    position: relative;
-    vertical-align: middle;
-    white-space: nowrap;
-    word-wrap: break-word;
-}
-
-.button-filter:focus {
-    background-color: #212121;
-    color: #ffffff;
-    text-decoration: none;
+.card-filter label {
+    margin-right: 5px;
 }
 
 .dashboard-wrap p {

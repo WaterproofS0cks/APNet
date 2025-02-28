@@ -10,7 +10,7 @@ PASSWORD = os.getenv("PASSWORD")
 
 user_profile = Blueprint("user_profile", __name__, static_folder="static", template_folder="templates")
 
-@user_profile.route('/profile', methods=["POST", "GET"])
+@user_profile.route('/profile', methods=['POST', 'GET'])
 def profile():
     if "user" in session:
         if request.method == "GET":

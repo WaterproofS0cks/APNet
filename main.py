@@ -51,5 +51,9 @@ def TermsOfService():
 def FrequentlyAskedQuestions():
     return render_template("faq.html")
 
+@app.route('/dashboard', methods=['POST', 'GET'])
+def Dashboard():
+    return render_template("dashboard.html")
+
 if __name__ == "__main__":
     app.run(debug=True)
