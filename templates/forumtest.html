@@ -3,19 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/x-icon" href="../static/src/favicon/favicon.ico">
+    <link rel="icon" type="image/x-icon" href="src/favicon/favicon.ico">
     <link rel="stylesheet" href="../static/style.css">    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
     <title>APNet</title>
-
+    
     <style>
         body {
             margin: 0;
             padding: 0;
             max-width: 100%;
-            padding-top: 70px;
+            padding-top: 85px;
             background-color: #F7F7F7;
         }
        
@@ -27,7 +27,7 @@
             border: 0px solid;
             background-color:	#212121;
             width: 100%;
-            height: 70px;
+            height: 85px;
             padding: 0 10px;
             box-sizing: border-box;
             z-index: 1000;
@@ -68,18 +68,12 @@
             display: none;
         }
 
-        #header-notificon {
-            position: relative;
-            height: 50px;
-            width: 50px;
-            margin-right: 3px;
-        }
-
         #header-profile-img {
             position: relative;
             height: 120px;
             width: 120px;
             padding: 30px;
+            margin-left: auto;
         }
 
         .header-infoicon {
@@ -211,8 +205,6 @@
             <div class="header-right-container">
 
                 <img src="../static/src/icon/icons8-search-50.png" alt="Search Icon" class="header-searchicon">
-
-                <img src="../static/src/icon/icons8-notification-white-48.png" alt="Notification Icon" id="header-notificon">
     
                 <img src="../static/src/img/default-pfp.png" alt="Default Profile Picture" id="header-profile-img">
 
@@ -227,7 +219,7 @@
     <!-- NAV BAR -->
     <div class="nb-left-container">
 
-        <h1 style="margin-top: 20px;">MAIN PAGES</h1>
+        <h1>MAIN PAGES</h1>
     
         <div class="nb-mainpages-container">    
 
@@ -247,6 +239,13 @@
         <h1>OTHER PAGES</h1>
 
         <div class="nb-otherpages-container">
+
+            <a href="#">
+                <div class="nb-otherpages-notif">
+                    <img src="../static/src/icon/icons8-notification-48.png" alt="Notif Default Icon" id="nb-notificon">
+                    <h2>Notifications</h2>
+                </div>
+            </a>
 
             <a href="#">
                 <div class="nb-otherpages-applicationlisting">
@@ -284,7 +283,7 @@
 
         <div class="nb-resources-container">
             
-            <a href="aboutus.html"><div class="nb-resources-aboutus">
+            <a href="#"><div class="nb-resources-aboutus">
                 <img src="../static/src/icon/icons8-info-50.png" alt="Info Default Icon" id="nb-infoicon">
                 <h2>About Us</h2>
             </div></a>
@@ -318,91 +317,6 @@
                 <!-- INSERT LAST CREATION DATE THING -->
                 <h2> • </h2>
                 <h2>Posted x days ago</h2>
-
-                <div class="fm-more-container">                   
-                    <img src="../static/src/icon/icons8-ellipsis-48.png" alt="Elipses" id="fm-moreicon">
-                    <div id="dropdownContent" class="dropdown-content" role="menu">
-                        <a href="#" role="menuitem"></a>
-                        <a href="#" role="menuitem"></a>
-                        <a href="#" role="menuitem"></a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="fm-image-container">
-                <!-- INSERT IMAGE HERE -->
-                <img src="../static/src/img/randomimage3.jpg" alt="">
-            </div>
-            
-            <div class="fm-button-container">
-
-                
-                <!-- LIKE BUTTON -->
-                <div class="fm-like-icon-container">
-                    <img src="../static/src/icon/icons8-heart-50.png" alt="Heart" id="fm-post-hearticon">
-                    <h2>Like</h2>
-                    <!-- LIKE AMOUNT -->
-                    <h4>(12)</h4>
-                </div>
-                
-
-                <!-- COMMENT BUTTON -->
-                <div class="fm-comment-icon-container">
-                    <img src="../static/src/icon/icons8-comment-50.png" alt="Comment" id="fm-post-commenticon">
-                    <h2>Comment</h2>
-                    <!-- COMMENT AMOUNT -->
-                    <h4>(0)</h4>
-                </div>
-
-
-                <!-- BOOKMARK BUTTON -->
-                <img src="../static/src/icon/icons8-bookmark-50.png" alt="Bookmark" id="fm-post-bookmarkicon">
-
-            </div>
-
-
-            <!-- INSERT COMMENT -->
-            <div class="fm-caption-container">
-                <h1>INSERT USERNAME</h1>
-                <!-- <h2>The old clock tower stood tall, its rusted gears ticking in defiance of time. A stray cat perched on the windowsill, watching the bustling streets below. Lanterns flickered, casting long shadows as the wind whispered secrets through the alleyways. Somewhere, a violin played a haunting melody</h2> -->
-                <h2>The rain drummed against the cobblestone streets as neon signs flickered in the misty night. A stranger in a tattered coat hurried past, clutching a leather-bound book with golden edges. In the distance, a train whistled, its echo swallowed by the howling wind. A small café glowed warmly, steam curling from porcelain cups as an old radio played a forgotten tune. The scent of freshly baked bread mixed with the distant sea breeze. Somewhere, a dog barked, chasing its own shadow in the dim light.</h2>
-            </div>
-
-        </div>
-
-        <div class="fm-post-layout">
-            
-            <div class="fm-profiledetails">
-                <!-- INSERT PFP HERE -->
-                <img src="../static/src/img/default-pfp.png" alt="Default pfp icon" id="fm-post-pfp">
-                <!-- INSERT USERNAME HERE -->
-                <h1>INSERT USERNAME</h1>
-                <!-- INSERT LAST CREATION DATE THING -->
-                <h2> • </h2>
-                <h2>Posted x days ago</h2>
-            </div>
-
-            <div class="fm-image-container">
-                <!-- INSERT IMAGE HERE -->
-                <img src="../static/src/img/randomimage2.jpg" alt="">
-            </div>
-
-            <div class="fm-button-container">
-                <img src="" alt="">
-            </div>
-
-        </div>
-
-        <div class="fm-post-layout">
-            
-            <div class="fm-profiledetails">
-                <!-- INSERT PFP HERE -->
-                <img src="../static/src/img/default-pfp.png" alt="Default pfp icon" id="fm-post-pfp">
-                <!-- INSERT USERNAME HERE -->
-                <h1>INSERT USERNAME</h1>
-                <!-- INSERT LAST CREATION DATE THING -->
-                <h2> • </h2>
-                <h2>Posted x days ago</h2>
             </div>
 
             <div class="fm-image-container">
@@ -410,34 +324,12 @@
                 <img src="../static/src/img/randomimage1.jpg" alt="">
             </div>
 
-            <div class="fm-button-container">
-                <img src="" alt="">
-            </div>
-
         </div>
 
-        <div class="fm-post-layout">
-            
-            <div class="fm-profiledetails">
-                <!-- INSERT PFP HERE -->
-                <img src="../static/src/img/default-pfp.png" alt="Default pfp icon" id="fm-post-pfp">
-                <!-- INSERT USERNAME HERE -->
-                <h1>INSERT USERNAME</h1>
-                <!-- INSERT LAST CREATION DATE THING -->
-                <h2> • </h2>
-                <h2>Posted x days ago</h2>
-            </div>
+    </div>
 
-            <div class="fm-image-container">
-                <!-- INSERT IMAGE HERE -->
-                <img src="../static/src/img/randomimage4.png" alt="">
-            </div>
 
-            <div class="fm-button-container">
-                <img src="" alt="">
-            </div>
 
-        </div>
 
 
 
@@ -470,23 +362,6 @@
         </div>
     
     </footer>
-
-
-    <script>
-        function toggleDropdown() {
-        const dropdownContent = document.getElementById("dropdownContent");
-        dropdownContent.classList.toggle("show");
-        const isExpanded = dropdownContent.classList.contains("show");
-        dropdownBtn.setAttribute("aria-expanded", isExpanded);
-}
-    
-        window.addEventListener("click", function(event) {
-            if (!event.target.matches('#dropdownBtn') && !dropdownContent.contains(event.target)) {
-                dropdownContent.classList.remove("show");
-                dropdownBtn.setAttribute("aria-expanded", "false");
-            }
-        });
-    </script>
 
 </body>
 </html>

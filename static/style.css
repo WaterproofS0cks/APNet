@@ -20,6 +20,8 @@ body {
 }
 
 
+/* HEADER */
+
 
 /* FOOTER */
 
@@ -147,10 +149,10 @@ input[type="submit"]:hover {
 
 /* NAVIGATION BAR (Marcus)  */
 .nb-left-container {
+    position: fixed;
     display: flex;
     flex-direction: column;
-    /* background-color: pink; */
-    width: 19%;
+    width: 22%;
     height: 100vh;
     border-right: 3px solid #ccc;
 }
@@ -175,15 +177,14 @@ input[type="submit"]:hover {
 #nb-infoicon,
 #nb-faqicon,
 #nb-scalesicon,
-#nb-notificon,
 #nb-listicon,
 #nb-personicon,
 #nb-hearticon,
 #nb-bookmarkicon
 {
-    width: 40px;
-    height: 40px;
-    margin-left: 40px;
+    width: 35px;
+    height: 35px;
+    margin-left: 20px;
 }
 
 .nb-mainpages-home h2, 
@@ -191,7 +192,6 @@ input[type="submit"]:hover {
 .nb-resources-aboutus h2,
 .nb-resources-faqs h2,
 .nb-resources-tnc h2,
-.nb-otherpages-notif h2,
 .nb-otherpages-applicationlisting h2,
 .nb-otherpages-applicantlisting h2,
 .nb-otherpages-likedposts h2,
@@ -199,7 +199,7 @@ input[type="submit"]:hover {
 {
     font-family: "Roboto", sans-serif;
     font-weight: bold;
-    font-size: 20px;
+    font-size: 16px;
     padding: 10px;
     margin: 4px 0 0 5px;
 }
@@ -225,8 +225,8 @@ input[type="submit"]:hover {
     font-family: Arial, Helvetica, sans-serif;
     font-weight: normal;
     color: #666;
-    font-size: 22px;
-    margin: 10px 0 10px 20px;
+    font-size: 18px;
+    margin: 5px 0 5px 20px;
 }
 
 .nb-resources-aboutus,
@@ -243,7 +243,6 @@ input[type="submit"]:hover {
 .nb-resources-aboutus:hover,
 .nb-resources-faqs:hover,
 .nb-resources-tnc:hover,
-.nb-otherpages-notif:hover,
 .nb-otherpages-applicationlisting:hover,
 .nb-otherpages-applicantlisting:hover,
 .nb-otherpages-likedposts:hover,
@@ -255,11 +254,10 @@ input[type="submit"]:hover {
 
 .nb-otherpages-container {
     width: 100%;
-    height: 35%;
+    height: 28%;
     padding: 6px;
 }
 
-.nb-otherpages-notif,
 .nb-otherpages-applicationlisting,
 .nb-otherpages-applicantlisting,
 .nb-otherpages-likedposts,
@@ -268,8 +266,197 @@ input[type="submit"]:hover {
     display: flex;
     align-items: center;
     width: 100%;
-    height: 20%;
+    height: 25%;
 }
+
+
+/* forummain.html (Marcus) */
+.fm-main-container {
+    /* background-color: pink; */
+    position: relative;
+    height: 100%;
+    width: 53%;
+    margin: 6px 0 0 23%;
+    padding: 20px;
+    z-index: -1000;
+}
+
+.fm-post-layout {
+    background-color: white;
+    position: relative;
+    height: 630px;
+    width: 95%;
+    margin-bottom: 40px;
+    border: 1px solid #b4dfd0;
+    border-radius: 16px;
+    padding: 12px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;    
+}
+
+.fm-profiledetails {
+    display: flex;
+    align-items: center;
+    height: 8%;
+    padding: 10px;
+    border-bottom: 1px solid #8decc7 ;
+}
+
+#fm-post-pfp {
+    width: 40px;
+    height: 40px;
+    margin: 0 5px 3px 5px;
+    border-radius: 50%;
+}
+
+.fm-profiledetails h1 {
+    font-family: "Roboto", sans-serif;
+    font-weight: bold;
+    font-size: 15px;
+    color: #333333 ;
+    margin: 0 5px 0 9px;
+}
+
+.fm-profiledetails h2 {
+    font-family: "Roboto", sans-serif;
+    font-weight: normal;
+    font-size: 12px;
+    color: #666666;
+    margin: 0 5px;
+}
+
+.fm-more-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    margin-left: auto;
+    justify-content: center;
+    /* background-color: green; */
+    width: 5%;
+}
+
+#fm-moreicon {
+    width: 20px;
+    height: 20px;
+    margin-left: auto;
+}
+
+.dropdown-content {
+    display: none; /* Hidden by default */
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.dropdown-content.show {
+    display: block; /* Show when active */
+}
+
+.fm-image-container {
+    height: 58%;
+    width: 100%;
+    margin: 10px 0 0 0;
+    border: 2px solid #87ebc0; 
+    background-color: #000;
+}
+
+.fm-image-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.fm-button-container {
+    /* background-color: green; */
+    display: flex;
+    width: 100%;
+    height: 8%;
+    align-items: center;
+    padding: 10px 10px 10px 0px;
+    margin-left: 5px;
+}
+
+#fm-post-hearticon {
+    width: 21px;
+    height: 23px;    
+    margin-bottom: 3px;
+}
+
+#fm-post-bookmarkicon {
+    width: 37px;
+    height: 27px;
+    margin: 0 0 1px 0;
+    margin-left: auto;
+}
+
+.fm-like-icon-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 15.5%;
+    height: 100%;
+    border: 1px solid #000;
+    border-radius: 20px;
+    padding: 10px;
+}
+
+.fm-comment-icon-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 19%;
+    height: 100%;
+    border: 1px solid #000;
+    border-radius: 20px;
+    padding: 10px;
+    margin-left: 10px;
+}
+
+
+#fm-post-commenticon {
+    width: 23px;
+    height: 23px;
+    margin-left: -5px; 
+}
+
+.fm-comment-icon-container h2, .fm-like-icon-container h2 {
+    font-family: "Roboto", sans-serif;
+    font-size: 12px;
+    margin-left: 7px;
+}
+
+.fm-like-icon-container h4, .fm-comment-icon-container h4 {
+    font-family: "Roboto", sans-serif;
+    font-size: 12px;
+    margin-left: 3px;
+    color: #9a9a9a;
+}
+
+.fm-caption-container {
+    display: block;
+    align-items: center;
+    padding: 0px 10px 10px 10px; 
+    line-height: 1.4;
+}
+
+.fm-caption-container h1 {
+    display: flex;
+    font-family: "Roboto", sans-serif;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.fm-caption-container h2 {
+    display: flex;
+    font-family: "Roboto", sans-serif;
+    font-weight: normal;
+    font-size: 13px;
+    text-align: justify;
+}
+
+
+
 
 
 
@@ -509,6 +696,33 @@ input[type="submit"]:hover {
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
 
+
+/* aboutus.html (Marcus)*/
+.au-main-container {
+    position: relative;
+    display: flex;
+    height: 5000px;
+    width: 100%;
+    background-color: pink;
+    z-index: -1;
+}
+
+.au-banner1 {
+    position: absolute;
+    /* display: block; */
+    background-color: green;
+    width: 100%;
+    height: 80vh;
+    margin: 0 0 400px 0;
+}
+
+.au-banner2 {
+    /* position: absolute; */
+    display: block;
+    background-color: blue;
+    width: 100%;
+    height: 80vh;
+}
 
 
 /* dashboard.html */
