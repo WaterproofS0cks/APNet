@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="src/favicon/favicon.ico">
+    <link rel="stylesheet" href="../static/style.css">  
+    <title>Application Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .form-container {
+            max-width: 350px;
+            margin: auto;
+            padding: 25px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+            position: relative;
+            min-height: 550px;
+        }
+        .input-box {
+            position: relative;
+            margin-top: 15px;
+        }
+        .input-box input {
+            width: 100%;
+            padding: 12px 35px 5px 35px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 14px;
+            transition: all 0.3s ease-in-out;
+            box-sizing: border-box;
+        }
+        .input-box label {
+            position: absolute;
+            left: 35px;
+            top: 35%;
+            transform: translateY(-50%);
+            background: white;
+            padding: 0 5px;
+            color: #888;
+            font-size: 14px;
+            transition: all 0.3s ease-in-out;
+            pointer-events: none;
+        }
+        .input-box input:focus + label,
+        .input-box input:not(:placeholder-shown) + label {
+            opacity: 0;
+            transform: scale(0.9);
+        }
+        .input-box ion-icon {
+            position: absolute;
+            left: 10px;
+            top: 35%;
+            transform: translateY(-50%);
+            font-size: 18px;
+        }
+        .button-container {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 15px;
+        }
+        .back-button {
+            background-color: #6c757d;
+            color: white;
+            border: none;
+            padding: 8px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .back-button:hover {
+            background-color: #5a6268;
+        }
+        .submit-button {
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            padding: 10px 25px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-left: 200px;
+            font-size: 16px;
+           
+        }
+        .submit-button:hover {
+            background-color: #0056b3;
+        }
+        
+        /* Ensure uniform spacing between input boxes */
+        .input-box {
+            margin-bottom: 10px;
+        }
+
+
+    </style>
+</head>
+<body>
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+
+    <div class="form-container">
+        <button class="back-button" onclick="window.history.back();">Back</button>
+        <h2 style="margin-top: 20px;">Application Form</h2>
+        <form action="submit_form.php" method="post">
+            
+            <div class="input-box">
+                <ion-icon name="person-outline"></ion-icon>
+                <input type="text" id="name" name="name" placeholder=" " required>
+                <label for="name">Full Name</label>
+            </div>
+
+            <div class="input-box">
+                <ion-icon name="calendar-outline"></ion-icon>
+                <input type="text" id="age" name="age" placeholder=" " required>
+                <label for="age">Age</label>
+            </div>
+
+
+            <div class="input-box">
+                <ion-icon name="id-card-outline"></ion-icon>
+                <input type="text" id="studentID" name="studentID" placeholder=" " required>
+                <label for="studentID">Student ID</label>
+            </div>
+
+            <div class="input-box">
+                <ion-icon name="mail-outline"></ion-icon>
+                <input type="email" id="email" name="email" placeholder=" " required>
+                <label for="email">Email Address</label>
+            </div>
+
+            <div class="input-box">
+                <ion-icon name="call-outline"></ion-icon>
+                <input type="tel" id="phone" name="phone" placeholder=" " required>
+                <label for="phone">Phone Number</label>
+            </div>
+
+            <div class="button-container">
+                <button type="submit" class="submit-button">Submit</button>
+            </div>
+        </form>
+    </div>
+
+    
+</body>
+</html>

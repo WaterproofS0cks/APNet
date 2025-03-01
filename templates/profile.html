@@ -5,7 +5,7 @@
     <div class="content-card">
         <div class="profile">
             <div class="profile-img">
-                <img src="{{ pfp }}" alt="Cat">
+                <img src="{{ session.get('pfp') }}" alt="User Profile">
             </div>
             <div class="profile-desc">
                 <h2>{{ name }}
@@ -19,19 +19,24 @@
                     <a href="notification" class="btn-icon">
                         <img src="{{ url_for('static', filename='src/icon/icons8-notification-96.png') }}" alt="Notification Icon">
                     </a>
-                    <a href="setting" class="btn-icon">
+                    <a href="settings" class="btn-icon">
                         <img src="{{ url_for('static', filename='src/icon/icons8-settings-96.png') }}" alt="Settings Icon">
                     </a>
                 </div>
-                <button class="button-black">
-                    <img src="{{ url_for('static', filename='src/icon/icons8-link-96.png') }}" alt="Add Icon">External Link
-                </button>
+                {% if link %}
+                <a href="{{ link }}" target="_blank" style="text-decoration: none;">
+                    <button class="button-black">
+                        <img src="{{ url_for('static', filename='src/icon/icons8-link-96.png') }}" alt="Add Icon">External Link
+                    </button>
+                </a>
+                {% endif %}
             </div>
         </div>
 
         <div class="navigation">
-            <button class="button-black">Posts</button>
-            <button class="button-black">Bookmarks</button>
+            <a href="#" class="button-black" style="text-decoration: none;">Posts</a>
+            <a href="events" class="button-black" style="text-decoration: none;">Events</a>
+            <a href="#" class="button-black" style="text-decoration: none;">Bookmarks</a>
         </div>
 
         <div class="post">
@@ -43,7 +48,7 @@
                 <h3>This is a post title</h3>
             </div>
             <div class="post-img">
-                <img src="" alt="Post Image">
+                <img src="{{ url_for('static', filename='src/img/default-events.jpg') }}" alt="Placeholder Image">
             </div>
             <div class="post-inter">
                 <button class="button-grey">

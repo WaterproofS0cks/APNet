@@ -1,27 +1,30 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/x-icon" href="src/favicon/favicon.ico">
-    <link rel="stylesheet" href="/static/style.css">
-    <title>Dashboard</title>
-</head>
+{% extends "layout.html" %}
+{% block title %}Dashboard{% endblock title %}
+{% block content %}
 <body>
     <div class="content-card">
         <div class="card-header">
             <h2>Dashboard</h2>
-            <sub>BETA</sub>
         </div>
 
-        <div class="filter">
-            <p>Filter by</p>
-            <div class="dashboard-filter">
-                <button class="button-filter">Daily</button>
-                <button class="button-filter">Weekly</button>
-                <button class="button-filter">Monthly</button>
-                <button class="button-filter">All Time</button>
-            </div>
+        <div class="card-filter">
+            <form action="#">
+                <div>
+                    <label for="filter">Filter by:</label>
+                    <select name="filter" id="filter" required>
+                        <option value="">None</option>
+                        <option value="daily">Daily</option>
+                        <option value="weekly">Weekly</option>
+                        <option value="monthly">Monthly</option>
+                        <option value="all-time">All Time</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="range">Range:</label>
+                    <input type="text" id="range" name="range" required>
+                </div>
+                <input type="submit" value="Filter">
+            </form>
         </div>
 
         <hr>
@@ -32,17 +35,16 @@
                     <h2>Overview</h2>
                 </div>
                 <div class="dashboard-row">
-                    <p>Core Services</p>
+                    <p>General</p>
                     <div class="dashboard-column-sm">
                         <div class="dashboard-card">
-                            <h3>Total Users</h3>
+                            <h3>Users</h3>
                             <h1>1,234</h1>
                         </div>
                     </div>
-
                     <div class="dashboard-column-sm">
                         <div class="dashboard-card">
-                            <h3>Total Posts</h3>
+                            <h3>Posts</h3>
                             <h1>123</h1>
                         </div>
                     </div>
@@ -55,21 +57,10 @@
                             <h1>12</h1>
                         </div>
                     </div>
-    
                     <div class="dashboard-column-sm">
                         <div class="dashboard-card">
                             <h3>Muted Users</h3>
                             <h1>23</h1>
-                        </div>
-                    </div>
-                </div>
-                <div class="dashboard-row">
-                    <p>Third-party APIs</p>
-                    <div class="dashboard-column-sm">
-                        <div class="dashboard-card">
-                            <h3>Uptime</h3>
-                            <h1>99.97%</h1>
-                            <sub>Powered by UptimeRobot</sub>
                         </div>
                     </div>
                 </div>
@@ -82,7 +73,7 @@
                     <h2>Charts</h2>
                     <div class="dashboard-column-lg">
                         <div class="dashboard-card">
-                            <!-- [TODO] Add bar chart here using Python -->
+                            <!-- [TODO] Add graphs here from Python -->
                         </div>
                     </div>
                 </div>
@@ -97,4 +88,4 @@
         });
     </script>
 </body>
-</html>
+{% endblock content %}
