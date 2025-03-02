@@ -19,7 +19,36 @@
             background-color: #F7F7F7;
             z-index: -1;
         }
-       
+
+        .dropdown {
+            position: relative;
+            display: inline-block;
+            cursor: pointer;
+        }
+
+        .dropdown-content {
+            display: flex;
+            flex-direction: column;
+            position: absolute;
+            background-color: #f9f9f9;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+            padding: 12px 16px;
+            z-index: 1;
+            border-radius: 8px;
+        }
+
+        .dropdown-item {
+            display: block;
+            text-decoration: none;
+            color: #dc3545;
+        }
+
+        /* This will not apply margin-bottom to the last dropdown item */
+        .dropdown-item:not(:last-child) {
+            margin-bottom: 8px;
+        }
+
         .header-main-container {
             position: fixed;
             top: 0;
@@ -320,14 +349,17 @@
                 <h2> • </h2>
                 <h2>Posted x days ago</h2>
 
-                <div class="fm-more-container">                   
-                    <img src="../static/src/icon/icons8-ellipsis-48.png" alt="Elipses" id="fm-moreicon">
-                    <div id="dropdownContent" class="dropdown-content" role="menu">
-                        <a href="#" role="menuitem"></a>
-                        <a href="#" role="menuitem"></a>
-                        <a href="#" role="menuitem"></a>
+                <div class="fm-more-container">
+                    <div class="dropdown">
+                        <span><img src="../static/src/icon/icons8-ellipsis-48.png" alt="Elipses" id="fm-moreicon" height="24" width="24"></span>
+                        <div class="dropdown-content">
+                            <a href="#" class="dropdown-item">Item 1</a>
+                            <a href="#" class="dropdown-item">Item 2</a>
+                            <a href="#" class="dropdown-item">Item 3</a>
+                        </div>
                     </div>
-                </div>
+                </div>                
+
             </div>
 
             <div class="fm-image-container">
@@ -472,20 +504,22 @@
     
     </footer>
 
-
     <script>
-        function toggleDropdown() {
-        const dropdownContent = document.getElementById("dropdownContent");
-        dropdownContent.classList.toggle("show");
-        const isExpanded = dropdownContent.classList.contains("show");
-        dropdownBtn.setAttribute("aria-expanded", isExpanded);
-}
-    
-        window.addEventListener("click", function(event) {
-            if (!event.target.matches('#dropdownBtn') && !dropdownContent.contains(event.target)) {
-                dropdownContent.classList.remove("show");
-                dropdownBtn.setAttribute("aria-expanded", "false");
-            }
+        document.addEventListener("DOMContentLoaded", function() {
+            var dropdown = document.querySelector('.dropdown');
+            var dropdownContent = document.querySelector('.dropdown-content');
+
+            dropdown.addEventListener('click', function(event) {
+                dropdownContent.style.display = (dropdownContent.style.display === "block") ? "none" : "block";
+
+                event.stopPropagation();
+            });
+
+            document.addEventListener('click', function(event) {
+                if (!dropdown.contains(event.target)) {
+                    dropdownContent.style.display = "none";
+                }
+            });
         });
     </script>
 
