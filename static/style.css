@@ -20,22 +20,130 @@ body {
 }
 
 
-/* HEADER */
+/* HEADER B (Marcus)*/
+.hb-main-container {
+    position: fixed;
+    display: flex;
+    align-items: center;
+    height: 100px;
+    width: 100%;
+    top: 0;
+    padding: 20px;
+    background-color: #232323;
+    z-index: 1;
+}
 
+.hb-logo-container {
+    display: flex;
+    align-items: center;
+    height: 70px;
+    width: 20%; 
+    /* background-color: red; */
+}
 
-/* FOOTER */
+#hb-logo-img {
+    height: 100%;
+    width: auto;
+}
 
-.footer-section a.font-footer-list {
+.hb-right-container {
+    display: flex;
+    align-items: center;
+    height: 70px;
+    width: 58%;
+    margin-left: auto;
+}
+
+#hb-pfp-img {
+    height: 55px;
+    width: 55px;
+    margin: 0 10px 0 auto;
+}
+
+.hb-right-container a {
+    text-decoration: none;
+}
+
+.hb-right-container h1 {
     font-family: "Roboto", sans-serif;
-    font-weight: bold;
-    font-size: 17px;
+    font-weight: normal;
+    font-size: 19px;
     color: white; 
     text-decoration: none; 
+    margin: 0 31px;
 }
 
-.footer-section a.font-footer-list:hover {
+.hb-right-container h1:hover {
     text-decoration: underline;
 }
+
+
+/* FOOTER B*/
+
+.fb-main-container {
+    display: flex;
+    background-color: #232323;
+    height: 65vh;
+    width: 100%;
+    padding: 40px;
+}
+
+.fb-logo-container {
+    display: flex;
+    align-items: center;
+    height: 25%;
+    width: 40%;
+}
+
+#fb-logo-img {
+    height: 100%;
+    width: auto;
+}
+
+.fb-github-container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 20%;
+    margin: 38px 0 0 140px;
+}
+
+.fb-linkedin-container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 20%;
+    margin: 38px 0 0 70px;
+}
+
+.fb-github-container h1, .fb-linkedin-container h1{
+    font-family: "Roboto", sans-serif;
+    font-size: 26px;
+    color: #5495ce;
+    letter-spacing: 1.5px;
+}
+
+.fb-github-container ul, .fb-linkedin-container ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.fb-github-container ul li, .fb-linkedin-container ul li {
+    font-size: 18px;
+    margin: 20px 0;
+}
+
+.fb-github-container a, .fb-linkedin-container a {
+    text-decoration: none;
+    font-family: "Roboto", sans-serif;
+    color: #fff;
+}
+
+.fb-github-container a:hover, .fb-linkedin-container a:hover {
+    text-decoration: underline;
+}
+
+
 
 
 
@@ -719,8 +827,9 @@ input[type="submit"]:hover {
 .au-main-container {
     position: relative;
     display: block;
-    height: 5000px;
+    height: 100%;
     width: 100%;
+    margin-top: 100px;
     background-color: pink;
 }
 
@@ -765,6 +874,7 @@ input[type="submit"]:hover {
     height: 100%;
     width: auto;
     border-radius: 15px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;    
 }
 
 .au-banner2 {
@@ -785,6 +895,7 @@ input[type="submit"]:hover {
     height: 100%;
     width: auto;
     border-radius: 15px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;    
 }
 
 .au-text-container2 {
@@ -922,8 +1033,8 @@ input[type="submit"]:hover {
 .au-jeremiah-container h3 {
     font-family: "Roboto", sans-serif;
     font-size: 16px;
-    font-weight: normal;
-    color: #666;
+    font-weight: bold;
+    color: #858585;
     text-align: center;
     line-height: 1.5;
 }
