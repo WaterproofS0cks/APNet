@@ -4,59 +4,16 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../static/style.css"> 
 <style>
     body {
         font-family: "Roboto", sans-serif;
         background-color: #f0f0f0;
         color: #666;
         padding: 20px;
-        margin: 0;
+        margin: 100px 0 0 0;
         padding: 0;
         line-height: 1.6;
-        max-width: 100%;
-        overflow-x: hidden;
-    }
-    .header-main-container {
-        position: relative;
-        align-items: center;
-        display: flex;
-        border: 0px solid;
-        background-color:	#292a2d;
-        width: 100%;
-        height: 80px;
-        padding: 0 10px;
-        margin-bottom: 20px;
-    }
-
-    #header-logo {
-        position: relative;
-        height: 55px;
-        width: auto;
-        padding: 3px;
-        margin: 3px;
-    }
-
-    .header-main-container input {
-        position: relative;  
-        height: 30px;
-        width: 45%;
-        border-radius: 8px;
-        left: 13%;
-        font-size: 16px;
-        text-align: center;
-    }
-
-    .header-main-container input::placeholder {
-        font-size: 16px;
-        text-align: center;
-    }
-
-    #header-profile-img {
-        position: relative;
-        height: 120px;
-        width: 120px;
-        padding: 30px;
-        margin-left: auto;
     }
 
     .container {
@@ -107,58 +64,35 @@
         background-color: #e9f5ff; 
     }
 
-    footer {
-        background-color: #292a2d;
-        color: white;
-        padding: 20px 0; 
-    }
-
-    .footer-content {
-        display: flex;
-        margin: auto;
-        max-width: 90%;
-    }
-
-    .footer-section {
-        flex: 1;
-        padding: 20px;
-    }
-
-    .footer-section-logo {
-        width: 50%;
-        padding: 20px;
-    }
-
-    .footer-section-logo img {
-        height: 75px;
-        width: auto;
-        padding: 10px;
-    }
-
-    .footer-section h2 {
-        font-size: 26px;
-        margin-bottom: 10px;
-        color:  #5495ce;
-    }
-
-    .footer-section ul {
-        list-style-type: none;
-        padding: 0;
-    }
-
-    .footer-section ul li {
-        margin: 20px 0;
-    }
-
-    .footer-bottom {
-        text-align: center;
-        padding: 10px 0;
-        background-color: #222;
-    }
 </style>
 <body>
+    
+    <header>
+
+        <div class="hb-main-container">
+
+            <div class="hb-logo-container">
+                <img src="../static/src/img/apnet-logo.png" alt="APNet logo" id="hb-logo-img">
+            </div>
+
+            <div class="hb-right-container">
+
+                <a href="forummain.html"><h1>Forum</h1></a>
+                <a href="#"><h1>Recruitment</h1></a>
+                <a href="aboutus.html"><h1>About Us</h1></a>
+                <a href="faq.html"><h1>FAQ</h1></a>
+                <a href="termsofservice.html"><h1>Terms of Service</h1></a> 
+                <img src="../static/src/img/default-pfp.png" alt="Pfp" id="hb-pfp-img">
+
+            </div>
+
+        </div>
+
+    </header>
+    
+
     <div class="container">
-        <h1>APNet Terms of Service/User Agreement</h1>
+        <1>APNet Terms of Service/User Agreement</h1>
         <p><strong>Effective Date: 1st February 2025</strong></p>
         <p>Welcome to APNet, a social media platform exclusively designed for the Asia Pacific University (APU) community. By accessing or using APNet, you agree to comply with the terms and conditions outlined below. If you do not agree with these terms, please refrain from using our platform.</p>
         
@@ -258,6 +192,42 @@
 
         <p>By creating an account on APNet or logging into the platform, you acknowledge that you have read, understood, and agree to these Terms of Service.</p>
     </div>
+
+    <footer>
+
+        <div class="fb-main-container">
+
+            <div class="fb-logo-container">
+                <img src="../static/src/img/apnet-logo.png" alt="APNet" id="fb-logo-img">
+            </div>
+
+            <div class="fb-github-container">
+                <h1>GitHub Accounts</h1>
+                <ul>
+                    <li><a href="https://github.com/WaterproofS0cks">Marcus Chan</a></li>
+                    <li><a href="https://github.com/yewshanooi">Yew Shan</a></li>
+                    <li><a href="https://github.com/Synix38">Zheng Yang</a></li>
+                    <li><a href="https://github.com/ProlexicGT">Karlson Thien</a></li>
+                    <li><a href="https://github.com/HyperUniverse1st">Sean Yap</a></li>
+                    <li><a href="https://github.com/BakaJerry">Jeremiah Sii</a></li>
+                </ul>
+            </div>
+
+            <div class="fb-linkedin-container">
+                <h1>LinkedIn Profiles</h1>
+                <ul>
+                    <li><a href="https://www.linkedin.com/in/marcuschanrenzhi/">Marcus Chan</a></li>
+                    <li><a href="https://www.linkedin.com/in/yewshanooi/">Yew Shan</a></li>
+                    <li><a href="https://www.linkedin.com/in/darren-kong-zheng-yang-65a23834b/">Zheng Yang</a></li>
+                    <li><a href="https://www.linkedin.com/in/karlsonthien/">Karlson Thien</a></li>
+                    <li><a href="https://www.linkedin.com/in/sean-yap-9b69022a2">Sean Yap</a></li>
+                    <li><a href="https://www.linkedin.com/in/jeremiah-sii-4272232a3/">Jeremiah Sii</a></li>
+                </ul>
+            </div>
+
+        </div>
+
+    </footer>
 
 </body>
 {% endblock content %}
