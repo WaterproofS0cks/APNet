@@ -19,6 +19,32 @@ body {
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
 
+/* HEADER A */
+.ha-main-container {
+    position: fixed;
+    display: flex;
+    align-items: center;
+    height: 70px;
+    width: 100%;
+    padding: 30px;
+    background-color:#212121;
+}
+
+.ha-logo-container {
+    display: flex;
+    align-items: center;
+    height: 50px;
+    width: 20%;
+}
+
+#ha-logo-img {
+    height: 100%;
+    width: auto;
+}
+
+.ha-search-container {
+    background-color: green;
+}
 
 /* HEADER B (Marcus)*/
 .hb-main-container {
