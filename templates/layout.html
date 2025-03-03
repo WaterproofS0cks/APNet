@@ -195,7 +195,7 @@
 
             <img src="{{ url_for('static', filename='src/icon/icons8-search-50.png') }}" alt="Search Icon" class="header-searchicon">
 
-            <img src="{{ url_for('static', filename='src/img/default-pfp.png') }}" alt="Default Profile Picture" id="header-profile-img">
+            <img src="{{ session.get('pfp') }}" alt="Default Profile Picture" id="header-profile-img">
 
             <img src="{{ url_for('static', filename='src/icon/icons8-info-50.png') }}" alt="Info Icon" class="header-infoicon">
 
