@@ -47,6 +47,11 @@ cur.execute("""CREATE TABLE IF NOT EXISTS Users (
 conn.commit()
 conn.close()
 
+
+@app.route('/', methods=['POST', 'GET'])
+def Homepage():
+    return render_template("forum.html")
+
 @app.route('/terms', methods=['GET'])
 def TermsOfService():
     return render_template("termsofservice.html")
@@ -54,10 +59,6 @@ def TermsOfService():
 @app.route('/faq', methods=['GET'])
 def FrequentlyAskedQuestions():
     return render_template("faq.html")
-
-@app.route('/homepage', methods=['POST', 'GET'])
-def Homepage():
-    return render_template("homepage.html")
 
 @app.route('/recruitment', methods=['POST', 'GET'])
 def Recruitment():
@@ -81,8 +82,8 @@ def Dashboard():
     user_count_result = db_retrieve.retrieve("users", "COUNT(*)")
     user_count = user_count_result[0][0]
 
-    post_count_result = db_retrieve.retrieve("post", "COUNT(*)")
-    post_count = post_count_result[0][0]
+    # post_count_result = db_retrieve.retrieve("post", "COUNT(*)")
+    # post_count = post_count_result[0][0]
 
     banned_count_result = db_retrieve.retrieve("users", "COUNT(*)", "penalty = %s", ('b',))
     banned_count = banned_count_result[0][0]  
@@ -105,7 +106,8 @@ def Dashboard():
     if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
         return jsonify({'chart': chart_html})
 
-    return render_template("dashboard.html", chart=chart_html, filter_value=filter_value, range_value=range_value, user_count=user_count, post_count=post_count, banned_count=banned_count, muted_count=muted_count)
+    # [TO-DO] Removed post_count=post_count for now
+    return render_template("dashboard.html", chart=chart_html, filter_value=filter_value, range_value=range_value, user_count=user_count, banned_count=banned_count, muted_count=muted_count)
 
 if __name__ == "__main__":
     app.run(debug=True)

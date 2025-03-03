@@ -13,3 +13,12 @@ python -m venv .venv
 ```sh
 pip install -r requirements.txt
 ```
+
+3. Save your secret keys into an .env file
+```env
+DBNAME=
+USER=
+PASSWORD=
+
+SECRET_KEY=
+```
