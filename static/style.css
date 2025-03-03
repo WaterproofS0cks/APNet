@@ -1161,6 +1161,7 @@ input[type="submit"]:hover {
     float: left;
     width: 50%;
     padding: 0 10px;
+    box-sizing: border-box;
 }
 
 .dashboard-column-lg {
@@ -1176,6 +1177,7 @@ input[type="submit"]:hover {
     background-color: #e7e9eb;
     border: 1px solid #71717A;
     border-radius: 8px;
+    margin-bottom: 20px;
 }
 
 .dashboard-card h3 {
@@ -1186,7 +1188,6 @@ input[type="submit"]:hover {
     .dashboard-column-sm {
         width: 100%;
         display: block;
-        margin-bottom: 20px;
     }
 }
 
