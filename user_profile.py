@@ -88,11 +88,11 @@ def updateAccount():
             return redirect("/user/profile")
     else:
         return redirect(url_for("auth.login"))
-    
-@user_profile.route('/notification', methods=['POST', 'GET'])
-def notification():
-    return render_template("notification.html")
 
 @user_profile.route('/events', methods=['POST', 'GET'])
 def events():
     return render_template("events.html")
+
+@user_profile.route('/bookmarks', methods=['POST', 'GET'])
+def bookmarks():
+    return render_template("bookmarks.html")

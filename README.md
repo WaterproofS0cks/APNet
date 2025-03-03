@@ -27,3 +27,8 @@ MAILTRAP_PASSWORD=
 # Session secret key
 SECRET_KEY=
 ```
+
+4. Start up the Flask session
+```sh
+python main.py
+```

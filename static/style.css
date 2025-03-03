@@ -911,6 +911,7 @@ input[type="submit"]:hover {
 }
 
 
+
 /* aboutus.html (Marcus)*/
 .au-main-container {
     position: relative;
@@ -1127,6 +1128,8 @@ input[type="submit"]:hover {
     line-height: 1.5;
 }
 
+
+
 /* dashboard.html */
 
 .card-filter {
@@ -1239,6 +1242,7 @@ input[type="submit"]:hover {
 }
 
 
+
 /* faq.html */
 
 .faq-background {
@@ -1348,4 +1352,12 @@ input[type="submit"]:hover {
     & + .faq-title:before {
         transform: rotate(90deg) !important;
     }
+}
+
+
+
+/* bookmarks.html */
+
+.bookmarks-card {
+    margin-top: 20px;
 }
