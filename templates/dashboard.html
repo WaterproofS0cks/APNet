@@ -1,5 +1,7 @@
 {% extends "layout.html" %}
-{% block title %}Dashboard{% endblock title %}
+
+{% block title %}Dashboard{% endblock %}
+
 {% block content %}
 <body>
     <div class="content-card">
@@ -8,22 +10,21 @@
         </div>
 
         <div class="card-filter">
-            <form action="#">
+            <form action="/dashboard" method="POST">
                 <div>
                     <label for="filter">Filter by:</label>
                     <select name="filter" id="filter" required>
-                        <option value="">None</option>
-                        <option value="daily">Daily</option>
-                        <option value="weekly">Weekly</option>
-                        <option value="monthly">Monthly</option>
-                        <option value="all-time">All Time</option>
+                        <option value="days" {% if filter_value == 'days' %}selected{% endif %}>Days</option>
+                        <option value="months" {% if filter_value == 'months' %}selected{% endif %}>Months</option>
+                        <option value="years" {% if filter_value == 'years' %}selected{% endif %}>Years</option>
+                        <option value="all-time" {% if filter_value == 'all-time' %}selected{% endif %}>All Time</option>
                     </select>
                 </div>
                 <div>
                     <label for="range">Range:</label>
-                    <input type="text" id="range" name="range" required>
+                    <input type="text" id="range" name="range" value="{{ range_value }}" required>
                 </div>
-                <input type="submit" value="Filter">
+                <input type="submit" value="Filter" id="filter-button">
             </form>
         </div>
 
@@ -36,16 +37,17 @@
                 </div>
                 <div class="dashboard-row">
                     <p>General</p>
+                    <p>General</p>
                     <div class="dashboard-column-sm">
                         <div class="dashboard-card">
                             <h3>Users</h3>
-                            <h1>1,234</h1>
+                            <h1>{{ user_count }}</h1>
                         </div>
                     </div>
                     <div class="dashboard-column-sm">
                         <div class="dashboard-card">
                             <h3>Posts</h3>
-                            <h1>123</h1>
+                            <h1>{{ post_count }}</h1>
                         </div>
                     </div>
                 </div>
@@ -54,13 +56,13 @@
                     <div class="dashboard-column-sm">
                         <div class="dashboard-card">
                             <h3>Banned Users</h3>
-                            <h1>12</h1>
+                            <h1>{{ banned_count }}</h1>
                         </div>
                     </div>
                     <div class="dashboard-column-sm">
                         <div class="dashboard-card">
                             <h3>Muted Users</h3>
-                            <h1>23</h1>
+                            <h1>{{ muted_count }}</h1>
                         </div>
                     </div>
                 </div>
@@ -73,13 +75,14 @@
                     <h2>Charts</h2>
                     <div class="dashboard-column-lg">
                         <div class="dashboard-card">
-                            <!-- [TODO] Add graphs here from Python -->
+                            <div id="chart-container">
+                            {{ chart|safe }}
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        
     </div>
 
     <script>
@@ -87,5 +90,35 @@
             $(this).toggleClass('focus');
         });
     </script>
+
+    <!-- For my own sanity and not to break things okay? -->
+    <script>
+        document.getElementById('filter-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            var filterValue = document.getElementById('filter').value;
+            var rangeValue = document.getElementById('range').value;
+
+            var formData = new FormData();
+            formData.append('filter', filterValue);
+            formData.append('range', rangeValue);
+
+            fetch('/dashboard', {
+                method: 'POST',
+                body: formData
+            })
+            .then(function(response) {
+                return response.json();
+            })
+            .then(function(data) {
+                console.log('Chart update data:', data); 
+                document.getElementById('chart-container').innerHTML = data.chart; 
+            })
+            .catch(function(error) {
+                console.error('Error updating chart:', error); 
+            });
+        });
+
+    </script>
 </body>
-{% endblock content %}
+{% endblock %}

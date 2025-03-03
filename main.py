@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request, jsonify
 from auth import auth
 from user_profile import user_profile
 from page import page
@@ -6,6 +6,10 @@ import psycopg2
 import os
 from dotenv import load_dotenv
 from datetime import timedelta
+
+from ConnectDatabase import dbConnection
+from RetrieveDatabase import dbRetrieve
+from ChartDatabase import dbChart
 
 load_dotenv()
 DBNAME = os.getenv("DBNAME")
@@ -51,9 +55,57 @@ def TermsOfService():
 def FrequentlyAskedQuestions():
     return render_template("faq.html")
 
+@app.route('/homepage', methods=['POST', 'GET'])
+def Homepage():
+    return render_template("homepage.html")
+
+@app.route('/recruitment', methods=['POST', 'GET'])
+def Recruitment():
+    return render_template("recruitment.html")
+
 @app.route('/dashboard', methods=['POST', 'GET'])
 def Dashboard():
-    return render_template("dashboard.html")
+    db_conn = dbConnection( 
+        dbname= os.getenv("DBNAME"),
+        user = os.getenv("USER"),
+        password = os.getenv("PASSWORD"),
+    )
+    db_conn.connect()
+
+    filter_value = request.form.get('filter', 'days')
+    range_value = request.form.get('range', '100') 
+
+    chart = dbChart(db_conn)
+    db_retrieve = dbRetrieve(db_conn)
+
+    user_count_result = db_retrieve.retrieve("users", "COUNT(*)")
+    user_count = user_count_result[0][0]
+
+    post_count_result = db_retrieve.retrieve("post", "COUNT(*)")
+    post_count = post_count_result[0][0]
+
+    banned_count_result = db_retrieve.retrieve("users", "COUNT(*)", "penalty = %s", ('b',))
+    banned_count = banned_count_result[0][0]  
+
+    muted_count_result = db_retrieve.retrieve("users", "COUNT(*)", "penalty = %s", ('m',))
+    muted_count = muted_count_result[0][0]
+
+    chart_html = chart.plot_registration_graph(
+        duration=(filter_value, int(range_value)), 
+        tablename="users", 
+        column="registerdate", 
+        xLabel="Registration Date", 
+        yLabel="Number of Users", 
+        title="Registered Users Over Time", 
+        lineLabel="Registered Users"
+    )
+
+    db_conn.close()
+
+    if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
+        return jsonify({'chart': chart_html})
+
+    return render_template("dashboard.html", chart=chart_html, filter_value=filter_value, range_value=range_value, user_count=user_count, post_count=post_count, banned_count=banned_count, muted_count=muted_count)
 
 if __name__ == "__main__":
     app.run(debug=True)
