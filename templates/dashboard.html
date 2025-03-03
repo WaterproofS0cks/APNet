@@ -12,18 +12,31 @@
         <div class="card-filter">
             <form action="/dashboard" method="POST">
                 <div>
-                    <label for="filter">Filter by:</label>
-                    <select name="filter" id="filter" required>
-                        <option value="days" {% if filter_value == 'days' %}selected{% endif %}>Days</option>
-                        <option value="months" {% if filter_value == 'months' %}selected{% endif %}>Months</option>
-                        <option value="years" {% if filter_value == 'years' %}selected{% endif %}>Years</option>
-                        <option value="all-time" {% if filter_value == 'all-time' %}selected{% endif %}>All Time</option>
+                    <label for="chart">Chart:</label>
+                    <select for="chart" id="chart" required>
+                        <option value="user">User</option>
+                        <option value="post">Post</option>
+                        <option value="comment">Comment</option>
+                        <option value="recruitment">Recruitment</option>
+                        <option value="application">Application</option>
+                        <option value="moderation">Moderation</option>
+                        <option value="report">Report</option>
+                        <option value="activity">Activity</option>
                     </select>
                 </div>
                 <div>
+                    <label for="filter">Filter by:</label>
+                    <select name="filter" id="filter" required>
+                        <option value="days" {% if filter_value == 'days' %}selected{% endif %}>Past Day</option>
+                        <option value="months" {% if filter_value == 'months' %}selected{% endif %}>Past Month</option>
+                        <option value="years" {% if filter_value == 'years' %}selected{% endif %}>Past Year</option>
+                        <option value="all-time" {% if filter_value == 'all-time' %}selected{% endif %}>All Time</option>
+                    </select>
+                </div>
+                <!-- <div>
                     <label for="range">Range:</label>
                     <input type="text" id="range" name="range" value="{{ range_value }}" required>
-                </div>
+                </div> -->
                 <input type="submit" value="Filter" id="filter-button">
             </form>
         </div>
@@ -33,10 +46,24 @@
         <div class="card-section">
             <div class="dashboard-wrap">
                 <div class="dashboard-row">
+                    <h2>Charts</h2>
+                    <div class="dashboard-column-lg">
+                        <div class="dashboard-card">
+                            <div id="chart-container">
+                            {{ chart|safe }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card-section">
+            <div class="dashboard-wrap">
+                <div class="dashboard-row">
                     <h2>Overview</h2>
                 </div>
                 <div class="dashboard-row">
-                    <p>General</p>
                     <p>General</p>
                     <div class="dashboard-column-sm">
                         <div class="dashboard-card">
@@ -69,27 +96,7 @@
             </div>
         </div>
 
-        <div class="card-section">
-            <div class="dashboard-wrap">
-                <div class="dashboard-row">
-                    <h2>Charts</h2>
-                    <div class="dashboard-column-lg">
-                        <div class="dashboard-card">
-                            <div id="chart-container">
-                            {{ chart|safe }}
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
     </div>
-
-    <script>
-        $('.button-filter').click(function() {
-            $(this).toggleClass('focus');
-        });
-    </script>
 
     <!-- For my own sanity and not to break things okay? -->
     <script>
@@ -97,11 +104,11 @@
             event.preventDefault();
 
             var filterValue = document.getElementById('filter').value;
-            var rangeValue = document.getElementById('range').value;
+            // var rangeValue = document.getElementById('range').value;
 
             var formData = new FormData();
             formData.append('filter', filterValue);
-            formData.append('range', rangeValue);
+            // formData.append('range', rangeValue);
 
             fetch('/dashboard', {
                 method: 'POST',
