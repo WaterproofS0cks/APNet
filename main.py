@@ -49,7 +49,7 @@ conn.close()
 
 
 @app.route('/', methods=['POST', 'GET'])
-def Homepage():
+def Forum():
     return render_template("forum.html")
 
 @app.route('/terms', methods=['GET'])
@@ -92,7 +92,8 @@ def Dashboard():
     muted_count = muted_count_result[0][0]
 
     chart_html = chart.plot_registration_graph(
-        duration=(filter_value, int(range_value)), 
+        # duration=(filter_value, int(range_value)),
+        duration=(filter_value, 1),
         tablename="users", 
         column="registerdate", 
         xLabel="Registration Date", 

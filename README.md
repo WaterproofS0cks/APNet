@@ -16,9 +16,14 @@ pip install -r requirements.txt
 
 3. Save your secret keys into an .env file
 ```env
+# Database credentials
 DBNAME=
 USER=
 PASSWORD=
 
+# Mailtrap account
+MAILTRAP_PASSWORD=
+
+# Session secret key
 SECRET_KEY=
 ```
