@@ -1,5 +1,5 @@
 {% extends "layout.html" %}
-{% block title %}Bookmarks{% endblock title %}
+{% block title %}Likes{% endblock title %}
 {% block content %}
 <body>
     <div class="content-card">
@@ -7,18 +7,18 @@
             <a href="profile" class="btn-icon">
                 <img src="{{ url_for('static', filename='src/icon/icons8-back-96.png') }}" alt="Back Icon">
             </a>
-            <h2>Bookmarks</h2>
+            <h2>Likes</h2>
         </div>
 
-        <!-- This is a single post bookmark -->
+        <!-- This is a single liked post -->
         <div class="bookmarks-card">
             <div class="post">
                 <div class="post-attr">
-                    <p>@username • Forum</p>
-                    <p>3 weeks ago</p>
+                    <p>@username • Recruitment</p>
+                    <p>1 week ago</p>
                 </div>
                 <div class="post-title">
-                    <h3>This is a bookmarked post</h3>
+                    <h3>This is a liked post</h3>
                 </div>
                 <div class="post-img">
                     <img src="{{ url_for('static', filename='src/img/default-events.jpg') }}" alt="Placeholder Image">
@@ -37,7 +37,7 @@
             </div>
         </div>
 
-        <!-- Add additional post bookmarks here -->
+        <!-- Add additional liked posts here -->
 
     </div>
 </body>
