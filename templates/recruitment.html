@@ -3,14 +3,361 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/x-icon" href="src/favicon/favicon.ico">
-    <link rel="stylesheet" href="../static/style.css"> 
-    <title>Recruitment</title>
+    <link rel="icon" type="image/x-icon" href="../static/src/favicon/favicon.ico">
+    <link rel="stylesheet" href="../static/style.css">    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <title>APNet</title>
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #F7F7F7;
+        }
+
+        /* FOOTER */
+        .header-footer-main-container {
+            display: none;
+            position: fixed;
+            justify-content: space-between;
+            align-items: center;
+            bottom: 0;
+            width: 100%;
+            height: 90px;
+            padding: 0;
+            box-sizing: border-box;
+            border: 0px solid;
+            background-color:	#212121;
+            z-index: 1000;
+        }
+
+        .header-footer-container1, 
+            .header-footer-container2, 
+            .header-footer-container3,
+            .header-footer-container4 {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                height: 100%;
+                flex-grow: 1;   
+                width: 25%;
+            }
+
+            .header-footer-container1 active {
+                border-top: 5px solid #2A83FF;
+            }
+
+            .header-footer-forumwhiteicon, 
+            .header-footer-recruitwhiteicon, 
+            .header-footer-notifwhiteicon, 
+            .header-footer-pfpicon {
+                height: 40px;
+                width: 40px;
+                margin: 0 30px 10px 30px;
+            }
+
+            .header-footer-container1 h2, 
+            .header-footer-container2 h2, 
+            .header-footer-container3 h2, 
+            .header-footer-container4 h2 {
+                font-family: "Roboto", sans-serif;
+                font-weight: bold;
+                font-size: 10px;
+                color: white; 
+                text-decoration: none; 
+            }
+
+            /*Recruitment */
+            .recruitment-main-container {
+                height: 100%;
+                width: 53%;
+                margin: 70px 0 0 23%;
+                padding: 20px;
+            }
+
+            .recruitment-post-layout {
+                background-color: white;
+                position: relative;
+                height: 800px;
+                width: 70%;
+                margin-left: 250px;
+                margin-bottom: 40px;
+                border: 1px solid #b4dfd0;
+                border-radius: 16px;
+                padding: 12px;
+                box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+            }
+
+            .recruitment-profiledetails {
+                display: flex;
+                align-items: center;
+                height: 8%;
+                padding: 10px;
+                border-bottom: 1px solid #8decc7 ;
+            }
+
+            #recruitment-post-pfp {
+                width: 40px;
+                height: 40px;
+                margin: 0 5px 3px 5px;
+                border-radius: 50%;
+            }
+
+            .recruitment-profiledetails h1 {
+                font-family: "Roboto", sans-serif;
+                font-weight: bold;
+                font-size: 15px;
+                color: #333333 ;
+                margin: 0 5px 0 9px;
+            }
+
+            .recruitment-profiledetails h2 {
+                font-family: "Roboto", sans-serif;
+                font-weight: normal;
+                font-size: 12px;
+                color: #666666;
+                margin: 0 5px;
+            }
+
+            .recruitment-more-container {
+                position: relative;
+                display: flex;
+                align-items: center;
+                margin-left: auto;
+                justify-content: center;
+                /* background-color: green; */
+                width: 5%;
+            }
+
+            #recruitment-moreicon {
+                width: 20px;
+                height: 20px;
+                margin-left: auto;
+            }
+
+            .recruitment-content {
+                display: none; /* Hidden by default */
+                position: absolute;
+                background-color: #f9f9f9;
+                min-width: 160px;
+                box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+                z-index: 1;
+            }
+
+            .recruitment-content.show {
+                display: block; /* Show when active */
+            }
+
+            .recruitment-image-container {
+                height: 58%;
+                width: 100%;
+                margin: 10px 0 0 0;
+                border: 2px solid #87ebc0; 
+                background-color: #000;
+            }
+
+            .recruitment-image-container img {
+                width: 100%;
+                height: 100%;
+                object-fit: contain;
+            }
+
+            .recruitment-button-container {
+                /* background-color: green; */
+                display: flex;
+                width: 100%;
+                height: 8%;
+                align-items: center;
+                padding: 10px 10px 10px 0px;
+                margin-left: 5px;
+            }
+
+            #recruitment-post-hearticon {
+                width: 21px;
+                height: 23px;    
+                margin-bottom: 3px;
+            }
+
+            #recruitment-post-bookmarkicon {
+                width: 37px;
+                height: 27px;
+                margin: 0 0 1px 0;
+                margin-left: auto;
+            }
+
+            .recruitment-like-icon-container {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                width: 15.5%;
+                height: 100%;
+                border: 1px solid #000;
+                border-radius: 20px;
+                padding: 10px;
+            }
+
+            .recruitment-comment-icon-container {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                width: 19%;
+                height: 100%;
+                border: 1px solid #000;
+                border-radius: 20px;
+                padding: 10px;
+                margin-left: 10px;
+            }
+
+            #recruitment-post-commenticon {
+                width: 23px;
+                height: 23px;
+                margin-left: -5px; 
+            }
+
+            .recruitment-comment-icon-container h2, .recruitment-like-icon-container h2 {
+                font-family: "Roboto", sans-serif;
+                font-size: 12px;
+                margin-left: 7px;
+            }
+
+            .recruitment-like-icon-container h4, .recruitment-comment-icon-container h4 {
+                font-family: "Roboto", sans-serif;
+                font-size: 12px;
+                margin-left: 3px;
+                color: #9a9a9a;
+            }
+
+            .recruitment-caption-container {
+                display: block;
+                align-items: center;
+                padding: 0px 10px 10px 10px; 
+                line-height: 1.4;
+            }
+
+            .recruitment-caption-container h1 {
+                display: flex;
+                font-family: "Roboto", sans-serif;
+                font-weight: bold;
+                font-size: 14px;
+            }
+
+            .recruitment-caption-container h2 {
+                display: flex;
+                font-family: "Roboto", sans-serif;
+                font-weight: normal;
+                font-size: 13px;
+                text-align: justify;
+            }
+
+
+            /* forumcreate.html */
+            .fmc-main-container {
+                background-color: green;
+                margin: 110px auto 10px auto;
+                height: 100vh;
+                width: 90%;
+            }
+
+
+        
+        @media (max-width: 430px) {
+            
+            /* HEADER */
+            .header-main-container {
+                height: 85px;
+                padding: 0;
+                box-sizing: content-box;
+                position: fixed;
+                top: 0;
+            }
+
+            .header-searchbar {
+                display: none;
+            }
+
+            #header-logo {
+                height: 60px;
+                margin-left: 0px;
+            }
+
+            .header-searchicon {
+                display: flex;
+                height: 45px;
+                width: 45px;
+                padding: 5px;
+                margin-right: 10px;
+            }
+
+            #header-profile-img {
+                display: none;
+                width: 55px;
+                height: 55px;
+                padding: 5px;
+                margin-right: 20px;
+            }
+
+            .header-infoicon {
+                display: flex;
+                height: 45px;
+                width: 45px;
+                padding: 5px;
+                margin-right: 15px;
+            }
+
+
+            /* FOOTER */
+            .header-footer-main-container {
+                display: flex;
+            }
+
+            /* NAV BAR */
+            .nb-left-container {
+                display: none;
+            }
+        }
+        
+    </style>
 </head>
 <body>
+    <!-- HEADER CONTENT -->
+    <header>
+        <div class="ha-main-container">
+
+            <div class="ha-logo-container">
+                <a href="/"><img src="../static/src/img/apnet-logo.png" id="ha-logo-img"></a>
+            </div>
+
+            <div class="ha-search-container">
+                <input type="text" id="ha-searchbar" placeholder="Search APNet...">
+            </div>
+            
+            <div class="ha-right-container">
+
+                <div class="ha-createpost-container">
+                    <a href="forumspecific.html">                        
+                        <img src="../static/src/icon/icons8-plus-48.png" alt="Plus" id="ha-plusicon">
+                        <h2>Create Post</h2>
+                    </a>
+                </div>
+
+                <img src="../static/src/icon/icons8-notification-50.png" alt="Notification Icon" id="ha-notificon">
+
+                <img src="../static/src/img/default-pfp.png" alt="Pfp" id="ha-pfpimg">
+                
+
+            </div>
+
+        </div>
+    </header>
+    
+
+    <!-- NAV BAR -->
     <div class="nb-left-container">
 
-        <h1>MAIN PAGES</h1>
+        <h1 style="margin-top: 20px;">MAIN PAGES</h1>
     
         <div class="nb-mainpages-container">    
 
@@ -30,13 +377,6 @@
         <h1>OTHER PAGES</h1>
 
         <div class="nb-otherpages-container">
-
-            <a href="#">
-                <div class="nb-otherpages-notif">
-                    <img src="../static/src/icon/icons8-notification-48.png" alt="Notif Default Icon" id="nb-notificon">
-                    <h2>Notifications</h2>
-                </div>
-            </a>
 
             <a href="#">
                 <div class="nb-otherpages-applicationlisting">
@@ -74,7 +414,7 @@
 
         <div class="nb-resources-container">
             
-            <a href="#"><div class="nb-resources-aboutus">
+            <a href="aboutus.html"><div class="nb-resources-aboutus">
                 <img src="../static/src/icon/icons8-info-50.png" alt="Info Default Icon" id="nb-infoicon">
                 <h2>About Us</h2>
             </div></a>
@@ -93,8 +433,197 @@
         </div>
 
     </div>
-    
 
-        <img src="../static/src/" alt="">
+    <!-- BODY CONTENT -->
+    <div class="recruitment-main-container">
+        
+        <!-- POST LAYOUT -->
+        <div class="recruitment-post-layout">
+            
+            <div class="recruitment-profiledetails">
+                <!-- INSERT PFP HERE -->
+                <img src="../static/src/img/default-pfp.png" alt="Default pfp icon" id="recruitment-post-pfp">
+                <!-- INSERT USERNAME HERE -->
+                <h1>INSERT CLUBNAME</h1>
+                <!-- INSERT LAST CREATION DATE THING -->
+                <h2> • </h2>
+                <h2>Posted x days ago</h2>
+
+                <div class="recruitment-more-container">
+                    <div class="dropdown">
+                        <span><img src="../static/src/icon/icons8-ellipsis-48.png" alt="Elipses" id="recruitment-moreicon" height="24" width="24"></span>
+                        <div class="dropdown-content">
+                            <a href="#" class="dropdown-item">Item 1</a>
+                            <a href="#" class="dropdown-item">Item 2</a>
+                            <a href="#" class="dropdown-item">Item 3</a>
+                        </div>
+                    </div>
+                </div>                
+
+            </div>
+
+            <div class="recruitment-image-container">
+                <!-- INSERT IMAGE HERE -->
+                <img src="../static/src/img/randomimage3.jpg" alt="">
+            </div>
+            
+            <div class="recruitment-button-container">
+
+                
+                <!-- LIKE BUTTON -->
+                <div class="recruitment-like-icon-container">
+                    <img src="../static/src/icon/icons8-heart-50.png" alt="Heart" id="recruitment-post-hearticon">
+                    <h2>Like</h2>
+                    <!-- LIKE AMOUNT -->
+                    <h4>(12)</h4>
+                </div>
+                
+
+                <!-- COMMENT BUTTON -->
+                <div class="recruitment-comment-icon-container">
+                    <img src="../static/src/icon/icons8-comment-50.png" alt="Comment" id="recruitment-post-commenticon">
+                    <h2>Comment</h2>
+                    <!-- COMMENT AMOUNT -->
+                    <h4>(0)</h4>
+                </div>
+
+
+                <!-- BOOKMARK BUTTON -->
+                <img src="../static/src/icon/icons8-bookmark-50.png" alt="Bookmark" id="recruitment-post-bookmarkicon">
+
+            </div>
+
+
+            <!-- INSERT COMMENT -->
+            <div class="recruitment-caption-container">
+                <h1>INSERT CLUBNAME</h1>
+                <!-- <h2>The old clock tower stood tall, its rusted gears ticking in defiance of time. A stray cat perched on the windowsill, watching the bustling streets below. Lanterns flickered, casting long shadows as the wind whispered secrets through the alleyways. Somewhere, a violin played a haunting melody</h2> -->
+                <h2>The rain drummed against the cobblestone streets as neon signs flickered in the misty night. A stranger in a tattered coat hurried past, clutching a leather-bound book with golden edges. In the distance, a train whistled, its echo swallowed by the howling wind. A small café glowed warmly, steam curling from porcelain cups as an old radio played a forgotten tune. The scent of freshly baked bread mixed with the distant sea breeze. Somewhere, a dog barked, chasing its own shadow in the dim light.</h2>
+            </div>
+
+        </div>
+
+        <div class="recruitment-post-layout">
+            
+            <div class="recruitment-profiledetails">
+                <!-- INSERT PFP HERE -->
+                <img src="../static/src/img/default-pfp.png" alt="Default pfp icon" id="recruitment-post-pfp">
+                <!-- INSERT USERNAME HERE -->
+                <h1>INSERT CLUBNAME</h1>
+                <!-- INSERT LAST CREATION DATE THING -->
+                <h2> • </h2>
+                <h2>Posted x days ago</h2>
+            </div>
+
+            <div class="recruitment-image-container">
+                <!-- INSERT IMAGE HERE -->
+                <img src="../static/src/img/randomimage2.jpg" alt="">
+            </div>
+
+            <div class="recruitment-button-container">
+                <img src="" alt="">
+            </div>
+
+        </div>
+
+        <div class="recruitment-post-layout">
+            
+            <div class="recruitment-profiledetails">
+                <!-- INSERT PFP HERE -->
+                <img src="../static/src/img/default-pfp.png" alt="Default pfp icon" id="recruitment-post-pfp">
+                <!-- INSERT USERNAME HERE -->
+                <h1>INSERT CLUBNAME</h1>
+                <!-- INSERT LAST CREATION DATE THING -->
+                <h2> • </h2>
+                <h2>Posted x days ago</h2>
+            </div>
+
+            <div class="recruitment-image-container">
+                <!-- INSERT IMAGE HERE -->
+                <img src="../static/src/img/randomimage1.jpg" alt="">
+            </div>
+
+            <div class="recruitment-button-container">
+                <img src="" alt="">
+            </div>
+
+        </div>
+
+        <div class="recruitment-post-layout">
+            
+            <div class="recruitment-profiledetails">
+                <!-- INSERT PFP HERE -->
+                <img src="../static/src/img/default-pfp.png" alt="Default pfp icon" id="recruitment-post-pfp">
+                <!-- INSERT USERNAME HERE -->
+                <h1>INSERT CLUBNAME</h1>
+                <!-- INSERT LAST CREATION DATE THING -->
+                <h2> • </h2>
+                <h2>Posted x days ago</h2>
+            </div>
+
+            <div class="recruitment-image-container">
+                <!-- INSERT IMAGE HERE -->
+                <img src="../static/src/img/randomimage4.png" alt="">
+            </div>
+
+            <div class="recruitment-button-container">
+                <img src="" alt="">
+            </div>
+
+        </div>
+    
+    </div>
+
+
+
+
+    <!-- FOOTER CONTENT -->
+    <footer>
+        
+        <div class="header-footer-main-container">
+            
+            <div class="header-footer-container1">
+                <img src="../static/src/icon/icons8-forum-blue-50.png" alt="Forum Icon" class="header-footer-forumblueicon">
+                <h2>Forum</h2>
+            </div>
+    
+            <div class="header-footer-container2">
+                <img src="../static/src/icon/icons8-resume-white-50.png" alt="Recruit Icon" class="header-footer-recruitwhiteicon">
+                <h2>Recruitment</h2>
+            </div>
+    
+            <div class="header-footer-container3">
+                <img src="../static/src/icon/icons8-notification-white-48.png" alt="Notification Icon" class="header-footer-notifwhiteicon">
+                <h2>Notifications</h2>
+            </div>
+    
+            <div class="header-footer-container4">
+                <a href="profile.html"><img src="../static/src/img/default-pfp.png" alt="Profile Pic Icon" class="header-footer-pfpicon"></a>
+                <h2>Profile</h2>
+            </div>
+    
+        </div>
+    
+    </footer>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            var dropdown = document.querySelector('.dropdown');
+            var dropdownContent = document.querySelector('.dropdown-content');
+
+            dropdown.addEventListener('click', function(event) {
+                dropdownContent.style.display = (dropdownContent.style.display === "block") ? "none" : "block";
+
+                event.stopPropagation();
+            });
+
+            document.addEventListener('click', function(event) {
+                if (!dropdown.contains(event.target)) {
+                    dropdownContent.style.display = "none";
+                }
+            });
+        });
+    </script>
+
 </body>
 </html>
