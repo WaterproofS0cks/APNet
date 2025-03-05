@@ -1,7 +1,5 @@
 {% extends "layout.html" %}
-
-{% block title %}Dashboard{% endblock %}
-
+{% block title %}Dashboard{% endblock title %}
 {% block content %}
 <body>
     <div class="content-card">
@@ -12,7 +10,7 @@
         <div class="card-filter">
             <form action="/dashboard" method="POST">
                 <div>
-                    <label for="chart">Chart:</label>
+                    <label for="chart">Data:</label>
                     <select for="chart" id="chart" required>
                         <option value="user">User</option>
                         <option value="post">Post</option>
@@ -21,7 +19,6 @@
                         <option value="application">Application</option>
                         <option value="moderation">Moderation</option>
                         <option value="report">Report</option>
-                        <option value="activity">Activity</option>
                     </select>
                 </div>
                 <div>
@@ -64,7 +61,7 @@
                     <h2>Overview</h2>
                 </div>
                 <div class="dashboard-row">
-                    <p>General</p>
+                    <p>Social Media</p>
                     <div class="dashboard-column-sm">
                         <div class="dashboard-card">
                             <h3>Users</h3>
@@ -74,7 +71,25 @@
                     <div class="dashboard-column-sm">
                         <div class="dashboard-card">
                             <h3>Posts</h3>
-                            <h1>{{ post_count }}</h1>
+                            <h1>-</h1>
+                        </div>
+                    </div>
+                    <div class="dashboard-column-sm">
+                        <div class="dashboard-card">
+                            <h3>Comments</h3>
+                            <h1>-</h1>
+                        </div>
+                    </div>
+                    <div class="dashboard-column-sm">
+                        <div class="dashboard-card">
+                            <h3>Recruitments</h3>
+                            <h1>-</h1>
+                        </div>
+                    </div>
+                    <div class="dashboard-column-sm">
+                        <div class="dashboard-card">
+                            <h3>Applications</h3>
+                            <h1>-</h1>
                         </div>
                     </div>
                 </div>
@@ -90,6 +105,12 @@
                         <div class="dashboard-card">
                             <h3>Muted Users</h3>
                             <h1>{{ muted_count }}</h1>
+                        </div>
+                    </div>
+                    <div class="dashboard-column-sm">
+                        <div class="dashboard-card">
+                            <h3>Reported Users</h3>
+                            <h1>-</h1>
                         </div>
                     </div>
                 </div>
@@ -128,4 +149,4 @@
 
     </script>
 </body>
-{% endblock %}
+{% endblock content %}

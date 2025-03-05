@@ -9,16 +9,12 @@
             </div>
             <div class="profile-desc">
                 <h2>{{ name }}
-                    <!-- <div class="verify-badge"><img src="{{ url_for('static', filename='src/icon/icons8-verify-96.png') }}" alt="Verified Checkmark"></div> -->
                     <div class="role-badge">Student</div>
                 </h2>
                 <p>{{ bio }}</p>
             </div>
             <div class="profile-btn">
                 <div class="profile-btn-group">
-                    <a href="notification" class="btn-icon">
-                        <img src="{{ url_for('static', filename='src/icon/icons8-notification-96.png') }}" alt="Notification Icon">
-                    </a>
                     <a href="settings" class="btn-icon">
                         <img src="{{ url_for('static', filename='src/icon/icons8-settings-96.png') }}" alt="Settings Icon">
                     </a>
@@ -34,14 +30,13 @@
         </div>
 
         <div class="navigation">
-            <a href="#" class="button-black" style="text-decoration: none;">Posts</a>
             <a href="events" class="button-black" style="text-decoration: none;">Events</a>
-            <a href="#" class="button-black" style="text-decoration: none;">Bookmarks</a>
+            <a href="bookmarks" class="button-black" style="text-decoration: none;">Bookmarks</a>
         </div>
 
         <div class="post">
             <div class="post-attr">
-                <p>@cat • Recruitment</p>
+                <p>@username • Recruitment</p>
                 <p>1 week ago</p>
             </div>
             <div class="post-title">
@@ -62,6 +57,7 @@
                 </button>
             </div>
         </div>
+
     </div>
 </body>
 {% endblock content %}

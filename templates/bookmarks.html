@@ -1,0 +1,44 @@
+{% extends "layout.html" %}
+{% block title %}Bookmarks{% endblock title %}
+{% block content %}
+<body>
+    <div class="content-card">
+        <div class="card-header">
+            <a href="profile" class="btn-icon">
+                <img src="{{ url_for('static', filename='src/icon/icons8-back-96.png') }}" alt="Back Icon">
+            </a>
+            <h2>Bookmarks</h2>
+        </div>
+
+        <!-- This is a single post bookmark -->
+        <div class="bookmarks-card">
+            <div class="post">
+                <div class="post-attr">
+                    <p>@username • Forum</p>
+                    <p>3 weeks ago</p>
+                </div>
+                <div class="post-title">
+                    <h3>This is a bookmarked post</h3>
+                </div>
+                <div class="post-img">
+                    <img src="{{ url_for('static', filename='src/img/default-events.jpg') }}" alt="Placeholder Image">
+                </div>
+                <div class="post-inter">
+                    <button class="button-grey">
+                        <img src="{{ url_for('static', filename='src/icon/icons8-like-96.png') }}" alt="Like Icon">Like
+                    </button>
+                    <button class="button-grey">
+                        <img src="{{ url_for('static', filename='src/icon/icons8-comment-96.png') }}" alt="Comment Icon">Comment
+                    </button>
+                    <button class="button-grey">
+                        <img src="{{ url_for('static', filename='src/icon/icons8-bookmark-96.png') }}" alt="Bookmark Icon">Bookmark
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Add additional post bookmarks here -->
+
+    </div>
+</body>
+{% endblock content %}

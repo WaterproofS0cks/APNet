@@ -885,18 +885,18 @@ input[type="submit"]:hover {
 
 /* notification.html */
 
-.card-section p, .reset-password-card p {
+.card-section p, .reset-password-card p, .faq-section p {
     margin-top: 20px;
     color: #666;
 }
 
-.card-section a {
+.card-section a, .faq-section a {
     text-decoration: none;
     font-weight: bold;
     color: #666;
 }
 
-.card-section a:hover {
+.card-section a:hover, .faq-section a:hover {
     text-decoration: underline;
     font-weight: bold;
     color: #666;
@@ -916,6 +916,7 @@ input[type="submit"]:hover {
     border-radius: 8px;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
+
 
 
 /* aboutus.html (Marcus)*/
@@ -1134,6 +1135,8 @@ input[type="submit"]:hover {
     line-height: 1.5;
 }
 
+
+
 /* dashboard.html */
 
 .card-filter {
@@ -1165,6 +1168,7 @@ input[type="submit"]:hover {
     float: left;
     width: 50%;
     padding: 0 10px;
+    box-sizing: border-box;
 }
 
 .dashboard-column-lg {
@@ -1180,6 +1184,7 @@ input[type="submit"]:hover {
     background-color: #e7e9eb;
     border: 1px solid #71717A;
     border-radius: 8px;
+    margin-bottom: 20px;
 }
 
 .dashboard-card h3 {
@@ -1190,7 +1195,6 @@ input[type="submit"]:hover {
     .dashboard-column-sm {
         width: 100%;
         display: block;
-        margin-bottom: 20px;
     }
 }
 
@@ -1246,7 +1250,15 @@ input[type="submit"]:hover {
 }
 
 
+
 /* faq.html */
+
+.faq-section {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    margin-top: 20px;
+}
 
 .faq-background {
     font-family: "Roboto", sans-serif;
@@ -1295,6 +1307,8 @@ input[type="submit"]:hover {
     backface-visibility: hidden;
     transform: translateZ(0);
     transition: all 0.3s;
+    box-shadow: 3px 3px 6px #ddd, -3px 3px 6px #ddd;
+    border-radius: 8px;
 }
 
 .faq-title {
@@ -1331,28 +1345,28 @@ input[type="submit"]:hover {
     }
 }
 
-.faq-toggle:hover {
-    & + .faq-title,
-    & + .faq-title + .faq-content {
-        box-shadow: 3px 3px 6px #ddd, -3px 3px 6px #ddd;
-        border-radius: 8px;
-    }
-}
-
 .faq-toggle:checked {
     & + .faq-title {
-        box-shadow: 3px 3px 6px #ddd, -3px 3px 6px #ddd;
+        /* box-shadow: 3px 3px 6px #ddd, -3px 3px 6px #ddd; */
         border-radius: 8px;
         max-height: 500px;
         background-color: #212121;
         color: #fff;
     }
     & + .faq-title + .faq-content {
-        box-shadow: 3px 3px 6px #ddd, -3px 3px 6px #ddd;
+        /* box-shadow: 3px 3px 6px #ddd, -3px 3px 6px #ddd; */
         border-radius: 8px;
         max-height: 500px;
     }
     & + .faq-title:before {
         transform: rotate(90deg) !important;
     }
+}
+
+
+
+/* bookmarks.html */
+
+.bookmarks-card {
+    margin-top: 20px;
 }
