@@ -96,7 +96,7 @@
                 align-items: center;
                 height: 8%;
                 padding: 10px;
-                border-bottom: 1px solid #8decc7 ;
+                border-bottom: 1px solid #020202 ;
             }
 
             #recruitment-post-pfp {
@@ -155,20 +155,21 @@
                 height: 58%;
                 width: 100%;
                 margin: 10px 0 0 0;
-                border: 2px solid #87ebc0; 
-                background-color: #000;
+                border: 2px solid #ffffff; 
+                background-color: #ffffff;
             }
 
             .recruitment-image-container img {
                 width: 100%;
                 height: 100%;
-                object-fit: contain;
+                object-fit: fill;
             }
+
 
             .recruitment-button-container {
                 /* background-color: green; */
                 display: flex;
-                width: 100%;
+                width: 120%;
                 height: 8%;
                 align-items: center;
                 padding: 10px 10px 10px 0px;
@@ -185,7 +186,7 @@
                 width: 37px;
                 height: 27px;
                 margin: 0 0 1px 0;
-                margin-left: auto;
+                margin-left: 250px;
             }
 
             .recruitment-like-icon-container {
@@ -251,6 +252,34 @@
                 font-size: 13px;
                 text-align: justify;
             }
+
+            .post-footer {
+                display: flex;
+                justify-content: flex-end;
+                align-items: center;
+                padding: 10px;
+            }
+
+            .interest-text {
+                font-size: 14px;
+                font-weight: bold;
+                margin-right: 10px;
+            }
+
+            .apply-button {
+                background-color: #007bff;
+                color: white;
+                border: none;
+                padding: 8px 16px;
+                font-size: 14px;
+                border-radius: 5px;
+                cursor: pointer;
+            }
+
+            .apply-button:hover {
+                background-color: #0056b3;
+            }
+
 
 
             /* forumcreate.html */
@@ -464,7 +493,7 @@
 
             <div class="recruitment-image-container">
                 <!-- INSERT IMAGE HERE -->
-                <img src="../static/src/img/randomimage3.jpg" alt="">
+                <img src="C:\Users\Darren Kong\Desktop\APNet\static\src\img\basketball-club.png" alt="">
             </div>
             
             <div class="recruitment-button-container">
@@ -496,9 +525,14 @@
 
             <!-- INSERT COMMENT -->
             <div class="recruitment-caption-container">
-                <h1>INSERT CLUBNAME</h1>
+                <h1>CLUB DESCRIPTION</h1>
                 <!-- <h2>The old clock tower stood tall, its rusted gears ticking in defiance of time. A stray cat perched on the windowsill, watching the bustling streets below. Lanterns flickered, casting long shadows as the wind whispered secrets through the alleyways. Somewhere, a violin played a haunting melody</h2> -->
                 <h2>The rain drummed against the cobblestone streets as neon signs flickered in the misty night. A stranger in a tattered coat hurried past, clutching a leather-bound book with golden edges. In the distance, a train whistled, its echo swallowed by the howling wind. A small café glowed warmly, steam curling from porcelain cups as an old radio played a forgotten tune. The scent of freshly baked bread mixed with the distant sea breeze. Somewhere, a dog barked, chasing its own shadow in the dim light.</h2>
+            </div>
+
+            <div class="post-footer">
+                <span class="interest-text">Interested? Join Us Now!</span>
+                <button class="apply-button">Apply</button>
             </div>
 
         </div>
@@ -521,7 +555,40 @@
             </div>
 
             <div class="recruitment-button-container">
-                <img src="" alt="">
+
+                
+                <!-- LIKE BUTTON -->
+                <div class="recruitment-like-icon-container">
+                    <img src="../static/src/icon/icons8-heart-50.png" alt="Heart" id="recruitment-post-hearticon">
+                    <h2>Like</h2>
+                    <!-- LIKE AMOUNT -->
+                    <h4>(12)</h4>
+                </div>
+                
+
+                <!-- COMMENT BUTTON -->
+                <div class="recruitment-comment-icon-container">
+                    <img src="../static/src/icon/icons8-comment-50.png" alt="Comment" id="recruitment-post-commenticon">
+                    <h2>Comment</h2>
+                    <!-- COMMENT AMOUNT -->
+                    <h4>(0)</h4>
+                </div>
+
+
+                <!-- BOOKMARK BUTTON -->
+                <img src="../static/src/icon/icons8-bookmark-50.png" alt="Bookmark" id="recruitment-post-bookmarkicon">
+
+            </div>
+
+            <div class="recruitment-caption-container">
+                <h1>CLUB DESCRIPTION</h1>
+                <!-- <h2>The old clock tower stood tall, its rusted gears ticking in defiance of time. A stray cat perched on the windowsill, watching the bustling streets below. Lanterns flickered, casting long shadows as the wind whispered secrets through the alleyways. Somewhere, a violin played a haunting melody</h2> -->
+                <h2>The rain drummed against the cobblestone streets as neon signs flickered in the misty night. A stranger in a tattered coat hurried past, clutching a leather-bound book with golden edges. In the distance, a train whistled, its echo swallowed by the howling wind. A small café glowed warmly, steam curling from porcelain cups as an old radio played a forgotten tune. The scent of freshly baked bread mixed with the distant sea breeze. Somewhere, a dog barked, chasing its own shadow in the dim light.</h2>
+            </div>
+
+            <div class="post-footer">
+                <span class="interest-text">Interested? Join Us Now!</span>
+                <button class="apply-button">Apply</button>
             </div>
 
         </div>
@@ -544,7 +611,40 @@
             </div>
 
             <div class="recruitment-button-container">
-                <img src="" alt="">
+
+                
+                <!-- LIKE BUTTON -->
+                <div class="recruitment-like-icon-container">
+                    <img src="../static/src/icon/icons8-heart-50.png" alt="Heart" id="recruitment-post-hearticon">
+                    <h2>Like</h2>
+                    <!-- LIKE AMOUNT -->
+                    <h4>(12)</h4>
+                </div>
+                
+
+                <!-- COMMENT BUTTON -->
+                <div class="recruitment-comment-icon-container">
+                    <img src="../static/src/icon/icons8-comment-50.png" alt="Comment" id="recruitment-post-commenticon">
+                    <h2>Comment</h2>
+                    <!-- COMMENT AMOUNT -->
+                    <h4>(0)</h4>
+                </div>
+
+
+                <!-- BOOKMARK BUTTON -->
+                <img src="../static/src/icon/icons8-bookmark-50.png" alt="Bookmark" id="recruitment-post-bookmarkicon">
+
+            </div>
+
+            <div class="recruitment-caption-container">
+                <h1>CLUB DESCRIPTION</h1>
+                <!-- <h2>The old clock tower stood tall, its rusted gears ticking in defiance of time. A stray cat perched on the windowsill, watching the bustling streets below. Lanterns flickered, casting long shadows as the wind whispered secrets through the alleyways. Somewhere, a violin played a haunting melody</h2> -->
+                <h2>The rain drummed against the cobblestone streets as neon signs flickered in the misty night. A stranger in a tattered coat hurried past, clutching a leather-bound book with golden edges. In the distance, a train whistled, its echo swallowed by the howling wind. A small café glowed warmly, steam curling from porcelain cups as an old radio played a forgotten tune. The scent of freshly baked bread mixed with the distant sea breeze. Somewhere, a dog barked, chasing its own shadow in the dim light.</h2>
+            </div>
+
+            <div class="post-footer">
+                <span class="interest-text">Interested? Join Us Now!</span>
+                <button class="apply-button">Apply</button>
             </div>
 
         </div>
@@ -567,7 +667,40 @@
             </div>
 
             <div class="recruitment-button-container">
-                <img src="" alt="">
+
+                
+                <!-- LIKE BUTTON -->
+                <div class="recruitment-like-icon-container">
+                    <img src="../static/src/icon/icons8-heart-50.png" alt="Heart" id="recruitment-post-hearticon">
+                    <h2>Like</h2>
+                    <!-- LIKE AMOUNT -->
+                    <h4>(12)</h4>
+                </div>
+                
+
+                <!-- COMMENT BUTTON -->
+                <div class="recruitment-comment-icon-container">
+                    <img src="../static/src/icon/icons8-comment-50.png" alt="Comment" id="recruitment-post-commenticon">
+                    <h2>Comment</h2>
+                    <!-- COMMENT AMOUNT -->
+                    <h4>(0)</h4>
+                </div>
+
+
+                <!-- BOOKMARK BUTTON -->
+                <img src="../static/src/icon/icons8-bookmark-50.png" alt="Bookmark" id="recruitment-post-bookmarkicon">
+
+            </div>
+
+            <div class="recruitment-caption-container">
+                <h1>CLUB DESCRIPTION</h1>
+                <!-- <h2>The old clock tower stood tall, its rusted gears ticking in defiance of time. A stray cat perched on the windowsill, watching the bustling streets below. Lanterns flickered, casting long shadows as the wind whispered secrets through the alleyways. Somewhere, a violin played a haunting melody</h2> -->
+                <h2>The rain drummed against the cobblestone streets as neon signs flickered in the misty night. A stranger in a tattered coat hurried past, clutching a leather-bound book with golden edges. In the distance, a train whistled, its echo swallowed by the howling wind. A small café glowed warmly, steam curling from porcelain cups as an old radio played a forgotten tune. The scent of freshly baked bread mixed with the distant sea breeze. Somewhere, a dog barked, chasing its own shadow in the dim light.</h2>
+            </div>
+
+            <div class="post-footer">
+                <span class="interest-text">Interested? Join Us Now!</span>
+                <button class="apply-button">Apply</button>
             </div>
 
         </div>
