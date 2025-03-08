@@ -40,7 +40,6 @@ class dbRetrieve:
         if condition:
             query += f' WHERE {condition}'
         query += ";"
-        print(query)
         self.execute_query(query, params)
         return self.db_connection.cur.fetchall()
 

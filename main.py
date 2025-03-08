@@ -51,8 +51,7 @@ conn.close()
 def index():
     return render_template('forum.html')
 
-
-@app.route('/load_more')
+@app.route('/load_more_post')
 def load_more():
     db_conn = dbConnection(
         dbname=os.getenv("DBNAME"),
@@ -122,17 +121,25 @@ def load_more():
 
     return jsonify({'post_html': post_html, 'no_more_posts': False})
 
+
+
 @app.route('/terms', methods=['GET'])
 def TermsOfService():
     return render_template("termsofservice.html")
+
+
 
 @app.route('/faq', methods=['GET'])
 def FrequentlyAskedQuestions():
     return render_template("faq.html")
 
+
+
 @app.route('/recruitment', methods=['POST', 'GET'])
 def Recruitment():
     return render_template("recruitment.html")
+
+
 
 @app.route('/dashboard', methods=['POST', 'GET'])
 def Dashboard():
@@ -143,8 +150,9 @@ def Dashboard():
     )
     db_conn.connect()
 
-    filter_value = request.form.get('filter', 'days')
-    range_value = request.form.get('range', '100') 
+    filter_value = request.form.get('filter', 'all-time')
+    database_value = request.form.get('database', 'users')
+    range_value = request.form.get('range', '1') 
 
     chart = dbChart(db_conn)
     db_retrieve = dbRetrieve(db_conn)
@@ -152,8 +160,17 @@ def Dashboard():
     user_count_result = db_retrieve.retrieve("users", "COUNT(*)")
     user_count = user_count_result[0][0]
 
-    # post_count_result = db_retrieve.retrieve("post", "COUNT(*)")
-    # post_count = post_count_result[0][0]
+    post_count_result = db_retrieve.retrieve("post", "COUNT(*)")
+    post_count = post_count_result[0][0]
+
+    comment_count_result = db_retrieve.retrieve("comment", "COUNT(*)")
+    comment_count = comment_count_result[0][0]
+
+    recruitment_count_result = db_retrieve.retrieve("recruitment", "COUNT(*)")
+    recruitment_count = recruitment_count_result[0][0]
+
+    application_count_result = db_retrieve.retrieve("application", "COUNT(*)")
+    application_count = application_count_result[0][0]
 
     banned_count_result = db_retrieve.retrieve("users", "COUNT(*)", "penalty = %s", ('b',))
     banned_count = banned_count_result[0][0]  
@@ -161,24 +178,45 @@ def Dashboard():
     muted_count_result = db_retrieve.retrieve("users", "COUNT(*)", "penalty = %s", ('m',))
     muted_count = muted_count_result[0][0]
 
-    chart_html = chart.plot_registration_graph(
-        # duration=(filter_value, int(range_value)),
-        duration=(filter_value, 1),
-        tablename="users", 
-        column="registerdate", 
-        xLabel="Registration Date", 
-        yLabel="Number of Users", 
-        title="Registered Users Over Time", 
-        lineLabel="Registered Users"
-    )
+    reported_count_result = db_retrieve.retrieve("reports", "COUNT(*)")
+    reported_count = reported_count_result[0][0]
+
+    # chart_html = chart.plot_graph(
+    #     # duration=(filter_value, int(range_value)),
+    #     duration = (filter_value, 1),
+    #     tablename = database_value, 
+    #     # column="registerdate", 
+    #     # xLabel="Registration Date", 
+    #     # yLabel="Number of Users", 
+    #     # title="Registered Users Over Time", 
+    #     # lineLabel="Registered Users"
+    # )
+
+
+    chart_html = chart.set_graph(database_value, filter_value)
 
     db_conn.close()
 
     if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
         return jsonify({'chart': chart_html})
 
-    # [TO-DO] Removed post_count=post_count for now
-    return render_template("dashboard.html", chart=chart_html, filter_value=filter_value, range_value=range_value, user_count=user_count, banned_count=banned_count, muted_count=muted_count)
+    return render_template(
+        "dashboard.html", 
+        chart=chart_html, 
+        filter_value=filter_value, 
+        database_value=database_value, 
+        # range_value=range_value, 
+        user_count=user_count,
+        post_count=post_count,
+        comment_count=comment_count,
+        recruitment_count=recruitment_count,
+        application_count=application_count,
+        banned_count=banned_count, 
+        muted_count=muted_count,
+        reported_count=reported_count
+        )
+
+
 
 if __name__ == "__main__":
     app.run(debug=True)

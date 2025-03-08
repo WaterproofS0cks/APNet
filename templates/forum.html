@@ -299,7 +299,7 @@
     
             postIds.forEach(postId => loadedPostIds.add(postId));
     
-            fetch('/load_more?page=' + currentPage + '&loaded_post_ids=' + JSON.stringify(Array.from(loadedPostIds)))
+            fetch('/load_more_post?page=' + currentPage + '&loaded_post_ids=' + JSON.stringify(Array.from(loadedPostIds)))
                 .then(response => response.json())
                 .then(data => {
                     if (data.post_html) {
