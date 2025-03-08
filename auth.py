@@ -28,7 +28,7 @@ def login():
                 date = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
                 cur.execute("UPDATE Users SET LastLogin = %s WHERE email = %s", (date, client["email"]))
                 conn.commit()
-                cur.execute("SELECT id, username, fullname, bio, link, role, email, gender, profilepicture, penalty FROM USERS WHERE email = %s LIMIT 1", (client['email'],))
+                cur.execute("SELECT userid, username, fullname, bio, link, role, email, gender, profilepicture, penalty FROM Users WHERE email = %s LIMIT 1", (client['email'],))
                 user_data = cur.fetchone()
                 conn.close()
                 session.permanent = True
@@ -59,9 +59,9 @@ def register():
         conn = psycopg2.connect(dbname=DBNAME, user=USER, password=PASSWORD)
         cur = conn.cursor()
         try:
-            cur.execute("INSERT INTO Users (username, fullname, bio, link, role, email, password, gender, RegisterDate, LastLogin, ProfilePicture, Penalty) VALUES (%s, %s, NULL, NULL, %s, %s, %s, %s, %s, %s, %s, NULL)", user)          
+            cur.execute("INSERT INTO Users (username, fullname, bio, link, role, email, password, gender, registerdate, lastLogin, profilepicture, penalty) VALUES (%s, %s, NULL, NULL, %s, %s, %s, %s, %s, %s, %s, NULL)", user)      
             conn.commit()
-            cur.execute("SELECT id, username, fullname, bio, link, role, email, gender, profilepicture, penalty FROM USERS WHERE email = %s LIMIT 1", (client['email'],))
+            cur.execute("SELECT userid, username, fullname, bio, link, role, email, gender, profilepicture, penalty FROM USERS WHERE email = %s LIMIT 1", (client['email'],))
             user_data = cur.fetchone()
             conn.close()
             session.permanent = True

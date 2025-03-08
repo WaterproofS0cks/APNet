@@ -18,12 +18,12 @@ PASSWORD = os.getenv("PASSWORD")
 SECRET_KEY = os.getenv("SECRET_KEY")
 
 db_conn = dbConnection( 
-        DBNAME= os.getenv("DBNAME"),
-        USER = os.getenv("USER"),
-        PASSWORD = os.getenv("PASSWORD"),
-    )
-db_conn.connect()
+    dbname= os.getenv("DBNAME"),
+    user = os.getenv("USER"),
+    password = os.getenv("PASSWORD"),
+)
 
+db_conn.connect()
 db_create = dbCreate(db_conn)
 
 app = Flask(__name__)
@@ -61,11 +61,11 @@ db_conn.close()
 
 
 @app.route('/')
-def index():
+def forum():
     return render_template('forum.html')
 
 @app.route('/load_more_post')
-def load_more():
+def load_more_post():
     db_conn = dbConnection(
         dbname=os.getenv("DBNAME"),
         user=os.getenv("USER"),
