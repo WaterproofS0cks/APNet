@@ -10,12 +10,21 @@ import json
 from ConnectDatabase import dbConnection
 from RetrieveDatabase import dbRetrieve
 from ChartDatabase import dbChart
-
+from CreateDatabase import dbCreate
 load_dotenv()
 DBNAME = os.getenv("DBNAME")
 USER = os.getenv("USER")
 PASSWORD = os.getenv("PASSWORD")
 SECRET_KEY = os.getenv("SECRET_KEY")
+
+db_conn = dbConnection( 
+        DBNAME= os.getenv("DBNAME"),
+        USER = os.getenv("USER"),
+        PASSWORD = os.getenv("PASSWORD"),
+    )
+db_conn.connect()
+
+db_create = dbCreate(db_conn)
 
 app = Flask(__name__)
 app.register_blueprint(auth, url_prefix="/auth")
@@ -23,28 +32,32 @@ app.register_blueprint(user_profile, url_prefix="/user")
 app.secret_key = SECRET_KEY
 app.permanent_session_lifetime = timedelta(days=1)
 
-conn = psycopg2.connect(dbname=DBNAME, user=USER, password=PASSWORD)
-cur = conn.cursor()
+db_create.create_database()
+db_conn.commit()
+db_conn.close()
 
-cur.execute("""CREATE TABLE IF NOT EXISTS Users (
-            id SERIAL NOT NULL PRIMARY KEY,
-            username VARCHAR(255) UNIQUE NOT NULL,
-			fullname VARCHAR(255) NOT NULL,
-            bio VARCHAR(255),
-            link VARCHAR(255),
-            role CHAR(1) NOT NULL,
-            email VARCHAR(255) UNIQUE NOT NULL,
-            password VARCHAR(255) NOT NULL,
-            gender CHAR(1),
-			RegisterDate DATE NOT NULL,
-			LastLogin TIMESTAMP,
-			ProfilePicture VARCHAR(255),
-            Penalty CHAR(1)
-            );
-""")
+# conn = psycopg2.connect(dbname=DBNAME, user=USER, password=PASSWORD)
+# cur = conn.cursor()
 
-conn.commit()
-conn.close()
+# cur.execute("""CREATE TABLE IF NOT EXISTS Users (
+#             id SERIAL NOT NULL PRIMARY KEY,
+#             username VARCHAR(255) UNIQUE NOT NULL,
+# 			fullname VARCHAR(255) NOT NULL,
+#             bio VARCHAR(255),
+#             link VARCHAR(255),
+#             role CHAR(1) NOT NULL,
+#             email VARCHAR(255) UNIQUE NOT NULL,
+#             password VARCHAR(255) NOT NULL,
+#             gender CHAR(1),
+# 			RegisterDate DATE NOT NULL,
+# 			LastLogin TIMESTAMP,
+# 			ProfilePicture VARCHAR(255),
+#             Penalty CHAR(1)
+#             );
+# """)
+
+# conn.commit()
+# conn.close()
 
 
 @app.route('/')
@@ -152,9 +165,9 @@ def Dashboard():
 
     filter_value = request.form.get('filter', 'all-time')
     database_value = request.form.get('database', 'users')
-    range_value = request.form.get('range', '1') 
+    # range_value = request.form.get('range', '1') 
 
-    chart = dbChart(db_conn)
+    db_chart = dbChart(db_conn)
     db_retrieve = dbRetrieve(db_conn)
 
     user_count_result = db_retrieve.retrieve("users", "COUNT(*)")
@@ -192,8 +205,7 @@ def Dashboard():
     #     # lineLabel="Registered Users"
     # )
 
-
-    chart_html = chart.set_graph(database_value, filter_value)
+    chart_html = db_chart.set_graph(database_value, filter_value)
 
     db_conn.close()
 
