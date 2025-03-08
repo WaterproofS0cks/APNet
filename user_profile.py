@@ -93,6 +93,10 @@ def updateAccount():
 def events():
     return render_template("events.html")
 
+@user_profile.route('/likes', methods=['POST', 'GET'])
+def likedPosts():
+    return render_template("likedposts.html")
+
 @user_profile.route('/bookmarks', methods=['POST', 'GET'])
-def bookmarks():
-    return render_template("bookmarks.html")
+def bookmarkedPosts():
+    return render_template("bookmarkedposts.html")

@@ -28,7 +28,7 @@ def login():
                 date = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
                 cur.execute("UPDATE Users SET LastLogin = %s WHERE email = %s", (date, client["email"]))
                 conn.commit()
-                cur.execute("SELECT * FROM Users WHERE email = %s LIMIT 1", (client['email'],))
+                cur.execute("SELECT id, username, fullname, bio, link, role, email, gender, profilepicture, penalty FROM USERS WHERE email = %s LIMIT 1", (client['email'],))
                 user_data = cur.fetchone()
                 conn.close()
                 session.permanent = True
@@ -39,9 +39,9 @@ def login():
                 session['link'] = user_data[4]
                 session['role'] = user_data[5]
                 session['email'] = user_data[6]
-                session['gender'] = user_data[8]
-                session['pfp'] = user_data[11]
-                session['penalty'] = user_data[12]
+                session['gender'] = user_data[7]
+                session['pfp'] = user_data[8]
+                session['penalty'] = user_data[9]
                 return redirect('/user/profile')
             else:
                 return render_template("login.html", errmsg="Email or Password incorrect. Please try again")
@@ -61,7 +61,7 @@ def register():
         try:
             cur.execute("INSERT INTO Users (username, fullname, bio, link, role, email, password, gender, RegisterDate, LastLogin, ProfilePicture, Penalty) VALUES (%s, %s, NULL, NULL, %s, %s, %s, %s, %s, %s, %s, NULL)", user)          
             conn.commit()
-            cur.execute("SELECT * FROM Users WHERE email = %s LIMIT 1", (client['email'],))
+            cur.execute("SELECT id, username, fullname, bio, link, role, email, gender, profilepicture, penalty FROM USERS WHERE email = %s LIMIT 1", (client['email'],))
             user_data = cur.fetchone()
             conn.close()
             session.permanent = True
@@ -72,9 +72,9 @@ def register():
             session['link'] = user_data[4]
             session['role'] = user_data[5]
             session['email'] = user_data[6]
-            session['gender'] = user_data[8]
-            session['pfp'] = user_data[11]
-            session['penalty'] = user_data[12]
+            session['gender'] = user_data[7]
+            session['pfp'] = user_data[8]
+            session['penalty'] = user_data[9]
             return redirect('/user/profile')
         except psycopg2.errors.UniqueViolation:
             return render_template("register.html", errmsg="Username or Email already exist. Please try again")

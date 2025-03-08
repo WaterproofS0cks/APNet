@@ -661,6 +661,13 @@ input[type="submit"]:hover {
 }
 
 
+/* forumcreate.html */
+.fmc-main-container {
+    background-color: green;
+    margin: 110px auto 10px auto;
+    height: 100vh;
+    width: 90%;
+}
 
 
 
