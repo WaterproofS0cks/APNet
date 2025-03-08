@@ -1,4 +1,5 @@
 import psycopg2
+from psycopg2.extras import DictCursor
 
 class dbConnection:
     def __init__(self, dbname, user, password, host="localhost", port = "5432"):
@@ -10,15 +11,17 @@ class dbConnection:
         self.conn = None
         self.cur = None
 
-    def connect(self):
-        try:
-            self.conn = psycopg2.connect(
-                host=self.host, dbname=self.dbname, user=self.user,
-                password=self.password, port=self.port
-            )
+    def connect(self, cursor_type=None):
+        self.conn = psycopg2.connect(
+            dbname=self.dbname,
+            user=self.user,
+            password=self.password
+        )
+        
+        if cursor_type == 'dict':
+            self.cur = self.conn.cursor(cursor_factory=DictCursor)
+        else:
             self.cur = self.conn.cursor()
-        except Exception as e:
-            print(f"Error executing connection: {e}")
         
     def commit(self):
         self.conn.commit()

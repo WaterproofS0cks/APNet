@@ -1,4 +1,6 @@
-<!DOCTYPE html>
+{% extends "layout.html" %}
+{% block title %}Forum{% endblock %}
+{% block content %}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -216,7 +218,7 @@
             <div class="ha-right-container">
 
                 <div class="ha-createpost-container">
-                    <a href="forumcreate">                        
+                    <a href="forumspecific.html">                        
                         <img src="../static/src/icon/icons8-plus-48.png" alt="Plus" id="ha-plusicon">
                         <h2>Create Post</h2>
                     </a>
@@ -330,146 +332,103 @@
     </div>
 
     <!-- BODY CONTENT -->
-    <div class="fm-main-container">
-        
-        <!-- POST LAYOUT -->
-        <div class="fm-post-layout">
-            
-            <div class="fm-profiledetails">
-                <!-- INSERT PFP HERE -->
-                <img src="../static/src/img/default-pfp.png" alt="Default pfp icon" id="fm-post-pfp">
-                <!-- INSERT USERNAME HERE -->
-                <h1>INSERT USERNAME</h1>
-                <!-- INSERT LAST CREATION DATE THING -->
-                <h2> • </h2>
-                <h2>Posted x days ago</h2>
-
-                <div class="fm-more-container">
-                    <div class="dropdown">
-                        <span><img src="../static/src/icon/icons8-ellipsis-48.png" alt="Elipses" id="fm-moreicon" height="24" width="24"></span>
-                        <div class="dropdown-content">
-                            <a href="#" class="dropdown-item">Item 1</a>
-                            <a href="#" class="dropdown-item">Item 2</a>
-                            <a href="#" class="dropdown-item">Item 3</a>
-                        </div>
-                    </div>
-                </div>                
-
-            </div>
-
-            <div class="fm-image-container">
-                <!-- INSERT IMAGE HERE -->
-                <img src="../static/src/img/randomimage3.jpg" alt="">
-            </div>
-            
-            <div class="fm-button-container">
-
-                
-                <!-- LIKE BUTTON -->
-                <div class="fm-like-icon-container">
-                    <img src="../static/src/icon/icons8-heart-50.png" alt="Heart" id="fm-post-hearticon">
-                    <h2>Like</h2>
-                    <!-- LIKE AMOUNT -->
-                    <h4>(12)</h4>
-                </div>
-                
-
-                <!-- COMMENT BUTTON -->
-                <div class="fm-comment-icon-container">
-                    <img src="../static/src/icon/icons8-comment-50.png" alt="Comment" id="fm-post-commenticon">
-                    <h2>Comment</h2>
-                    <!-- COMMENT AMOUNT -->
-                    <h4>(0)</h4>
-                </div>
-
-
-                <!-- BOOKMARK BUTTON -->
-                <img src="../static/src/icon/icons8-bookmark-50.png" alt="Bookmark" id="fm-post-bookmarkicon">
-
-            </div>
-
-
-            <!-- INSERT COMMENT -->
-            <div class="fm-caption-container">
-                <h1>INSERT USERNAME</h1>
-                <!-- <h2>The old clock tower stood tall, its rusted gears ticking in defiance of time. A stray cat perched on the windowsill, watching the bustling streets below. Lanterns flickered, casting long shadows as the wind whispered secrets through the alleyways. Somewhere, a violin played a haunting melody</h2> -->
-                <h2>The rain drummed against the cobblestone streets as neon signs flickered in the misty night. A stranger in a tattered coat hurried past, clutching a leather-bound book with golden edges. In the distance, a train whistled, its echo swallowed by the howling wind. A small café glowed warmly, steam curling from porcelain cups as an old radio played a forgotten tune. The scent of freshly baked bread mixed with the distant sea breeze. Somewhere, a dog barked, chasing its own shadow in the dim light.</h2>
-            </div>
-
-        </div>
-
-        <div class="fm-post-layout">
-            
-            <div class="fm-profiledetails">
-                <!-- INSERT PFP HERE -->
-                <img src="../static/src/img/default-pfp.png" alt="Default pfp icon" id="fm-post-pfp">
-                <!-- INSERT USERNAME HERE -->
-                <h1>INSERT USERNAME</h1>
-                <!-- INSERT LAST CREATION DATE THING -->
-                <h2> • </h2>
-                <h2>Posted x days ago</h2>
-            </div>
-
-            <div class="fm-image-container">
-                <!-- INSERT IMAGE HERE -->
-                <img src="../static/src/img/randomimage2.jpg" alt="">
-            </div>
-
-            <div class="fm-button-container">
-                <img src="" alt="">
-            </div>
-
-        </div>
-
-        <div class="fm-post-layout">
-            
-            <div class="fm-profiledetails">
-                <!-- INSERT PFP HERE -->
-                <img src="../static/src/img/default-pfp.png" alt="Default pfp icon" id="fm-post-pfp">
-                <!-- INSERT USERNAME HERE -->
-                <h1>INSERT USERNAME</h1>
-                <!-- INSERT LAST CREATION DATE THING -->
-                <h2> • </h2>
-                <h2>Posted x days ago</h2>
-            </div>
-
-            <div class="fm-image-container">
-                <!-- INSERT IMAGE HERE -->
-                <img src="../static/src/img/randomimage1.jpg" alt="">
-            </div>
-
-            <div class="fm-button-container">
-                <img src="" alt="">
-            </div>
-
-        </div>
-
-        <div class="fm-post-layout">
-            
-            <div class="fm-profiledetails">
-                <!-- INSERT PFP HERE -->
-                <img src="../static/src/img/default-pfp.png" alt="Default pfp icon" id="fm-post-pfp">
-                <!-- INSERT USERNAME HERE -->
-                <h1>INSERT USERNAME</h1>
-                <!-- INSERT LAST CREATION DATE THING -->
-                <h2> • </h2>
-                <h2>Posted x days ago</h2>
-            </div>
-
-            <div class="fm-image-container">
-                <!-- INSERT IMAGE HERE -->
-                <img src="../static/src/img/randomimage4.png" alt="">
-            </div>
-
-            <div class="fm-button-container">
-                <img src="" alt="">
-            </div>
-
-        </div>
-    
+    <div class="fm-main-container" id="postContainer">
+        <div id="loading" style="display:none;">Loading...</div>
+        <div id="no-more-posts" style="display:none; text-align: center; font-size: 20px;">No more posts to load</div>
     </div>
-
-
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            document.body.addEventListener('click', function(event) {
+                const clickedDropdown = event.target.closest('.dropdown');
+                
+                if (clickedDropdown) {
+                    const dropdownContent = clickedDropdown.querySelector('.dropdown-content');
+                    
+                    document.querySelectorAll('.dropdown-content').forEach(function(dropdown) {
+                        if (dropdown !== dropdownContent) {
+                            dropdown.style.display = 'none';
+                        }
+                    });
+    
+                    dropdownContent.style.display = dropdownContent.style.display === "block" ? "none" : "block";
+                    event.stopPropagation();
+                } else {
+                    document.querySelectorAll('.dropdown-content').forEach(function(dropdown) {
+                        dropdown.style.display = 'none';
+                    });
+                }
+            });
+    
+            window.addEventListener('scroll', function() {
+                document.querySelectorAll('.dropdown-content').forEach(function(dropdown) {
+                    dropdown.style.display = 'none';
+                });
+            });
+        });
+    
+        let currentPage = 1;
+        let loadedPostIds = new Set();
+        const postContainer = document.getElementById('postContainer');
+        const loadingIndicator = document.getElementById('loading');
+        let isLoading = false;
+    
+        function loadPosts() {
+            if (isLoading) return;
+    
+            isLoading = true;
+            loadingIndicator.style.display = 'block';
+    
+            const postIds = Array.from(postContainer.querySelectorAll('.fm-post-layout'))
+                .map(post => post.getAttribute('data-post-id'))
+                .filter(postId => postId && postId.trim() !== "");
+    
+            postIds.forEach(postId => loadedPostIds.add(postId));
+    
+            fetch('/load_more?page=' + currentPage + '&loaded_post_ids=' + JSON.stringify(Array.from(loadedPostIds)))
+                .then(response => response.json())
+                .then(data => {
+                    if (data.post_html) {
+                        postContainer.insertAdjacentHTML('beforeend', data.post_html);
+                        currentPage++;
+                    }
+    
+                    let noMorePostsMessage = document.getElementById('no-more-posts');
+                    if (noMorePostsMessage) {
+                        noMorePostsMessage.remove();
+                    }
+    
+                    if (data.no_more_posts) {
+                        noMorePostsMessage = document.createElement('div');
+                        noMorePostsMessage.id = 'no-more-posts';
+                        // honestly this can be css but i found this on a forum and i am too lazy to change it
+                        noMorePostsMessage.style.textAlign = 'center';
+                        noMorePostsMessage.style.fontSize = '20px';
+                        noMorePostsMessage.textContent = 'No more posts to load';
+    
+                        postContainer.appendChild(noMorePostsMessage);
+                    }
+    
+                    loadingIndicator.style.display = 'none';
+                    isLoading = false;
+                })
+                .catch(error => {
+                    console.error('Error loading posts:', error);
+                    loadingIndicator.style.display = 'none';
+                    isLoading = false;
+                });
+            }
+    
+        window.addEventListener('scroll', () => {
+            if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 10 && !isLoading) {
+                loadPosts();
+            }
+        });
+    
+        document.addEventListener('DOMContentLoaded', () => {
+            loadPosts();
+        });
+    </script>
 
 
     <!-- FOOTER CONTENT -->
@@ -500,25 +459,5 @@
         </div>
     
     </footer>
-
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            var dropdown = document.querySelector('.dropdown');
-            var dropdownContent = document.querySelector('.dropdown-content');
-
-            dropdown.addEventListener('click', function(event) {
-                dropdownContent.style.display = (dropdownContent.style.display === "block") ? "none" : "block";
-
-                event.stopPropagation();
-            });
-
-            document.addEventListener('click', function(event) {
-                if (!dropdown.contains(event.target)) {
-                    dropdownContent.style.display = "none";
-                }
-            });
-        });
-    </script>
-
 </body>
-</html>
+{% endblock content %}
