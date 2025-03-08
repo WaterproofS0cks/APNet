@@ -8,7 +8,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
-    <title>Create Post</title>
+    <title>APNet</title>
 </head>
 <style>
     body {
@@ -42,10 +42,143 @@
         </div>
 
     </header>
-
-    <!-- BODY CONTENT -->
-    <div class="fmc-main-container">
-        
+    
+    <div class="fms-undo-container">
+        <a href="forum.html">
+            <img src="../static/src/icon/icons8-undo-96.png" alt="Undo Button" id="fms-undo-icon">
+            <h1>Back</h1>
+        </a>
     </div>
+    
+    <!-- BODY CONTENT -->
+    <div class="fms-main-container">
+        
+        <div class="fms-post-layout">
+            
+            <div class="fms-profiledetails">
+                <!-- INSERT PFP HERE -->
+                <img src="../static/src/img/default-pfp.png" alt="Default pfp icon" id="fms-post-pfp">
+                <!-- INSERT USERNAME HERE -->
+                <h1>INSERT USERNAME</h1>
+                <!-- INSERT LAST CREATION DATE THING -->
+                <h2> • </h2>
+                <h2>Posted x days ago</h2>
+
+                <div class="fms-more-container">
+                    <div class="fms-dropdown">
+                        <span><img src="../static/src/icon/icons8-ellipsis-48.png" alt="Elipses" id="fms-moreicon" height="24" width="24"></span>
+                        <div class="fms-dropdown-content">
+                            <a href="#" class="fms-dropdown-item">
+                                <img src="../static/src/icon/icons8-flag-48.png" alt="Report Post" id="fms-reportposticon" height="30" width="30"> Report Post
+                            </a>
+                            <a href="#" class="fms-dropdown-item">
+                                <img src="../static/src/icon/icons8-danger-50.png" alt="Report User" id="fms-reportusericon" height="30" width="30"> Report User
+                            </a>
+                            <a href="#" class="fms-dropdown-item">
+                                <img src="../static/src/icon/icons8-edit-96.png" alt="Edit Post" id="fms-editicon" height="30" width="30">Edit Post
+                            </a>
+                            <a href="#" class="fms-dropdown-item">
+                                <img src="../static/src/icon/icons8-delete-48.png" alt="Delete Post" id="fms-deleteicon" height="30" width="30">Delete Post
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            
+            <div class="fms-image-container">
+                <!-- INSERT IMAGE HERE -->
+                <img src="../static/src/img/randomimage3.jpg" alt="">
+            </div>
+            
+            <div class="fms-button-container">
+
+                
+                <!-- LIKE BUTTON -->
+                <div class="fms-like-icon-container">
+                    <img src="../static/src/icon/icons8-heart-50.png" alt="Heart" id="fms-post-hearticon">
+                    <h2>Like</h2>
+                    <!-- LIKE AMOUNT -->
+                    <h4>(12)</h4>
+                </div>
+                
+                <!-- BOOKMARK BUTTON -->
+                <img src="../static/src/icon/icons8-bookmark-50.png" alt="Bookmark" id="fms-post-bookmarkicon">
+
+            </div>
+
+
+            <!-- INSERT CAPTION -->
+            <div class="fms-caption-container">
+                <h1>INSERT USERNAME</h1>
+                <h2>The rain drummed against the cobblestone streets as neon signs flickered in the misty night. A stranger in a tattered coat hurried past, clutching a leather-bound book with golden edges. In the distance, a train whistled, its echo swallowed by the howling wind. A small café glowed warmly, steam curling from porcelain cups as an old radio played a forgotten tune. The scent of freshly baked bread mixed with the distant sea breeze. Somewhere, a dog barked, chasing its own shadow in the dim light.</h2>
+            </div>
+
+            <!-- INSERT COMMENT -->
+            <div class="fms-comments-container">
+
+                <div class="fms-comment-input">
+                    <input type="text" id="commentInput" placeholder="Add a comment...">
+                    <button id="addCommentButton">Comment</button>
+                </div>
+
+                <div class="fms-comments-list">
+                    <!-- Comments will be dynamically added here -->
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <script>
+        
+        document.addEventListener("DOMContentLoaded", function() {
+
+            // DROPDOWN THINGGY
+            var dropdown = document.querySelector('.fms-dropdown');
+            var dropdownContent = document.querySelector('.fms-dropdown-content');
+    
+            dropdown.addEventListener('click', function(event) {
+                dropdownContent.style.display = (dropdownContent.style.display === "block") ? "none" : "block";
+                event.stopPropagation();
+            });
+    
+            document.addEventListener('click', function(event) {
+                if (!dropdown.contains(event.target)) {
+                    dropdownContent.style.display = "none";
+                }
+            });
+    
+            // COMMENT FUNCTION
+            document.getElementById('addCommentButton').addEventListener('click', function() {
+                const commentInput = document.getElementById('commentInput');
+                const commentText = commentInput.value.trim();
+    
+                if (commentText) {
+                    const commentsList = document.querySelector('.fms-comments-list');
+    
+                    const newComment = document.createElement('div');
+                    newComment.className = 'fms-comment';
+    
+                    const usernameSpan = document.createElement('span');
+                    usernameSpan.className = 'fms-username-placeholder'; 
+                    usernameSpan.textContent = 'INSERT USERNAME: ';
+    
+                    const commentSpan = document.createElement('span');
+                    commentSpan.className = 'fms-comment-text'; 
+                    commentSpan.textContent = commentText;
+    
+                    newComment.appendChild(usernameSpan);
+                    newComment.appendChild(commentSpan);
+    
+                    commentsList.appendChild(newComment);
+    
+                    commentInput.value = '';
+                }
+            });
+        });
+    </script>
 </body>
 </html>
