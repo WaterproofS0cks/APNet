@@ -166,6 +166,7 @@ body {
 }
 
 
+
 /* FOOTER B*/
 
 .fb-main-container {
@@ -691,6 +692,69 @@ input[type="submit"]:hover {
     text-align: justify;
 }
 
+.fm-notif-main-container {
+    display: none;
+    position: fixed;
+    flex-direction: column;
+    height: 91vh;
+    width: 26%;
+    top: 0;
+    right: 0;
+    margin-top: 70px;
+    padding: 20px;
+    background-color: #fff;
+    border-left: 2px solid #ccc;
+    overflow-y: auto;
+}
+
+.fm-notif-main-container h2 {
+    display: block;
+    font-family: "Roboto", sans-serif;
+    font-size: 30px;
+    color: #666;
+    text-align: center;
+}
+
+.fm-notif-main-container ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.fm-notif-main-container ul li {
+    display: flex;
+    align-items: center;
+    font-family: "Roboto", sans-serif;
+    font-size: 12.5px;
+    min-height: 60px;
+    padding: 5px 10px;
+    margin: 20px 0;
+    border-radius: 8px;
+    box-shadow: 3px 3px 6px #ddd, -3px 3px 6px #ddd;
+}
+
+.fm-notif-main-container ul li b {
+    margin-right: 5px;
+}
+
+.fm-notif-main-container ul li i {
+    margin-left: auto;
+}
+
+
+#fm-notifimg {
+    display: block;
+    width: 40px;
+    height: 40px;
+    margin-right: 10px;
+}
+
+.fm-notif-main-container h3 {
+    font-family: "Roboto", sans-serif;
+    font-size: 16px;
+    color: #666;
+    text-align: center;
+}
+
 /* forumspecific.html */
 .fms-undo-container {
     position: absolute;
@@ -926,7 +990,6 @@ input[type="submit"]:hover {
     background-color: #5495ce;
     border: 1px solid #a1a1a1;
     border-radius: 4px;
-    cursor: pointer;
 }
 
 .fms-comments-list {
