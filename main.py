@@ -60,6 +60,10 @@ db_conn.close()
 # conn.close()
 
 
+@app.route('/test')
+def test():
+    return render_template('likedposts.html')
+
 @app.route('/')
 def forum():
     return render_template('forum.html')
@@ -75,12 +79,13 @@ def load_more_post():
     db_conn.connect()
     db_retrieve = dbRetrieve(db_conn)
 
+    search_term = request.args.get('search', '')
     loaded_post_ids = request.args.get('loaded_post_ids', default='[]', type=str)
     posts_per_page = 5
 
     loaded_post_ids = json.loads(loaded_post_ids)
 
-    posts = db_retrieve.retrieve_posts(posts_per_page, loaded_post_ids)
+    posts = db_retrieve.retrieve_posts(posts_per_page, loaded_post_ids, search_term)
 
     if not posts:
         return jsonify({'post_html': '', 'no_more_posts': True})
