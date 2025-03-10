@@ -16,6 +16,12 @@
         margin: 0;
         background-color: #F7F7F7;
     }
+
+    @media (max-width: 430px) {
+        body {
+            padding: 0;
+        }
+    }
 </style>
 <body>
 
@@ -35,9 +41,20 @@
                 <a href="aboutus.html"><h1>About Us</h1></a>
                 <a href="faq.html"><h1>FAQ</h1></a>
                 <a href="termsofservice.html"><h1>Terms of Service</h1></a> 
+
                 <img src="../static/src/img/default-pfp.png" alt="Pfp" id="hb-pfp-img">
+                <div class="hb-popup-menu" id="hb-popup-menu">
+                    <ul>
+                        <li><a href="settings.html">Settings</a></li>
+                        <li><a href="profile.html">My Profile</a></li>
+                        <li><a href="bookmarkedposts.html">Bookmarks</a></li>
+                        <li><a href="logout.html">Logout</a></li>
+                    </ul>
+                </div>
 
             </div>
+
+            <img src="../static/src/icon/icons8-menu-vertical-white-64.png" id="hb-menuicon">
 
         </div>
 
@@ -136,48 +153,81 @@
         
         document.addEventListener("DOMContentLoaded", function() {
 
-            // DROPDOWN THINGGY
-            var dropdown = document.querySelector('.fms-dropdown');
-            var dropdownContent = document.querySelector('.fms-dropdown-content');
-    
-            dropdown.addEventListener('click', function(event) {
-                dropdownContent.style.display = (dropdownContent.style.display === "block") ? "none" : "block";
-                event.stopPropagation();
+        // DROPDOWN THINGGY
+        var dropdown = document.querySelector('.fms-dropdown');
+        var dropdownContent = document.querySelector('.fms-dropdown-content');
+
+        dropdown.addEventListener('click', function(event) {
+            dropdownContent.style.display = (dropdownContent.style.display === "block") ? "none" : "block";
+            event.stopPropagation();
+        });
+
+        document.addEventListener('click', function(event) {
+            if (!dropdown.contains(event.target)) {
+                dropdownContent.style.display = "none";
+            }
+        });
+
+        // COMMENT FUNCTION
+        document.getElementById('addCommentButton').addEventListener('click', function() {
+            const commentInput = document.getElementById('commentInput');
+            const commentText = commentInput.value.trim();
+
+            if (commentText) {
+                const commentsList = document.querySelector('.fms-comments-list');
+
+                const newComment = document.createElement('div');
+                newComment.className = 'fms-comment';
+
+                // Create the profile picture element
+                const profileImg = document.createElement('img');
+                profileImg.src = '../static/src/img/default-pfp.png';
+                profileImg.alt = 'Profile Picture';
+                profileImg.className = 'fms-pfp-placeholder'; 
+                profileImg.style.width = '30px';
+                profileImg.style.height = '30px'; 
+                profileImg.style.borderRadius = '50%'; 
+
+                const usernameSpan = document.createElement('span');
+                usernameSpan.className = 'fms-username-placeholder'; 
+                usernameSpan.textContent = 'INSERT USERNAME: ';
+
+                const commentSpan = document.createElement('span');
+                commentSpan.className = 'fms-comment-text'; 
+                commentSpan.textContent = commentText;
+
+                // Append the profile picture and username to the new comment
+                newComment.appendChild(profileImg);
+                newComment.appendChild(usernameSpan);
+                newComment.appendChild(commentSpan);
+
+                commentsList.appendChild(newComment);
+
+                commentInput.value = '';
+            }
+        });
+
+
+        // HEADER PFP DROPDOWN
+        var profileImg = document.getElementById('hb-pfp-img');
+        var popupMenu = document.getElementById('hb-popup-menu');
+
+        profileImg.addEventListener('click', function(event) {
+            if (popupMenu.style.display === "block") {
+                popupMenu.style.display = "none";
+            } else {
+                popupMenu.style.display = "block";
+            }
+            event.stopPropagation();
             });
-    
-            document.addEventListener('click', function(event) {
-                if (!dropdown.contains(event.target)) {
-                    dropdownContent.style.display = "none";
-                }
-            });
-    
-            // COMMENT FUNCTION
-            document.getElementById('addCommentButton').addEventListener('click', function() {
-                const commentInput = document.getElementById('commentInput');
-                const commentText = commentInput.value.trim();
-    
-                if (commentText) {
-                    const commentsList = document.querySelector('.fms-comments-list');
-    
-                    const newComment = document.createElement('div');
-                    newComment.className = 'fms-comment';
-    
-                    const usernameSpan = document.createElement('span');
-                    usernameSpan.className = 'fms-username-placeholder'; 
-                    usernameSpan.textContent = 'INSERT USERNAME: ';
-    
-                    const commentSpan = document.createElement('span');
-                    commentSpan.className = 'fms-comment-text'; 
-                    commentSpan.textContent = commentText;
-    
-                    newComment.appendChild(usernameSpan);
-                    newComment.appendChild(commentSpan);
-    
-                    commentsList.appendChild(newComment);
-    
-                    commentInput.value = '';
-                }
-            });
+
+
+        // CLOSES DROPDOWNS IF CLICKED ELSEWHERE
+        document.addEventListener('click', function(event) {
+            if (!profileImg.contains(event.target) && !popupMenu.contains(event.target)) {
+                popupMenu.style.display = "none";
+            }
+        });
         });
     </script>
 </body>
