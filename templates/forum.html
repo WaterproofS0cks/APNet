@@ -1,6 +1,6 @@
-{% extends "layout.html" %}
+<!-- {% extends "layout.html" %}
 {% block title %}Forum{% endblock %}
-{% block content %}
+{% block content %} -->
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -299,7 +299,7 @@
 
                     if (searchTerm) {
                         console.log('Search term:', searchTerm);
-                        window.location.href = "/forum?search=" + encodeURIComponent(searchTerm);
+                        window.location.href = "/load_more_post?search=" + encodeURIComponent(searchTerm);
                     }
                 }
             });
