@@ -1,9 +1,4 @@
-<!-- {% extends "layout.html" %}
-{% block title %}Forum{% endblock %}
-{% block content %} -->
-<!-- {% extends "layout.html" %}
-{% block title %}Forum{% endblock %}
-{% block content %} -->
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -116,8 +111,7 @@
     
         <div class="nb-mainpages-container">    
 
-            <a href="/"><div class="nb-mainpages-home">
-            <a href="/"><div class="nb-mainpages-home">
+            <a href="#"><div class="nb-mainpages-home">
                  <img src="../static/src/icon/icons8-forum-50.png" alt="Forum Default Icon" id="nb-forumicon">
                  <h2>Forum</h2>
             </div></a> 
@@ -304,196 +298,15 @@
 
         </div>
     
-    <div class="fm-main-container" id="postContainer">
-        <div id="loading" style="display:none;">Loading...</div>
-        <div id="no-more-posts" style="display:none; text-align: center; font-size: 20px;">No more posts to load</div>
     </div>
-    
-    <script>
-        // this is for the 3 dot menu, i havent made a function to read the value or filter the delete option
-        document.addEventListener('DOMContentLoaded', () => {
-            document.body.addEventListener('click', function(event) {
-                const clickedDropdown = event.target.closest('.dropdown');
-                
-                if (clickedDropdown) {
-                    const dropdownContent = clickedDropdown.querySelector('.dropdown-content');
-                    
-                    document.querySelectorAll('.dropdown-content').forEach(function(dropdown) {
-                        if (dropdown !== dropdownContent) { 
-                            dropdown.style.display = 'none';
-                        }
-                    });
-    
-                    dropdownContent.style.display = dropdownContent.style.display === "block" ? "none" : "block";
-                    event.stopPropagation();
-                } else {
-                    document.querySelectorAll('.dropdown-content').forEach(function(dropdown) {
-                        dropdown.style.display = 'none';
-                    });
-                }
-            });
-    
-            window.addEventListener('scroll', function() {
-                document.querySelectorAll('.dropdown-content').forEach(function(dropdown) {
-                    dropdown.style.display = 'none';
-                });
-            });
-        });
 
-        // this is for search bar
-        document.addEventListener('DOMContentLoaded', () => {
-            const searchContainer = document.getElementById('ha-searchbar');
 
-            if (!searchContainer) {
-                console.error('Search bar element not found');
-                return;
-            }
+    <!-- NOTIFICATION POPUP MENU -->
 
-            searchContainer.addEventListener("keypress", function(event) {
-                if (event.key === "Enter") {
-                    event.preventDefault(); 
 
-                    const searchTerm = searchContainer.value.trim();
 
-                    if (searchTerm) {
-                        console.log('Search term:', searchTerm);
-                        window.location.href = "/load_more_post?search=" + encodeURIComponent(searchTerm);
-                    }
-                }
-            });
-        });
 
-        // let currentPage = 1;
-        // let loadedPostIds = new Set();
-        // const postContainer = document.getElementById('postContainer');
-        // const loadingIndicator = document.getElementById('loading');
-        // let isLoading = false;
-    
-        // function loadPosts() {
-        //     if (isLoading) return;
-    
-        //     isLoading = true;
-        //     loadingIndicator.style.display = 'block';
-    
-        //     const postIds = Array.from(postContainer.querySelectorAll('.fm-post-layout'))
-        //         .map(post => post.getAttribute('data-post-id'))
-        //         .filter(postId => postId && postId.trim() !== "");
-    
-        //     postIds.forEach(postId => loadedPostIds.add(postId));
-    
-        //     fetch('/load_more_post?page=' + currentPage + '&loaded_post_ids=' + JSON.stringify(Array.from(loadedPostIds)))
-        //         .then(response => response.json())
-        //         .then(data => {
-        //             if (data.post_html) {
-        //                 postContainer.insertAdjacentHTML('beforeend', data.post_html);
-        //                 currentPage++;
-        //             }
-    
-        //             let noMorePostsMessage = document.getElementById('no-more-posts');
-        //             if (noMorePostsMessage) {
-        //                 noMorePostsMessage.remove();
-        //             }
-    
-        //             if (data.no_more_posts) {
-        //                 noMorePostsMessage = document.createElement('div');
-        //                 noMorePostsMessage.id = 'no-more-posts';
-        //                 // honestly this can be css but i found this on a forum and i am too lazy to change it
-        //                 noMorePostsMessage.style.textAlign = 'center';
-        //                 noMorePostsMessage.style.fontSize = '20px';
-        //                 noMorePostsMessage.textContent = 'No more posts to load';
-    
-        //                 postContainer.appendChild(noMorePostsMessage);
-        //             }
-    
-        //             loadingIndicator.style.display = 'none';
-        //             isLoading = false;
-        //         })
-        //         .catch(error => {
-        //             console.error('Error loading posts:', error);
-        //             loadingIndicator.style.display = 'none';
-        //             isLoading = false;
-        //         });
-        //     }
-    
-        // window.addEventListener('scroll', () => {
-        //     if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 10 && !isLoading) {
-        //         loadPosts();
-        //     }
-        // });
-    
-        // document.addEventListener('DOMContentLoaded', () => {
-        //     loadPosts();
-        // });
 
-        // this is for the load post
-        let currentPage = 1;
-        let loadedPostIds = new Set();
-        const postContainer = document.getElementById('postContainer');
-        const loadingIndicator = document.getElementById('loading');
-        let isLoading = false;
-    
-        function loadPosts(searchTerm = '') {
-            if (isLoading) return;
-
-            isLoading = true;
-            loadingIndicator.style.display = 'block';
-
-            const postIds = Array.from(postContainer.querySelectorAll('.fm-post-layout'))
-                .map(post => post.getAttribute('data-post-id'))
-                .filter(postId => postId && postId.trim() !== "");
-
-            postIds.forEach(postId => loadedPostIds.add(postId));
-
-            const url = '/load_more_post?page=' + currentPage + 
-                        '&loaded_post_ids=' + JSON.stringify(Array.from(loadedPostIds)) + 
-                        (searchTerm ? '&search=' + encodeURIComponent(searchTerm) : '');
-
-            fetch(url)
-                .then(response => response.json())
-                .then(data => {
-                    if (data.post_html) {
-                        postContainer.insertAdjacentHTML('beforeend', data.post_html);
-                        currentPage++;
-                    }
-
-                    let noMorePostsMessage = document.getElementById('no-more-posts');
-                    if (noMorePostsMessage) {
-                        noMorePostsMessage.remove();
-                    }
-
-                    if (data.no_more_posts) {
-                        noMorePostsMessage = document.createElement('div');
-                        noMorePostsMessage.id = 'no-more-posts';
-                        noMorePostsMessage.style.textAlign = 'center';
-                        noMorePostsMessage.style.fontSize = '20px';
-                        noMorePostsMessage.textContent = 'No more posts to load';
-
-                        postContainer.appendChild(noMorePostsMessage);
-                    }
-
-                    loadingIndicator.style.display = 'none';
-                    isLoading = false;
-                })
-                .catch(error => {
-                    console.error('Error loading posts:', error);
-                    loadingIndicator.style.display = 'none';
-                    isLoading = false;
-                });
-        }
-
-        window.addEventListener('scroll', () => {
-            if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 10 && !isLoading) {
-                loadPosts();
-            }
-        });
-
-        document.addEventListener('DOMContentLoaded', () => {
-            const urlParams = new URLSearchParams(window.location.search);
-            const searchTerm = urlParams.get('search') || '';
-
-            loadPosts(searchTerm);
-        });
-    </script>
     <!-- FOOTER CONTENT -->
     <footer>
         
@@ -583,5 +396,4 @@
         });
     </script>
 </body>
-{% endblock content %}
-{% endblock content %}
+</html>

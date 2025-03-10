@@ -839,6 +839,165 @@ input[type="submit"]:hover {
 }
 
 
+/* register.html (Darren) */
+.rg-body {
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: url('background.jpg') no-repeat center center/cover;
+    font-family: Arial, sans-serif;
+}
+
+.rg-img-registerbackground {
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 100vw; 
+    height: 100vh; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden; 
+    z-index: -1;
+}
+
+.rg-img-registerbackground img {
+    width: 1920px;
+    height: 1080px;
+    height: auto;
+    object-fit: cover; 
+}
+
+.rg-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.rg-register-box {
+    background: rgba(255, 255, 255, 0.9);
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    max-width: 350px;
+    width: 90%;
+}
+
+.rg-img-logo img {
+    width: 700px;
+    margin-bottom: 10px;
+}
+
+.rg-inputgroup {
+    display: flex;
+    align-items: center;
+    position: relative;
+    width: 100%;
+    margin-bottom: 15px;
+}
+
+.rg-inputgroup ion-icon {
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 18px;
+    color: #333;
+}
+
+.rg-inputgroup input {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    padding: 10px 10px 10px 35px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    outline: none;
+}
+
+.rg-inputgroup label {
+    position: absolute;
+    left: 35px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 14px;
+    color: gray;
+    transition: all 0.3s ease-in-out;
+    pointer-events: none;
+}
+
+.rg-inputgroup input:focus ~ label,
+.rg-inputgroup input:valid ~ label {
+    opacity: 0;
+    visibility: hidden;
+    font-size: 12px;
+    color: #007bff;
+}
+
+.rg-genderbox {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.rg-genderbox label {
+    font-size: 14px;
+    color: #333;
+}
+
+.rg-genderbox input[type="radio"] {
+    margin-left: 10px;
+}
+
+.rg-checkbox {
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    margin-bottom: 15px;
+}
+
+.rg-checkbox input {
+    margin-right: 8px;
+}
+
+.rg-btn {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    background: #007bff;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.rg-btn:hover {
+    background: #0056b3;
+}
+
+.rg-login {
+    margin-top: 10px;
+}
+
+.rg-login a {
+    color: #007bff;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.rg-login a:hover {
+    text-decoration: underline;
+}
+
+
 /* forum.html (Marcus) */
 .fm-main-container {
     height: 100%;
