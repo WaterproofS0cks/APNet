@@ -10,15 +10,16 @@
         <div class="card-filter">
             <form action="/dashboard" method="POST">
                 <div>
-                    <label for="chart">Data:</label>
-                    <select for="chart" id="chart" required>
-                        <option value="user">User</option>
-                        <option value="post">Post</option>
-                        <option value="comment">Comment</option>
-                        <option value="recruitment">Recruitment</option>
-                        <option value="application">Application</option>
-                        <option value="moderation">Moderation</option>
-                        <option value="report">Report</option>
+                    <label for="database">Data:</label>
+                    <select name="database" id="database" required>
+                        <option value="users" {% if database_value == 'users' %}selected{% endif %}>User</option>
+                        <option value="post" {% if database_value == 'post' %}selected{% endif %}>Post</option>
+                        <option value="comment" {% if database_value == 'comment' %}selected{% endif %}>Comment</option>
+                        <option value="recruitment" {% if database_value == 'recruitment' %}selected{% endif %}>Recruitment</option>
+                        <option value="application" {% if database_value == 'application' %}selected{% endif %}>Application</option>
+                        <option value="penaltyhistory" {% if database_value == 'penaltyhistory' %}selected{% endif %}>Moderation</option>
+                        <option value="reports" {% if database_value == 'reports' %}selected{% endif %}>Report</option>
+                        <option value="activity" {% if database_value == 'activity' %}selected{% endif %}>Activity</option>
                     </select>
                 </div>
                 <div>
@@ -58,7 +59,7 @@
         <div class="card-section">
             <div class="dashboard-wrap">
                 <div class="dashboard-row">
-                    <h2>Overview</h2>
+                    <h2>Total</h2>
                 </div>
                 <div class="dashboard-row">
                     <p>Social Media</p>
@@ -71,25 +72,25 @@
                     <div class="dashboard-column-sm">
                         <div class="dashboard-card">
                             <h3>Posts</h3>
-                            <h1>-</h1>
+                            <h1>{{ post_count }}</h1>
                         </div>
                     </div>
                     <div class="dashboard-column-sm">
                         <div class="dashboard-card">
                             <h3>Comments</h3>
-                            <h1>-</h1>
+                            <h1>{{ comment_count }}</h1>
                         </div>
                     </div>
                     <div class="dashboard-column-sm">
                         <div class="dashboard-card">
                             <h3>Recruitments</h3>
-                            <h1>-</h1>
+                            <h1>{{ recruitment_count }}</h1>
                         </div>
                     </div>
                     <div class="dashboard-column-sm">
                         <div class="dashboard-card">
                             <h3>Applications</h3>
-                            <h1>-</h1>
+                            <h1>{{ application_count }}</h1>
                         </div>
                     </div>
                 </div>
@@ -110,7 +111,7 @@
                     <div class="dashboard-column-sm">
                         <div class="dashboard-card">
                             <h3>Reported Users</h3>
-                            <h1>-</h1>
+                            <h1>{{ reported_count }}</h1>
                         </div>
                     </div>
                 </div>
@@ -125,11 +126,15 @@
             event.preventDefault();
 
             var filterValue = document.getElementById('filter').value;
+            var databaseValue = document.getElementById('database').value;
             // var rangeValue = document.getElementById('range').value;
+            console.log(databaseValue)
 
             var formData = new FormData();
             formData.append('filter', filterValue);
+            formData.append('database', databaseValue);
             // formData.append('range', rangeValue);
+            console.log(databaseValue)
 
             fetch('/dashboard', {
                 method: 'POST',

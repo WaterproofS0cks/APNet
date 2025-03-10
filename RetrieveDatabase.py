@@ -40,10 +40,10 @@ class dbRetrieve:
         if condition:
             query += f' WHERE {condition}'
         query += ";"
-        print(query)
         self.execute_query(query, params)
         return self.db_connection.cur.fetchall()
 
+<<<<<<< HEAD
     def retrieve_posts(self, limit=5, loaded_post_ids=None):
         query = """
             SELECT 
@@ -70,12 +70,93 @@ class dbRetrieve:
         query += """
             GROUP BY post.postID, post.caption, post.timestamp, post.image, post.userID, 
                     users.username, users.profilePicture, users.name, users.registerDate
+=======
+    # def retrieve_posts(self, limit=5, loaded_post_ids=None, searched_term=''):
+    #     query = """
+    #         SELECT 
+    #             post.postID, 
+    #             post.caption, 
+    #             TO_CHAR(post.timestamp, 'DD-MM-YYYY') AS post_timestamp, 
+    #             post.image AS post_image, 
+    #             post.userID, 
+    #             users.username, 
+    #             users.profilePicture, 
+    #             users.name, 
+    #             users.registerDate,
+    #             COALESCE(COUNT(DISTINCT comment.postID), 0) AS comments_count,
+    #             COALESCE(COUNT(DISTINCT engagement.postID), 0) AS likes_count
+    #         FROM post
+    #         JOIN users ON post.userID = users.userID
+    #         LEFT JOIN comment ON post.postID = comment.postID
+    #         LEFT JOIN engagement ON post.postID = engagement.postID AND engagement."like" = TRUE
+    #     """
+
+    #     if loaded_post_ids:
+    #         query += f" WHERE post.postID NOT IN ({', '.join(map(str, loaded_post_ids))})"
+
+    #     query += """
+    #         GROUP BY post.postID, post.caption, post.timestamp, post.image, post.userID, 
+    #                 users.username, users.profilePicture, users.name, users.registerDate
+    #         ORDER BY post.timestamp DESC
+    #         LIMIT %s;
+    #     """
+
+    #     try:
+    #         self.execute_query(query, (limit,), cursor_type='dict')
+    #         results = self.db_connection.cur.fetchall()
+
+    #         if not results:
+    #             return []
+
+    #         return results
+    #     except Exception as e:
+    #         print(f"Error executing query: {e}")
+    #         return []
+
+    def retrieve_posts(self, limit=5, loaded_post_ids=None, searched_term=''):
+        query = """
+            SELECT 
+                post.postID, 
+                post.caption, 
+                TO_CHAR(post.timestamp, 'DD-MM-YYYY') AS post_timestamp, 
+                post.image AS post_image, 
+                post.userID, 
+                users.username, 
+                users.profilePicture, 
+                users.fullname,  -- Corrected to use 'fullname' instead of 'name'
+                users.registerDate,
+                COALESCE(COUNT(DISTINCT comment.postID), 0) AS comments_count,
+                COALESCE(COUNT(DISTINCT engagement.postID), 0) AS likes_count
+            FROM post
+            JOIN users ON post.userID = users.userID
+            LEFT JOIN comment ON post.postID = comment.postID
+            LEFT JOIN engagement ON post.postID = engagement.postID AND engagement."like" = TRUE
+        """
+
+        if searched_term:
+            query += f" WHERE post.caption ILIKE %s"
+
+            if loaded_post_ids:
+                query += f" AND post.postID NOT IN ({', '.join(map(str, loaded_post_ids))})"
+        else:
+            if loaded_post_ids:
+                query += f" WHERE post.postID NOT IN ({', '.join(map(str, loaded_post_ids))})"
+
+        query += """
+            GROUP BY post.postID, post.caption, post.timestamp, post.image, post.userID, 
+                    users.username, users.profilePicture, users.fullname, users.registerDate  -- Updated to match the correct columns
+>>>>>>> dd6c6de0e7cd395797e73273c75bfc069665b735
             ORDER BY post.timestamp DESC
             LIMIT %s;
         """
 
         try:
+<<<<<<< HEAD
             self.execute_query(query, (limit,), cursor_type='dict')
+=======
+            params = (f"%{searched_term}%", limit) if searched_term else (limit,)
+            self.execute_query(query, params, cursor_type='dict')
+>>>>>>> dd6c6de0e7cd395797e73273c75bfc069665b735
             results = self.db_connection.cur.fetchall()
 
             if not results:
@@ -84,4 +165,8 @@ class dbRetrieve:
             return results
         except Exception as e:
             print(f"Error executing query: {e}")
+<<<<<<< HEAD
             return []
+=======
+            return []
+>>>>>>> dd6c6de0e7cd395797e73273c75bfc069665b735
