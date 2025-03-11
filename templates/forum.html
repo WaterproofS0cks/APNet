@@ -388,65 +388,7 @@
     </script>
 
     <script>
-        // this is for the 3 dot menu
-        document.addEventListener('DOMContentLoaded', () => {
-            document.body.addEventListener('click', function(event) {
-                console.log('It Can Read The Click')
-                const clickedDropdown = event.target.closest('.fm-dropdown');
-                
-                if (clickedDropdown) {
-                    const dropdownContent = clickedDropdown.querySelector('.fm-dropdown-content');
-                    
-                    document.querySelectorAll('.fm-dropdown-content').forEach(function(dropdown) {
-                        if (dropdown !== dropdownContent) { 
-                            dropdown.style.display = 'none';
-                        }
-                    });
-
-                    if (dropdownContent.style.display === "block") {
-                        dropdownContent.style.display = "none"; 
-                    } else {
-                        dropdownContent.style.display = "block";
-                    }
-
-                    event.stopPropagation();
-                } else {
-                    document.querySelectorAll('.fm-dropdown-content').forEach(function(dropdown) {
-                        dropdown.style.display = 'none';
-                    });
-                }
-            });
-
-            window.addEventListener('scroll', function() {
-                document.querySelectorAll('.fm-dropdown-content').forEach(function(dropdown) {
-                    dropdown.style.display = 'none';
-                });
-            });
-        });
-
-        // this is for search bar
-        document.addEventListener('DOMContentLoaded', () => {
-            const searchContainer = document.getElementById('ha-searchbar');
-
-            if (!searchContainer) {
-                console.error('Search bar element not found');
-                return;
-            }
-
-            searchContainer.addEventListener("keypress", function(event) {
-                if (event.key === "Enter") {
-                    event.preventDefault(); 
-
-                    const searchTerm = searchContainer.value.trim();
-
-                    if (searchTerm) {
-                        window.location.href = "/?search=" + encodeURIComponent(searchTerm);
-                    }
-                }
-            });
-        });
-
-        // this is for the load post
+        // Loading Post
         let currentPage = 1;
         let loadedPostIds = new Set();
         const postContainer = document.getElementById('postContainer');
@@ -502,59 +444,100 @@
                 });
         }
 
+        document.addEventListener('DOMContentLoaded', function() {
+            // 3 Dot Menu
+            document.body.addEventListener('click', function(event) {
+                const clickedDropdown = event.target.closest('.fm-dropdown');
+                
+                if (clickedDropdown) {
+                    const dropdownContent = clickedDropdown.querySelector('.fm-dropdown-content');
+                    
+                    document.querySelectorAll('.fm-dropdown-content').forEach(function(dropdown) {
+                        if (dropdown !== dropdownContent) { 
+                            dropdown.style.display = 'none';
+                        }
+                    });
+
+                    if (dropdownContent.style.display === "block") {
+                        dropdownContent.style.display = "none"; 
+                    } else {
+                        dropdownContent.style.display = "block";
+                    }
+
+                    event.stopPropagation();
+                } else {
+                    document.querySelectorAll('.fm-dropdown-content').forEach(function(dropdown) {
+                        dropdown.style.display = 'none';
+                    });
+                }
+            });
+
+            // 3 Dot Menu Scroll
+            window.addEventListener('scroll', function() {
+                document.querySelectorAll('.fm-dropdown-content').forEach(function(dropdown) {
+                    dropdown.style.display = 'none';
+                });
+            });
+
+            // 3 Dot Menu Filter
+            fetch("/load_more_post")
+            .then(response => response.json())
+            .then(data => {
+                const loggedInUserId = String(data.user_id);
+                
+                document.querySelectorAll(".fm-post-layout").forEach(post => {
+                    const postUserId = post.getAttribute("data-user-id");
+                    const dropdown = post.querySelector(".fm-dropdown-content");
+
+                    if (dropdown) {
+                        const reportPost = dropdown.querySelector("#fm-reportposticon")?.parentElement;
+                        const reportUser = dropdown.querySelector("#fm-reportusericon")?.parentElement;
+                        const editPost = dropdown.querySelector("#fm-editicon")?.parentElement;
+                        const deletePost = dropdown.querySelector("#fm-deleteicon")?.parentElement;
+                        
+                        if (reportPost && reportUser && editPost && deletePost) {
+                            if (loggedInUserId && loggedInUserId === postUserId) {
+                                reportPost.style.display = "none";
+                                reportUser.style.display = "none";
+                                editPost.style.display = "block";
+                                deletePost.style.display = "block";
+                            } else {
+                                reportPost.style.display = "block";
+                                reportUser.style.display = "block";
+                                editPost.style.display = "none";
+                                deletePost.style.display = "none";
+                            }
+                        }
+                    }
+                });
+            })
+            .catch(error => console.error("Error fetching user ID:", error));
+
+            // Searchbar
+            const searchContainer = document.getElementById('ha-searchbar');
+            searchContainer.addEventListener("keypress", function(event) {
+                if (event.key === "Enter") {
+                    event.preventDefault(); 
+
+                    const searchTerm = searchContainer.value.trim();
+
+                    if (searchTerm) {
+                        window.location.href = "/?search=" + encodeURIComponent(searchTerm);
+                    }
+                }
+            });
+        
+            const urlParams = new URLSearchParams(window.location.search);
+            const searchTerm = urlParams.get('search') || '';
+            loadPosts(searchTerm);
+        });
+
+        // Scrolling
         window.addEventListener('scroll', () => {
             if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 10 && !isLoading) {
                 loadPosts();
             }
-        });
-
-        document.addEventListener('DOMContentLoaded', () => {
-            const urlParams = new URLSearchParams(window.location.search);
-            const searchTerm = urlParams.get('search') || '';
-
-            loadPosts(searchTerm);
-        });
-    </script>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // session id
-            const userId = data.user_id;
-
-            const postContainer = document.querySelectorAll('.fm-post-layout');
-
-            postContainer.forEach(postContainer => {
-                const containerUserId = document.getAttribute('data-user-id');
-
-                const editPostOption = postContainer.querySelector('.edit-post');
-                const deletePostOption = postContainer.querySelector('.delete-post');
-
-                if (containerUserId == sessionId) {
-                    if (editPostOption) {
-                        document.getElementById('fm-editpost').style.display = 'block';
-                    }
-                    if (deletePostOption) {
-                        document.getElementById('fm-deletepost').style.display = 'block';
-                    }
-
-                } else {
-                    if (editPostOption) {
-                        document.getElementById('fm-editpost').style.display = 'none';
-                    }
-                    if (editPostOption) {
-                        document.getElementById('fm-deletepost').style.display = 'none';
-                    }
-                }
-
-            });
-            
-        });
-    </script>
-
-    <script>
-        // session id
-        const sessionId = 1;
-
+        });     
     </script>
 
 </body>
