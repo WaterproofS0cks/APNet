@@ -1,71 +1,12 @@
-{% extends "layout.html" %}
+{% extends "header-b.html" %}
 {% block title %}APNet Terms of Service{% endblock title %}
 {% block content %}
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../static/style.css">
-<style>
-    body {
-        font-family: "Roboto", sans-serif;
-        background-color: #f0f0f0;
-        color: #666;
-        padding: 20px;
-        margin: 100px 0 0 0;
-        padding: 0;
-        line-height: 1.6;
-    }
 
-    .container {
-        max-width: 80%;
-        margin: auto;
-        background: white;
-        border-radius: 8px;
-        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        padding: 20px;
-        margin-bottom: 20px;
-    }
-
-    h1, h2, h3 {
-        color: #000;
-        margin-top: 20px;
-    }
-
-    hr {
-        border: 1px solid #ccc;
-        margin: 20px 0;
-    }
-
-    a {
-        color: #0066cc; 
-        text-decoration: none;
-        transition: color 0.3s ease;
-    }
-
-    a:hover {
-        color: #004999; 
-        text-decoration: underline;
-    }
-
-    ul {
-        list-style-type: disc;
-        margin-left: 20px;
-    }
-
-    .section {
-        margin-bottom: 30px;
-        padding: 15px;
-        border-left: 4px solid #0a4693;
-        background-color: #f9f9f9;
-        transition: background-color 0.3s ease;
-    }
-
-    .section:hover {
-        background-color: #e9f5ff; 
-    }
-
-</style>
-<body>
+<body class="tos-body">
     
     <header>
 
@@ -91,14 +32,15 @@
     </header>
     
 
-    <div class="container">
-        <h1>APNet Terms of Service / User Agreement</h1>
+    <div class="tos-container">
+        <h1>APNet Terms of Service</h1>
+        <hr class="tos-responsive-hr">
         <p><strong>Effective Date: 1st February 2025</strong></p>
         <p>Welcome to APNet, a social media platform exclusively designed for the Asia Pacific University (APU) community. By accessing or using APNet, you agree to comply with the terms and conditions outlined below. If you do not agree with these terms, please refrain from using our platform.</p>
 
-        <hr>
+        <hr class="tos-hr">
 
-        <div class="section">
+        <div class="tos-section">
             <h2>1. Eligibility and Scope</h2>
             <h3>1.1 Restricted Access</h3>
             <p>APNet is specifically created for current staff and students of APU. Users from other universities may register, but the platform’s features and content are tailored exclusively to the APU community. As a result, users outside of APU may experience limited engagement or relevance.</p>
@@ -110,7 +52,7 @@
             <p>All users must provide accurate and truthful information during registration. Impersonation of others, including APU faculty, staff, or students, is strictly prohibited.</p>
         </div>
 
-        <div class="section">
+        <div class="tos-section">
             <h2>2. User Responsibilities</h2>
             <h3>2.1 Account Security</h3>
             <p>You are responsible for safeguarding your APNet login credentials. Notify us immediately if you suspect unauthorized access or a security breach.</p>
@@ -136,7 +78,7 @@
             </ul>
         </div>
 
-        <div class="section">
+        <div class="tos-section">
             <h2>3. Platform Features</h2>
             <h3>3.1 Forums and Posting</h3>
             <p>Users can view forum pages, post their own content (including images and videos), comment on posts, like posts, and bookmark content. All posts and comments must adhere to the guidelines stated in Section 2.</p>
@@ -148,7 +90,7 @@
             <p>Users can view their own profile and those of other users. They may also edit their profile information. Misrepresentation (e.g., providing false affiliations or achievements) is prohibited.</p>
         </div>
 
-        <div class="section">
+        <div class="tos-section">
             <h2>4. Privacy and Data Usage</h2>
             <h3>4.1 Data Collection</h3>
             <p>We collect user information during registration and track activity logs (e.g., posts, likes, and comments) to enhance your experience on APNet.</p>
@@ -160,7 +102,7 @@
             <p>Content posted on public forums or profiles is visible to all APNet users. Please exercise discretion when sharing personal or sensitive information.</p>
         </div>
 
-        <div class="section">
+        <div class="tos-section">
             <h2>5. Account Suspension and Termination</h2>
             <h3>5.1 Violations</h3>
             <p>We reserve the right to suspend or terminate accounts for violating these terms, applicable laws, or APU policies.</p>
@@ -169,7 +111,7 @@
             <p>Users can report inappropriate content or behavior using APNet’s reporting tools. All reports will be reviewed, and appropriate actions will be taken based on our findings.</p>
         </div>
 
-        <div class="section">
+        <div class="tos-section">
             <h2>6. Limitations of Liability</h2>
             <h3>6.1 No Guarantee of Availability</h3>
             <p>While we strive to ensure continuous availability of APNet, we cannot guarantee uninterrupted access due to maintenance, technical issues, or other unforeseen circumstances.</p>
@@ -178,14 +120,9 @@
             <p>APNet is not responsible for the content posted by its users. However, we reserve the right to review and remove content that violates these terms.</p>
         </div>
 
-        <div class="section">
+        <div class="tos-section">
             <h2>7. Modifications to Terms</h2>
             <p>We may update these terms of service periodically. Significant changes will be communicated to users. Continued use of APNet after updates constitutes acceptance of the revised terms.</p>
-        </div>
-
-        <div class="section">
-            <h2>8. Contact Information</h2>
-            <p>For questions, concerns, or support, please contact us at <a href="mailto:[Insert Support Email]">apnetsupport@gmail.com</a> or use our <a href="[Insert Contact Form URL]">Contact Form</a>.</p>
         </div>
 
         <hr>

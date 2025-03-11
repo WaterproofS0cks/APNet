@@ -4,13 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/x-icon" href="../static/src/favicon/favicon.ico">
-    <link rel="stylesheet" href="../static/style.css">    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
-    <title>{% block title %}{% endblock %}</title>
+    <link rel="stylesheet" href="../static/style.css">
+    <title>Application Form</title>
 </head>
-<body>
+<body class="rca-body">  
     <header>
         <div class="hb-main-container">
 
@@ -32,32 +32,42 @@
         </div>
     </header>
 
-    {% block content %}
-    {% endblock %}
+    <div class="rca-image-container">
 
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            // HEADER PFP DROPDOWN
-            var profileImg = document.getElementById('hb-pfp-img');
-            var popupMenu = document.getElementById('hb-popup-menu');
+    </div>
 
-            profileImg.addEventListener('click', function(event) {
-                if (popupMenu.style.display === "block") {
-                    popupMenu.style.display = "none";
-                } else {
-                    popupMenu.style.display = "block";
-                }
-                event.stopPropagation();
-                });
+    <div class="rca-content-container">
+
+        <div class="rca-top-container">
+            <a href="recruitment.html" class="rca-back-container">
+                <img src="../static/src/icon/icons8-undo-96.png" id="rca-undoicon">
+                <h2>Back</h2>
+            </a>
+
+            <div class="rca-title-container">
+                <!-- INSERT RECRUITMENT TITLE HERE -->
+                <h2>Recruitment Title</h2>
+            </div>
+        </div>
+
+        <div class="rca-info-container">
+
+            <div class="rca-tpno-container">
+                <h2>TP Number</h2>
+                <input type="text" id="rca-tpno">
+            </div>
+
+            <div class="rca-role-container">
+                <h2>Event Position</h2>
+                <input type="text" id="rca-role">
+            </div>
 
 
-            // CLOSES DROPDOWNS IF CLICKED ELSEWHERE
-            document.addEventListener('click', function(event) {
-                if (!profileImg.contains(event.target) && !popupMenu.contains(event.target)) {
-                    popupMenu.style.display = "none";
-                }
-            });
-        });
-    </script>
+
+        </div>
+
+
+
+    </div>
 </body>
 </html>

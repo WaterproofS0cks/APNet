@@ -445,6 +445,12 @@ body {
     text-decoration: underline;
 }
 
+@media (max-width: 430px) {
+    .fb-main-container {
+        display: none;
+    }
+}
+
 
 
 
@@ -1635,6 +1641,118 @@ input[type="submit"]:hover {
 }
 
 
+/* recruitment-application.html (Marcus) */
+.rca-body {
+    display: flex;
+    margin: 0;
+    padding: 0;
+    background-color: #F7F7F7;
+}
+
+.rca-image-container {
+    background-color: pink;
+    margin-top: 100px;
+    height: 86.3vh;
+    width: 48%;
+    border-right: 2px solid #000;
+}
+
+.rca-image-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.rca-content-container {
+    /* background-color: green; */
+    display: flex;
+    flex-direction: column;
+    margin-top: 100px;
+    height: 86.3vh;
+    width: 52%;
+    padding: 20px;
+}
+
+.rca-top-container {
+    display: flex;
+    background-color: blue;
+    width: 100%;
+    height: 7%;
+    margin-bottom: 50px;
+}
+
+.rca-back-container {
+    background-color: red;
+    display: flex;
+    align-items: center;
+    width: 25%;
+    height: 100%;
+    text-decoration: none;
+}
+
+#rca-undoicon {
+    height: 100%;
+    width: auto;
+    margin-right: 10px;
+}
+
+.rca-back-container h2, .rca-title-container h2 {
+    font-family: "Roboto", sans-serif;
+    font-size: 28px;
+    color: #ccc;
+}
+
+.rca-title-container {
+    background-color: red;
+    display: flex;
+    align-items: center;
+    margin-left: auto;
+    width: 31%;
+    height: 100%;
+}
+
+.rca-info-container {
+    background-color: red;
+    display: flex;
+    width: 100%;
+    height: 12%;
+}
+
+.rca-tpno-container {
+    background-color: skyblue;
+    display: flex;
+    flex-direction: column;
+    width: 45%;
+    height: 100%;
+}
+
+.rca-role-container {
+    background-color: skyblue;
+    display: flex;
+    flex-direction: column;
+    width: 45%;
+    height: 100%;
+    margin-left: auto;
+}
+
+.rca-tpno-container h2, .rca-role-container h2 {
+    font-family: "Roboto", sans-serif;
+    font-size: 21px;
+    font-weight: normal;
+    color: #666;
+    margin-bottom: 5px;
+}
+
+.rca-tpno-container input, .rca-role-container input {
+    font-family: "Roboto", sans-serif;
+    font-size: 12px;
+    width: 100%;
+    height: 40%;
+    padding: 3px;
+    border-radius: 2px;
+}
+
+
 /* profile.html */
 
 .profile {
@@ -2099,6 +2217,95 @@ input[type="submit"]:hover {
 }
 
 
+/* termsofservice.html (Marcus) */
+.tos-body {
+    font-family: "Roboto", sans-serif;
+    background-color: #f0f0f0;
+    color: #666;
+    margin: 100px 0 0 0;
+    padding: 0;
+    line-height: 1.6;
+}
+
+.tos-container {
+    width: 80%;
+    margin: auto;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin: 0 0 20px 100px;
+}
+
+.tos-container h1, .tos-container h2, .tos-container h3 {
+    color: #000;
+    margin-top: 20px;
+    text-align: justify;
+}
+
+.tos-container p {
+    text-align: justify;
+}
+
+.tos-section {
+    margin-bottom: 30px;
+    padding: 15px;
+    border-left: 4px solid #0a4693;
+    background-color: #f9f9f9;
+    transition: background-color 0.3s ease;
+}
+
+.tos-section:hover {
+    background-color: #e9f5ff; 
+}
+
+.tos-responsive-hr {
+    border: 1px solid #ccc;
+    margin: 20px 0;
+    display: none;
+}
+
+.tos-hr {
+    border: 1px solid #ccc;
+    margin: 20px 0;
+}
+
+.tos-container ul {
+    list-style-type: disc;
+    margin: 5px 0 0 20px;
+}
+
+.tos-container ul li {
+    text-align: justify;
+}
+
+@media (max-width: 430px) {
+    .tos-container {
+        width: 90%;
+        margin: 50px auto 0 auto;
+        border: 2px solid #ccc;
+    }
+
+    .tos-container h1 {
+        margin: 0;
+        text-align: center;
+        font-size: 30px;
+        margin-top: 10px;
+    }
+
+    .tos-container h2, .tos-container h3 {
+        margin-top: 15px;
+    }
+    
+    .tos-container p {
+        margin-top: 5px;
+    }
+
+    .tos-responsive-hr {
+        display: block;
+    }
+}
+
 
 /* dashboard.html */
 
@@ -2230,14 +2437,12 @@ input[type="submit"]:hover {
 }
 
 .faq-container {
-    max-width: 80%;
-    margin: auto;
+    width: 80%;
+    margin: 120px auto 20px auto;
     background: white;
     border-radius: 8px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     padding: 20px;
-    margin-bottom: 20px;
-    margin-top: 20px;
 }
 
 .faq-container h1, 
@@ -2249,6 +2454,7 @@ input[type="submit"]:hover {
 
 .faq-container p {
     margin-top: 20px;
+    text-align: justify;
 }
 
 .faq-container hr {
@@ -2305,6 +2511,7 @@ input[type="submit"]:hover {
         margin: 0;
         padding: 0.5em 1em 1em;
         line-height: 1.5;
+        text-align: justify;
     }
 }
 
@@ -2326,6 +2533,18 @@ input[type="submit"]:hover {
     }
 }
 
+@media (max-width: 430px) {
+    .faq-container {
+        width: 90%;
+        margin-top: 100px;
+    }
+
+    .faq-container h1 {
+        font-size: 30px;
+        text-align: center;
+        margin-top: 0;
+    }
+}
 
 
 /* bookmarks.html */
