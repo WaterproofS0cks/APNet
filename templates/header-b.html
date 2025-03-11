@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="../static/src/favicon/favicon.ico">
+    <link rel="stylesheet" href="../static/style.css">    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <title>{% block title %}{% endblock %}</title>
+</head>
+<body>
+    <header>
+        <div class="hb-main-container">
+
+            <div class="hb-logo-container">
+                <img src="../static/src/img/apnet-logo.png" alt="APNet logo" id="hb-logo-img">
+            </div>
+
+            <div class="hb-right-container">
+
+                <a href="forum.html"><h1>Forum</h1></a>
+                <a href="#"><h1>Recruitment</h1></a>
+                <a href="aboutus.html"><h1>About Us</h1></a>
+                <a href="faq.html"><h1>FAQ</h1></a>
+                <a href="termsofservice.html"><h1>Terms of Service</h1></a> 
+                <img src="../static/src/img/default-pfp.png" alt="Pfp" id="hb-pfp-img">
+
+            </div>
+
+        </div>
+    </header>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            // HEADER PFP DROPDOWN
+            var profileImg = document.getElementById('hb-pfp-img');
+            var popupMenu = document.getElementById('hb-popup-menu');
+
+            profileImg.addEventListener('click', function(event) {
+                if (popupMenu.style.display === "block") {
+                    popupMenu.style.display = "none";
+                } else {
+                    popupMenu.style.display = "block";
+                }
+                event.stopPropagation();
+                });
+
+
+            // CLOSES DROPDOWNS IF CLICKED ELSEWHERE
+            document.addEventListener('click', function(event) {
+                if (!profileImg.contains(event.target) && !popupMenu.contains(event.target)) {
+                    popupMenu.style.display = "none";
+                }
+            });
+        });
+    </script>
+</body>
+</html>

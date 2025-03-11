@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request, jsonify
 from auth import auth
 from user_profile import user_profile
-import psycopg2
+# import psycopg2
 import os
 from dotenv import load_dotenv
 from datetime import timedelta
@@ -79,6 +79,8 @@ def load_more_post():
     db_conn.connect()
     db_retrieve = dbRetrieve(db_conn)
 
+    # how do you get session?
+
     search_term = request.args.get('search', '')
     loaded_post_ids = request.args.get('loaded_post_ids', default='[]', type=str)
     posts_per_page = 5
@@ -91,19 +93,28 @@ def load_more_post():
         return jsonify({'post_html': '', 'no_more_posts': True})
 
     post_html = ''.join([f'''
-        <div class="fm-post-layout" data-post-id="{post['postid']}">
+        <div class="fm-post-layout" data-post-id="{post['postid']}" data-user-id="{post['user_id']}">
             <div class="fm-profiledetails">
                 <img src="/static/{post.get('profilePicture', 'src/img/default-pfp.png')}" alt="Pfp" id="fm-post-pfp">
                 <h1>{post['username']}</h1>
                 <h2>Posted on {post['post_timestamp']}</h2>
 
                 <div class="fm-more-container">
-                    <div class="dropdown">
-                        <span><img src="../static/src/icon/icons8-ellipsis-48.png" alt="Elipses" class="fm-moreicon" data-post-id="{post['postid']}" height="24" width="24"></span>
-                        <div class="dropdown-content">
-                            <a href="#" class="dropdown-item">Item 1</a>
-                            <a href="#" class="dropdown-item">Item 2</a>
-                            <a href="#" class="dropdown-item">Item 3</a>
+                    <div class="fm-dropdown">
+                        <span><img src="../static/src/icon/icons8-ellipsis-48.png" alt="Elipses" id="fm-moreicon" height="24" width="24"></span>
+                        <div class="fm-dropdown-content">
+                            <a href="#" class="fm-dropdown-item">
+                                <img src="../static/src/icon/icons8-flag-48.png" alt="Report Post" id="fm-reportposticon" height="20" width="20"> Report Post
+                            </a>
+                            <a href="#" class="fm-dropdown-item">
+                                <img src="../static/src/icon/icons8-danger-50.png" alt="Report User" id="fm-reportusericon" height="20" width="20"> Report User
+                            </a>
+                            <a href="#" class="fm-dropdown-item">
+                                <img src="../static/src/icon/icons8-edit-96.png" alt="Edit" id="fm-editicon" height="20" width="20">Edit Post
+                            </a>
+                            <a href="#" class="fm-dropdown-item">
+                                <img src="../static/src/icon/icons8-delete-48.png" alt="Delete" id="fm-deleteicon" height="20" width="20">Delete Post
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -115,6 +126,7 @@ def load_more_post():
             </div>
 
             <div class="fm-button-container">
+
                 <div class="fm-like-icon-container">
                     <img src="../static/src/icon/icons8-heart-50.png" alt="Heart" id="fm-post-hearticon">
                     <h2>Like</h2>

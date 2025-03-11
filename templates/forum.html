@@ -1,6 +1,4 @@
-<!-- {% extends "layout.html" %}
-{% block title %}Forum{% endblock %}
-{% block content %} -->
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -18,118 +16,7 @@
             padding: 0;
             background-color: #F7F7F7;
         }
-
-        /* FOOTER */
-        .header-footer-main-container {
-            display: none;
-            position: fixed;
-            justify-content: space-between;
-            align-items: center;
-            bottom: 0;
-            width: 100%;
-            height: 90px;
-            padding: 0;
-            box-sizing: border-box;
-            border: 0px solid;
-            background-color:	#212121;
-            z-index: 1000;
-        }
-
-        .header-footer-container1, 
-            .header-footer-container2, 
-            .header-footer-container3,
-            .header-footer-container4 {
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                justify-content: center;
-                height: 100%;
-                flex-grow: 1;   
-                width: 25%;
-            }
-
-            .header-footer-container1 active {
-                border-top: 5px solid #2A83FF;
-            }
-
-            .header-footer-forumwhiteicon, 
-            .header-footer-recruitwhiteicon, 
-            .header-footer-notifwhiteicon, 
-            .header-footer-pfpicon {
-                height: 40px;
-                width: 40px;
-                margin: 0 30px 10px 30px;
-            }
-
-            .header-footer-container1 h2, 
-            .header-footer-container2 h2, 
-            .header-footer-container3 h2, 
-            .header-footer-container4 h2 {
-                font-family: "Roboto", sans-serif;
-                font-weight: bold;
-                font-size: 10px;
-                color: white; 
-                text-decoration: none; 
-            }
-
-
-        
-        @media (max-width: 430px) {
-            
-            /* HEADER */
-            .header-main-container {
-                height: 85px;
-                padding: 0;
-                box-sizing: content-box;
-                position: fixed;
-                top: 0;
-            }
-
-            .header-searchbar {
-                display: none;
-            }
-
-            #header-logo {
-                height: 60px;
-                margin-left: 0px;
-            }
-
-            .header-searchicon {
-                display: flex;
-                height: 45px;
-                width: 45px;
-                padding: 5px;
-                margin-right: 10px;
-            }
-
-            #header-profile-img {
-                display: none;
-                width: 55px;
-                height: 55px;
-                padding: 5px;
-                margin-right: 20px;
-            }
-
-            .header-infoicon {
-                display: flex;
-                height: 45px;
-                width: 45px;
-                padding: 5px;
-                margin-right: 15px;
-            }
-
-
-            /* FOOTER */
-            .header-footer-main-container {
-                display: flex;
-            }
-
-            /* NAV BAR */
-            .nb-left-container {
-                display: none;
-            }
-        }
-        
+    
     </style>
 </head>
 <body>
@@ -155,10 +42,62 @@
                 </div>
 
                 <img src="../static/src/icon/icons8-notification-50.png" alt="Notification Icon" id="ha-notificon">
+                <div class="fm-notif-main-container">
+                    <h2>Notifications</h2>
+                    <!-- INSERT NOTIFICATIONS -->
+                    <ul>
+                        <li>
+                            <img src="../static/src/img/aboutus-eventcollage.png" alt="Notifimg" id="fm-notifimg">
+                            <b>INSERT USERNAME </b> has liked your post <i>1w</i>
+                        </li>
+                        <li>
+                            <img src="../static/src/img/aboutus-eventcollage.png" alt="Notifimg" id="fm-notifimg">
+                            <b>INSERT USERNAME </b> has liked your post <i>1w</i>
+                        </li>
+                        <li>
+                            <img src="../static/src/img/aboutus-eventcollage.png" alt="Notifimg" id="fm-notifimg">
+                            <b>INSERT USERNAME </b> has liked your post <i>1w</i>
+                        </li>
+                        <li>
+                            <img src="../static/src/img/aboutus-eventcollage.png" alt="Notifimg" id="fm-notifimg">
+                            <b>INSERT USERNAME </b> has liked your post <i>1w</i>
+                        </li>
+                        <li>
+                            <img src="../static/src/img/aboutus-eventcollage.png" alt="Notifimg" id="fm-notifimg">
+                            <b>INSERT USERNAME </b> has liked your post <i>1w</i>
+                        </li>
+                        <li>
+                            <img src="../static/src/img/aboutus-eventcollage.png" alt="Notifimg" id="fm-notifimg">
+                            <b>INSERT USERNAME </b> has liked your post <i>1w</i>
+                        </li>
+                        <li>
+                            <img src="../static/src/img/aboutus-eventcollage.png" alt="Notifimg" id="fm-notifimg">
+                            <b>INSERT USERNAME </b> has liked your post <i>1w</i>
+                        </li>
+                        <li>
+                            <img src="../static/src/img/aboutus-eventcollage.png" alt="Notifimg" id="fm-notifimg">
+                            <b>INSERT USERNAME </b> has liked your post <i>1w</i>
+                        </li>
+            
+                    </ul>
+            
+                    <h3><-------- NO NEW NOTIFICATIONS --------></h3>
+                </div>
 
                 <img src="../static/src/img/default-pfp.png" alt="Pfp" id="ha-pfpimg">
-                
+                <div class="ha-popup-menu" id="ha-popup-menu">
+                    <ul>
+                        <li><a href="settings.html">Settings</a></li>
+                        <li><a href="profile.html">My Profile</a></li>
+                        <li><a href="bookmarkedposts.html">Bookmarks</a></li>
+                        <li><a href="logout.html">Logout</a></li>
+                    </ul>
+                </div>
+            </div>
 
+            <div class="ha-right-responsive-container">
+                <img src="../static/src/icon/icons8-search-60.png" id="ha-searchicon">
+                <img src="../static/src/icon/icons8-menu-vertical-white-64.png" id="ha-menuicon">
             </div>
 
         </div>
@@ -172,7 +111,7 @@
     
         <div class="nb-mainpages-container">    
 
-            <a href="/"><div class="nb-mainpages-home">
+            <a href="#"><div class="nb-mainpages-home">
                  <img src="../static/src/icon/icons8-forum-50.png" alt="Forum Default Icon" id="nb-forumicon">
                  <h2>Forum</h2>
             </div></a> 
@@ -247,12 +186,223 @@
 
     <!-- BODY CONTENT -->
     <div class="fm-main-container" id="postContainer">
-        <div id="loading" style="display:none;">Loading...</div>
-        <div id="no-more-posts" style="display:none; text-align: center; font-size: 20px;">No more posts to load</div>
-    </div>
+        
+        <div class="fm-main-container" id="postContainer">
+            <div id="loading" style="display:none;">Loading...</div>
+            <div id="no-more-posts" style="display:none; text-align: center; font-size: 20px;">No more posts to load</div>
+        </div>
+        
+        <!-- POST LAYOUT -->
+        <!-- <div class="fm-post-layout">
+
+            <div class="fm-profiledetails"> -->
+                <!-- INSERT PFP HERE -->
+                <!-- <img src="../static/src/img/default-pfp.png" alt="Default pfp icon" id="fm-post-pfp"> -->
+                <!-- INSERT USERNAME HERE -->
+                <!-- <a href="profile.html"><h1>INSERT USERNAME</h1></a> -->
+                <!-- INSERT LAST CREATION DATE THING -->
+                <!-- <h2> • </h2>
+                <h2>Posted x days ago</h2> -->
+
+                <!-- <a href="forumspecific.html" class="fm-clickable-container"></a> -->
+
+                <!-- <div class="fm-more-container">
+                    <div class="fm-dropdown">
+                        <span><img src="../static/src/icon/icons8-ellipsis-48.png" alt="Elipses" id="fm-moreicon" height="24" width="24"></span>
+                        <div class="fm-dropdown-content">
+                            <a href="#" class="fm-dropdown-item">
+                                <img src="../static/src/icon/icons8-flag-48.png" alt="Report Post" id="fm-reportposticon" height="20" width="20"> Report Post
+                            </a>
+                            <a href="#" class="fm-dropdown-item">
+                                <img src="../static/src/icon/icons8-danger-50.png" alt="Report User" id="fm-reportusericon" height="20" width="20"> Report User
+                            </a>
+                            <a href="#" class="fm-dropdown-item">
+                                <img src="../static/src/icon/icons8-edit-96.png" alt="Edit" id="fm-editicon" height="20" width="20">Edit Post
+                            </a>
+                            <a href="#" class="fm-dropdown-item">
+                                <img src="../static/src/icon/icons8-delete-48.png" alt="Delete" id="fm-deleteicon" height="20" width="20">Delete Post
+                            </a>
+                        </div>
+                    </div>
+                </div>                
+
+            </div> -->
+
+            <!-- <div class="fm-image-container"> -->
+                <!-- INSERT IMAGE HERE -->
+                <!-- <img src="../static/src/img/randomimage3.jpg" alt="">
+            </div>
+            
+            <div class="fm-button-container"> -->
+
+                
+                <!-- LIKE BUTTON -->
+                <!-- <div class="fm-like-icon-container">
+                    <img src="../static/src/icon/icons8-heart-50.png" alt="Heart" id="fm-post-hearticon">
+                    <h2>Like</h2> -->
+                    <!-- LIKE AMOUNT -->
+                    <!-- <h4>(12)</h4>
+                </div> -->
+                
+
+                <!-- COMMENT BUTTON -->
+                <!-- <a href="forumspecific.html" class="fm-comment-icon-container">
+                    <img src="../static/src/icon/icons8-comment-50.png" alt="Comment" id="fm-post-commenticon">
+                    <h2>Comment</h2> -->
+                    <!-- COMMENT AMOUNT -->
+                    <!-- <h4>(0)</h4>
+                </a> -->
+
+
+                <!-- BOOKMARK BUTTON -->
+                <!-- <img src="../static/src/icon/icons8-bookmark-50.png" alt="Bookmark" id="fm-post-bookmarkicon">
+
+            </div> -->
+
+
+            <!-- INSERT CAPTION -->
+            <!-- <div class="fm-caption-container">
+                <h1>INSERT USERNAME</h1>
+                <h2>The rain drummed against the cobblestone streets as neon signs flickered in the misty night. A stranger in a tattered coat hurried past, clutching a leather-bound book with golden edges. In the distance, a train whistled, its echo swallowed by the howling wind. A small café glowed warmly, steam curling from porcelain cups as an old radio played a forgotten tune. The scent of freshly baked bread mixed with the distant sea breeze. Somewhere, a dog barked, chasing its own shadow in the dim light.</h2>
+            </div>
+
+        </div> -->
+
+
+
+
+
+
+
+
+
+
+
+        <!-- DUMMY POST FOR CSS STYLING PURPOSES -->
+
+        <!-- <div class="fm-post-layout">
+            
+            <div class="fm-profiledetails"> -->
+                <!-- INSERT PFP HERE -->
+                <!-- <img src="../static/src/img/default-pfp.png" alt="Default pfp icon" id="fm-post-pfp"> -->
+                <!-- INSERT USERNAME HERE -->
+                <!-- <h1>INSERT USERNAME</h1> -->
+                <!-- INSERT LAST CREATION DATE THING -->
+                <!-- <h2> • </h2>
+                <h2>Posted x days ago</h2>
+            </div>
+
+            <div class="fm-image-container"> -->
+                <!-- INSERT IMAGE HERE -->
+                <!-- <img src="../static/src/img/randomimage2.jpg" alt="">
+            </div>
+
+            <div class="fm-button-container">
+                <img src="" alt="">
+            </div>
+
+        </div> -->
     
+    </div>
+
+
+    <!-- NOTIFICATION POPUP MENU -->
+
+
+
+
+
+    <!-- FOOTER CONTENT -->
+    <footer>
+        
+        <div class="header-footer-main-container">
+            
+            <div class="header-footer-container1">
+                <img src="../static/src/icon/icons8-forum-blue-50.png" alt="Forum Icon" class="header-footer-forumblueicon">
+                <h2>Forum</h2>
+            </div>
+    
+            <div class="header-footer-container2">
+                <img src="../static/src/icon/icons8-resume-white-50.png" alt="Recruit Icon" class="header-footer-recruitwhiteicon">
+                <h2>Recruitment</h2>
+            </div>
+    
+            <div class="header-footer-container3">
+                <img src="../static/src/icon/icons8-notification-white-48.png" alt="Notification Icon" class="header-footer-notifwhiteicon">
+                <h2>Notifications</h2>
+            </div>
+    
+            <div class="header-footer-container4">
+                <a href="profile.html"><img src="../static/src/img/default-pfp.png" alt="Profile Pic Icon" class="header-footer-pfpicon"></a>
+                <h2>Profile</h2>
+            </div>
+    
+        </div>
+    
+    </footer>
+
     <script>
-        // this is for the 3 dot menu, i havent made a function to read the value or filter the delete option
+        document.addEventListener("DOMContentLoaded", function() {
+            // ELIPSES DROPDOWN
+            var dropdown = document.querySelector('.fm-dropdown');
+            var dropdownContent = document.querySelector('.fm-dropdown-content');
+
+            dropdown.addEventListener('click', function(event) {
+                dropdownContent.style.display = (dropdownContent.style.display === "block") ? "none" : "block";
+                event.stopPropagation();
+            });
+
+            document.addEventListener('click', function(event) {
+                if (!dropdown.contains(event.target)) {
+                    dropdownContent.style.display = "none";
+                }
+            });
+
+            
+            // TOGGLING FM-NOTIF-MAIN-CONTAINER
+            var notifIcon = document.getElementById('ha-notificon');
+            var notifContainer = document.querySelector('.fm-notif-main-container');
+
+            notifIcon.addEventListener('click', function(event) {
+                if (notifContainer.style.display === "flex") {
+                    notifContainer.style.display = "none";
+                    notifIcon.src = "../static/src/icon/icons8-notification-50.png"; 
+                } else {
+                    notifContainer.style.display = "flex";
+                    notifIcon.src = "../static/src/icon/icons8-notification-blue-48.png"; 
+                }
+                event.stopPropagation(); 
+            });
+
+            // PFP DROPDOWN
+            var profileImg = document.getElementById('ha-pfpimg');
+            var popupMenu = document.getElementById('ha-popup-menu');
+
+            profileImg.addEventListener('click', function(event) {
+                if (popupMenu.style.display === "block") {
+                    popupMenu.style.display = "none";
+                } else {
+                    popupMenu.style.display = "block";
+                }
+                event.stopPropagation();
+            });
+
+
+            // CLOSING THE CONTAINER IF CLICKED ELSEWHERE
+            document.addEventListener('click', function(event) {
+                if (!notifIcon.contains(event.target) && !notifContainer.contains(event.target)) {
+                    notifContainer.style.display = "none";
+                    notifIcon.src = "../static/src/icon/icons8-notification-50.png";
+                }
+                if (!profileImg.contains(event.target) && !popupMenu.contains(event.target)) {
+                    popupMenu.style.display = "none";
+                }
+            });
+        });
+    </script>
+
+    <script>
+        // this is for the 3 dot menu
         document.addEventListener('DOMContentLoaded', () => {
             document.body.addEventListener('click', function(event) {
                 const clickedDropdown = event.target.closest('.dropdown');
@@ -265,8 +415,13 @@
                             dropdown.style.display = 'none';
                         }
                     });
-    
-                    dropdownContent.style.display = dropdownContent.style.display === "block" ? "none" : "block";
+
+                    if (dropdownContent.style.display === "block") {
+                        dropdownContent.style.display = "none"; 
+                    } else {
+                        dropdownContent.style.display = "block";
+                    }
+
                     event.stopPropagation();
                 } else {
                     document.querySelectorAll('.dropdown-content').forEach(function(dropdown) {
@@ -274,7 +429,7 @@
                     });
                 }
             });
-    
+
             window.addEventListener('scroll', function() {
                 document.querySelectorAll('.dropdown-content').forEach(function(dropdown) {
                     dropdown.style.display = 'none';
@@ -298,8 +453,7 @@
                     const searchTerm = searchContainer.value.trim();
 
                     if (searchTerm) {
-                        console.log('Search term:', searchTerm);
-                        window.location.href = "/load_more_post?search=" + encodeURIComponent(searchTerm);
+                        window.location.href = "/?search=" + encodeURIComponent(searchTerm);
                     }
                 }
             });
@@ -310,19 +464,19 @@
         // const postContainer = document.getElementById('postContainer');
         // const loadingIndicator = document.getElementById('loading');
         // let isLoading = false;
-    
+
         // function loadPosts() {
         //     if (isLoading) return;
-    
+
         //     isLoading = true;
         //     loadingIndicator.style.display = 'block';
-    
+
         //     const postIds = Array.from(postContainer.querySelectorAll('.fm-post-layout'))
         //         .map(post => post.getAttribute('data-post-id'))
         //         .filter(postId => postId && postId.trim() !== "");
-    
+
         //     postIds.forEach(postId => loadedPostIds.add(postId));
-    
+
         //     fetch('/load_more_post?page=' + currentPage + '&loaded_post_ids=' + JSON.stringify(Array.from(loadedPostIds)))
         //         .then(response => response.json())
         //         .then(data => {
@@ -330,12 +484,12 @@
         //                 postContainer.insertAdjacentHTML('beforeend', data.post_html);
         //                 currentPage++;
         //             }
-    
+
         //             let noMorePostsMessage = document.getElementById('no-more-posts');
         //             if (noMorePostsMessage) {
         //                 noMorePostsMessage.remove();
         //             }
-    
+
         //             if (data.no_more_posts) {
         //                 noMorePostsMessage = document.createElement('div');
         //                 noMorePostsMessage.id = 'no-more-posts';
@@ -343,10 +497,10 @@
         //                 noMorePostsMessage.style.textAlign = 'center';
         //                 noMorePostsMessage.style.fontSize = '20px';
         //                 noMorePostsMessage.textContent = 'No more posts to load';
-    
+
         //                 postContainer.appendChild(noMorePostsMessage);
         //             }
-    
+
         //             loadingIndicator.style.display = 'none';
         //             isLoading = false;
         //         })
@@ -356,13 +510,13 @@
         //             isLoading = false;
         //         });
         //     }
-    
+
         // window.addEventListener('scroll', () => {
         //     if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 10 && !isLoading) {
         //         loadPosts();
         //     }
         // });
-    
+
         // document.addEventListener('DOMContentLoaded', () => {
         //     loadPosts();
         // });
@@ -373,7 +527,7 @@
         const postContainer = document.getElementById('postContainer');
         const loadingIndicator = document.getElementById('loading');
         let isLoading = false;
-    
+
         function loadPosts(searchTerm = '') {
             if (isLoading) return;
 
@@ -436,33 +590,47 @@
             loadPosts(searchTerm);
         });
     </script>
-    <!-- FOOTER CONTENT -->
-    <footer>
-        
-        <div class="header-footer-main-container">
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // session id
+            const sessionId = 1;
+
+            const postContainer = document.querySelectorAll('.fm-post-layout');
+
+            postContainer.forEach(postContainer => {
+                const containerUserId = document.getAttribute('data-user-id');
+
+                const editPostOption = postContainer.querySelector('.edit-post');
+                const deletePostOption = postContainer.querySelector('.delete-post');
+
+                if (containerUserId == sessionId) {
+                    if (editPostOption) {
+                        document.getElementById('fm-editpost').style.display = 'block';
+                    }
+                    if (deletePostOption) {
+                        document.getElementById('fm-deletepost').style.display = 'block';
+                    }
+
+                } else {
+                    if (editPostOption) {
+                        document.getElementById('fm-editpost').style.display = 'none';
+                    }
+                    if (editPostOption) {
+                        document.getElementById('fm-deletepost').style.display = 'none';
+                    }
+                }
+
+            });
             
-            <div class="header-footer-container1">
-                <img src="../static/src/icon/icons8-forum-blue-50.png" alt="Forum Icon" class="header-footer-forumblueicon">
-                <h2>Forum</h2>
-            </div>
-    
-            <div class="header-footer-container2">
-                <img src="../static/src/icon/icons8-resume-white-50.png" alt="Recruit Icon" class="header-footer-recruitwhiteicon">
-                <h2>Recruitment</h2>
-            </div>
-    
-            <div class="header-footer-container3">
-                <img src="../static/src/icon/icons8-notification-white-48.png" alt="Notification Icon" class="header-footer-notifwhiteicon">
-                <h2>Notifications</h2>
-            </div>
-    
-            <div class="header-footer-container4">
-                <a href="profile.html"><img src="../static/src/img/default-pfp.png" alt="Profile Pic Icon" class="header-footer-pfpicon"></a>
-                <h2>Profile</h2>
-            </div>
-    
-        </div>
-    
-    </footer>
+        });
+    </script>
+
+    <script>
+        // session id
+        const sessionId = 1;
+
+    </script>
+
 </body>
-{% endblock content %}
+</html>

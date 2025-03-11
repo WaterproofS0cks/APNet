@@ -3,17 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/x-icon" href="src/favicon/favicon.ico">
-    <link rel="stylesheet" href="../static/style.css">  
+    <link rel="icon" type="image/x-icon" href="../static/src/favicon/favicon.ico">
+    <link rel="stylesheet" href="../static/style.css">    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet"> 
     <title>Application Form</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
+            font-family: "Roboto", sans-serif;
         }
+
         .form-container {
             max-width: 350px;
-            margin: auto;
+            margin: 110px auto 0 auto;
             padding: 25px;
             border: 1px solid #ccc;
             border-radius: 5px;
@@ -89,7 +92,6 @@
             background-color: #0056b3;
         }
         
-        /* Ensure uniform spacing between input boxes */
         .input-box {
             margin-bottom: 10px;
         }
@@ -100,6 +102,41 @@
 <body>
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+
+    <header>
+
+        <div class="hb-main-container">
+
+            <div class="hb-logo-container">
+                <img src="../static/src/img/apnet-logo.png" alt="APNet logo" id="hb-logo-img">
+            </div>
+
+            <div class="hb-right-container">
+
+                <a href="forum.html"><h1>Forum</h1></a>
+                <a href="#"><h1>Recruitment</h1></a>
+                <a href="aboutus.html"><h1>About Us</h1></a>
+                <a href="faq.html"><h1>FAQ</h1></a>
+                <a href="termsofservice.html"><h1>Terms of Service</h1></a> 
+
+                <img src="../static/src/img/default-pfp.png" alt="Pfp" id="hb-pfp-img">
+                <div class="hb-popup-menu" id="hb-popup-menu">
+                    <ul>
+                        <li><a href="settings.html">Settings</a></li>
+                        <li><a href="profile.html">My Profile</a></li>
+                        <li><a href="bookmarkedposts.html">Bookmarks</a></li>
+                        <li><a href="logout.html">Logout</a></li>
+                    </ul>
+                </div>
+
+            </div>
+
+            <img src="../static/src/icon/icons8-menu-vertical-white-64.png" id="hb-menuicon">
+
+        </div>
+
+    </header>
+
 
     <div class="form-container">
         <button class="back-button" onclick="window.history.back();">Back</button>
@@ -121,8 +158,8 @@
 
             <div class="input-box">
                 <ion-icon name="id-card-outline"></ion-icon>
-                <input type="text" id="studentID" name="studentID" placeholder=" " required>
-                <label for="studentID">Student ID</label>
+                <input type="text" id="tpNumber" name="tpNumber" placeholder=" " required>
+                <label for="studentID">TP Number</label>
             </div>
 
             <div class="input-box">
@@ -142,7 +179,32 @@
             </div>
         </form>
     </div>
-
     
+    
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+
+            // HEADER PFP DROPDOWN
+            var profileImg = document.getElementById('hb-pfp-img');
+            var popupMenu = document.getElementById('hb-popup-menu');
+
+            profileImg.addEventListener('click', function(event) {
+                if (popupMenu.style.display === "block") {
+                    popupMenu.style.display = "none";
+                } else {
+                    popupMenu.style.display = "block";
+                }
+                event.stopPropagation();
+                });
+
+
+            // CLOSES DROPDOWNS IF CLICKED ELSEWHERE
+            document.addEventListener('click', function(event) {
+                if (!profileImg.contains(event.target) && !popupMenu.contains(event.target)) {
+                    popupMenu.style.display = "none";
+                }
+            });
+        });
+    </script>
 </body>
 </html>
