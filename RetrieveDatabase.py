@@ -95,7 +95,7 @@ class dbRetrieve:
                 post.userID, 
                 users.username, 
                 users.profilePicture, 
-                users.fullname,  -- Corrected to use 'fullname' instead of 'name'
+                users.fullname,
                 users.registerDate,
                 COALESCE(COUNT(DISTINCT comment.postID), 0) AS comments_count,
                 COALESCE(COUNT(DISTINCT engagement.postID), 0) AS likes_count
