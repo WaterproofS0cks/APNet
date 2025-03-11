@@ -79,6 +79,8 @@ def load_more_post():
     db_conn.connect()
     db_retrieve = dbRetrieve(db_conn)
 
+    # how do you get session?
+
     search_term = request.args.get('search', '')
     loaded_post_ids = request.args.get('loaded_post_ids', default='[]', type=str)
     posts_per_page = 5
@@ -91,7 +93,7 @@ def load_more_post():
         return jsonify({'post_html': '', 'no_more_posts': True})
 
     post_html = ''.join([f'''
-        <div class="fm-post-layout" data-post-id="{post['postid']}">
+        <div class="fm-post-layout" data-post-id="{post['postid']}" data-user-id="{post['user_id']}">
             <div class="fm-profiledetails">
                 <img src="/static/{post.get('profilePicture', 'src/img/default-pfp.png')}" alt="Pfp" id="fm-post-pfp">
                 <h1>{post['username']}</h1>
@@ -124,7 +126,7 @@ def load_more_post():
             </div>
 
             <div class="fm-button-container">
-            
+
                 <div class="fm-like-icon-container">
                     <img src="../static/src/icon/icons8-heart-50.png" alt="Heart" id="fm-post-hearticon">
                     <h2>Like</h2>

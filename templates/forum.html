@@ -402,7 +402,7 @@
     </script>
 
     <script>
-        // this is for the 3 dot menu, i havent made a function to read the value or filter the delete option
+        // this is for the 3 dot menu
         document.addEventListener('DOMContentLoaded', () => {
             document.body.addEventListener('click', function(event) {
                 const clickedDropdown = event.target.closest('.dropdown');
@@ -416,7 +416,12 @@
                         }
                     });
 
-                    dropdownContent.style.display = dropdownContent.style.display === "block" ? "none" : "block";
+                    if (dropdownContent.style.display === "block") {
+                        dropdownContent.style.display = "none"; 
+                    } else {
+                        dropdownContent.style.display = "block";
+                    }
+
                     event.stopPropagation();
                 } else {
                     document.querySelectorAll('.dropdown-content').forEach(function(dropdown) {
@@ -448,7 +453,6 @@
                     const searchTerm = searchContainer.value.trim();
 
                     if (searchTerm) {
-                        console.log('Search term:', searchTerm);
                         window.location.href = "/?search=" + encodeURIComponent(searchTerm);
                     }
                 }
@@ -585,6 +589,47 @@
 
             loadPosts(searchTerm);
         });
+    </script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // session id
+            const sessionId = 1;
+
+            const postContainer = document.querySelectorAll('.fm-post-layout');
+
+            postContainer.forEach(postContainer => {
+                const containerUserId = document.getAttribute('data-user-id');
+
+                const editPostOption = postContainer.querySelector('.edit-post');
+                const deletePostOption = postContainer.querySelector('.delete-post');
+
+                if (containerUserId == sessionId) {
+                    if (editPostOption) {
+                        document.getElementById('fm-editpost').style.display = 'block';
+                    }
+                    if (deletePostOption) {
+                        document.getElementById('fm-deletepost').style.display = 'block';
+                    }
+
+                } else {
+                    if (editPostOption) {
+                        document.getElementById('fm-editpost').style.display = 'none';
+                    }
+                    if (editPostOption) {
+                        document.getElementById('fm-deletepost').style.display = 'none';
+                    }
+                }
+
+            });
+            
+        });
+    </script>
+
+    <script>
+        // session id
+        const sessionId = 1;
+
     </script>
 
 </body>
