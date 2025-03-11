@@ -908,6 +908,9 @@ input[type="submit"]:hover {
 
 .reset-password-flow {
     margin-bottom: 20px;
+    display: flex;
+    gap: 20px;
+    align-items: center;
 }
 
 .reset-password-card {
@@ -915,6 +918,13 @@ input[type="submit"]:hover {
     padding: 40px; /* Padding intentionally set to 40px instead of 20px */
     border-radius: 8px;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.rp-body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
 }
 
 
