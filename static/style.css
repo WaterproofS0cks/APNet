@@ -508,6 +508,23 @@ button img {
     background-color: #bb2d3b;
 }
 
+.button-blue {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.button-blue:hover {
+    background-color: #0056b3;
+}
+
 
 
 /* FORM */
@@ -1888,6 +1905,16 @@ input[type="submit"]:hover {
     justify-content: center;
     align-items: center;
     min-height: 100vh;
+}
+
+.rp-content-card {
+    width: 800px;
+    height: auto;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
 
 
