@@ -4,48 +4,52 @@
 <body>
     <div class="content-card">
         <div class="card-header">
+            <a href="/" class="btn-icon">
+                <img src="{{ url_for('static', filename='src/icon/icons8-back-96.png') }}" alt="Back Icon">
+            </a>
             <h2>Dashboard</h2>
         </div>
-
-        <div class="card-filter">
-            <form action="/dashboard" method="POST">
-                <div>
-                    <label for="database">Data:</label>
-                    <select name="database" id="database" required>
-                        <option value="users" {% if database_value == 'users' %}selected{% endif %}>User</option>
-                        <option value="post" {% if database_value == 'post' %}selected{% endif %}>Post</option>
-                        <option value="comment" {% if database_value == 'comment' %}selected{% endif %}>Comment</option>
-                        <option value="recruitment" {% if database_value == 'recruitment' %}selected{% endif %}>Recruitment</option>
-                        <option value="application" {% if database_value == 'application' %}selected{% endif %}>Application</option>
-                        <option value="penaltyhistory" {% if database_value == 'penaltyhistory' %}selected{% endif %}>Moderation</option>
-                        <option value="reports" {% if database_value == 'reports' %}selected{% endif %}>Report</option>
-                        <option value="activity" {% if database_value == 'activity' %}selected{% endif %}>Activity</option>
-                    </select>
-                </div>
-                <div>
-                    <label for="filter">Filter by:</label>
-                    <select name="filter" id="filter" required>
-                        <option value="days" {% if filter_value == 'days' %}selected{% endif %}>Past Day</option>
-                        <option value="months" {% if filter_value == 'months' %}selected{% endif %}>Past Month</option>
-                        <option value="years" {% if filter_value == 'years' %}selected{% endif %}>Past Year</option>
-                        <option value="all-time" {% if filter_value == 'all-time' %}selected{% endif %}>All Time</option>
-                    </select>
-                </div>
-                <!-- <div>
-                    <label for="range">Range:</label>
-                    <input type="text" id="range" name="range" value="{{ range_value }}" required>
-                </div> -->
-                <input type="submit" value="Filter" id="filter-button">
-            </form>
-        </div>
-
-        <hr>
 
         <div class="card-section">
             <div class="dashboard-wrap">
                 <div class="dashboard-row">
-                    <h2>Charts</h2>
-                    <div class="dashboard-column-lg">
+                    <h2>Statistics</h2>
+
+                    <div class="card-filter">
+                        <form action="/dashboard" method="POST">
+                            <div>
+                                <label for="database">Data:</label>
+                                <select name="database" id="database" required>
+                                    <option value="users" {% if database_value == 'users' %}selected{% endif %}>User</option>
+                                    <option value="post" {% if database_value == 'post' %}selected{% endif %}>Post</option>
+                                    <option value="comment" {% if database_value == 'comment' %}selected{% endif %}>Comment</option>
+                                    <option value="recruitment" {% if database_value == 'recruitment' %}selected{% endif %}>Recruitment</option>
+                                    <option value="application" {% if database_value == 'application' %}selected{% endif %}>Application</option>
+                                    <option value="penaltyhistory" {% if database_value == 'penaltyhistory' %}selected{% endif %}>Moderation</option>
+                                    <option value="reports" {% if database_value == 'reports' %}selected{% endif %}>Report</option>
+                                    <option value="activity" {% if database_value == 'activity' %}selected{% endif %}>Activity</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label for="filter">Filter by:</label>
+                                <select name="filter" id="filter" required>
+                                    <option value="days" {% if filter_value == 'days' %}selected{% endif %}>Past Day</option>
+                                    <option value="months" {% if filter_value == 'months' %}selected{% endif %}>Past Month</option>
+                                    <option value="years" {% if filter_value == 'years' %}selected{% endif %}>Past Year</option>
+                                    <option value="all-time" {% if filter_value == 'all-time' %}selected{% endif %}>All Time</option>
+                                </select>
+                            </div>
+                            <!-- <div>
+                                <label for="range">Range:</label>
+                                <input type="text" id="range" name="range" value="{{ range_value }}" required>
+                            </div> -->
+                            <input type="submit" value="Filter" id="filter-button">
+                        </form>
+                    </div>
+
+                    <hr class="dashboard-hr">
+
+                    <div class="dashboard-column-graph">
                         <div class="dashboard-card">
                             <div id="chart-container">
                             {{ chart|safe }}
@@ -114,6 +118,106 @@
                             <h1>{{ reported_count }}</h1>
                         </div>
                     </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card-section">
+            <div class="dashboard-wrap">
+                <div class="dashboard-row">
+                    <h2>Moderation</h2>
+                </div>
+                <div class="dashboard-row">
+                    <p>Reported Users</p>
+
+                    <div class="dashboard-column-lg">
+                        <div class="dashboard-card">
+                            <div style="overflow-x:auto;">
+                                <table class="dashboard-table">
+                                    <tr>
+                                        <th>Username</th>
+                                        <th>Reason</th>
+                                        <th>Option</th>
+                                    </tr>
+                                    <tr>
+                                        <td>ProlexicGT</td>
+                                        <td>Hate Speech & Discrimination</td>
+                                        <td><u>Ban</u></td>
+                                    </tr>
+                                    <tr>
+                                        <td>WaterproofSocks</td>
+                                        <td>Harassment & Bullying</td>
+                                        <td><u>Ban</u></td>
+                                    </tr>
+                                    <tr>
+                                        <td>HyperUniverse1st</td>
+                                        <td>Spam & Fake Accounts</td>
+                                        <td><u>Ban</u></td>
+                                    </tr>
+                                    <!-- Add a new entry here -->
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="dashboard-row">
+                    <p>Reported Posts</p>
+
+                    <div class="dashboard-column-lg">
+                        <div class="dashboard-card">
+                            <div style="overflow-x:auto;">
+                                <table class="dashboard-table">
+                                    <tr>
+                                        <th>Title</th>
+                                        <th>Reason</th>
+                                        <th>Option</th>
+                                    </tr>
+                                    <tr>
+                                        <td>Post title 1</td>
+                                        <td>This is a reason 1</td>
+                                        <td><u>Remove</u></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Post title 2</td>
+                                        <td>This is a reason 2</td>
+                                        <td><u>Remove</u></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Post title 3</td>
+                                        <td>This is a reason 3</td>
+                                        <td><u>Remove</u></td>
+                                    </tr>
+                                    <!-- Add a new entry here -->
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="dashboard-row">
+                    <p>Banned Users</p>
+
+                    <div class="dashboard-column-lg">
+                        <div class="dashboard-card">
+                            <div style="overflow-x:auto;">
+                                <table class="dashboard-table">
+                                    <tr>
+                                        <th>Username</th>
+                                        <th>Reason</th>
+                                        <th>Option</th>
+                                    </tr>
+                                    <tr>
+                                        <td>JavaRuntime</td>
+                                        <td>Violent or Graphic Content</td>
+                                        <td><u>Unban</u></td>
+                                    </tr>
+                                    <!-- Add a new entry here -->
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </div>
