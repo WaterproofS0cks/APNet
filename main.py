@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, jsonify
+from flask import Flask, render_template, session, request, jsonify
 from auth import auth
 from user_profile import user_profile
 # import psycopg2
@@ -79,7 +79,7 @@ def load_more_post():
     db_conn.connect()
     db_retrieve = dbRetrieve(db_conn)
 
-    # how do you get session?
+    user_id = session.get('id')
 
     search_term = request.args.get('search', '')
     loaded_post_ids = request.args.get('loaded_post_ids', default='[]', type=str)
@@ -90,12 +90,12 @@ def load_more_post():
     posts = db_retrieve.retrieve_posts(posts_per_page, loaded_post_ids, search_term)
 
     if not posts:
-        return jsonify({'post_html': '', 'no_more_posts': True})
+        return jsonify({'post_html': '', 'no_more_posts': True, 'user_id': user_id})
 
     post_html = ''.join([f'''
-        <div class="fm-post-layout" data-post-id="{post['postid']}" data-user-id="{post['user_id']}">
+        <div class="fm-post-layout" data-post-id="{post['postid']}" data-user-id="{post['userid']}">
             <div class="fm-profiledetails">
-                <img src="/static/{post.get('profilePicture', 'src/img/default-pfp.png')}" alt="Pfp" id="fm-post-pfp">
+                <img src="{post.get('profilePicture', '/static/src/img/default-pfp.png')}" alt="Pfp" id="fm-post-pfp">
                 <h1>{post['username']}</h1>
                 <h2>Posted on {post['post_timestamp']}</h2>
 
@@ -122,7 +122,7 @@ def load_more_post():
             </div>
 
             <div class="fm-image-container">
-                <img src="/static/{post['post_image']}" alt="Post Image">
+                <img src="{post['post_image']}" alt="Post Image">
             </div>
 
             <div class="fm-button-container">
@@ -144,12 +144,12 @@ def load_more_post():
 
             <div class="fm-caption-container">
                 <h1>{post['username']}</h1>
-                <h2>{post['caption'] if post.get('caption') else 'No caption available'}</h2>
+                <h2>{post['caption']}</h2>
             </div>
         </div>
     ''' for post in posts])
 
-    return jsonify({'post_html': post_html, 'no_more_posts': False})
+    return jsonify({'post_html': post_html, 'no_more_posts': False, 'user_id': user_id})
 
 
 
