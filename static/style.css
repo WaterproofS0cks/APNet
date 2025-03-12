@@ -1692,19 +1692,20 @@ input[type="submit"]:hover {
 
 .rca-top-container {
     display: flex;
-    background-color: blue;
+    /* background-color: blue; */
     width: 100%;
     height: 7%;
     margin-bottom: 50px;
 }
 
 .rca-back-container {
-    background-color: red;
+    /* background-color: red; */
     display: flex;
     align-items: center;
-    width: 25%;
+    width: 17%;
     height: 100%;
     text-decoration: none;
+    margin-left: auto;
 }
 
 #rca-undoicon {
@@ -1713,30 +1714,37 @@ input[type="submit"]:hover {
     margin-right: 10px;
 }
 
-.rca-back-container h2, .rca-title-container h2 {
+.rca-back-container h2 {
     font-family: "Roboto", sans-serif;
     font-size: 28px;
     color: #ccc;
 }
 
+.rca-title-container h2 {
+    font-family: "Roboto", sans-serif;
+    font-size: 28px;
+    color: #000;
+}
+
 .rca-title-container {
-    background-color: red;
+    /* background-color: red; */
     display: flex;
     align-items: center;
-    margin-left: auto;
+    /* margin-left: auto; */
     width: 31%;
     height: 100%;
 }
 
 .rca-info-container {
-    background-color: red;
+    /* background-color: red; */
     display: flex;
     width: 100%;
-    height: 12%;
+    height: 9%;
+    margin-bottom: 50px;
 }
 
 .rca-tpno-container {
-    background-color: skyblue;
+    /* background-color: skyblue; */
     display: flex;
     flex-direction: column;
     width: 45%;
@@ -1744,7 +1752,7 @@ input[type="submit"]:hover {
 }
 
 .rca-role-container {
-    background-color: skyblue;
+    /* background-color: skyblue; */
     display: flex;
     flex-direction: column;
     width: 45%;
@@ -1764,9 +1772,33 @@ input[type="submit"]:hover {
     font-family: "Roboto", sans-serif;
     font-size: 12px;
     width: 100%;
-    height: 40%;
+    height: 45%;
     padding: 3px;
     border-radius: 2px;
+}
+
+.rca-desc-container {
+    /* background-color: red; */
+    width: 100%;
+    height: 56%;
+}
+
+.rca-desc-container h2 {
+    font-family: "Roboto", sans-serif;
+    font-size: 19px;
+    font-weight: normal;
+    color: #666;
+    margin-bottom: 5px;
+}
+
+.rca-desc-container textarea {
+    font-family: "Roboto", sans-serif;
+    font-size: 15px;
+    text-align: justify;
+    width: 100%;
+    height: 310px;
+    line-height: 1.5;
+    resize: none;
 }
 
 
