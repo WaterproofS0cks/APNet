@@ -121,8 +121,7 @@
     
     </footer>
 
-    {% block content %}
-    {% endblock %}
+
 
     <script>
         document.addEventListener("DOMContentLoaded", function() {
@@ -166,7 +165,22 @@
                     popupMenu.style.display = "none";
                 }
             });
+
+            // SEARCHBAR JAVASCRIPT
+            const searchContainer = document.getElementById('ha-searchbar');
+            searchContainer.addEventListener("keypress", function(event) {
+                if (event.key === "Enter") {
+                    event.preventDefault(); 
+
+                    const searchTerm = searchContainer.value.trim();
+
+                    if (searchTerm) {
+                        window.location.href = "/?search=" + encodeURIComponent(searchTerm);
+                    }
+                }
+            });
         });
     </script>
+    
 </body>
 </html>

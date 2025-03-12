@@ -17,7 +17,7 @@
             background-color: #F7F7F7;
             min-height: 100vh;
             padding-bottom: 50px;
-        }
+        }  
     
     </style>
 </head>
@@ -344,47 +344,47 @@
     </footer>
 
     <script>
-        document.addEventListener("DOMContentLoaded", function() {
+        // document.addEventListener("DOMContentLoaded", function() {
             // TOGGLING FM-NOTIF-MAIN-CONTAINER
-            var notifIcon = document.getElementById('ha-notificon');
-            var notifContainer = document.querySelector('.fm-notif-main-container');
+            // var notifIcon = document.getElementById('ha-notificon');
+            // var notifContainer = document.querySelector('.fm-notif-main-container');
 
-            notifIcon.addEventListener('click', function(event) {
-                if (notifContainer.style.display === "flex") {
-                    notifContainer.style.display = "none";
-                    notifIcon.src = "../static/src/icon/icons8-notification-50.png"; 
-                } else {
-                    notifContainer.style.display = "flex";
-                    notifIcon.src = "../static/src/icon/icons8-notification-blue-48.png"; 
-                }
-                event.stopPropagation(); 
-            });
+            // notifIcon.addEventListener('click', function(event) {
+            //     if (notifContainer.style.display === "flex") {
+            //         notifContainer.style.display = "none";
+            //         notifIcon.src = "../static/src/icon/icons8-notification-50.png"; 
+            //     } else {
+            //         notifContainer.style.display = "flex";
+            //         notifIcon.src = "../static/src/icon/icons8-notification-blue-48.png"; 
+            //     }
+            //     event.stopPropagation(); 
+            // });
 
             // PFP DROPDOWN
-            var profileImg = document.getElementById('ha-pfpimg');
-            var popupMenu = document.getElementById('ha-popup-menu');
+            // var profileImg = document.getElementById('ha-pfpimg');
+            // var popupMenu = document.getElementById('ha-popup-menu');
 
-            profileImg.addEventListener('click', function(event) {
-                if (popupMenu.style.display === "block") {
-                    popupMenu.style.display = "none";
-                } else {
-                    popupMenu.style.display = "block";
-                }
-                event.stopPropagation();
-            });
+            // profileImg.addEventListener('click', function(event) {
+            //     if (popupMenu.style.display === "block") {
+            //         popupMenu.style.display = "none";
+            //     } else {
+            //         popupMenu.style.display = "block";
+            //     }
+            //     event.stopPropagation();
+            // });
 
 
             // CLOSING THE CONTAINER IF CLICKED ELSEWHERE
-            document.addEventListener('click', function(event) {
-                if (!notifIcon.contains(event.target) && !notifContainer.contains(event.target)) {
-                    notifContainer.style.display = "none";
-                    notifIcon.src = "../static/src/icon/icons8-notification-50.png";
-                }
-                if (!profileImg.contains(event.target) && !popupMenu.contains(event.target)) {
-                    popupMenu.style.display = "none";
-                }
-            });
-        });
+        //     document.addEventListener('click', function(event) {
+        //         if (!notifIcon.contains(event.target) && !notifContainer.contains(event.target)) {
+        //             notifContainer.style.display = "none";
+        //             notifIcon.src = "../static/src/icon/icons8-notification-50.png";
+        //         }
+        //         if (!profileImg.contains(event.target) && !popupMenu.contains(event.target)) {
+        //             popupMenu.style.display = "none";
+        //         }
+        //     });
+        // });
     </script>
 
     <script>
