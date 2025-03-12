@@ -99,6 +99,9 @@ def load_more_post():
                 <h1>{post['username']}</h1>
                 <h2>Posted on {post['post_timestamp']}</h2>
 
+                <a href="forumspecific.html" class="fm-clickable-container"></a>
+
+
                 <div class="fm-more-container">
                     <div class="fm-dropdown">
                         <span><img src="../static/src/icon/icons8-ellipsis-48.png" alt="Elipses" id="fm-moreicon" height="24" width="24"></span>
