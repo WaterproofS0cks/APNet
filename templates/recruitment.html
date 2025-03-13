@@ -1,14 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/x-icon" href="../static/src/favicon/favicon.ico">
-    <link rel="stylesheet" href="../static/style.css">    
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
-    <title>APNet</title>
+{% extends "header-a.html" %}
+{% block title %}Recruitment{% endblock title %}
+{% block content %}
+<body>
 
     <style>
         body {
@@ -349,39 +342,6 @@
         }
         
     </style>
-</head>
-<body>
-    <!-- HEADER CONTENT -->
-    <header>
-        <div class="ha-main-container">
-
-            <div class="ha-logo-container">
-                <a href="/"><img src="../static/src/img/apnet-logo.png" id="ha-logo-img"></a>
-            </div>
-
-            <div class="ha-search-container">
-                <input type="text" id="ha-searchbar" placeholder="Search APNet...">
-            </div>
-            
-            <div class="ha-right-container">
-
-                <div class="ha-createpost-container">
-                    <a href="forumspecific.html">                        
-                        <img src="../static/src/icon/icons8-plus-48.png" alt="Plus" id="ha-plusicon">
-                        <h2>Create Post</h2>
-                    </a>
-                </div>
-
-                <img src="../static/src/icon/icons8-notification-50.png" alt="Notification Icon" id="ha-notificon">
-
-                <img src="../static/src/img/default-pfp.png" alt="Pfp" id="ha-pfpimg">
-                
-
-            </div>
-
-        </div>
-    </header>
-    
 
     <!-- NAV BAR -->
     <div class="nb-left-container">
@@ -759,4 +719,4 @@
     </script>
 
 </body>
-</html>
+{% endblock content %}

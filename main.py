@@ -174,6 +174,12 @@ def Recruitment():
 
 
 
+@app.route('/recruitment-application', methods=['POST', 'GET'])
+def RecruitmentApplication():
+    return render_template("recruitment_application.html")
+
+
+
 @app.route('/dashboard', methods=['POST', 'GET'])
 def Dashboard():
     db_conn = dbConnection( 
@@ -247,6 +253,12 @@ def Dashboard():
         muted_count=muted_count,
         reported_count=reported_count
         )
+
+
+
+@app.route('/aboutus', methods=['GET'])
+def AboutUs():
+    return render_template('aboutus.html')
 
 
 
