@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Webpage</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+        .container {
+            width: 300px;
+            padding: 20px;
+            background-color: white;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+        }
+        .filter {
+            margin-bottom: 20px;
+        }
+        .input-group {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="filter">
+        <label for="filterSelect">Select Option:</label>
+        <select id="filterSelect" onchange="updateInputs()">
+            <option value="forum">Forum</option>
+            <option value="recruitment">Recruitment</option>
+        </select>
+    </div>
+    
+    <div id="forumInputs">
+        <div class="input-group">
+            <label for="input1">Input 1:</label>
+            <input type="text" id="input1">
+        </div>
+        <div class="input-group">
+            <label for="input2">Input 2:</label>
+            <input type="text" id="input2">
+        </div>
+        <div class="input-group">
+            <label for="input3">Input 3:</label>
+            <input type="text" id="input3">
+        </div>
+    </div>
+
+    <div id="recruitmentInputs" style="display: none;">
+        <div class="input-group">
+            <label for="input4">Input 4:</label>
+            <input type="text" id="input4">
+        </div>
+        <div class="input-group">
+            <label for="input5">Input 5:</label>
+            <input type="text" id="input5">
+        </div>
+        <div class="input-group">
+            <label for="input6">Input 6:</label>
+            <input type="text" id="input6">
+        </div>
+    </div>
+</div>
+
+<script>
+    function updateInputs() {
+        const filterSelect = document.getElementById('filterSelect').value;
+        const forumInputs = document.getElementById('forumInputs');
+        const recruitmentInputs = document.getElementById('recruitmentInputs');
+
+        if (filterSelect === 'forum') {
+            forumInputs.style.display = 'block';
+            recruitmentInputs.style.display = 'none';
+        } else {
+            forumInputs.style.display = 'none';
+            recruitmentInputs.style.display = 'block';
+        }
+    }
+
+    // Initialize the page with the default selection
+    updateInputs();
+</script>
+
+</body>
+</html>
