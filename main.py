@@ -82,7 +82,7 @@ def load_more_post():
     user_id = session.get('id')
 
     search_term = request.args.get('search', '')
-    loaded_post_ids = request.args.get('loaded_post_ids', default='[]', type=str)
+    loaded_ids = request.args.get('loaded_ids', default='[]', type=str)
     posts_per_page = 5
 
     loaded_post_ids = json.loads(loaded_post_ids)

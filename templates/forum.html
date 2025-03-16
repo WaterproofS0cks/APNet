@@ -409,7 +409,7 @@
             postIds.forEach(postId => loadedPostIds.add(postId));
 
             const url = '/load_more_post?page=' + currentPage + 
-                        '&loaded_post_ids=' + JSON.stringify(Array.from(loadedPostIds)) + 
+                        '&loaded_ids=' + JSON.stringify(Array.from(loadedPostIds)) + 
                         (searchTerm ? '&search=' + encodeURIComponent(searchTerm) : '');
 
             fetch(url)

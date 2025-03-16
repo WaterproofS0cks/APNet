@@ -17,15 +17,16 @@ class dbCreate:
                 userID SERIAL PRIMARY KEY,
                 username VARCHAR(50) UNIQUE NOT NULL,
                 fullname VARCHAR(255) NOT NULL,
-                role CHAR(1) NOT NULL,
                 password VARCHAR(255) NOT NULL,
+                role CHAR(1) NOT NULL,
+                phone VARCHAR(20) NOT NULL,
                 email VARCHAR(255) UNIQUE NOT NULL,
                 gender CHAR(1),
-                link VARCHAR(255),
+                link VARCHAR(512),
                 bio TEXT,
                 registerDate TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
                 lastLogin TIMESTAMP,
-                profilePicture VARCHAR(255),
+                profilePicture VARCHAR(512),
                 penalty CHAR(1) 
             );
         """)
@@ -37,19 +38,31 @@ class dbCreate:
                 userID INT NOT NULL REFERENCES Users(userID),
                 header TEXT NOT NULL,
                 description TEXT NOT NULL,
-                image VARCHAR(255),
+                image VARCHAR(512),
                 timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
                 status BOOLEAN
             );
         """)
 
-        # Resume Table
+        # RecruitmentComment Table
         self.execute_query("""
-            CREATE TABLE IF NOT EXISTS Resume (
-                resumeID SERIAL PRIMARY KEY,
+            CREATE TABLE IF NOT EXISTS RecruitmentComment (
+                recruitmentCommentID SERIAL PRIMARY KEY,       
                 userID INT NOT NULL REFERENCES Users(userID),
-                description TEXT NOT NULL,
-                image VARCHAR(255)
+                recruitmentID INT NOT NULL REFERENCES Recruitment(recruitmentID),
+                comment TEXT NOT NULL,
+                timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+            );
+        """)
+
+        # RecruitmentEngagement Table
+        self.execute_query("""
+            CREATE TABLE IF NOT EXISTS RecruitmentEngagement (
+                userID INT NOT NULL REFERENCES Users(userID),
+                recruitmentID INT NOT NULL REFERENCES Recruitment(recruitmentID),
+                bookmark BOOLEAN,
+                liked BOOLEAN,
+                PRIMARY KEY (userID, recruitmentID)
             );
         """)
 
@@ -57,10 +70,14 @@ class dbCreate:
         self.execute_query("""
             CREATE TABLE IF NOT EXISTS Application (
                 recruitmentID INT NOT NULL REFERENCES Recruitment(recruitmentID),
-                resumeID INT NOT NULL REFERENCES Resume(resumeID),
+                userID INT NOT NULL REFERENCES Users(userID),
+                TPNumber VARCHAR(10) NOT NULL,
+                eventPosition VARCHAR(100),
+                description TEXT NOT NULL,
+                resume VARCHAR(512),
                 timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-                status CHAR(1) NOT NULL CHECK (status IN ('A', 'R', 'P')),
-                PRIMARY KEY (recruitmentID, resumeID)
+                status VARCHAR(10) CHECK (status IN ('Pending', 'Accepted', 'Rejected')) NOT NULL,
+                PRIMARY KEY (recruitmentID, userID)
             );
         """)
 
@@ -71,13 +88,14 @@ class dbCreate:
                 userID INT NOT NULL REFERENCES Users(userID),
                 caption TEXT,
                 timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-                image VARCHAR(255)
+                image VARCHAR(512)
             );
         """)
 
-        # Comment Table
+        # PostComment Table
         self.execute_query("""
-            CREATE TABLE IF NOT EXISTS Comment (
+            CREATE TABLE IF NOT EXISTS PostComment (
+                postCommentID SERIAL PRIMARY KEY,       
                 userID INT NOT NULL REFERENCES Users(userID),
                 postID INT NOT NULL REFERENCES Post(postID),
                 comment TEXT NOT NULL,
@@ -85,26 +103,14 @@ class dbCreate:
             );
         """)
 
-        # Engagement Table
+        # PostEngagement Table
         self.execute_query("""
-            CREATE TABLE IF NOT EXISTS Engagement (
+            CREATE TABLE IF NOT EXISTS PostEngagement (
                 userID INT NOT NULL REFERENCES Users(userID),
                 postID INT NOT NULL REFERENCES Post(postID),
                 bookmark BOOLEAN,
-                "like" BOOLEAN,
+                liked BOOLEAN,
                 PRIMARY KEY (userID, postID)
-            );
-        """)
-
-        # PenaltyHistory Table
-        self.execute_query("""
-            CREATE TABLE IF NOT EXISTS PenaltyHistory (
-                penaltyID SERIAL PRIMARY KEY,
-                penaltyType CHAR(1) NOT NULL CHECK (penaltyType IN ('B', 'M')),
-                duration INT NOT NULL,  -- Added data type for the duration column
-                timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-                status BOOLEAN,
-                description TEXT
             );
         """)
 
@@ -113,10 +119,22 @@ class dbCreate:
             CREATE TABLE IF NOT EXISTS Reports (
                 reportID SERIAL PRIMARY KEY,
                 userID INT NOT NULL REFERENCES Users(userID),
-                type CHAR(1) NOT NULL CHECK (type IN ('H', 'S', 'N', 'V')),
+                reportedUserID INT REFERENCES Users(userID) ON DELETE SET NULL,
                 description TEXT,
                 timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-                status CHAR(1) NOT NULL CHECK (status IN ('P','R','A'))
+                status VARCHAR(10) CHECK (status IN ('Processing', 'Accepted', 'Rejected'))
+            );
+        """)
+
+        # PenaltyHistory Table
+        self.execute_query("""
+            CREATE TABLE IF NOT EXISTS PenaltyHistory (
+                penaltyID SERIAL PRIMARY KEY,
+                userID INT NOT NULL REFERENCES Users(userID),
+                reportID INT NOT NULL REFERENCES Reports(reportID),
+                timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                issuedBy INT NOT NULL REFERENCES Users(userID),
+                penaltyType VARCHAR(20) CHECK (penaltyType IN ('Banned', 'Muted', 'Delete Post', 'Delete Recruitment'))
             );
         """)
 
@@ -128,3 +146,15 @@ class dbCreate:
                 timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP
             );
         """)
+
+        # Notification Table
+        self.execute_query("""
+            CREATE TABLE IF NOT EXISTS Notification (
+                notificationID SERIAL PRIMARY KEY,
+                userID INT NOT NULL REFERENCES Users(userID),
+                ActedUserID INT NOT NULL REFERENCES Users(userID),
+                Action VARCHAR(20) CHECK (Action IN ('Comment', 'Liked', 'Reject Application', 'Accept Application')),
+                timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+            );
+        """)
+

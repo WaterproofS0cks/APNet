@@ -40,96 +40,79 @@ class dbRetrieve:
         if condition:
             query += f' WHERE {condition}'
         query += ";"
-        self.execute_query(query, params)
+        self.execute_query(query, params, cursor_type='dict')
         return self.db_connection.cur.fetchall()
 
-    # def retrieve_posts(self, limit=5, loaded_post_ids=None, searched_term=''):
-    #     query = """
-    #         SELECT 
-    #             post.postID, 
-    #             post.caption, 
-    #             TO_CHAR(post.timestamp, 'DD-MM-YYYY') AS post_timestamp, 
-    #             post.image AS post_image, 
-    #             post.userID, 
-    #             users.username, 
-    #             users.profilePicture, 
-    #             users.name, 
-    #             users.registerDate,
-    #             COALESCE(COUNT(DISTINCT comment.postID), 0) AS comments_count,
-    #             COALESCE(COUNT(DISTINCT engagement.postID), 0) AS likes_count
-    #         FROM post
-    #         JOIN users ON post.userID = users.userID
-    #         LEFT JOIN comment ON post.postID = comment.postID
-    #         LEFT JOIN engagement ON post.postID = engagement.postID AND engagement."like" = TRUE
-    #     """
+    def retrieve_entries(self, type, limit=5, loaded_ids=None, searched_term=''):
+        if type == "post":
+            query = """
+                SELECT 
+                    post.postID AS id, 
+                    post.caption AS title, 
+                    TO_CHAR(post.timestamp, 'DD-MM-YYYY') AS timestamp, 
+                    post.image AS image, 
+                    post.userID, 
+                    users.username, 
+                    users.profilePicture, 
+                    users.fullname,
+                    users.registerDate,
+                    COALESCE(COUNT(DISTINCT comment.postID), 0) AS comments_count,
+                    COALESCE(COUNT(DISTINCT engagement.postID), 0) AS likes_count
+                FROM post
+                JOIN users ON post.userID = users.userID
+                LEFT JOIN postcomment AS comment ON post.postID = comment.postID
+                LEFT JOIN postengagement AS engagement ON post.postID = engagement.postID AND engagement.liked = TRUE
+            """
+            id_column = "post.postID"
+            search_column = "post.caption"
+        
+        elif type == "recruitment":
+            query = """
+                SELECT 
+                    recruitment.recruitmentID AS id, 
+                    recruitment.header AS title, 
+                    recruitment.description AS description, 
+                    TO_CHAR(recruitment.timestamp, 'DD-MM-YYYY') AS timestamp, 
+                    recruitment.image AS image, 
+                    recruitment.userID, 
+                    users.username, 
+                    users.profilePicture, 
+                    users.fullname,
+                    users.registerDate,
+                    COALESCE(COUNT(DISTINCT comment.recruitmentID), 0) AS comments_count,
+                    COALESCE(COUNT(DISTINCT engagement.recruitmentID), 0) AS likes_count
+                FROM recruitment
+                JOIN users ON recruitment.userID = users.userID
+                LEFT JOIN recruitmentcomment AS comment ON recruitment.recruitmentID = comment.recruitmentID
+                LEFT JOIN recruitmentengagement AS engagement ON recruitment.recruitmentID = engagement.recruitmentID AND engagement.liked = TRUE
+            """
+            id_column = "recruitment.recruitmentID"
+            search_column = "recruitment.header"
 
-    #     if loaded_post_ids:
-    #         query += f" WHERE post.postID NOT IN ({', '.join(map(str, loaded_post_ids))})"
-
-    #     query += """
-    #         GROUP BY post.postID, post.caption, post.timestamp, post.image, post.userID, 
-    #                 users.username, users.profilePicture, users.name, users.registerDate
-    #         ORDER BY post.timestamp DESC
-    #         LIMIT %s;
-    #     """
-
-    #     try:
-    #         self.execute_query(query, (limit,), cursor_type='dict')
-    #         results = self.db_connection.cur.fetchall()
-
-    #         if not results:
-    #             return []
-
-    #         return results
-    #     except Exception as e:
-    #         print(f"Error executing query: {e}")
-    #         return []
-
-    def retrieve_posts(self, limit=5, loaded_post_ids=None, searched_term=''):
-        query = """
-            SELECT 
-                post.postID, 
-                post.caption, 
-                TO_CHAR(post.timestamp, 'DD-MM-YYYY') AS post_timestamp, 
-                post.image AS post_image, 
-                post.userID, 
-                users.username, 
-                users.profilePicture, 
-                users.fullname,
-                users.registerDate,
-                COALESCE(COUNT(DISTINCT comment.postID), 0) AS comments_count,
-                COALESCE(COUNT(DISTINCT engagement.postID), 0) AS likes_count
-            FROM post
-            JOIN users ON post.userID = users.userID
-            LEFT JOIN comment ON post.postID = comment.postID
-            LEFT JOIN engagement ON post.postID = engagement.postID AND engagement."like" = TRUE
-        """
+        else:
+            print("Invalid entry type")
+            return []
 
         if searched_term:
-            query += f" WHERE post.caption ILIKE %s"
-
-            if loaded_post_ids:
-                query += f" AND post.postID NOT IN ({', '.join(map(str, loaded_post_ids))})"
+            query += f" WHERE {search_column} ILIKE %s"
+            if loaded_ids:
+                query += f" AND {id_column} NOT IN ({', '.join(map(str, loaded_ids))})"
         else:
-            if loaded_post_ids:
-                query += f" WHERE post.postID NOT IN ({', '.join(map(str, loaded_post_ids))})"
+            if loaded_ids:
+                query += f" WHERE {id_column} NOT IN ({', '.join(map(str, loaded_ids))})"
 
-        query += """
-            GROUP BY post.postID, post.caption, post.timestamp, post.image, post.userID, 
-                    users.username, users.profilePicture, users.fullname, users.registerDate  -- Updated to match the correct columns
-            ORDER BY post.timestamp DESC
+        query += f"""
+            GROUP BY {id_column}, title, timestamp, image, users.username, 
+                    users.profilePicture, users.fullname, users.registerDate
+            ORDER BY timestamp DESC
             LIMIT %s;
         """
 
         try:
             params = (f"%{searched_term}%", limit) if searched_term else (limit,)
-            self.execute_query(query, params, cursor_type='dict')
+            self.execute_query(query, params)
             results = self.db_connection.cur.fetchall()
-
-            if not results:
-                return []
-
-            return results
+            return results if results else []
         except Exception as e:
             print(f"Error executing query: {e}")
             return []
