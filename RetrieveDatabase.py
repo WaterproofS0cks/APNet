@@ -42,15 +42,23 @@ class dbRetrieve:
         query += ";"
         self.execute_query(query, params, cursor_type='dict')
         return self.db_connection.cur.fetchall()
+    
+    def retrieve_one(self, tablename, columns="*", condition=None, params=None):
+        query = f'SELECT {columns} FROM "{tablename}"'
+        if condition:
+            query += f' WHERE {condition}'
+        query += ";"
+        self.execute_query(query, params, cursor_type='dict')
+        return self.db_connection.cur.fetchone()
 
     def retrieve_entries(self, type, limit=5, loaded_ids=None, searched_term=''):
         if type == "post":
             query = """
                 SELECT 
-                    post.postID AS id, 
-                    post.caption AS title, 
+                    post.postID,
+                    post.description, 
                     TO_CHAR(post.timestamp, 'DD-MM-YYYY') AS timestamp, 
-                    post.image AS image, 
+                    post.image, 
                     post.userID, 
                     users.username, 
                     users.profilePicture, 
@@ -64,16 +72,17 @@ class dbRetrieve:
                 LEFT JOIN postengagement AS engagement ON post.postID = engagement.postID AND engagement.liked = TRUE
             """
             id_column = "post.postID"
-            search_column = "post.caption"
-        
+            search_column = "post.description"
+            timestamp_column = "post.timestamp"
+
         elif type == "recruitment":
             query = """
                 SELECT 
-                    recruitment.recruitmentID AS id, 
-                    recruitment.header AS title, 
-                    recruitment.description AS description, 
+                    recruitment.recruitmentID, 
+                    recruitment.header, 
+                    recruitment.description, 
                     TO_CHAR(recruitment.timestamp, 'DD-MM-YYYY') AS timestamp, 
-                    recruitment.image AS image, 
+                    recruitment.image, 
                     recruitment.userID, 
                     users.username, 
                     users.profilePicture, 
@@ -88,29 +97,40 @@ class dbRetrieve:
             """
             id_column = "recruitment.recruitmentID"
             search_column = "recruitment.header"
+            timestamp_column = "recruitment.timestamp"
 
         else:
             print("Invalid entry type")
             return []
 
+        # Apply filtering based on search term and loaded IDs
+        conditions = []
+        params = []
+
         if searched_term:
-            query += f" WHERE {search_column} ILIKE %s"
-            if loaded_ids:
-                query += f" AND {id_column} NOT IN ({', '.join(map(str, loaded_ids))})"
-        else:
-            if loaded_ids:
-                query += f" WHERE {id_column} NOT IN ({', '.join(map(str, loaded_ids))})"
+            conditions.append(f"{search_column} ILIKE %s")
+            params.append(f"%{searched_term}%")
+
+        if loaded_ids:
+            placeholders = ", ".join(["%s"] * len(loaded_ids))
+            conditions.append(f"{id_column} NOT IN ({placeholders})")
+            params.extend(loaded_ids)
+
+        if conditions:
+            query += " WHERE " + " AND ".join(conditions)
 
         query += f"""
-            GROUP BY {id_column}, title, timestamp, image, users.username, 
-                    users.profilePicture, users.fullname, users.registerDate
-            ORDER BY timestamp DESC
+            GROUP BY {id_column}, {search_column}, {timestamp_column}, 
+                    post.image, users.username, users.profilePicture, 
+                    users.fullname, users.registerDate
+            ORDER BY {timestamp_column} DESC
             LIMIT %s;
         """
 
+        params.append(limit)
+
         try:
-            params = (f"%{searched_term}%", limit) if searched_term else (limit,)
-            self.execute_query(query, params)
+            self.execute_query(query, tuple(params), cursor_type='dict')
             results = self.db_connection.cur.fetchall()
             return results if results else []
         except Exception as e:

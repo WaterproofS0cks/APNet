@@ -86,7 +86,7 @@ class dbCreate:
             CREATE TABLE IF NOT EXISTS Post (
                 postID SERIAL PRIMARY KEY,
                 userID INT NOT NULL REFERENCES Users(userID),
-                caption TEXT,
+                description TEXT,
                 timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
                 image VARCHAR(512)
             );

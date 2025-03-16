@@ -396,7 +396,7 @@
         let isLoading = false;
 
         // Loading Post
-        function loadPosts(searchTerm = '') {
+        function loadPosts(searchTerm = '', type = 'post') {
             if (isLoading) return;
 
             isLoading = true;
@@ -408,8 +408,9 @@
 
             postIds.forEach(postId => loadedPostIds.add(postId));
 
-            const url = '/load_more_post?page=' + currentPage + 
+            const url = '/load_more?page=' + currentPage + 
                         '&loaded_ids=' + JSON.stringify(Array.from(loadedPostIds)) + 
+                        '&type=' + encodeURIComponent(type) +
                         (searchTerm ? '&search=' + encodeURIComponent(searchTerm) : '');
 
             fetch(url)
@@ -446,6 +447,32 @@
                 });
         }
 
+        function updateLikeUI(container, liked, count) {
+            const likeCountElement = container.querySelector(".like-count");
+            const likeIcon = container.querySelector("img");
+
+            likeIcon.src = liked
+                ? "../static/src/icon/icons8-heart-filled-50.png"
+                : "../static/src/icon/icons8-heart-50.png";
+
+            if (likeCountElement) {
+                likeCountElement.textContent = `(${count})`;
+            }
+        }
+
+        function updateBookmarkUI(container, bookmarked) {
+            const bookmarkText = container.querySelector(".bookmark-status");
+            const bookmarkIcon = container.querySelector("img");
+
+            bookmarkIcon.src = bookmarked
+                ? "../static/src/icon/icons8-bookmark-filled-50.png"
+                : "../static/src/icon/icons8-bookmark-50.png";
+
+            if (bookmarkText) {
+                bookmarkText.textContent = bookmarked ? "Bookmarked" : "Not Bookmarked";
+            }
+        }
+
         // 3 Dot Menu Filter
         function filter3DotMenu(loggedInUserId) {
             document.querySelectorAll(".fm-post-layout").forEach(post => {
@@ -476,8 +503,9 @@
         }
 
         document.addEventListener('DOMContentLoaded', function() {
-            // 3 Dot Menu
+
             document.body.addEventListener('click', function(event) {
+                // 3 Dot Menu
                 const clickedDropdown = event.target.closest('.fm-dropdown');
                 
                 if (clickedDropdown) {
@@ -501,6 +529,38 @@
                         dropdown.style.display = 'none';
                     });
                 }
+                // Like And Bookmark
+                const actionContainer = event.target.closest("[data-action]");
+                if (!actionContainer) return;
+
+                const postElement = actionContainer.closest(".fm-post");
+                const postId = postElement?.getAttribute("data-post-id");
+                const action = actionContainer.getAttribute("data-action");
+
+                if (!postId || !action) return;
+
+                const url = action === "like" ? "/like_post" : "/bookmark_post";
+
+                fetch(url, {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ post_id: postId }),
+                })
+                    .then((response) => response.json())
+                    .then((data) => {
+                        if (data.error) {
+                            alert(data.error);
+                            return;
+                        }
+
+                        if (action === "like") {
+                            updateLikeUI(actionContainer, data.liked, data.likes_count);
+                        } else if (action === "bookmark") {
+                            updateBookmarkUI(actionContainer, data.bookmarked);
+                        }
+                    })
+                    .catch((error) => console.error("Error:", error));
+
             });
 
             // 3 Dot Menu Scroll
@@ -532,9 +592,11 @@
         // Scrolling
         window.addEventListener('scroll', () => {
             if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 10 && !isLoading) {
-                loadPosts();
+                const urlParams = new URLSearchParams(window.location.search);
+                const searchTerm = urlParams.get('search') || ''; 
+                loadPosts(searchTerm);
             }
-        });     
+        });    
     </script>
 
 </body>

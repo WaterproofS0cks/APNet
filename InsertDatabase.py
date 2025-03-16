@@ -17,28 +17,33 @@ class dbInsert:
                 raise
 
     def find_table_columns(self, table_name):
-        if table_name == "users":
-            return ["username", "role", "password", "email", "name", "gender", "biography", "lastLogin", "profilePicture", "penalty"]
+        if table_name == "Users":
+            return ["username", "fullname", "password", "role", "phone", "email", "gender", "link", "bio", "lastLogin", "profilePicture", "penalty"]
         elif table_name == "Recruitment":
             return ["userID", "header", "description", "image", "status"]
-        elif table_name == "Resume":
-            return ["userID", "description", "image"]
+        elif table_name == "RecruitmentComment":
+            return ["userID", "recruitmentID", "comment"]
+        elif table_name == "RecruitmentEngagement":
+            return ["userID", "recruitmentID", "bookmark", "liked"]
         elif table_name == "Application":
-            return ["recruitmentID", "resumeID", "status"]
+            return ["recruitmentID", "userID", "TPNumber", "eventPosition", "description", "resume", "status"]
         elif table_name == "Post":
-            return ["userID", "caption", "image"]
-        elif table_name == "Comment":
+            return ["userID", "description", "image"]
+        elif table_name == "PostComment":
             return ["userID", "postID", "comment"]
-        elif table_name == "Engagement":
-            return ["userID", "postID", "bookmark", "like"]
-        elif table_name == "PenaltyHistory":
-            return ["penaltyType", "duration", "status", "description"]
+        elif table_name == "PostEngagement":
+            return ["userID", "postID", "bookmark", "liked"]
         elif table_name == "Reports":
-            return ["userID", "type", "description", "status"]
+            return ["userID", "reportedUserID", "description", "status"]
+        elif table_name == "PenaltyHistory":
+            return ["userID", "reportID", "issuedBy", "penaltyType"]
         elif table_name == "Activity":
             return ["userID"]
+        elif table_name == "Notification":
+            return ["userID", "ActedUserID", "Action"]
         else:
             return []
+
         
     def to_join(self, columns):
         return ', '.join(columns)

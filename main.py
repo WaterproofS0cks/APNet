@@ -62,14 +62,15 @@ db_conn.close()
 
 @app.route('/test')
 def test():
-    return render_template('likedposts.html')
+    return render_template('recruitment.html')
 
 @app.route('/')
 def forum():
     return render_template('forum.html')
 
-@app.route('/load_more_post')
-def load_more_post():
+@app.route('/load_more')
+@app.route('/recruitment/load_more')
+def load_more():
     db_conn = dbConnection(
         dbname=os.getenv("DBNAME"),
         user=os.getenv("USER"),
@@ -83,21 +84,24 @@ def load_more_post():
 
     search_term = request.args.get('search', '')
     loaded_ids = request.args.get('loaded_ids', default='[]', type=str)
-    posts_per_page = 5
+    type = request.args.get('type')
+    entries_per_page = 5
 
-    loaded_post_ids = json.loads(loaded_post_ids)
+    loaded_ids = json.loads(loaded_ids)
 
-    posts = db_retrieve.retrieve_posts(posts_per_page, loaded_post_ids, search_term)
+    entries = db_retrieve.retrieve_entries(type, entries_per_page, loaded_ids, search_term)
 
-    if not posts:
-        return jsonify({'post_html': '', 'no_more_posts': True, 'user_id': user_id})
+    if not entries:
+        return jsonify({'html': '', 'no_more_posts': True, 'user_id': user_id})
 
-    post_html = ''.join([f'''
-        <div class="fm-post-layout" data-post-id="{post['postid']}" data-user-id="{post['userid']}">
+    html = ''.join([f'''
+        <div class="fm-post-layout" data-post-id="{entry['postid']}" data-user-id="{entry['userid']}">
             <div class="fm-profiledetails">
-                <img src="{post.get('profilePicture', '/static/src/img/default-pfp.png')}" alt="Pfp" id="fm-post-pfp">
-                <h1>{post['username']}</h1>
-                <h2>Posted on {post['post_timestamp']}</h2>
+                <img src="{entry.get('profilePicture', '/static/src/img/default-pfp.png')}" alt="Pfp" id="fm-post-pfp">
+                <h1>{entry['username']}</h1>
+                <h2>Posted on {entry['timestamp']}</h2>
+
+                {f'<h2>Posted on {entry["header"]}</h2>' if type == "recruitment" else ''}
 
                 <a href="forumspecific.html" class="fm-clickable-container"></a>
 
@@ -125,34 +129,75 @@ def load_more_post():
             </div>
 
             <div class="fm-image-container">
-                <img src="{post['post_image']}" alt="Post Image">
+                <img src="{entry['image']}" alt="Post Image">
             </div>
 
             <div class="fm-button-container">
 
-                <div class="fm-like-icon-container">
+                <div class="fm-like-icon-container" data-action="like">
                     <img src="../static/src/icon/icons8-heart-50.png" alt="Heart" id="fm-post-hearticon">
                     <h2>Like</h2>
-                    <h4>({post['likes_count']})</h4>
+                    <h4>({entry['likes_count']})</h4>
                 </div>
 
-                <div class="fm-comment-icon-container">
+                <div class="fm-comment-icon-container" data-action="bookmark">
                     <img src="../static/src/icon/icons8-comment-50.png" alt="Comment" id="fm-post-commenticon">
                     <h2>Comment</h2>
-                    <h4>({post['comments_count']})</h4>
+                    <h4>({entry['comments_count']})</h4>
                 </div>
 
                 <img src="../static/src/icon/icons8-bookmark-50.png" alt="Bookmark" id="fm-post-bookmarkicon">
             </div>
 
+            
             <div class="fm-caption-container">
-                <h1>{post['username']}</h1>
-                <h2>{post['caption']}</h2>
+                
+                <h1>{entry['username']}</h1>
+                <h2>{entry['description']}</h2>
             </div>
-        </div>
-    ''' for post in posts])
 
-    return jsonify({'post_html': post_html, 'no_more_posts': False, 'user_id': user_id})
+            {'<div class="post-footer">'
+             '<span class="interest-text">Interested? Join Us Now!</span>'
+             '<button class="apply-button">Apply</button>'
+             '</div>' if type == "recruitment" else ''}
+
+        </div>
+    ''' for entry in entries])
+
+    return jsonify({'post_html': html, 'no_more_posts': False, 'user_id': user_id})
+
+
+
+
+
+@app.route('/like_post', methods=['POST'])
+def like_post():
+    db_conn = dbConnection(
+        dbname=os.getenv("DBNAME"),
+        user=os.getenv("USER"),
+        password=os.getenv("PASSWORD"),
+    )
+    db_conn.connect()
+    db_retrieve = dbRetrieve(db_conn)
+
+    user_id = session.get('id')
+    if not user_id:
+        return jsonify({'error': 'User not logged in'}), 403
+
+    data = request.json
+    post_id = data.get('post_id')
+
+    if not post_id:
+        return jsonify({'error': 'Post ID required'}), 400
+
+    liked = db_retrieve.toggle_like(user_id, post_id)
+
+    # Fetch updated like count
+    likes_count = db_retrieve.get_likes_count(post_id)
+
+    return jsonify({'liked': liked, 'likes_count': likes_count})
+
+
 
 
 
