@@ -10,18 +10,26 @@
             <h2>Applications</h2>
         </div>
         <div class="activity-card">
-            <div class="activity-attr">
-                <sub>2 weeks ago</sub>
-                <h3>This is an application</h3>
-                <p>This is a description of an application that you have applied to</p>
-                <div class="activity-list">
-                    <h3>Applicants</h3>
-                    <p>Marcus, Sean, Karlson</p>
+            <div class="activity-flex">
+                <div class="activity-attr">
+                    <sub>2 weeks ago</sub>
+                    <h3>This is an application</h3>
+                    <p>This is a description of an application that you have applied to</p>
+                </div>
+                <div class="activity-img">
+                    <img src="{{ url_for('static', filename='src/img/default-events.jpg') }}" alt="Placeholder Image">
                 </div>
             </div>
-            <div class="activity-img">
-                <img src="{{ url_for('static', filename='src/img/default-events.jpg') }}" alt="Placeholder Image">
-            </div>
+            <div class="activity-margin">
+                <h3>Applicants</h3>
+                <div class="applicant-flex">
+                    <div class="applicant-card">Sean</div>
+                    <div class="applicant-card">Karlson</div>
+                    <div class="applicant-card">Marcus</div>
+                    <div class="applicant-card">Darren</div>
+                </div>
+                <p>View more</p>
+            </div>            
         </div>
     </div>
 </body>

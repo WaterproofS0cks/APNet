@@ -3051,13 +3051,16 @@ input[type="submit"]:hover {
 /* events.html */
 
 .activity-card {
-    display: flex;
-    justify-content: space-between;
     background-color: #fff;
     padding: 40px;
     border-radius: 8px;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
     margin-top: 20px;
+}
+
+.activity-flex {
+    display: flex;
+    justify-content: space-between;
 }
 
 .activity-card p {
@@ -3229,7 +3232,7 @@ input[type="submit"]:hover {
 
 /* bookmarks.html */
 
-.bookmarks-card {
+.activity-margin {
     margin-top: 20px;
 }
 
@@ -3237,6 +3240,38 @@ input[type="submit"]:hover {
 
 /* applications.html */
 
-.activity-list {
-    margin-top: 40px;
+.applicant-card {
+    background-color: #e7e9eb;
+    border: 1px solid #71717A;
+    padding: 16px;
+    border-radius: 8px;
+    margin-top: 20px;
+    height: 50px;
+    width: 150px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.applicant-flex {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+}
+
+@media (max-width: 430px) {
+    .applicant-flex {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .applicant-card {
+        width: 100%;
+    }
+}
+
+@media (min-width: 431px) {
+    .applicant-flex {
+        justify-content: space-between;
+    }
 }
