@@ -12,7 +12,7 @@ body {
 
 .content-card {
     max-width: 800px;
-    margin: 120px auto 20px auto;
+    margin: 20px auto; /* Yew Shan: I removed 120px auto because the margin top is broken for Events, Likes, Bookmarks, and Applications page :( */
     padding: 20px;
     background-color: #fff;
     border-radius: 8px;
@@ -3050,7 +3050,7 @@ input[type="submit"]:hover {
 
 /* events.html */
 
-.events-card {
+.activity-card {
     display: flex;
     justify-content: space-between;
     background-color: #fff;
@@ -3060,38 +3060,38 @@ input[type="submit"]:hover {
     margin-top: 20px;
 }
 
-.events-card p {
+.activity-card p {
     margin-top: 20px;
     color: #666;
 }
 
-.events-card a {
+.activity-card a {
     text-decoration: none;
     font-weight: bold;
     color: #666;
 }
 
-.events-card a:hover {
+.activity-card a:hover {
     text-decoration: underline;
     font-weight: bold;
     color: #666;
 }
 
-.events-card sub {
+.activity-card sub {
     display: inline-block;
     margin-bottom: 20px;
 }
 
-.events-attr {
+.activity-attr {
     flex: 1;
 }
 
-.events-img {
+.activity-img {
     flex-shrink: 0;
     margin-left: 20px;
 }
 
-.events-img img {
+.activity-img img {
     width: 300px;
     height: 150px;
     object-fit: cover;
@@ -3226,8 +3226,17 @@ input[type="submit"]:hover {
 }
 
 
+
 /* bookmarks.html */
 
 .bookmarks-card {
     margin-top: 20px;
+}
+
+
+
+/* applications.html */
+
+.activity-list {
+    margin-top: 40px;
 }

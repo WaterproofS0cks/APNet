@@ -1,5 +1,5 @@
 {% extends "layout.html" %}
-{% block title %}Events{% endblock title %}
+{% block title %}Applications{% endblock title %}
 {% block content %}
 <body>
     <div class="content-card">
@@ -7,23 +7,17 @@
             <a href="profile" class="btn-icon">
                 <img src="{{ url_for('static', filename='src/icon/icons8-back-96.png') }}" alt="Back Icon">
             </a>
-            <h2>Events</h2>
+            <h2>Applications</h2>
         </div>
         <div class="activity-card">
             <div class="activity-attr">
                 <sub>2 weeks ago</sub>
-                <h3>This is an event title</h3>
-                <p>This is an event description</p>
-            </div>
-            <div class="activity-img">
-                <img src="{{ url_for('static', filename='src/img/default-events.jpg') }}" alt="Placeholder Image">
-            </div>
-        </div>
-        <div class="activity-card">
-            <div class="activity-attr">
-                <sub>1 month ago</sub>
-                <h3>This is an event title</h3>
-                <p>This is an event description</p>
+                <h3>This is an application</h3>
+                <p>This is a description of an application that you have applied to</p>
+                <div class="activity-list">
+                    <h3>Applicants</h3>
+                    <p>Marcus, Sean, Karlson</p>
+                </div>
             </div>
             <div class="activity-img">
                 <img src="{{ url_for('static', filename='src/img/default-events.jpg') }}" alt="Placeholder Image">
