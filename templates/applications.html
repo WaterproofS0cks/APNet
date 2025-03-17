@@ -9,6 +9,8 @@
             </a>
             <h2>Applications</h2>
         </div>
+
+        <!-- This is a single application post -->
         <div class="activity-card">
             <div class="activity-flex">
                 <div class="activity-attr">
@@ -23,14 +25,40 @@
             <div class="activity-margin">
                 <h3>Applicants</h3>
                 <div class="applicant-flex">
-                    <div class="applicant-card">Sean</div>
-                    <div class="applicant-card">Karlson</div>
-                    <div class="applicant-card">Marcus</div>
-                    <div class="applicant-card">Darren</div>
+                    <!-- The first four applicants will be displayed by default -->
+                    <div class="applicant-card">Emily</div>
+                    <div class="applicant-card">Ryan</div>
+                    <div class="applicant-card">Olivia</div>
+                    <div class="applicant-card">Lucas</div>
+                    <!-- Subsequent applicants will be hidden until the user press "View more" -->
+                    <div class="applicant-card applicant-extra">Sophia</div>
+                    <div class="applicant-card applicant-extra">Ethan</div>
+                    <div class="applicant-card applicant-extra">Ava</div>
+                    <div class="applicant-card applicant-extra">Scott</div>
                 </div>
-                <p>View more</p>
-            </div>            
+                <p id="applicant-view" class="applicant-view" onclick="viewToggle()">View more</p>
+            </div>                     
         </div>
+
+        <!-- Add additional application posts here -->
+
     </div>
+
+    <script>
+        function viewToggle() {
+            const additionalApplicants = document.querySelectorAll('.applicant-extra');
+            const viewMoreBtn = document.getElementById('applicant-view');
+
+            additionalApplicants.forEach(item => {
+                item.style.display = (item.style.display === 'none' || item.style.display === '') ? 'flex' : 'none';
+            });
+
+            if (viewMoreBtn.innerText === 'View more') {
+                viewMoreBtn.innerText = 'View less';
+            } else {
+                viewMoreBtn.innerText = 'View more';
+            }
+        }
+    </script>
 </body>
 {% endblock content %}

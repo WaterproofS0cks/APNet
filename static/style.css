@@ -3259,6 +3259,19 @@ input[type="submit"]:hover {
     justify-content: flex-start;
 }
 
+.applicant-extra {
+    display: none;
+}
+
+.applicant-view {
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.applicant-view:hover {
+    text-decoration: underline;
+}
+
 @media (max-width: 430px) {
     .applicant-flex {
         flex-direction: column;
