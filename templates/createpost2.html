@@ -196,16 +196,26 @@
         </div>
 
         <!-- FORUM FIELDS -->
-        <div id="cp-forumInputs">
-            <div class="cp-forum-imagecontainer">
-                <img src="../static/src/icon/icons8-upload-to-cloud-100.png" alt="Cloud" id="cp-forum-cloudimg">
-                <h1>Drag file to upload</h1>
-                <h2>or</h2>
-                <button id="cp-forum-browsefilesbutton">Browse Files</button>
-                <h3>Max file size: <b>100MB</b></h3>
-                <h3>Supported file types: <b>JPG, JPEG, PNG, GIF</b></h3>
-            </div>
-        </div>
+         <form action="" id="cp-forum-form">
+             <div id="cp-forumInputs">
+
+                <h1>Image</h1>
+                 <div class="cp-forum-imagecontainer">
+                     <img src="../static/src/icon/icons8-upload-to-cloud-100.png" alt="Cloud" id="cp-forum-cloudimg">
+                     <h1>Drag file to upload</h1>
+                     <h2>or</h2>
+                     <button id="cp-forum-browsefilesbutton">Browse Files</button>
+                     <h3>Max file size: <b>100MB</b></h3>
+                     <h3>Supported file types: <b>JPG, JPEG, PNG, GIF</b></h3>
+                 </div>
+
+                 <h1>Caption</h1>
+                 <textarea name="" id="cp-forum-caption-text" placeholder="Enter your caption here..."></textarea>
+                 <div class="cp-forum-button-container">
+                     <button class="cp-forum-post-button" id="cp-post-button">Post</button>
+                 </div>
+             </div>
+         </form>
 
         <!-- RECRUITMENT FIELDS -->
         <div id="cp-recruitmentInputs">
@@ -240,5 +250,25 @@
         </div>
     
     </footer>
+
+
+    <script>
+        function updateInputs() {
+            const postSelect = document.getElementById('cp-postSelect');
+            const forumInputs = document.getElementById('cp-forumInputs');
+            const recruitmentInputs = document.getElementById('cp-recruitmentInputs');
+    
+            if (postSelect.value === 'forum') {
+                forumInputs.style.display = 'block'; // Show forum inputs
+                recruitmentInputs.style.display = 'none'; // Hide recruitment inputs
+            } else if (postSelect.value === 'recruitment') {
+                forumInputs.style.display = 'none'; // Hide forum inputs
+                recruitmentInputs.style.display = 'block'; // Show recruitment inputs (if you have any)
+            }
+        }
+    
+        // Call the function on page load to set the initial state
+        window.onload = updateInputs;
+    </script>
 </body>
 </html>
