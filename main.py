@@ -1,7 +1,7 @@
 from flask import Flask, render_template, session, request, jsonify
 from auth import auth
 from user_profile import user_profile
-# import psycopg2
+import psycopg2
 import os
 from dotenv import load_dotenv
 from datetime import timedelta
@@ -36,28 +36,29 @@ db_create.create_database()
 db_conn.commit()
 db_conn.close()
 
-# conn = psycopg2.connect(dbname=DBNAME, user=USER, password=PASSWORD)
-# cur = conn.cursor()
+conn = psycopg2.connect(dbname=DBNAME, user=USER, password=PASSWORD)
+cur = conn.cursor()
 
-# cur.execute("""CREATE TABLE IF NOT EXISTS Users (
-#             id SERIAL NOT NULL PRIMARY KEY,
-#             username VARCHAR(255) UNIQUE NOT NULL,
-# 			fullname VARCHAR(255) NOT NULL,
-#             bio VARCHAR(255),
-#             link VARCHAR(255),
-#             role CHAR(1) NOT NULL,
-#             email VARCHAR(255) UNIQUE NOT NULL,
-#             password VARCHAR(255) NOT NULL,
-#             gender CHAR(1),
-# 			RegisterDate DATE NOT NULL,
-# 			LastLogin TIMESTAMP,
-# 			ProfilePicture VARCHAR(255),
-#             Penalty CHAR(1)
-#             );
-# """)
+cur.execute("""CREATE TABLE IF NOT EXISTS Users (
+            id SERIAL NOT NULL PRIMARY KEY,
+            username VARCHAR(255) UNIQUE NOT NULL,
+			fullname VARCHAR(255) NOT NULL,
+            bio VARCHAR(255),
+            link VARCHAR(255),
+            role CHAR(1) NOT NULL,
+            email VARCHAR(255) UNIQUE NOT NULL,
+            password VARCHAR(255) NOT NULL,
+            phone VARCHAR(20) NOT NULL,
+            gender CHAR(1),
+			RegisterDate DATE NOT NULL,
+			LastLogin TIMESTAMP,
+			ProfilePicture VARCHAR(255),
+            Penalty CHAR(1)
+            );
+""")
 
-# conn.commit()
-# conn.close()
+conn.commit()
+conn.close()
 
 
 @app.route('/test')
