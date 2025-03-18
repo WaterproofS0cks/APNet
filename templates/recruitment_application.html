@@ -3,45 +3,46 @@
 {% block content %}
 <body class="rca-body">  
     <div class="rca-image-container">
-
+        <img src="../static/src/img/randomimage1.jpg" alt="">
     </div>
 
-    <div class="rca-content-container">
-
-        <div class="rca-top-container">
-            
-            <div class="rca-title-container">
-                <!-- INSERT RECRUITMENT TITLE HERE -->
-                <h2>Recruitment Title</h2>
+    <form action="" id="rca-form">
+        <div class="rca-content-container">
+    
+            <div class="rca-top-container">
+                
+                <div class="rca-title-container">
+                    <h2>Recruitment Title</h2>
+                </div>
+    
+                <a href="recruitment.html" class="rca-back-container">
+                    <img src="../static/src/icon/icons8-undo-96.png" id="rca-undoicon">
+                    <h2>Back</h2>
+                </a>
+                
             </div>
 
-            <a href="recruitment.html" class="rca-back-container">
-                <img src="../static/src/icon/icons8-undo-96.png" id="rca-undoicon">
-                <h2>Back</h2>
-            </a>
-            
-        </div>
-
-        <div class="rca-info-container">
-
+            <!-- Removed rca-info-container -->
             <div class="rca-tpno-container">
-                <h2>TP Number</h2>
-                <input type="text" id="rca-tpno" placeholder="TP Number">
+                <h2>TP Number <span class="rca-required">*</span></h2>
+                <input type="text" id="rca-tpno" placeholder="Enter your TP Number...">
             </div>
-
+    
             <div class="rca-role-container">
-                <h2>Event Position</h2>
-                <input type="text" id="rca-role" placeholder="Event Position">
+                <h2>Event Position <span class="rca-required">*</span></h2>
+                <input type="text" id="rca-role" placeholder="Enter your Event Position...">
             </div>
+    
+            <div class="rca-desc-container">
+                <h2>Tell us a little more about yourself <span class="rca-required">*</span></h2>
+                <textarea name="" id="" cols="99" rows="18" placeholder="Enter your text here..."></textarea>
+            </div>
+    
+            <div class="rca-button-container">
+                <button class="rca-button" id="rca-submit-button">Submit</button>
+            </div>
+    
         </div>
-
-        <div class="rca-desc-container">
-            <h2>Tell us a little more about yourself</h2>
-            <textarea name="" id="" cols="99" rows="18" placeholder="Enter your text here..."></textarea>
-        </div>
-
-
-
-    </div>
+    </form>
 </body>
 {% endblock content %}

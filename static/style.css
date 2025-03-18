@@ -1880,10 +1880,10 @@ input[type="submit"]:hover {
     transition: background-color 0.3s;
 }
 
-
 .cp-forum-post-button:hover, .cp-recruit-post-button:hover {
     background-color: #0056b3;
 }
+
 
 /* recruitment-application.html (Marcus) */
 .rca-body {
@@ -1891,14 +1891,22 @@ input[type="submit"]:hover {
     margin: 0;
     padding: 0;
     background-color: #F7F7F7;
+    overflow: hidden;
+}
+
+#rca-form {
+    height: calc(100vh - 100px); 
+    width: 40%;
+    padding: 0;
+    margin-top: 100px;
+    overflow-y: auto; 
 }
 
 .rca-image-container {
-    background-color: pink;
+    background-color: black;
     margin-top: 100px;
-    height: 86.3vh;
-    width: 48%;
-    border-right: 2px solid #000;
+    height: calc(100vh - 100px); 
+    width: 60%;
 }
 
 .rca-image-container img {
@@ -1908,28 +1916,24 @@ input[type="submit"]:hover {
 }
 
 .rca-content-container {
-    /* background-color: green; */
     display: flex;
     flex-direction: column;
-    margin-top: 100px;
-    height: 86.3vh;
-    width: 52%;
+    height: 100%;
     padding: 20px;
+    border-left: 4px solid #ccc;
 }
 
 .rca-top-container {
     display: flex;
-    /* background-color: blue; */
     width: 100%;
-    height: 7%;
-    margin-bottom: 50px;
+    height: 5%;
+    margin-bottom: 35px;
 }
 
 .rca-back-container {
-    /* background-color: red; */
     display: flex;
     align-items: center;
-    width: 17%;
+    width: 21%;
     height: 100%;
     text-decoration: none;
     margin-left: auto;
@@ -1943,48 +1947,34 @@ input[type="submit"]:hover {
 
 .rca-back-container h2 {
     font-family: "Roboto", sans-serif;
-    font-size: 28px;
+    font-size: 24px;
     color: #ccc;
+    margin-right: 5px;
 }
 
 .rca-title-container h2 {
     font-family: "Roboto", sans-serif;
-    font-size: 28px;
+    font-size: 30px;
     color: #000;
 }
 
+.rca-required {
+    color: red;
+}
+
 .rca-title-container {
-    /* background-color: red; */
     display: flex;
     align-items: center;
-    /* margin-left: auto; */
-    width: 31%;
+    width: 50%;
     height: 100%;
 }
 
-.rca-info-container {
-    /* background-color: red; */
-    display: flex;
-    width: 100%;
-    height: 9%;
-    margin-bottom: 50px;
-}
-
-.rca-tpno-container {
-    /* background-color: skyblue; */
-    display: flex;
-    flex-direction: column;
-    width: 45%;
-    height: 100%;
-}
-
+.rca-tpno-container,
 .rca-role-container {
-    /* background-color: skyblue; */
     display: flex;
     flex-direction: column;
-    width: 45%;
-    height: 100%;
-    margin-left: auto;
+    width: 100%; 
+    margin-bottom: 45px;
 }
 
 .rca-tpno-container h2, .rca-role-container h2 {
@@ -1992,22 +1982,22 @@ input[type="submit"]:hover {
     font-size: 21px;
     font-weight: normal;
     color: #666;
-    margin-bottom: 5px;
+    margin-bottom: 8px;
 }
 
 .rca-tpno-container input, .rca-role-container input {
     font-family: "Roboto", sans-serif;
-    font-size: 12px;
+    font-size: 13px;
     width: 100%;
-    height: 45%;
-    padding: 3px;
-    border-radius: 2px;
+    height: 32px;
+    padding: 3px 6px;
+    border-radius: 4px;
+    margin-bottom: 0px;
 }
 
 .rca-desc-container {
-    /* background-color: red; */
     width: 100%;
-    height: 56%;
+    height: auto; /* Allow height to adjust based on content */
 }
 
 .rca-desc-container h2 {
@@ -2015,7 +2005,7 @@ input[type="submit"]:hover {
     font-size: 19px;
     font-weight: normal;
     color: #666;
-    margin-bottom: 5px;
+    margin-bottom: 8px;
 }
 
 .rca-desc-container textarea {
@@ -2023,11 +2013,34 @@ input[type="submit"]:hover {
     font-size: 15px;
     text-align: justify;
     width: 100%;
-    height: 310px;
+    height: 300px;
+    margin-bottom: 15px;
+    padding: 6px;
     line-height: 1.5;
+    border-radius: 5px;
     resize: none;
 }
 
+.rca-button-container {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 8%;
+}
+
+.rca-button {
+    font-family: "Roboto", sans-serif;
+    font-size: 16px;
+    width: 100px;
+    height: 35px;
+    margin: 10px 0 30px auto;
+    background-color: #7AB0DD;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
 
 /* profile.html */
 
