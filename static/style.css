@@ -12,7 +12,7 @@ body {
 
 .content-card {
     max-width: 800px;
-    margin: 20px auto; /* Yew Shan: I removed 120px auto because the margin top is broken for Events, Likes, Bookmarks, and Applications page :( */
+    margin: 120px auto 20px auto;
     padding: 20px;
     background-color: #fff;
     border-radius: 8px;
@@ -1711,13 +1711,16 @@ input[type="submit"]:hover {
 
 /* createpost2.html (Marcus) */
 .cp-main-container {
-    /* background-color: pink; */
     display: flex;
     flex-direction: column;
-    height: 110vh;
+    height: 140vh;
     width: 50vw;
     margin: 70px 0 200px 23%;
     padding: 20px;
+}
+
+.cp-main-container.recruitment-active {
+    height: 152vh;
 }
 
 .cp-title-container {
@@ -1736,7 +1739,6 @@ input[type="submit"]:hover {
 }
 
 .cp-filter-container {
-    /* background-color: red; */
     display: flex;
     align-items: center;
     height: 37px;
@@ -1764,7 +1766,7 @@ input[type="submit"]:hover {
     margin-bottom: 10px;
 }
 
-.cp-forum-imagecontainer {
+.cp-forum-imagecontainer, .cp-recruit-imagecontainer {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -1774,21 +1776,30 @@ input[type="submit"]:hover {
     margin: 5px 0 25px 0;
     border: 4px dashed #ccc;
     border-radius: 16px;
+    object-position: center;
+    object-fit: cover;
 }
 
-#cp-forum-cloudimg {
+#cp-forum-imageview {
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+
+#cp-forum-cloudimg, #cp-recruit-cloudimg {
     width: 120px;
     height: auto;
 }
 
-.cp-forum-imagecontainer h1 {
+.cp-forum-imagecontainer h1, .cp-recruit-imagecontainer h1 {
     font-family: "Roboto", sans-serif;
     font-size: 24px;
     font-weight: normal;
     color: #666;
 }
 
-.cp-forum-imagecontainer h2 {
+.cp-forum-imagecontainer h2, .cp-recruit-imagecontainer h2 {
     font-family: "Roboto", sans-serif;
     font-size: 16px;
     font-weight: normal;
@@ -1796,7 +1807,7 @@ input[type="submit"]:hover {
     margin: 10px 0;
 }
 
-#cp-forum-browsefilesbutton {
+#cp-forum-browsefilesbutton, #cp-recruit-browsefilesbutton {
     font-family: "Roboto", sans-serif;
     font-size: 16px;
     color: #7AB0DD;
@@ -1808,7 +1819,7 @@ input[type="submit"]:hover {
     background-color: white;
 }
 
-.cp-forum-imagecontainer h3 {
+.cp-forum-imagecontainer h3, .cp-recruit-imagecontainer h3 {
     font-family: "Roboto", sans-serif;
     font-size: 15px;
     font-weight: normal;
@@ -1816,7 +1827,13 @@ input[type="submit"]:hover {
     margin: 5px 0;
 }
 
-#cp-forum-caption-text {
+.cp-forum-imagecontainer:hover, .cp-recruit-imagecontainer:hover {
+    background-color: #d2e9ff;
+    transition: background-color 0.2s ease;
+    cursor: pointer;
+}
+
+#cp-forum-caption-text, #cp-recruit-caption-text {
     font-family: "Roboto", sans-serif;
     font-size: 16px;
     text-align: justify;
@@ -1829,7 +1846,7 @@ input[type="submit"]:hover {
     resize: none;
 }
 
-.cp-forum-button-container {
+.cp-forum-button-container, .cp-recruit-button-container {
     width: 100%;
     height: 35px;
     margin: 20px 0 0 0;
@@ -1840,6 +1857,7 @@ input[type="submit"]:hover {
     font-size: 15px;
     height: 40px;
     width: 100%;
+    margin-bottom: 20px;
 }
 
 .cp-forum-post-button, .cp-recruit-post-button {
@@ -1855,6 +1873,7 @@ input[type="submit"]:hover {
     cursor: pointer;
     transition: background-color 0.3s;
 }
+
 
 .cp-forum-post-button:hover, .cp-recruit-post-button:hover {
     background-color: #0056b3;
@@ -3057,7 +3076,9 @@ input[type="submit"]:hover {
 
 /* events.html */
 
-.activity-card {
+.events-card {
+    display: flex;
+    justify-content: space-between;
     background-color: #fff;
     padding: 40px;
     border-radius: 8px;
@@ -3065,43 +3086,38 @@ input[type="submit"]:hover {
     margin-top: 20px;
 }
 
-.activity-flex {
-    display: flex;
-    justify-content: space-between;
-}
-
-.activity-card p {
+.events-card p {
     margin-top: 20px;
     color: #666;
 }
 
-.activity-card a {
+.events-card a {
     text-decoration: none;
     font-weight: bold;
     color: #666;
 }
 
-.activity-card a:hover {
+.events-card a:hover {
     text-decoration: underline;
     font-weight: bold;
     color: #666;
 }
 
-.activity-card sub {
+.events-card sub {
     display: inline-block;
     margin-bottom: 20px;
 }
 
-.activity-attr {
+.events-attr {
     flex: 1;
 }
 
-.activity-img {
+.events-img {
     flex-shrink: 0;
     margin-left: 20px;
 }
 
-.activity-img img {
+.events-img img {
     width: 300px;
     height: 150px;
     object-fit: cover;
@@ -3236,62 +3252,8 @@ input[type="submit"]:hover {
 }
 
 
-
 /* bookmarks.html */
 
-.activity-margin {
+.bookmarks-card {
     margin-top: 20px;
-}
-
-
-
-/* applications.html */
-
-.applicant-card {
-    background-color: #e7e9eb;
-    border: 1px solid #71717A;
-    padding: 16px;
-    border-radius: 8px;
-    margin-top: 20px;
-    height: 50px;
-    width: 150px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.applicant-flex {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: flex-start;
-}
-
-.applicant-extra {
-    display: none;
-}
-
-.applicant-view {
-    cursor: pointer;
-    text-decoration: none;
-}
-
-.applicant-view:hover {
-    text-decoration: underline;
-}
-
-@media (max-width: 430px) {
-    .applicant-flex {
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .applicant-card {
-        width: 100%;
-    }
-}
-
-@media (min-width: 431px) {
-    .applicant-flex {
-        justify-content: space-between;
-    }
 }

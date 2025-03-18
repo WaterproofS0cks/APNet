@@ -11,6 +11,9 @@
     <title>CreatePost</title>
 
     <style>
+        html {
+            height: 100%;
+        }
         body {
             margin-top: 70px;
         }
@@ -200,14 +203,20 @@
             <div id="cp-forumInputs">
 
                 <h1>Image</h1>
-                <div class="cp-forum-imagecontainer">
-                    <img src="../static/src/icon/icons8-upload-to-cloud-100.png" alt="Cloud" id="cp-forum-cloudimg">
-                    <h1>Drag file to upload</h1>
-                    <h2>or</h2>
-                    <button id="cp-forum-browsefilesbutton">Browse Files</button>
-                    <h3>Max file size: <b>100MB</b></h3>
-                    <h3>Supported file types: <b>JPG, JPEG, PNG, GIF</b></h3>
-                </div>
+
+                <label for="cp-forum-input-file" id="cp-forum-drop-area">
+
+                    <div class="cp-forum-imagecontainer" id="cp-forum-imageview">
+                        <input type="file" accept="image/*" id="cp-forum-input-file" hidden>
+                        <img src="../static/src/icon/icons8-upload-to-cloud-100.png" alt="Cloud" id="cp-forum-cloudimg">
+                        <h1>Drag file to upload</h1>
+                        <h2>or</h2>
+                        <button id="cp-forum-browsefilesbutton">Browse Files</button>
+                        <h3>Max file size: <b>100MB</b></h3>
+                        <h3>Supported file types: <b>JPG, JPEG, PNG, GIF</b></h3>
+                    </div>
+
+                </label>
 
                 <h1>Caption</h1>
                 <textarea name="" id="cp-forum-caption-text" placeholder="Enter your caption here..."></textarea>
@@ -222,7 +231,24 @@
             <div id="cp-recruitmentInputs">
 
                 <h1>Title</h1>
-                <input type="text" id="cp-recruit-title-text" placeholder="Title">
+                <input type="text" id="cp-recruit-title-text" placeholder="Enter your title here...">
+
+                <h1>Image</h1>
+                <div class="cp-recruit-imagecontainer">
+                    <img src="../static/src/icon/icons8-upload-to-cloud-100.png" alt="Cloud" id="cp-recruit-cloudimg">
+                    <h1>Drag file to upload</h1>
+                    <h2>or</h2>
+                    <button id="cp-recruit-browsefilesbutton">Browse Files</button>
+                    <h3>Max file size: <b>100MB</b></h3>
+                    <h3>Supported file types: <b>JPG, JPEG, PNG, GIF</b></h3>
+                </div>
+
+                <h1>Caption</h1>
+                <textarea name="" id="cp-recruit-caption-text" placeholder="Enter your caption here..."></textarea>
+
+                <div class="cp-recruit-button-container">
+                    <button class="cp-recruit-post-button" id="cp-recruit-button">Post</button>
+                </div>
 
             </div>
          </form>
@@ -259,21 +285,69 @@
 
 
     <script>
+        const dropAreaForum = document.getElementById('cp-forum-drop-area');
+        const inputFileForum = document.getElementById('cp-forum-input-file');
+        const imageViewForum = document.getElementById('cp-forum-imageview');
+
         function updateInputs() {
             const postSelect = document.getElementById('cp-postSelect');
             const forumInputs = document.getElementById('cp-forum-form');
             const recruitmentInputs = document.getElementById('cp-recruitment-form');
-    
+            const mainContainer = document.querySelector('.cp-main-container');
+
             if (postSelect.value === 'forum') {
-                forumInputs.style.display = 'block'; // Show forum inputs
-                recruitmentInputs.style.display = 'none'; // Hide recruitment inputs
+                forumInputs.style.display = 'block'; 
+                recruitmentInputs.style.display = 'none'; 
+                mainContainer.classList.remove('recruitment-active');
             } else if (postSelect.value === 'recruitment') {
-                forumInputs.style.display = 'none'; // Hide forum inputs
-                recruitmentInputs.style.display = 'block'; // Show recruitment inputs (if you have any)
+                forumInputs.style.display = 'none'; 
+                recruitmentInputs.style.display = 'block'; 
+                mainContainer.classList.add('recruitment-active'); 
             }
         }
-    
+
+        function uploadImage() {
+            if (inputFileForum.files.length > 0) {
+                let forumImgLink = URL.createObjectURL(inputFileForum.files[0]);
+                imageViewForum.style.backgroundImage = `url(${forumImgLink})`; 
+                imageViewForum.textContent = "";
+            }
+        }
+
+        ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+            dropAreaForum.addEventListener(eventName, preventDefaults, false); 
+            document.body.addEventListener(eventName, preventDefaults, false); 
+        });
+
+        dropAreaForum.addEventListener('dragover', highlight, false);
+        dropAreaForum.addEventListener('dragleave', unhighlight, false);
+
+        dropAreaForum.addEventListener('drop', handleDrop, false);
+
+        function preventDefaults(e) {
+            e.preventDefault();
+            e.stopPropagation();
+        }
+
+        function highlight() {
+            dropAreaForum.classList.add('highlight');
+        }
+
+        function unhighlight() {
+            dropAreaForum.classList.remove('highlight');
+        }
+
+        function handleDrop(e) {
+            let dt = e.dataTransfer;
+            let files = dt.files;
+
+            inputFileForum.files = files;
+
+            uploadImage();
+        }
+
         window.onload = updateInputs;
+        inputFileForum.addEventListener("change", uploadImage);
     </script>
 </body>
 </html>
