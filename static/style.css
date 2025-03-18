@@ -1757,7 +1757,7 @@ input[type="submit"]:hover {
     padding: 5px;
 }
 
-#cp-forumInputs h1 {
+#cp-forumInputs h1, #cp-recruitmentInputs h1 {
     font-family: "Roboto", sans-serif;
     font-size: 22px;
     font-weight: normal;
@@ -1835,7 +1835,14 @@ input[type="submit"]:hover {
     margin: 20px 0 0 0;
 }
 
-.cp-forum-post-button {
+#cp-recruit-title-text {
+    font-family: "Roboto", sans-serif;
+    font-size: 15px;
+    height: 40px;
+    width: 100%;
+}
+
+.cp-forum-post-button, .cp-recruit-post-button {
     font-family: "Roboto", sans-serif;
     font-size: 16px;
     width: 100px;
@@ -1849,7 +1856,7 @@ input[type="submit"]:hover {
     transition: background-color 0.3s;
 }
 
-.cp-forum-post-button:hover {
+.cp-forum-post-button:hover, .cp-recruit-post-button:hover {
     background-color: #0056b3;
 }
 
