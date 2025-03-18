@@ -1817,6 +1817,7 @@ input[type="submit"]:hover {
     padding: 5px;
     border: 2px solid #7AB0DD;
     background-color: white;
+    cursor: pointer;
 }
 
 .cp-forum-imagecontainer h3, .cp-recruit-imagecontainer h3 {
@@ -1827,7 +1828,7 @@ input[type="submit"]:hover {
     margin: 5px 0;
 }
 
-.cp-forum-imagecontainer:hover, .cp-recruit-imagecontainer:hover {
+#cp-forum-browsefilesbutton:hover {
     background-color: #d2e9ff;
     transition: background-color 0.2s ease;
     cursor: pointer;

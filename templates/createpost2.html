@@ -204,19 +204,17 @@
 
                 <h1>Image</h1>
 
-                <label for="cp-forum-input-file" id="cp-forum-drop-area">
-
+                <div id="cp-forum-drop-area">
                     <div class="cp-forum-imagecontainer" id="cp-forum-imageview">
                         <input type="file" accept="image/*" id="cp-forum-input-file" hidden>
                         <img src="../static/src/icon/icons8-upload-to-cloud-100.png" alt="Cloud" id="cp-forum-cloudimg">
                         <h1>Drag file to upload</h1>
                         <h2>or</h2>
-                        <button id="cp-forum-browsefilesbutton">Browse Files</button>
+                        <button id="cp-forum-browsefilesbutton" onclick="document.getElementById('cp-forum-input-file').click(); return false;">Browse Files</button>
                         <h3>Max file size: <b>100MB</b></h3>
                         <h3>Supported file types: <b>JPG, JPEG, PNG, GIF</b></h3>
                     </div>
-
-                </label>
+                </div>
 
                 <h1>Caption</h1>
                 <textarea name="" id="cp-forum-caption-text" placeholder="Enter your caption here..."></textarea>
