@@ -1766,6 +1766,11 @@ input[type="submit"]:hover {
     margin-bottom: 10px;
 }
 
+.cp-required {
+    font-size: 21px;
+    color: red;
+}
+
 .cp-forum-imagecontainer, .cp-recruit-imagecontainer {
     display: flex;
     align-items: center;
@@ -1780,7 +1785,7 @@ input[type="submit"]:hover {
     object-fit: cover;
 }
 
-#cp-forum-imageview {
+#cp-forum-imageview, #cp-recruit-imageview {
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
@@ -1828,7 +1833,7 @@ input[type="submit"]:hover {
     margin: 5px 0;
 }
 
-#cp-forum-browsefilesbutton:hover {
+#cp-forum-browsefilesbutton:hover, #cp-recruit-browsefilesbutton:hover {
     background-color: #d2e9ff;
     transition: background-color 0.2s ease;
     cursor: pointer;
