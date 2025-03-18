@@ -100,3 +100,7 @@ def likedPosts():
 @user_profile.route('/bookmarks', methods=['POST', 'GET'])
 def bookmarkedPosts():
     return render_template("bookmarkedposts.html")
+
+@user_profile.route('/applications', methods=['POST', 'GET'])
+def applications():
+    return render_template("applications.html")

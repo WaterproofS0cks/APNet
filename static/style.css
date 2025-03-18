@@ -12,7 +12,7 @@ body {
 
 .content-card {
     max-width: 800px;
-    margin: 120px auto 20px auto;
+    margin: 20px auto; /* Yew Shan: I removed 120px auto because the margin top is broken for Events, Likes, Bookmarks, and Applications page :( */
     padding: 20px;
     background-color: #fff;
     border-radius: 8px;
@@ -3057,9 +3057,7 @@ input[type="submit"]:hover {
 
 /* events.html */
 
-.events-card {
-    display: flex;
-    justify-content: space-between;
+.activity-card {
     background-color: #fff;
     padding: 40px;
     border-radius: 8px;
@@ -3067,38 +3065,43 @@ input[type="submit"]:hover {
     margin-top: 20px;
 }
 
-.events-card p {
+.activity-flex {
+    display: flex;
+    justify-content: space-between;
+}
+
+.activity-card p {
     margin-top: 20px;
     color: #666;
 }
 
-.events-card a {
+.activity-card a {
     text-decoration: none;
     font-weight: bold;
     color: #666;
 }
 
-.events-card a:hover {
+.activity-card a:hover {
     text-decoration: underline;
     font-weight: bold;
     color: #666;
 }
 
-.events-card sub {
+.activity-card sub {
     display: inline-block;
     margin-bottom: 20px;
 }
 
-.events-attr {
+.activity-attr {
     flex: 1;
 }
 
-.events-img {
+.activity-img {
     flex-shrink: 0;
     margin-left: 20px;
 }
 
-.events-img img {
+.activity-img img {
     width: 300px;
     height: 150px;
     object-fit: cover;
@@ -3233,8 +3236,62 @@ input[type="submit"]:hover {
 }
 
 
+
 /* bookmarks.html */
 
-.bookmarks-card {
+.activity-margin {
     margin-top: 20px;
+}
+
+
+
+/* applications.html */
+
+.applicant-card {
+    background-color: #e7e9eb;
+    border: 1px solid #71717A;
+    padding: 16px;
+    border-radius: 8px;
+    margin-top: 20px;
+    height: 50px;
+    width: 150px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.applicant-flex {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+}
+
+.applicant-extra {
+    display: none;
+}
+
+.applicant-view {
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.applicant-view:hover {
+    text-decoration: underline;
+}
+
+@media (max-width: 430px) {
+    .applicant-flex {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .applicant-card {
+        width: 100%;
+    }
+}
+
+@media (min-width: 431px) {
+    .applicant-flex {
+        justify-content: space-between;
+    }
 }

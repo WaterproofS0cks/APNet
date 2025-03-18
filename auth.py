@@ -55,11 +55,11 @@ def register():
     if request.method == "POST":
         client = request.form
         date = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-        user = (client['username'], client['fullname'], 'U', client['email'], client["password"], client["gender"], date.split(" ")[0], date, "/static/src/img/default-pfp.png")
+        user = (client['username'], client['fullname'], 'U', client['email'], client["password"], client["phone"], client["gender"], date.split(" ")[0], date, "/static/src/img/default-pfp.png")
         conn = psycopg2.connect(dbname=DBNAME, user=USER, password=PASSWORD)
         cur = conn.cursor()
         try:
-            cur.execute("INSERT INTO Users (username, fullname, bio, link, role, email, password, gender, registerdate, lastLogin, profilepicture, penalty) VALUES (%s, %s, NULL, NULL, %s, %s, %s, %s, %s, %s, %s, NULL)", user)      
+            cur.execute("INSERT INTO Users (username, fullname, bio, link, role, email, password, phone, gender, registerdate, lastLogin, profilepicture, penalty) VALUES (%s, %s, NULL, NULL, %s, %s, %s, %s, %s, %s, %s, %s, NULL)", user)      
             conn.commit()
             cur.execute("SELECT userid, username, fullname, bio, link, role, email, gender, profilepicture, penalty FROM USERS WHERE email = %s LIMIT 1", (client['email'],))
             user_data = cur.fetchone()
