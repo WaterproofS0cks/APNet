@@ -36,7 +36,7 @@ class dbRetrieve:
         return self.db_connection.cur.fetchall()
 
     def retrieve(self, tablename, columns="*", condition=None, params=None):
-        query = f'SELECT {columns} FROM "{tablename}"'
+        query = f'SELECT {columns} FROM {tablename}'
         if condition:
             query += f' WHERE {condition}'
         query += ";"
@@ -55,7 +55,7 @@ class dbRetrieve:
         if type == "post":
             query = """
                 SELECT 
-                    post.postID,
+                    post.postID AS id,
                     post.description, 
                     TO_CHAR(post.timestamp, 'DD-MM-YYYY') AS timestamp, 
                     post.image, 
@@ -64,8 +64,8 @@ class dbRetrieve:
                     users.profilePicture, 
                     users.fullname,
                     users.registerDate,
-                    COALESCE(COUNT(DISTINCT comment.postID), 0) AS comments_count,
-                    COALESCE(COUNT(DISTINCT engagement.postID), 0) AS likes_count
+                    COALESCE(COUNT(DISTINCT comment.postCommentID), 0) AS comments_count,
+                    COALESCE(COUNT(DISTINCT engagement.userID), 0) AS likes_count
                 FROM post
                 JOIN users ON post.userID = users.userID
                 LEFT JOIN postcomment AS comment ON post.postID = comment.postID
@@ -78,7 +78,7 @@ class dbRetrieve:
         elif type == "recruitment":
             query = """
                 SELECT 
-                    recruitment.recruitmentID, 
+                    recruitment.recruitmentID AS id, 
                     recruitment.header, 
                     recruitment.description, 
                     TO_CHAR(recruitment.timestamp, 'DD-MM-YYYY') AS timestamp, 
@@ -88,8 +88,8 @@ class dbRetrieve:
                     users.profilePicture, 
                     users.fullname,
                     users.registerDate,
-                    COALESCE(COUNT(DISTINCT comment.recruitmentID), 0) AS comments_count,
-                    COALESCE(COUNT(DISTINCT engagement.recruitmentID), 0) AS likes_count
+                    COALESCE(COUNT(DISTINCT comment.postCommentID), 0) AS comments_count,
+                    COALESCE(COUNT(DISTINCT engagement.userID), 0) AS likes_count
                 FROM recruitment
                 JOIN users ON recruitment.userID = users.userID
                 LEFT JOIN recruitmentcomment AS comment ON recruitment.recruitmentID = comment.recruitmentID
@@ -103,7 +103,6 @@ class dbRetrieve:
             print("Invalid entry type")
             return []
 
-        # Apply filtering based on search term and loaded IDs
         conditions = []
         params = []
 
