@@ -752,6 +752,22 @@ input[type="submit"]:hover {
     margin-top: 100px;
 }
 
+.lg-img-loginbackground {
+    position: fixed;
+    right: 0;
+    top: 0;
+    display: flex;
+    z-index: -1;
+    height: 100vh;
+    width: 100vw;
+}
+
+.lg-img-loginbackground img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
 .lg-main-container {
     display: flex;
     flex-direction: column;
@@ -759,11 +775,20 @@ input[type="submit"]:hover {
     top: 0;
     margin: 40px auto 0 auto;
     height: calc(100%-100px);
-    width: 27%;
+    width: 30%;
+}
+
+.lg-form-blur-container {
+    position: fixed;
+    margin-top: 55px;
+    background: rgba(131, 166, 242, 0.4);
+    border-radius: 10px;
+    width: 30%;
+    height: 380px;
+    opacity: 40%;
 }
 
 .lg-form {
-    background: #fff;
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
@@ -771,10 +796,27 @@ input[type="submit"]:hover {
     flex-direction: column;
     align-items: center;
     width: 100%;
+    height: 380px;
+    margin-top: 55px;
+    opacity: 100%;
+    z-index: 1;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);    
+}
+
+.lg-form h1 {
+    font-family: "Roboto", sans-serif;
+    font-size: 40px;
+    /* color: #d9dfe6; */
+    color: #fff;
+    margin: 0px auto 55px auto;
+    letter-spacing: 1.2px;
 }
 
 .lg-inputcredentials {
     position: relative;
+    display: flex;
+    align-items: center;
     width: 100%;
     margin-bottom: 15px;
 }
@@ -782,13 +824,14 @@ input[type="submit"]:hover {
 .lg-inputcredentials ion-icon {
     position: absolute;
     left: 10px;
-    top: 50%;
     transform: translateY(-50%);
     font-size: 18px;
     color: #333;
 }
 
 .lg-inputcredentials input {
+    display: flex;
+    align-items: center;
     width: 100%;
     padding: 10px 10px 10px 35px;
     border: 1px solid #ccc;
@@ -798,8 +841,8 @@ input[type="submit"]:hover {
 
 .lg-inputcredentials label {
     position: absolute;
-    left: 35px;
-    top: 50%;
+    left: 40px;
+    margin-top: 2px;
     transform: translateY(-50%);
     font-size: 14px;
     color: gray;
@@ -871,20 +914,6 @@ input[type="submit"]:hover {
     color: #2a3f5f; 
     width: 100%;
     height: auto;
-}
-
-.lg-img-loginbackground {
-    position: fixed;
-    right: 0;
-    top: 0;
-    display: flex;
-    z-index: -1;
-}
-
-.lg-img-loginbackground img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
 }
 
 

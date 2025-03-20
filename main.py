@@ -128,9 +128,9 @@ def load_more():
 
                 </div>
 
-                <a class="fm-image-container" href="specificpost?postid={entry['id']}">
-                    <img src="{entry['image']}" alt="Post Image">
-                </a>
+                <div class="fm-image-container">
+                    <a href="specificpost?postid={entry['id']}"> <img src="{entry['image']}" alt="Post Image"> </a>
+                </div>
 
                 <div class="fm-button-container">
 
