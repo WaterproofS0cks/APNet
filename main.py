@@ -42,7 +42,7 @@ db_conn.close()
 
 @app.route('/test')
 def test():
-    return render_template('recruitment.html')
+    return render_template('likedposts.html')
 
 @app.route('/')
 def forum():
@@ -128,9 +128,9 @@ def load_more():
 
                 </div>
 
-                <div class="fm-image-container" data-action="specific">
+                <a class="fm-image-container" href="specificpost?postid={entry['id']}">
                     <img src="{entry['image']}" alt="Post Image">
-                </div>
+                </a>
 
                 <div class="fm-button-container">
 
@@ -201,7 +201,7 @@ def engagement_render():
     print(response)
     return jsonify(response)
 
-@app.route('/specificpost')
+@app.route('/specificpost', methods=["GET", "POST"])
 def specific_post():
     post_id = request.args.get('postid', '')
     user_id = session.get('id')
