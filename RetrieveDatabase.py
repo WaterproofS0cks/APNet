@@ -44,7 +44,7 @@ class dbRetrieve:
         return self.db_connection.cur.fetchall()
     
     def retrieve_one(self, tablename, columns="*", condition=None, params=None):
-        query = f'SELECT {columns} FROM "{tablename}"'
+        query = f'SELECT {columns} FROM {tablename}'
         if condition:
             query += f' WHERE {condition}'
         query += ";"

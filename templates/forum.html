@@ -431,29 +431,41 @@
                 console.log(action); //Remove Later
                 console.log(postId);
                 console.log(actionContainer);
+                if (action === "liked" || action === "bookmark") {
+                    fetch("/engagement", {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify({ post_id: postId, action: action }),
+                    })
+                    .then((response) => response.json())
+                    .then((data) => {
+                        if (data.error) {
+                            alert(data.error);
+                            return;
+                        }
 
-                fetch("/engagement", {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({ post_id: postId, action: action }),
-                })
-                .then((response) => response.json())
-                .then((data) => {
-                    if (data.error) {
-                        alert(data.error);
-                        return;
-                    }
-
-                    if (action === "liked") {
-                        updateLikeUI(actionContainer, data.liked, data.likes_count);
-                    } else if (action === "bookmark") {
-                        updateBookmarkUI(actionContainer, data.bookmark);
-                    }
-                })
-                .catch((error) => console.error("Error:", error));
+                        if (action === "liked") {
+                            updateLikeUI(actionContainer, data.liked, data.likes_count);
+                        } else if (action === "bookmark") {
+                            updateBookmarkUI(actionContainer, data.bookmark);
+                        }
+                    })
+                    .catch((error) => console.error("Error:", error));
+                } else if (action === "specific") {
+                    window.location.href = "/specificpost?postid=" + encodeURIComponent(postId);
+                }
             });
 
 
+
+
+
+            document.body.addEventListener("click", function (event) { 
+                let actionContainer = event.target.closest("[data-action]");
+                if (!actionContainer && event.target.tagName === "IMG") {
+                    actionContainer = event.target.parentElement.closest("[data-action]");
+                }
+            });
 
 
             // 3 Dot Menu Scroll

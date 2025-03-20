@@ -106,9 +106,6 @@ def load_more():
 
                     {f'<h2>Posted on {entry["header"]}</h2>' if type == "recruitment" else ''}
 
-                    <a href="forumspecific.html" class="fm-clickable-container"></a>
-
-
                     <div class="fm-more-container">
                         <div class="fm-dropdown">
                             <span><img src="../static/src/icon/icons8-ellipsis-48.png" alt="Elipses" id="fm-moreicon" height="24" width="24"></span>
@@ -131,7 +128,7 @@ def load_more():
 
                 </div>
 
-                <div class="fm-image-container">
+                <div class="fm-image-container" data-action="specific">
                     <img src="{entry['image']}" alt="Post Image">
                 </div>
 
@@ -143,7 +140,7 @@ def load_more():
                         <h4>({entry['likes_count']})</h4>
                     </div>
 
-                    <div class="fm-comment-icon-container">
+                    <div class="fm-comment-icon-container" data-action="specific">
                         <img src="../static/src/icon/icons8-comment-50.png" alt="Comment" id="fm-post-commenticon">
                         <h2>Comment</h2>
                         <h4>({entry['comments_count']})</h4>
@@ -204,7 +201,50 @@ def engagement_render():
     print(response)
     return jsonify(response)
 
+@app.route('/specificpost')
+def specific_post():
+    post_id = request.args.get('postid', '')
+    user_id = session.get('id')
 
+    if not post_id:
+        return # Should Send To Homepage
+
+    db_conn = dbConnection(
+        dbname=os.getenv("DBNAME"),
+        user=os.getenv("USER"),
+        password=os.getenv("PASSWORD"),
+    )
+
+    db_conn.connect()
+    db_retrieve = dbRetrieve(db_conn)
+
+    post_data = db_retrieve.retrieve_one("Post", "*", "postID = %s", (post_id,))
+    if not post_data: # Need To Figure Out What To Do
+        return 
+    print("Post Data:", post_data)
+    post_user_id = post_data.get("userID")
+    user_data = db_retrieve.retrieve_one("Users", "*", "userID = %s", (post_user_id,))
+    if not user_data: # Need To Figure Out What To Do
+        return
+
+    like_count = db_retrieve.retrieve_one("PostEngagement", "COUNT(*)", "liked = TRUE AND postID = %s", (post_id,))[0]
+    engagement_data = db_retrieve.retrieve_one("PostEngagement", "*", "userID = %s AND postID = %s", (user_id, post_id)) or {}
+
+    profile_picture = user_data.get("profilePicture") or "/static/src/img/default-pfp.png"
+    like_icon = ("../static/src/icon/icons8-heart-red-50.png" if engagement_data.get("liked") else "../static/src/icon/icons8-heart-50.png")
+    bookmark_icon = ("../static/src/icon/icons8-bookmark-evendarkergreen-500.png" if engagement_data.get("bookmark") else "../static/src/icon/icons8-bookmark-50.png")
+
+    return render_template(
+        "forumspecific.html",
+        profile_picture=profile_picture,
+        username=user_data.get("username", "Unknown"),
+        timestamp=post_data.get("timestamp", "N/A"),
+        image=post_data.get("image", ""),
+        description=post_data.get("description", "No description available."),
+        like_icon=like_icon,
+        like_count=like_count,
+        bookmark_icon=bookmark_icon
+    )
 
 
 @app.route('/terms', methods=['GET'])

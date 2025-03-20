@@ -74,12 +74,12 @@
             
             <div class="fms-profiledetails">
                 <!-- INSERT PFP HERE -->
-                <img src="../static/src/img/default-pfp.png" alt="Default pfp icon" id="fms-post-pfp">
+                <img src="{{ profile_picture }}" alt="Default pfp icon" id="fms-post-pfp">
                 <!-- INSERT USERNAME HERE -->
-                <h1>INSERT USERNAME</h1>
+                <h1>{{ username }}</h1>
                 <!-- INSERT LAST CREATION DATE THING -->
                 <h2> • </h2>
-                <h2>Posted x days ago</h2>
+                <h2>Posted on {{ timestamp }}</h2>
 
                 <div class="fms-more-container">
                     <div class="fms-dropdown">
@@ -112,23 +112,24 @@
 
                 
                 <!-- LIKE BUTTON -->
-                <div class="fms-like-icon-container">
-                    <img src="../static/src/icon/icons8-heart-50.png" alt="Heart" id="fms-post-hearticon">
+                <div class="fms-like-icon-container" data-action="liked">
+                    <img src= "{{ like_icon }}" alt="Heart" id="fms-post-hearticon">
                     <h2>Like</h2>
                     <!-- LIKE AMOUNT -->
-                    <h4>(12)</h4>
+                    <h4>{{ like_count }}</h4>
                 </div>
                 
                 <!-- BOOKMARK BUTTON -->
-                <img src="../static/src/icon/icons8-bookmark-50.png" alt="Bookmark" id="fms-post-bookmarkicon">
-
+                <div class="fm-bookmark-icon-container" data-action="bookmark">
+                    <img src="{{ bookmark_icon }}" alt="Bookmark" id="fms-post-bookmarkicon">
+                </div>
             </div>
 
 
             <!-- INSERT CAPTION -->
             <div class="fms-caption-container">
-                <h1>INSERT USERNAME</h1>
-                <h2>The rain drummed against the cobblestone streets as neon signs flickered in the misty night. A stranger in a tattered coat hurried past, clutching a leather-bound book with golden edges. In the distance, a train whistled, its echo swallowed by the howling wind. A small café glowed warmly, steam curling from porcelain cups as an old radio played a forgotten tune. The scent of freshly baked bread mixed with the distant sea breeze. Somewhere, a dog barked, chasing its own shadow in the dim light.</h2>
+                <h1>{{ username }}</h1>
+                <h2>{{ description }}</h2>
             </div>
 
             <!-- INSERT COMMENT -->
