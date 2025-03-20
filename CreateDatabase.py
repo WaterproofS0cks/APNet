@@ -60,8 +60,8 @@ class dbCreate:
             CREATE TABLE IF NOT EXISTS RecruitmentEngagement (
                 userID INT NOT NULL REFERENCES Users(userID),
                 recruitmentID INT NOT NULL REFERENCES Recruitment(recruitmentID),
-                bookmark BOOLEAN,
-                liked BOOLEAN,
+                bookmark BOOLEAN DEFAULT FALSE,
+                liked BOOLEAN DEFAULT FALSE,
                 PRIMARY KEY (userID, recruitmentID)
             );
         """)
@@ -108,8 +108,8 @@ class dbCreate:
             CREATE TABLE IF NOT EXISTS PostEngagement (
                 userID INT NOT NULL REFERENCES Users(userID),
                 postID INT NOT NULL REFERENCES Post(postID),
-                bookmark BOOLEAN,
-                liked BOOLEAN,
+                bookmark BOOLEAN DEFAULT FALSE,
+                liked BOOLEAN DEFAULT FALSE,
                 PRIMARY KEY (userID, postID)
             );
         """)

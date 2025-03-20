@@ -1192,11 +1192,17 @@ input[type="submit"]:hover {
     margin-bottom: 3px;
 }
 
+.fm-bookmark-icon-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    margin-left: auto;
+}
+
 #fm-post-bookmarkicon {
     width: 37px;
     height: 27px;
-    margin: 0 0 1px 0;
-    margin-left: auto;
 }
 
 .fm-like-icon-container {
