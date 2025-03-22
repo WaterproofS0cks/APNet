@@ -1194,7 +1194,7 @@ input[type="submit"]:hover {
     align-items: center;
     height: 50.4px;
     padding: 10px;
-    border-bottom: 1px solid #94bfe3 ;
+    /* border-bottom: 1px solid #94bfe3 ; */
 }
 
 #fm-post-pfp {
@@ -1254,11 +1254,11 @@ input[type="submit"]:hover {
     cursor: pointer;
 }
 
-.fm-dropdown {
+.fm-dropdown, .rc-dropdown {
     position: relative;
 }
 
-.fm-dropdown-content {
+.fm-dropdown-content, .rc-dropdown-content {
     display: none;
     position: absolute;
     background-color: white;
@@ -1267,7 +1267,7 @@ input[type="submit"]:hover {
     z-index: 1;
 }
 
-.fm-dropdown-item {
+.fm-dropdown-item, .rc-dropdown-item {
     display: flex;
     align-items: center;
     font-family: "Roboto", sans-serif;
@@ -1278,15 +1278,16 @@ input[type="submit"]:hover {
     text-decoration: none;  
 }
 
-.fm-dropdown-item img {
+.fm-dropdown-item img, .rc-dropdown-item img {
     margin-right: 15px;
 }
 
-.fm-dropdown-item:hover {
+.fm-dropdown-item:hover, .rc-dropdown-item:hover {
     background-color: #f1f1f1;
 }
 
-.fm-image-container {
+
+.fm-image-container, .rc-image-container {
     height: 365.4px;    
     width: 100%;
     margin: 10px 0 0 0;
@@ -1294,13 +1295,13 @@ input[type="submit"]:hover {
     background-color: #000;
 }
 
-.fm-image-container img {
+.fm-image-container img, .rc-image-container img {
     width: 100%;
     height: 100%;
     object-fit: contain;
 }
 
-.fm-button-container {
+.fm-button-container, .rc-button-container {
     display: flex;
     width: 100%;
     height: 50.4px;
@@ -1309,13 +1310,13 @@ input[type="submit"]:hover {
     margin-left: 5px;
 }
 
-#fm-post-hearticon {
+#fm-post-hearticon, #rc-post-hearticon {
     width: 21px;
     height: 23px;    
     margin-bottom: 3px;
 }
 
-.fm-bookmark-icon-container {
+.fm-bookmark-icon-container, .rc-bookmark-icon-container {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -1323,7 +1324,7 @@ input[type="submit"]:hover {
     margin-left: auto;
 }
 
-#fm-post-bookmarkicon {
+#fm-post-bookmarkicon, #rc-post-bookmarkicon {
     width: 37px;
     height: 27px;
 }
@@ -2018,8 +2019,7 @@ input[type="submit"]:hover {
 .rc-post-layout {
     background-color: white;
     position: relative;
-    height: 800px;
-    width: 100%;
+    width: 95%;
     margin-left: 0px;
     margin-bottom: 40px;
     border: 1px solid #b4dfd0;
@@ -2028,10 +2028,31 @@ input[type="submit"]:hover {
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
 
+.rc-title-container {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 78px;
+    margin-bottom: 5px;
+    border-bottom: 1.5px solid #94bfe3 ;
+}
+
+.rc-title-container h1 {
+    font-family: "Roboto", sans-serif;
+    font-weight: bold;
+    font-size: 34px;
+    color: #444;
+    margin: 0 auto;
+}
+
+.rc-profiledetails {
+    margin-bottom: 2px;
+}
+
 #rc-post-pfp {
     width: 40px;
     height: 40px;
-    margin: 0 5px 3px 5px;
+    margin: 0 5px 3px 0px;
     border-radius: 50%;
 }
 
@@ -2067,39 +2088,7 @@ input[type="submit"]:hover {
 }
 
 .rc-image-container {
-    height: 58%;
-    width: 100%;
-    margin: 10px 0 0 0;
-    border: 2px solid #ffffff; 
-    background-color: #ffffff;
-}
-
-.rc-image-container img {
-    width: 100%;
-    height: 100%;
-    object-fit: fill;
-}
-
-.rc-button-container {
-    display: flex;
-    width: 120%;
-    height: 8%;
-    align-items: center;
-    padding: 10px 10px 10px 0px;
-    margin-left: 5px;
-}
-
-#rc-post-hearticon {
-    width: 21px;
-    height: 23px;    
-    margin-bottom: 3px;
-}
-
-#rc-post-bookmarkicon {
-    width: 37px;
-    height: 27px;
-    margin: 0 0 1px 0;
-    margin-left: 250px;
+    margin-top: 0px;
 }
 
 .rc-like-icon-container {
@@ -2168,9 +2157,10 @@ input[type="submit"]:hover {
 
 .rc-post-footer {
     display: flex;
-    justify-content: flex-end;
     align-items: center;
-    padding: 10px;
+    padding: 0px 10px;
+    height: 45px;
+    border-top: 1.5px solid #94bfe3 ;
 }
 
 .rc-interest-text {
@@ -2183,7 +2173,7 @@ input[type="submit"]:hover {
     background-color: #007bff;
     color: white;
     border: none;
-    padding: 8px 16px;
+    padding: 5px 16px;
     font-size: 14px;
     border-radius: 5px;
     cursor: pointer;
