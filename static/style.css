@@ -1135,6 +1135,40 @@ input[type="submit"]:hover {
     text-decoration: underline;
 }
 
+@media (max-width: 430px) {
+    .rg-body {
+        margin-top: 90px;
+        height: calc(100vh - 180px);
+        width: 100vw;
+    }
+
+    .rg-img-registerbackground {
+        margin-top: 90px;
+        /* display: none; */
+    }
+
+    .rg-container {
+        height: 752px;
+        padding: 0px;
+    }
+
+    .rg-blur-container {
+        width: 90%;
+        height: 639.2px;
+        top: 145px;
+        right: 22px; 
+        border-radius: 10px;
+    }
+
+    .rg-register-box {
+        margin-left: 0px;
+        height: 85%;
+        width: 90%;
+        padding: 30px 30px 20px 30px;
+        border-radius: 10px;
+    }
+}
+
 
 /* forum.html (Marcus) */
 .fm-main-container {
