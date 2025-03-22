@@ -1171,7 +1171,7 @@ input[type="submit"]:hover {
 
 
 /* forum.html (Marcus) */
-.fm-main-container {
+.fm-main-container, .rc-main-container {
     height: 100%;
     width: 53%;
     margin: 70px 0 0 23%;
@@ -1189,7 +1189,7 @@ input[type="submit"]:hover {
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
 
-.fm-profiledetails {
+.fm-profiledetails, .rc-profiledetails {
     display: flex;
     align-items: center;
     height: 50.4px;
@@ -2010,6 +2010,186 @@ input[type="submit"]:hover {
 }
 
 .cp-forum-post-button:hover, .cp-recruit-post-button:hover {
+    background-color: #0056b3;
+}
+
+
+/* recruitment.html */
+.rc-post-layout {
+    background-color: white;
+    position: relative;
+    height: 800px;
+    width: 100%;
+    margin-left: 0px;
+    margin-bottom: 40px;
+    border: 1px solid #b4dfd0;
+    border-radius: 16px;
+    padding: 12px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+#rc-post-pfp {
+    width: 40px;
+    height: 40px;
+    margin: 0 5px 3px 5px;
+    border-radius: 50%;
+}
+
+.rc-profiledetails h1 {
+    font-family: "Roboto", sans-serif;
+    font-weight: bold;
+    font-size: 15px;
+    color: #333333 ;
+    margin: 0 5px 0 9px;
+}
+
+.rc-profiledetails h2 {
+    font-family: "Roboto", sans-serif;
+    font-weight: normal;
+    font-size: 12px;
+    color: #666666;
+    margin: 0 5px;
+}
+
+.rc-more-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    margin-left: auto;
+    justify-content: center;
+    width: 5%;
+}
+
+#rc-moreicon {
+    width: 20px;
+    height: 20px;
+    margin-left: auto;
+}
+
+.rc-image-container {
+    height: 58%;
+    width: 100%;
+    margin: 10px 0 0 0;
+    border: 2px solid #ffffff; 
+    background-color: #ffffff;
+}
+
+.rc-image-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: fill;
+}
+
+.rc-button-container {
+    display: flex;
+    width: 120%;
+    height: 8%;
+    align-items: center;
+    padding: 10px 10px 10px 0px;
+    margin-left: 5px;
+}
+
+#rc-post-hearticon {
+    width: 21px;
+    height: 23px;    
+    margin-bottom: 3px;
+}
+
+#rc-post-bookmarkicon {
+    width: 37px;
+    height: 27px;
+    margin: 0 0 1px 0;
+    margin-left: 250px;
+}
+
+.rc-like-icon-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 15.5%;
+    height: 100%;
+    border: 1px solid #000;
+    border-radius: 20px;
+    padding: 10px;
+}
+
+.rc-comment-icon-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 19%;
+    height: 100%;
+    border: 1px solid #000;
+    border-radius: 20px;
+    padding: 10px;
+    margin-left: 10px;
+}
+
+#rc-post-commenticon {
+    width: 23px;
+    height: 23px;
+    margin-left: -5px; 
+}
+
+.rc-comment-icon-container h2, .rc-like-icon-container h2 {
+    font-family: "Roboto", sans-serif;
+    font-size: 12px;
+    margin-left: 7px;
+}
+
+.rc-like-icon-container h4, .rc-comment-icon-container h4 {
+    font-family: "Roboto", sans-serif;
+    font-size: 12px;
+    margin-left: 3px;
+    color: #9a9a9a;
+}
+
+.rc-caption-container {
+    display: block;
+    align-items: center;
+    padding: 0px 10px 10px 10px;    
+    line-height: 1.4;
+}
+
+.rc-caption-container h1 {
+    display: flex;
+    font-family: "Roboto", sans-serif;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.rc-caption-container h2 {
+    display: flex;
+    font-family: "Roboto", sans-serif;
+    font-weight: normal;
+    font-size: 13px;
+    text-align: justify;
+}
+
+.rc-post-footer {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 10px;
+}
+
+.rc-interest-text {
+    font-size: 14px;
+    font-weight: bold;
+    margin-right: 10px;
+}
+
+.rc-apply-button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    font-size: 14px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.rc-apply-button:hover {
     background-color: #0056b3;
 }
 

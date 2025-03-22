@@ -2,347 +2,6 @@
 {% block title %}Recruitment{% endblock title %}
 {% block content %}
 <body>
-
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-            background-color: #F7F7F7;
-        }
-
-        /* FOOTER */
-        .header-footer-main-container {
-            display: none;
-            position: fixed;
-            justify-content: space-between;
-            align-items: center;
-            bottom: 0;
-            width: 100%;
-            height: 90px;
-            padding: 0;
-            box-sizing: border-box;
-            border: 0px solid;
-            background-color:	#212121;
-            z-index: 1000;
-        }
-
-        .header-footer-container1, 
-            .header-footer-container2, 
-            .header-footer-container3,
-            .header-footer-container4 {
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                justify-content: center;
-                height: 100%;
-                flex-grow: 1;   
-                width: 25%;
-            }
-
-            .header-footer-container1 active {
-                border-top: 5px solid #2A83FF;
-            }
-
-            .header-footer-forumwhiteicon, 
-            .header-footer-recruitwhiteicon, 
-            .header-footer-notifwhiteicon, 
-            .header-footer-pfpicon {
-                height: 40px;
-                width: 40px;
-                margin: 0 30px 10px 30px;
-            }
-
-            .header-footer-container1 h2, 
-            .header-footer-container2 h2, 
-            .header-footer-container3 h2, 
-            .header-footer-container4 h2 {
-                font-family: "Roboto", sans-serif;
-                font-weight: bold;
-                font-size: 10px;
-                color: white; 
-                text-decoration: none; 
-            }
-
-            /*Recruitment */
-            .recruitment-main-container {
-                height: 100%;
-                width: 53%;
-                margin: 70px 0 0 23%;
-                padding: 20px;
-            }
-
-            .recruitment-post-layout {
-                background-color: white;
-                position: relative;
-                height: 800px;
-                width: 70%;
-                margin-left: 250px;
-                margin-bottom: 40px;
-                border: 1px solid #b4dfd0;
-                border-radius: 16px;
-                padding: 12px;
-                box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-            }
-
-            .recruitment-profiledetails {
-                display: flex;
-                align-items: center;
-                height: 8%;
-                padding: 10px;
-                border-bottom: 1px solid #020202 ;
-            }
-
-            #recruitment-post-pfp {
-                width: 40px;
-                height: 40px;
-                margin: 0 5px 3px 5px;
-                border-radius: 50%;
-            }
-
-            .recruitment-profiledetails h1 {
-                font-family: "Roboto", sans-serif;
-                font-weight: bold;
-                font-size: 15px;
-                color: #333333 ;
-                margin: 0 5px 0 9px;
-            }
-
-            .recruitment-profiledetails h2 {
-                font-family: "Roboto", sans-serif;
-                font-weight: normal;
-                font-size: 12px;
-                color: #666666;
-                margin: 0 5px;
-            }
-
-            .recruitment-more-container {
-                position: relative;
-                display: flex;
-                align-items: center;
-                margin-left: auto;
-                justify-content: center;
-                /* background-color: green; */
-                width: 5%;
-            }
-
-            #recruitment-moreicon {
-                width: 20px;
-                height: 20px;
-                margin-left: auto;
-            }
-
-            .recruitment-content {
-                display: none; /* Hidden by default */
-                position: absolute;
-                background-color: #f9f9f9;
-                min-width: 160px;
-                box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-                z-index: 1;
-            }
-
-            .recruitment-content.show {
-                display: block; /* Show when active */
-            }
-
-            .recruitment-image-container {
-                height: 58%;
-                width: 100%;
-                margin: 10px 0 0 0;
-                border: 2px solid #ffffff; 
-                background-color: #ffffff;
-            }
-
-            .recruitment-image-container img {
-                width: 100%;
-                height: 100%;
-                object-fit: fill;
-            }
-
-
-            .recruitment-button-container {
-                /* background-color: green; */
-                display: flex;
-                width: 120%;
-                height: 8%;
-                align-items: center;
-                padding: 10px 10px 10px 0px;
-                margin-left: 5px;
-            }
-
-            #recruitment-post-hearticon {
-                width: 21px;
-                height: 23px;    
-                margin-bottom: 3px;
-            }
-
-            #recruitment-post-bookmarkicon {
-                width: 37px;
-                height: 27px;
-                margin: 0 0 1px 0;
-                margin-left: 250px;
-            }
-
-            .recruitment-like-icon-container {
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                width: 15.5%;
-                height: 100%;
-                border: 1px solid #000;
-                border-radius: 20px;
-                padding: 10px;
-            }
-
-            .recruitment-comment-icon-container {
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                width: 19%;
-                height: 100%;
-                border: 1px solid #000;
-                border-radius: 20px;
-                padding: 10px;
-                margin-left: 10px;
-            }
-
-            #recruitment-post-commenticon {
-                width: 23px;
-                height: 23px;
-                margin-left: -5px; 
-            }
-
-            .recruitment-comment-icon-container h2, .recruitment-like-icon-container h2 {
-                font-family: "Roboto", sans-serif;
-                font-size: 12px;
-                margin-left: 7px;
-            }
-
-            .recruitment-like-icon-container h4, .recruitment-comment-icon-container h4 {
-                font-family: "Roboto", sans-serif;
-                font-size: 12px;
-                margin-left: 3px;
-                color: #9a9a9a;
-            }
-
-            .recruitment-caption-container {
-                display: block;
-                align-items: center;
-                padding: 0px 10px 10px 10px; 
-                line-height: 1.4;
-            }
-
-            .recruitment-caption-container h1 {
-                display: flex;
-                font-family: "Roboto", sans-serif;
-                font-weight: bold;
-                font-size: 14px;
-            }
-
-            .recruitment-caption-container h2 {
-                display: flex;
-                font-family: "Roboto", sans-serif;
-                font-weight: normal;
-                font-size: 13px;
-                text-align: justify;
-            }
-
-            .post-footer {
-                display: flex;
-                justify-content: flex-end;
-                align-items: center;
-                padding: 10px;
-            }
-
-            .interest-text {
-                font-size: 14px;
-                font-weight: bold;
-                margin-right: 10px;
-            }
-
-            .apply-button {
-                background-color: #007bff;
-                color: white;
-                border: none;
-                padding: 8px 16px;
-                font-size: 14px;
-                border-radius: 5px;
-                cursor: pointer;
-            }
-
-            .apply-button:hover {
-                background-color: #0056b3;
-            }
-
-
-
-            /* forumcreate.html */
-            .fmc-main-container {
-                background-color: green;
-                margin: 110px auto 10px auto;
-                height: 100vh;
-                width: 90%;
-            }
-
-
-        
-        @media (max-width: 430px) {
-            
-            /* HEADER */
-            .header-main-container {
-                height: 85px;
-                padding: 0;
-                box-sizing: content-box;
-                position: fixed;
-                top: 0;
-            }
-
-            .header-searchbar {
-                display: none;
-            }
-
-            #header-logo {
-                height: 60px;
-                margin-left: 0px;
-            }
-
-            .header-searchicon {
-                display: flex;
-                height: 45px;
-                width: 45px;
-                padding: 5px;
-                margin-right: 10px;
-            }
-
-            #header-profile-img {
-                display: none;
-                width: 55px;
-                height: 55px;
-                padding: 5px;
-                margin-right: 20px;
-            }
-
-            .header-infoicon {
-                display: flex;
-                height: 45px;
-                width: 45px;
-                padding: 5px;
-                margin-right: 15px;
-            }
-
-
-            /* FOOTER */
-            .header-footer-main-container {
-                display: flex;
-            }
-
-            /* NAV BAR */
-            .nb-left-container {
-                display: none;
-            }
-        }
-        
-    </style>
-
     <!-- NAV BAR -->
     <div class="nb-left-container">
 
@@ -424,23 +83,23 @@
     </div>
 
     <!-- BODY CONTENT -->
-    <div class="recruitment-main-container">
+    <div class="rc-main-container">
         
         <!-- POST LAYOUT -->
-        <div class="recruitment-post-layout">
+        <div class="rc-post-layout">
             
-            <div class="recruitment-profiledetails">
+            <div class="rc-profiledetails">
                 <!-- INSERT PFP HERE -->
-                <img src="../static/src/img/default-pfp.png" alt="Default pfp icon" id="recruitment-post-pfp">
+                <img src="../static/src/img/default-pfp.png" alt="Default pfp icon" id="rc-post-pfp">
                 <!-- INSERT USERNAME HERE -->
                 <h1>INSERT CLUBNAME</h1>
                 <!-- INSERT LAST CREATION DATE THING -->
                 <h2> • </h2>
                 <h2>Posted x days ago</h2>
 
-                <div class="recruitment-more-container">
+                <div class="rc-more-container">
                     <div class="dropdown">
-                        <span><img src="../static/src/icon/icons8-ellipsis-48.png" alt="Elipses" id="recruitment-moreicon" height="24" width="24"></span>
+                        <span><img src="../static/src/icon/icons8-ellipsis-48.png" alt="Elipses" id="rc-moreicon" height="24" width="24"></span>
                         <div class="dropdown-content">
                             <a href="#" class="dropdown-item">Item 1</a>
                             <a href="#" class="dropdown-item">Item 2</a>
@@ -451,17 +110,16 @@
 
             </div>
 
-            <div class="recruitment-image-container">
+            <div class="rc-image-container">
                 <!-- INSERT IMAGE HERE -->
-                <img src="C:\Users\Darren Kong\Desktop\APNet\static\src\img\basketball-club.png" alt="">
+                <img src="../static/src/img/basketball-club.png" alt="">
             </div>
             
-            <div class="recruitment-button-container">
-
-                
+            <div class="rc-button-container">
+      
                 <!-- LIKE BUTTON -->
-                <div class="recruitment-like-icon-container">
-                    <img src="../static/src/icon/icons8-heart-50.png" alt="Heart" id="recruitment-post-hearticon">
+                <div class="rc-like-icon-container">
+                    <img src="../static/src/icon/icons8-heart-50.png" alt="Heart" id="rc-post-hearticon">
                     <h2>Like</h2>
                     <!-- LIKE AMOUNT -->
                     <h4>(12)</h4>
@@ -469,8 +127,8 @@
                 
 
                 <!-- COMMENT BUTTON -->
-                <div class="recruitment-comment-icon-container">
-                    <img src="../static/src/icon/icons8-comment-50.png" alt="Comment" id="recruitment-post-commenticon">
+                <div class="rc-comment-icon-container">
+                    <img src="../static/src/icon/icons8-comment-50.png" alt="Comment" id="rc-post-commenticon">
                     <h2>Comment</h2>
                     <!-- COMMENT AMOUNT -->
                     <h4>(0)</h4>
@@ -478,192 +136,27 @@
 
 
                 <!-- BOOKMARK BUTTON -->
-                <img src="../static/src/icon/icons8-bookmark-50.png" alt="Bookmark" id="recruitment-post-bookmarkicon">
+                <img src="../static/src/icon/icons8-bookmark-50.png" alt="Bookmark" id="rc-post-bookmarkicon">
 
             </div>
 
 
             <!-- INSERT COMMENT -->
-            <div class="recruitment-caption-container">
+            <div class="rc-caption-container">
                 <h1>CLUB DESCRIPTION</h1>
                 <!-- <h2>The old clock tower stood tall, its rusted gears ticking in defiance of time. A stray cat perched on the windowsill, watching the bustling streets below. Lanterns flickered, casting long shadows as the wind whispered secrets through the alleyways. Somewhere, a violin played a haunting melody</h2> -->
                 <h2>The rain drummed against the cobblestone streets as neon signs flickered in the misty night. A stranger in a tattered coat hurried past, clutching a leather-bound book with golden edges. In the distance, a train whistled, its echo swallowed by the howling wind. A small café glowed warmly, steam curling from porcelain cups as an old radio played a forgotten tune. The scent of freshly baked bread mixed with the distant sea breeze. Somewhere, a dog barked, chasing its own shadow in the dim light.</h2>
             </div>
 
-            <div class="post-footer">
-                <span class="interest-text">Interested? Join Us Now!</span>
-                <button class="apply-button">Apply</button>
+            <div class="rc-post-footer">
+                <span class="rc-interest-text">Interested? Join Us Now!</span>
+                <button class="rc-apply-button">Apply</button>
             </div>
 
         </div>
 
-        <div class="recruitment-post-layout">
-            
-            <div class="recruitment-profiledetails">
-                <!-- INSERT PFP HERE -->
-                <img src="../static/src/img/default-pfp.png" alt="Default pfp icon" id="recruitment-post-pfp">
-                <!-- INSERT USERNAME HERE -->
-                <h1>INSERT CLUBNAME</h1>
-                <!-- INSERT LAST CREATION DATE THING -->
-                <h2> • </h2>
-                <h2>Posted x days ago</h2>
-            </div>
+      
 
-            <div class="recruitment-image-container">
-                <!-- INSERT IMAGE HERE -->
-                <img src="../static/src/img/randomimage2.jpg" alt="">
-            </div>
-
-            <div class="recruitment-button-container">
-
-                
-                <!-- LIKE BUTTON -->
-                <div class="recruitment-like-icon-container">
-                    <img src="../static/src/icon/icons8-heart-50.png" alt="Heart" id="recruitment-post-hearticon">
-                    <h2>Like</h2>
-                    <!-- LIKE AMOUNT -->
-                    <h4>(12)</h4>
-                </div>
-                
-
-                <!-- COMMENT BUTTON -->
-                <div class="recruitment-comment-icon-container">
-                    <img src="../static/src/icon/icons8-comment-50.png" alt="Comment" id="recruitment-post-commenticon">
-                    <h2>Comment</h2>
-                    <!-- COMMENT AMOUNT -->
-                    <h4>(0)</h4>
-                </div>
-
-
-                <!-- BOOKMARK BUTTON -->
-                <img src="../static/src/icon/icons8-bookmark-50.png" alt="Bookmark" id="recruitment-post-bookmarkicon">
-
-            </div>
-
-            <div class="recruitment-caption-container">
-                <h1>CLUB DESCRIPTION</h1>
-                <!-- <h2>The old clock tower stood tall, its rusted gears ticking in defiance of time. A stray cat perched on the windowsill, watching the bustling streets below. Lanterns flickered, casting long shadows as the wind whispered secrets through the alleyways. Somewhere, a violin played a haunting melody</h2> -->
-                <h2>The rain drummed against the cobblestone streets as neon signs flickered in the misty night. A stranger in a tattered coat hurried past, clutching a leather-bound book with golden edges. In the distance, a train whistled, its echo swallowed by the howling wind. A small café glowed warmly, steam curling from porcelain cups as an old radio played a forgotten tune. The scent of freshly baked bread mixed with the distant sea breeze. Somewhere, a dog barked, chasing its own shadow in the dim light.</h2>
-            </div>
-
-            <div class="post-footer">
-                <span class="interest-text">Interested? Join Us Now!</span>
-                <button class="apply-button">Apply</button>
-            </div>
-
-        </div>
-
-        <div class="recruitment-post-layout">
-            
-            <div class="recruitment-profiledetails">
-                <!-- INSERT PFP HERE -->
-                <img src="../static/src/img/default-pfp.png" alt="Default pfp icon" id="recruitment-post-pfp">
-                <!-- INSERT USERNAME HERE -->
-                <h1>INSERT CLUBNAME</h1>
-                <!-- INSERT LAST CREATION DATE THING -->
-                <h2> • </h2>
-                <h2>Posted x days ago</h2>
-            </div>
-
-            <div class="recruitment-image-container">
-                <!-- INSERT IMAGE HERE -->
-                <img src="../static/src/img/randomimage1.jpg" alt="">
-            </div>
-
-            <div class="recruitment-button-container">
-
-                
-                <!-- LIKE BUTTON -->
-                <div class="recruitment-like-icon-container">
-                    <img src="../static/src/icon/icons8-heart-50.png" alt="Heart" id="recruitment-post-hearticon">
-                    <h2>Like</h2>
-                    <!-- LIKE AMOUNT -->
-                    <h4>(12)</h4>
-                </div>
-                
-
-                <!-- COMMENT BUTTON -->
-                <div class="recruitment-comment-icon-container">
-                    <img src="../static/src/icon/icons8-comment-50.png" alt="Comment" id="recruitment-post-commenticon">
-                    <h2>Comment</h2>
-                    <!-- COMMENT AMOUNT -->
-                    <h4>(0)</h4>
-                </div>
-
-
-                <!-- BOOKMARK BUTTON -->
-                <img src="../static/src/icon/icons8-bookmark-50.png" alt="Bookmark" id="recruitment-post-bookmarkicon">
-
-            </div>
-
-            <div class="recruitment-caption-container">
-                <h1>CLUB DESCRIPTION</h1>
-                <!-- <h2>The old clock tower stood tall, its rusted gears ticking in defiance of time. A stray cat perched on the windowsill, watching the bustling streets below. Lanterns flickered, casting long shadows as the wind whispered secrets through the alleyways. Somewhere, a violin played a haunting melody</h2> -->
-                <h2>The rain drummed against the cobblestone streets as neon signs flickered in the misty night. A stranger in a tattered coat hurried past, clutching a leather-bound book with golden edges. In the distance, a train whistled, its echo swallowed by the howling wind. A small café glowed warmly, steam curling from porcelain cups as an old radio played a forgotten tune. The scent of freshly baked bread mixed with the distant sea breeze. Somewhere, a dog barked, chasing its own shadow in the dim light.</h2>
-            </div>
-
-            <div class="post-footer">
-                <span class="interest-text">Interested? Join Us Now!</span>
-                <button class="apply-button">Apply</button>
-            </div>
-
-        </div>
-
-        <div class="recruitment-post-layout">
-            
-            <div class="recruitment-profiledetails">
-                <!-- INSERT PFP HERE -->
-                <img src="../static/src/img/default-pfp.png" alt="Default pfp icon" id="recruitment-post-pfp">
-                <!-- INSERT USERNAME HERE -->
-                <h1>INSERT CLUBNAME</h1>
-                <!-- INSERT LAST CREATION DATE THING -->
-                <h2> • </h2>
-                <h2>Posted x days ago</h2>
-            </div>
-
-            <div class="recruitment-image-container">
-                <!-- INSERT IMAGE HERE -->
-                <img src="../static/src/img/randomimage4.png" alt="">
-            </div>
-
-            <div class="recruitment-button-container">
-
-                
-                <!-- LIKE BUTTON -->
-                <div class="recruitment-like-icon-container">
-                    <img src="../static/src/icon/icons8-heart-50.png" alt="Heart" id="recruitment-post-hearticon">
-                    <h2>Like</h2>
-                    <!-- LIKE AMOUNT -->
-                    <h4>(12)</h4>
-                </div>
-                
-
-                <!-- COMMENT BUTTON -->
-                <div class="recruitment-comment-icon-container">
-                    <img src="../static/src/icon/icons8-comment-50.png" alt="Comment" id="recruitment-post-commenticon">
-                    <h2>Comment</h2>
-                    <!-- COMMENT AMOUNT -->
-                    <h4>(0)</h4>
-                </div>
-
-
-                <!-- BOOKMARK BUTTON -->
-                <img src="../static/src/icon/icons8-bookmark-50.png" alt="Bookmark" id="recruitment-post-bookmarkicon">
-
-            </div>
-
-            <div class="recruitment-caption-container">
-                <h1>CLUB DESCRIPTION</h1>
-                <!-- <h2>The old clock tower stood tall, its rusted gears ticking in defiance of time. A stray cat perched on the windowsill, watching the bustling streets below. Lanterns flickered, casting long shadows as the wind whispered secrets through the alleyways. Somewhere, a violin played a haunting melody</h2> -->
-                <h2>The rain drummed against the cobblestone streets as neon signs flickered in the misty night. A stranger in a tattered coat hurried past, clutching a leather-bound book with golden edges. In the distance, a train whistled, its echo swallowed by the howling wind. A small café glowed warmly, steam curling from porcelain cups as an old radio played a forgotten tune. The scent of freshly baked bread mixed with the distant sea breeze. Somewhere, a dog barked, chasing its own shadow in the dim light.</h2>
-            </div>
-
-            <div class="post-footer">
-                <span class="interest-text">Interested? Join Us Now!</span>
-                <button class="apply-button">Apply</button>
-            </div>
-
-        </div>
     
     </div>
 
@@ -700,22 +193,238 @@
     </footer>
 
     <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            var dropdown = document.querySelector('.dropdown');
-            var dropdownContent = document.querySelector('.dropdown-content');
+        
+        let currentPage = 1;
+        let loadedPostIds = new Set();
+        const postContainer = document.getElementById('postContainer');
+        let isLoading = false;
 
-            dropdown.addEventListener('click', function(event) {
-                dropdownContent.style.display = (dropdownContent.style.display === "block") ? "none" : "block";
+        // Loading Post
+        function loadPosts(searchTerm = '', type = 'post') {
+            if (isLoading) return;
 
-                event.stopPropagation();
-            });
+            isLoading = true;
 
-            document.addEventListener('click', function(event) {
-                if (!dropdown.contains(event.target)) {
-                    dropdownContent.style.display = "none";
+            const postIds = Array.from(postContainer.querySelectorAll('.fm-post-layout'))
+                .map(post => post.getAttribute('data-post-id'))
+                .filter(postId => postId && postId.trim() !== "");
+
+            postIds.forEach(postId => loadedPostIds.add(postId));
+
+            const url = '/load_more?page=' + currentPage + 
+                        '&loaded_ids=' + JSON.stringify(Array.from(loadedPostIds)) + 
+                        '&type=' + encodeURIComponent(type) +
+                        (searchTerm ? '&search=' + encodeURIComponent(searchTerm) : '');
+
+            //Will Change This To Post When I Can
+            fetch(url)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.html) {
+                        postContainer.insertAdjacentHTML('beforeend', data.html);
+                        currentPage++;
+                        filter3DotMenu(data.user_id);
+                    }
+
+                    let noMorePostsMessage = document.getElementById('no-more-posts');
+                    if (noMorePostsMessage) {
+                        noMorePostsMessage.remove();
+                    }
+
+                    if (data.no_more_posts) {
+                        noMorePostsMessage = document.createElement('div');
+                        noMorePostsMessage.id = 'no-more-posts';
+                        noMorePostsMessage.style.textAlign = 'center';
+                        noMorePostsMessage.style.fontSize = '20px';
+                        noMorePostsMessage.textContent = 'No more posts to load';
+
+                        postContainer.appendChild(noMorePostsMessage);
+                    }
+
+                    isLoading = false;
+                })
+                .catch(error => {
+                    console.error('Error loading posts:', error);
+                    isLoading = false;
+                });
+        }
+
+        function updateLikeUI(container, liked, count) {
+            const likeCountElement = container.querySelector("h4");
+            const likeIcon = container.querySelector("img");
+
+            likeIcon.src = liked
+                ? "../static/src/icon/icons8-heart-red-50.png"
+                : "../static/src/icon/icons8-heart-50.png";
+
+            if (likeCountElement) {
+                likeCountElement.textContent = `(${count})`;
+            }
+        }
+
+        function updateBookmarkUI(container, bookmark) {
+            const bookmarkIcon = container.querySelector("img");
+
+            if (!bookmarkIcon) return;
+
+            bookmarkIcon.src = bookmark
+                ? "../static/src/icon/icons8-bookmark-evendarkergreen-500.png"
+                : "../static/src/icon/icons8-bookmark-50.png";
+        }
+        
+
+        // 3 Dot Menu Filter
+        function filter3DotMenu(loggedInUserId) {
+            document.querySelectorAll(".fm-post-layout").forEach(post => {
+                const postUserId = post.getAttribute("data-user-id");
+                const dropdown = post.querySelector(".fm-dropdown-content");
+
+                if (dropdown) {
+                    const reportPost = dropdown.querySelector("#fm-reportposticon")?.parentElement;
+                    const reportUser = dropdown.querySelector("#fm-reportusericon")?.parentElement;
+                    const editPost = dropdown.querySelector("#fm-editicon")?.parentElement;
+                    const deletePost = dropdown.querySelector("#fm-deleteicon")?.parentElement;
+
+                    if (reportPost && reportUser && editPost && deletePost) {
+                        if (String(loggedInUserId) === String(postUserId)) {
+                            reportPost.style.display = "none";
+                            reportUser.style.display = "none";
+                            editPost.style.display = "block";
+                            deletePost.style.display = "block";
+                        } else {
+                            reportPost.style.display = "block";
+                            reportUser.style.display = "block";
+                            editPost.style.display = "none";
+                            deletePost.style.display = "none";
+                        }
+                    }
                 }
             });
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            document.body.addEventListener('click', function(event) {
+                // 3 Dot Menu
+                const clickedDropdown = event.target.closest('.fm-dropdown');
+                
+                if (clickedDropdown) {
+                    const dropdownContent = clickedDropdown.querySelector('.fm-dropdown-content');
+                    
+                    document.querySelectorAll('.fm-dropdown-content').forEach(function(dropdown) {
+                        if (dropdown !== dropdownContent) { 
+                            dropdown.style.display = 'none';
+                        }
+                    });
+
+                    if (dropdownContent.style.display === "block") {
+                        dropdownContent.style.display = "none"; 
+                    } else {
+                        dropdownContent.style.display = "block";
+                    }
+
+                    event.stopPropagation();
+                } else {
+                    document.querySelectorAll('.fm-dropdown-content').forEach(function(dropdown) {
+                        dropdown.style.display = 'none';
+                    });
+                }
+            });
+
+            document.body.addEventListener("click", function (event) {
+                let actionContainer = event.target.closest("[data-action]");
+
+                if (!actionContainer && event.target.tagName === "IMG") {
+                    actionContainer = event.target.parentElement.closest("[data-action]");
+                }
+
+                if (!actionContainer) return;
+
+                const postElement = actionContainer.closest(".fm-post-layout");
+                if (!postElement) return;
+
+                const postId = postElement.getAttribute("data-post-id");
+                const action = actionContainer.getAttribute("data-action");
+
+                if (!postId || !action) return;
+
+                console.log(action); //Remove Later
+                console.log(postId);
+                console.log(actionContainer);
+                if (action === "liked" || action === "bookmark") {
+                    fetch("/engagement", {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify({ post_id: postId, action: action }),
+                    })
+                    .then((response) => response.json())
+                    .then((data) => {
+                        if (data.error) {
+                            alert(data.error);
+                            return;
+                        }
+
+                        if (action === "liked") {
+                            updateLikeUI(actionContainer, data.liked, data.likes_count);
+                        } else if (action === "bookmark") {
+                            updateBookmarkUI(actionContainer, data.bookmark);
+                        }
+                    })
+                    .catch((error) => console.error("Error:", error));
+                } else if (action === "specific") {
+                    window.location.href = "/specificpost?postid=" + encodeURIComponent(postId);
+                }
+            });
+
+
+
+
+
+            document.body.addEventListener("click", function (event) { 
+                let actionContainer = event.target.closest("[data-action]");
+                if (!actionContainer && event.target.tagName === "IMG") {
+                    actionContainer = event.target.parentElement.closest("[data-action]");
+                }
+            });
+
+
+            // 3 Dot Menu Scroll
+            window.addEventListener('scroll', function() {
+                if (isLoading) return;
+                
+                if (window.innerHeight + window.scrollY < document.body.offsetHeight - 10) {
+                    document.querySelectorAll('.fm-dropdown-content').forEach(function(dropdown) {
+                        dropdown.style.display = 'none';
+                    });
+                }
+            });
+
+            // Searchbar
+            const searchContainer = document.getElementById('ha-searchbar');
+            searchContainer.addEventListener("keypress", function(event) {
+                if (event.key === "Enter") {
+                    event.preventDefault(); 
+
+                    const searchTerm = searchContainer.value.trim();
+
+                    if (searchTerm) {
+                        window.location.href = "/?search=" + encodeURIComponent(searchTerm);
+                    }
+                }
+            });
+        
+            const urlParams = new URLSearchParams(window.location.search);
+            const searchTerm = urlParams.get('search') || '';
+            loadPosts(searchTerm);
         });
+
+        // Scrolling
+        window.addEventListener('scroll', () => {
+            if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 10 && !isLoading) {
+                const urlParams = new URLSearchParams(window.location.search);
+                const searchTerm = urlParams.get('search') || ''; 
+                loadPosts(searchTerm);
+            }
+        });    
     </script>
 
 </body>
