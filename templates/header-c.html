@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="../static/src/favicon/favicon.ico">
+    <link rel="stylesheet" href="../static/style.css">    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <title>{% block title %}{% endblock %}</title>
+</head>
+<body>
+    <header>
+        <div class="hc-main-container">
+
+            <a class="hc-logo-container">
+                <img src="../static/src/img/apnet-logo.png" alt="APNet logo" id="hc-logo-img">
+            </a>
+
+            <div class="hc-right-container">
+
+                <a href="forum.html"><h1>Forum</h1></a>
+                <a href="recruitment"><h1>Recruitment</h1></a>
+                <a href="aboutus"><h1>About Us</h1></a>
+                <a href="faq"><h1>FAQ</h1></a>
+                <a href="terms"><h1>Terms of Service</h1></a>
+
+            </div>
+
+            <div class="hc-responsive-right-container">
+                <img src="../static/src/icon/icons8-menu-vertical-96.png" alt="help" id="hc-menuicon" onclick="toggleDropdown()">
+            </div>
+
+            <div class="hc-popup-menu" id="hc-popup-menu">
+                <ul>
+                    <li><a href="forum.html">Forum</a></li>
+                    <li><a href="recruitment">Recruitment</a></li>
+                    <li><a href="aboutus">About Us</a></li>
+                    <li><a href="faq">FAQ</a></li>
+                    <li><a href="terms">Terms of Service</a></li>
+                    <li><a href="login" style="border-top: 2px solid #ccc; margin-top: 2px;">Sign In</a></li>
+                </ul>
+            </div>
+
+        </div>
+    </header>
+    
+
+    <script>
+        function toggleDropdown() {
+            const dropdown = document.getElementById('hc-popup-menu');
+            dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
+        }
+
+        window.onclick = function(event) {
+            if (!event.target.matches('#hc-menuicon')) {
+                const dropdowns = document.getElementsByClassName("hc-popup-menu");
+                for (let i = 0; i < dropdowns.length; i++) {
+                    const openDropdown = dropdowns[i];
+                    if (openDropdown.style.display === 'block') {
+                        openDropdown.style.display = 'none';
+                    }
+                }
+            }
+        }
+    </script>
+
+{% block content %}
+{% endblock %}
+</body>
+</html>
