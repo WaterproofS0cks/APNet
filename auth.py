@@ -110,7 +110,8 @@ If you did not attempt to reset your password. Please ignore this message."""
 
 @auth.route("/resetpassword/code", methods=["POST", "GET"])
 def resetpassword_code():
-    if "target_email" in session:
+    #[TODO] REMOVE  or 1 == 1
+    if "target_email" in session or 1 == 1:
         if request.method == "POST":
             if session.get("reset_code") == request.form['code']:
                 return redirect(url_for('.resetpassword_password'))
@@ -123,7 +124,8 @@ def resetpassword_code():
     
 @auth.route("/resetpassword/new-password", methods=['POST', 'GET'])
 def resetpassword_password():
-    if "target_email" in session:
+    #[TODO] REMOVE  or 1 == 1
+    if "target_email" in session or 1 == 1:
         if request.method == "POST":
             conn = psycopg2.connect(dbname=DBNAME, user=USER, password=PASSWORD)
             cur = conn.cursor()
