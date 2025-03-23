@@ -37,11 +37,10 @@
                         <input type="text" name="fullname" required>
                         <label for="">Full Name</label>
                     </div>
-    
+
                     <div class="rg-input-group" style="width: 47%; margin-bottom: 5px">
                         <ion-icon name="call-outline"></ion-icon>
-                        <input type="text" name="phone" required>
-                        <!-- [TODO] Add verification for phone number -->
+                        <input type="tel" name="phone" required pattern="[0-9]*" oninput="this.setCustomValidity('')" oninvalid="this.setCustomValidity('Please enter a valid phone number (numeric only).')">
                         <label for="">Phone Number</label>
                     </div>
                 </div>
