@@ -1598,32 +1598,32 @@ input[type="submit"]:hover {
 @media (max-width: 430px) {
     .fm-main-container {
         width: 95%;
-        margin-left: 2.5%;
+        margin-left: 2%;
         margin-bottom: 90px;
     }
 
-    .fm-post-layout {
+    .fm-post-layout, .rc-post-layout {
         width: 100%;
         margin-bottom: 20px;
     }
 
-    .fm-profiledetails {
+    .fm-profiledetails, .rc-profiledetails {
         height: 40px;
         padding: 5px;
     }
 
-    #fm-post-pfp {
+    #fm-post-pfp, #rc-post-pfp {
         width: 35px;
         height: 35px;
         margin: 0 4px 4px 4px;
     }
 
-    .fm-profiledetails h1 {
+    .fm-profiledetails h1, .rc-profiledetails h1 {
         font-size: 14px;
         margin: 0 4px 0 6px;
     }
 
-    .fm-profiledetails h2 {
+    .fm-profiledetails h2, .rc-profiledetails h2 {
         font-size: 9px;
         margin: 0 3px;
     }
@@ -1632,15 +1632,15 @@ input[type="submit"]:hover {
         display: none;
     }
 
-    .fm-dropdown-content {  
+    .fm-dropdown-content, .rc-dropdown-content {  
         right: 0;
     }
 
-    .fm-like-icon-container {
+    .fm-like-icon-container, .rc-like-icon-container {
         width: 105px;
     }
 
-    .fm-comment-icon-container {
+    .fm-comment-icon-container, .rc-comment-icon-container {
         width: 125px;
     }
 
@@ -1649,7 +1649,6 @@ input[type="submit"]:hover {
 
 /* forumspecific.html */
 .fms-undo-container {
-    /* background-color: green; */
     position: absolute;
     height: 45px;
     width: 160px;
@@ -2195,7 +2194,7 @@ input[type="submit"]:hover {
     font-family: "Roboto", sans-serif;
     font-weight: bold;
     font-size: 15px;
-    color: #333333 ;
+    color: #333333;
     margin: 0 5px 0 9px;
 }
 
@@ -2316,6 +2315,27 @@ input[type="submit"]:hover {
 
 .rc-apply-button:hover {
     background-color: #0056b3;
+}
+
+@media (max-width: 430px) {
+    .rc-title-container {
+        height: 70px;
+    }
+
+    .rc-title-container h1 {
+        font-size: 22px;
+        word-spacing: 1px;
+    }
+
+    .rc-profiledetails h1 {
+        margin-left: 3px;
+        margin-right: 7px;
+        font-size: 13px;
+    }
+
+    .rc-profiledetails h2 {
+        margin: 0 3px;
+    }
 }
 
 
@@ -3614,7 +3634,6 @@ input[type="submit"]:hover {
 
 
 /* events.html */
-
 .events-card {
     display: flex;
     justify-content: space-between;
@@ -3661,6 +3680,10 @@ input[type="submit"]:hover {
     height: 150px;
     object-fit: cover;
 }
+
+
+/* applications.html (Yew Shan) */
+
 
 
 
