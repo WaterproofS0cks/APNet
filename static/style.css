@@ -1602,28 +1602,28 @@ input[type="submit"]:hover {
         margin-bottom: 90px;
     }
 
-    .fm-post-layout, .rc-post-layout {
+    .fm-post-layout {
         width: 100%;
         margin-bottom: 20px;
     }
 
-    .fm-profiledetails, .rc-profiledetails {
+    .fm-profiledetails {
         height: 40px;
         padding: 5px;
     }
 
-    #fm-post-pfp, #rc-post-pfp {
+    #fm-post-pfp {
         width: 35px;
         height: 35px;
         margin: 0 4px 4px 4px;
     }
 
-    .fm-profiledetails h1, .rc-profiledetails h1 {
+    .fm-profiledetails h1 {
         font-size: 14px;
         margin: 0 4px 0 6px;
     }
 
-    .fm-profiledetails h2, .rc-profiledetails h2 {
+    .fm-profiledetails h2 {
         font-size: 9px;
         margin: 0 3px;
     }
@@ -1632,15 +1632,15 @@ input[type="submit"]:hover {
         display: none;
     }
 
-    .fm-dropdown-content, .rc-dropdown-content {  
+    .fm-dropdown-content {  
         right: 0;
     }
 
-    .fm-like-icon-container, .rc-like-icon-container {
+    .fm-like-icon-container {
         width: 105px;
     }
 
-    .fm-comment-icon-container, .rc-comment-icon-container {
+    .fm-comment-icon-container {
         width: 125px;
     }
 
@@ -1926,7 +1926,6 @@ input[type="submit"]:hover {
 
 @media (max-width: 430px) {
     .fms-undo-container {
-        /* top: 0; */
         left: 0;
         background-color: green;
         width: 43px;
@@ -2376,6 +2375,11 @@ input[type="submit"]:hover {
 }
 
 @media (max-width: 430px) {
+    .rc-main-container {
+        margin-left: 4%;
+        width: 95%;
+    }
+
     .rc-title-container {
         height: 70px;
     }
@@ -2393,6 +2397,10 @@ input[type="submit"]:hover {
 
     .rc-profiledetails h2 {
         margin: 0 3px;
+    }
+
+    .rc-dropdown-content {  
+        right: 0;
     }
 }
 
