@@ -2970,6 +2970,26 @@ input[type="submit"]:hover {
     margin-top: 10px;
 }
 
+@media (max-width: 768px) {
+    .settings-pfp {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .settings-pfp img {
+        margin-bottom: 0;
+    }
+
+    .settings-pfp p {
+        text-align: left;
+    }
+
+    .settings-pfp input {
+        margin-top: 10px;
+        width: 100%;
+    }
+}
+
 
 
 /* notification.html */
