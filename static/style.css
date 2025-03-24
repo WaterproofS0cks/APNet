@@ -2153,20 +2153,6 @@ input[type="submit"]:hover {
         margin-top: 10px;
     }
     
-    /* nothing changed */
-    .cp-filter-container label {
-        font-size: 21px;
-    }
-    
-    /* nothing changed */
-    #cp-postSelect {
-        font-size: 16px;
-        height: 33px;
-        width: 150px;
-        margin: 0 0 4px 10px;
-        padding: 5px;
-    }
-    
     #cp-forumInputs h1, #cp-recruitmentInputs h1 { 
         font-size: 21px;
     }
@@ -2187,14 +2173,6 @@ input[type="submit"]:hover {
         height: auto;
     }
     
-    /* nothing changed */
-    .cp-forum-imagecontainer h1, .cp-recruit-imagecontainer h1 {
-        font-family: "Roboto", sans-serif;
-        font-size: 24px;
-        font-weight: normal;
-        color: #666;
-    }
-    
     .cp-forum-imagecontainer h2, .cp-recruit-imagecontainer h2 {
         margin: 4px 0 10px 0;
     }
@@ -2208,21 +2186,7 @@ input[type="submit"]:hover {
     .cp-forum-imagecontainer h3, .cp-recruit-imagecontainer h3 {
         font-size: 14px;
     }
-    
-    /* nothing changed */
-    #cp-forum-caption-text, #cp-recruit-caption-text {
-        font-family: "Roboto", sans-serif;
-        font-size: 16px;
-        text-align: justify;
-        padding: 10px;
-        width: 100%;
-        height: 270px;
-        line-height: 1.5;
-        border-color: #ccc;
-        border-radius: 8px;
-        resize: none;
-    }
-    
+
     .cp-forum-button-container, .cp-recruit-button-container {
         width: 100%;
         height: 35px;
