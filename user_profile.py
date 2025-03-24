@@ -104,3 +104,7 @@ def bookmarkedPosts():
 @user_profile.route('/applications', methods=['POST', 'GET'])
 def applications():
     return render_template("applications.html")
+
+@user_profile.route('/otherprofile', methods=['POST', 'GET'])
+def otherProfile():
+    return render_template("otherprofile.html")

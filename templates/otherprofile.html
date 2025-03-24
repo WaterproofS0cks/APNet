@@ -1,5 +1,5 @@
 {% extends "header-b.html" %}
-{% block title %}Profile{% endblock title %}
+{% block title %}Other Profile{% endblock title %}
 {% block content %}
 <body>
     <div class="content-card">
@@ -11,12 +11,7 @@
                 <h2>{{ name }}</h2>
                 <p>{{ bio }}</p>
             </div>
-            <div class="profile-btn">
-                <div class="profile-btn-group">
-                    <a href="settings" class="btn-icon">
-                        <img src="{{ url_for('static', filename='src/icon/icons8-settings-96.png') }}" alt="Settings Icon">
-                    </a>
-                </div>
+            <div class="profile-btn" style="margin-top: 107px;">
                 {% if link %}
                 <a href="{{ link }}" target="_blank" style="text-decoration: none;">
                     <button class="button-black">
@@ -26,19 +21,6 @@
                 {% endif %}
             </div>
         </div>
-
-        <div class="navigation">
-            <a href="likes" class="button-black" style="text-decoration: none;">Likes</a>
-            <a href="bookmarks" class="button-black" style="text-decoration: none;">Bookmarks</a>
-            <a href="events" class="button-black" style="text-decoration: none;">Events</a>
-            <a href="applications" class="button-black" style="text-decoration: none;">Applications</a>
-        </div>
-
-        <!-- <div class="post">
-            <div class="post-title">
-                <h3>You have not posted anything yet.</h3>
-            </div>
-        </div> -->
 
         <div class="post">
             <div class="post-attr">
