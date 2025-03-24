@@ -3512,6 +3512,7 @@ input[type="submit"]:hover {
 
 .card-filter {
     margin-bottom: 30px;
+    width: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -3597,6 +3598,18 @@ input[type="submit"]:hover {
         display: block;
     }
 }
+
+@media (max-width: 430px) {
+    #dashboard-content-card {
+        margin-bottom: 110px;
+    }
+
+    #database, #filter {
+        width: 100%;
+    }
+}
+
+
 
 
 
