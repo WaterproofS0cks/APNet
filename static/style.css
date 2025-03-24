@@ -2942,6 +2942,34 @@ input[type="submit"]:hover {
     align-items: center;
 }
 
+.settings-pfp {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.settings-pfp img {
+    width: 150px;
+    height: 150px;
+    border-radius: 100%;
+    object-fit: cover;
+    margin-bottom: 20px;
+}
+
+.settings-pfp div {
+    display: flex;
+    flex-direction: column;
+}
+
+.settings-pfp p {
+    margin-left: 10px;
+    word-wrap: break-word;
+}
+
+.settings-pfp input {
+    margin-top: 10px;
+}
+
 
 
 /* notification.html */

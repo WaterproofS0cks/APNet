@@ -13,7 +13,13 @@
             <h3>Profile</h3>
             <form action="/user/updateProfile" method="POST">
                 <label for="pfp">Profile Picture</label>
-                <input type="file" id="pfp" name="pfp" accept=".jpg, .jpeg, .png">
+                <div class="settings-pfp">
+                    <img src="{{ session.get('pfp') }}" alt="User Profile">
+                    <div>
+                        <p>Use a picture in the JPG, JPEG, or PNG format. Please ensure that your picture adheres to the APNet Community Guidelines.</p>
+                        <input type="file" id="pfp" name="pfp" accept=".jpg, .jpeg, .png">
+                    </div>
+                </div>
                 <label for="username">Username</label>
                 <input type="text" id="username" name="username">
                 <p style="width: 90%; margin-top: -10px; margin-bottom: 10px; color: red;">{{erruser}}</p>
