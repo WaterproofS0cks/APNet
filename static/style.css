@@ -4073,6 +4073,11 @@ input[type="submit"]:hover {
     object-fit: cover;
 }
 
+.applications-card-url {
+    text-decoration: none;
+    color: inherit;
+}
+
 @media (max-width: 430px) {
     .applications-content-card {
         width: 90%;

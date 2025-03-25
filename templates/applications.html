@@ -10,30 +10,44 @@
             <h2>Applications</h2>
         </div>
 
-        <div class="activity-card">
-            <div class="activity-flex">
-                <div class="activity-attr">
-                    <h3>Joined Applications</h3>
-                    <p>Click here to view all the applications that you have joined.</p>
-                </div>
-                <div class="applications-menu-img">
-                    <img src="{{ url_for('static', filename='src/icon/noun-summary-3082102-black.png') }}" alt="Joined Applications">
+        <a href="applications/applied" class="applications-card-url">
+            <div class="activity-card" id="applicationCard">
+                <div class="activity-flex">
+                    <div class="activity-attr">
+                        <h3>Applied</h3>
+                        <p>Click here to view all the applications that you have applied.</p>
+                    </div>
+                    <div class="applications-menu-img">
+                        <img src="{{ url_for('static', filename='src/icon/noun-summary-3082102-black.png') }}" alt="Joined Applications">
+                    </div>
                 </div>
             </div>
-        </div>
+        </a>
 
-        <div class="activity-card">
-            <div class="activity-flex">
-                <div class="activity-attr">
-                    <h3>Created Applications</h3>
-                    <p>Click here to view all the applications that you have created.</p>
-                </div>
-                <div class="applications-menu-img">
-                    <img src="{{ url_for('static', filename='src/icon/noun-add-notes-3971091-black.png') }}" alt="Created Applications">
+        <a href="applications/created" class="applications-card-url">
+            <div class="activity-card">
+                <div class="activity-flex">
+                    <div class="activity-attr">
+                        <h3>Created</h3>
+                        <p>Click here to view all the applications that you have created.</p>
+                    </div>
+                    <div class="applications-menu-img">
+                        <img src="{{ url_for('static', filename='src/icon/noun-add-notes-3971091-black.png') }}" alt="Created Applications">
+                    </div>
                 </div>
             </div>
-        </div>
+        </a>
 
     </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const appDiv = document.querySelector('#applicationCard');
+
+            appDiv.addEventListener('click', function() {
+                console.log('Div was clicked!');
+            });
+        });
+    </script>
 </body>
 {% endblock content %}
