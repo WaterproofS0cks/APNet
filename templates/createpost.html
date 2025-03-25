@@ -199,32 +199,32 @@
         </div>
 
         <!-- FORUM FIELDS -->
-        <form action="POST" id="cp-forum-form">
+        <form action="/upload" method="POST" enctype="multipart/form-data" id="cp-forum-form">
             <div id="cp-forumInputs">
-
                 <h1>Image</h1>
                 <div id="cp-forum-drop-area">
                     <div class="cp-forum-imagecontainer" id="cp-forum-imageview">
-                        <input type="file" accept="image/*" id="cp-forum-input-file" hidden>
+                        <input type="file" accept="image/*" id="cp-forum-input-file" name="file">
                         <img src="../static/src/icon/icons8-upload-to-cloud-100.png" alt="Cloud" id="cp-forum-cloudimg" draggable="false">
                         <h1>Drag file to upload</h1>
                         <h2>or</h2>
-                        <button id="cp-forum-browsefilesbutton" onclick="document.getElementById('cp-forum-input-file').click(); return false;">Browse Files</button>
+                        <button type="button" id="cp-forum-browsefilesbutton" onclick="document.getElementById('cp-forum-input-file').click();">Browse Files</button>
                         <h3>Max file size: <b>100MB</b></h3>
                         <h3>Supported file types: <b>JPG, JPEG, PNG, GIF</b></h3>
                     </div>
                 </div>
-
+        
                 <h1>Caption <span class="cp-required">*</span></h1>
-                <textarea name="" id="cp-forum-caption-text" placeholder="Enter your caption here..."></textarea>
+                <textarea name="caption" id="cp-forum-caption-text" placeholder="Enter your caption here..."></textarea>
+        
                 <div class="cp-forum-button-container">
-                    <button class="cp-forum-post-button" id="cp-post-button">Post</button>
+                    <button class="cp-forum-post-button" id="cp-post-button" type="submit">Post</button>
                 </div>
             </div>
         </form>
 
         <!-- RECRUITMENT FIELDS -->
-        <form action="POST" id="cp-recruitment-form">
+        <form action="/upload" method="POST" enctype="multipart/form-data" id="cp-recruitment-form">
             <div id="cp-recruitmentInputs">
 
                 <h1>Title <span class="cp-required">*</span></h1>
@@ -378,48 +378,6 @@
         inputFileRecruit.addEventListener("change", uploadRecruitImage);
 
         window.onload = updateInputs;
-
-
-        document.addEventListener("DOMContentLoaded", function () {
-            document.getElementById("cp-recruit-button").addEventListener("click", function (event) {
-                event.preventDefault(); 
-                sendFormData();
-            });
-
-            function sendFormData() {
-                let formData = new FormData();
-                const postType = document.getElementById("cp-postSelect").value;
-                formData.append("post_type", postType);
-
-                if (postType === "forum") {
-                    formData.append("caption", document.getElementById("cp-forum-caption-text").value);
-                    const fileInput = document.getElementById("cp-forum-input-file").files[0];
-                    if (fileInput) formData.append("image", fileInput);
-                } else if (postType === "recruitment") {
-                    formData.append("title", document.getElementById("cp-recruit-title-text").value);
-                    formData.append("caption", document.getElementById("cp-recruit-caption-text").value);
-                    const fileInput = document.getElementById("cp-recruit-input-file").files[0];
-                    if (fileInput) formData.append("image", fileInput);
-                }
-
-                fetch("/uploadpost", {
-                    method: "POST",
-                    body: formData
-                })
-                .then(response => response.json())
-                .then(data => {
-                    if (data.success) {
-                        alert("Post created successfully!");
-                    } else {
-                        alert("Error creating post: " + data.message);
-                    }
-                })
-                .catch(error => {
-                    console.error("Error:", error);
-                    alert("An error occurred while creating the post.");
-                });
-            }
-        });
     </script>
 
 </body>

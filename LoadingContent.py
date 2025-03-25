@@ -321,23 +321,22 @@ class Content():
         )
 
         for entry in load_reported_post_data:
-            post_data = None
 
-            if entry["type"] == "Forum":
-                post_data = db_retrieve.retrieve_one(
-                    tablename="Post",
-                    columns="postContent", 
-                    condition="postid = %s",
-                    params=(entry["placementid"],)
-                )
+            # if entry["type"] == "Forum":
+            #     post_data = db_retrieve.retrieve_one(
+            #         tablename="Post",
+            #         columns="postContent", 
+            #         condition="postid = %s",
+            #         params=(entry["placementid"],)
+            #     )
 
-            elif entry["type"] == "Recruitment":
-                post_data = db_retrieve.retrieve_one(
-                    tablename="Recruitment",
-                    columns="recruitmentDetails", 
-                    condition="recruitmentid = %s",
-                    params=(entry["placementid"],)
-                )
+            # elif entry["type"] == "Recruitment":
+            #     post_data = db_retrieve.retrieve_one(
+            #         tablename="Recruitment",
+            #         columns="recruitmentDetails", 
+            #         condition="recruitmentid = %s",
+            #         params=(entry["placementid"],)
+            #     )
 
             # if post_data:
             #     post_content = post_data.get("postContent") or post_data.get("recruitmentDetails")

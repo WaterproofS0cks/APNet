@@ -79,18 +79,30 @@ def specific_post():
 def create_post():
     return render_template('createpost.html')
 
+@app.route('/upload', methods=["GET", "POST"])
 def upload_post():
-    post_type = request.form["post_type"]
-    user_id = request.form["userID"]
-    caption = request.form["caption"]
-    title = request.form.get("title")
-    file = request.files.get("image")
-    filename = uploader.upload(file) if file else None
-
     try:
+        post_type = request.form["post_type"]
+        user_id = request.form.get("userID", None)
+        caption = request.form["caption"]
+        title = request.form.get("title", None)
+        file = request.files.get("image")
+
+        if not caption:
+            raise ValueError("Caption is required.")
+        
+        filename = None
+        if file:
+            filename = uploader.upload(file)
+
+        print("HEYHEYHEY")
+        print(request.form)
+
         if post_type == "forum":
-            dbInsert.insert("Post", [user_id, caption, filename])
+            dbInsert.insert("Post", [1, caption, filename])
         elif post_type == "recruitment":
+            if not title:
+                raise ValueError("Title is required for recruitment posts.")
             dbInsert.insert("Post", [user_id, title, caption, filename])
 
         return jsonify({"success": True, "filename": filename})
