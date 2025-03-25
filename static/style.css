@@ -2538,7 +2538,7 @@ input[type="submit"]:hover {
 
 .rca-desc-container {
     width: 100%;
-    height: auto; /* Allow height to adjust based on content */
+    height: auto;
 }
 
 .rca-desc-container h2 {
@@ -2583,8 +2583,51 @@ input[type="submit"]:hover {
     transition: background-color 0.3s;
 }
 
-/* profile.html */
+@media (max-width: 430px) {
+    .rca-image-container {
+        display: none;
+    }
 
+    #rca-form {
+        display: flex;
+        width: 95%;
+        margin: 100px auto;
+        overflow-y: scroll;
+    }
+    
+    .rca-content-container {
+        border-left: 0px;
+    }
+
+    .rca-top-container {
+        height: 50px;
+    }
+    
+    .rca-title-container {
+        width: 75%;
+    }
+
+    .rca-title-container h2 {
+        font-size: 28px;
+    }
+
+    .rca-back-container {
+        justify-content: flex-end;
+    }
+
+    .rca-back-container h2 {
+        display: none;
+    }
+
+    #rca-undoicon {
+        margin-right: 0;
+        width: 40px;
+        height: auto;
+    }
+}
+
+
+/* profile.html */
 .profile {
     display: flex;
     margin-bottom: 20px;
