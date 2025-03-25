@@ -185,22 +185,22 @@
     <!-- CREATE POST CONTENT -->
     <div class="efp-main-container">
         <div class="efp-title-container">
-            <h1>Create Post</h1>
+            <h1>Edit Forum Post</h1>
         </div>
 
         <!-- FORUM FIELDS -->
         <form action="/upload" method="POST" enctype="multipart/form-data" id="efp-forum-form">
             <div id="efp-forumInputs">
-                <h1>Image</h1>
+
+                <div class="efp-image-title-container">
+                    <h1>Image</h1>
+                    <input type="file" id="efp-changeimage-button" hidden>
+                    <label for="efp-changeimage-button" class="efp-change-button">Change</label>
+                </div>
+
                 <div id="efp-forum-drop-area">
                     <div class="efp-forum-imagecontainer" id="efp-forum-imageview">
-                        <input type="file" accept="image/*" id="efp-forum-input-file" name="file" hidden>
-                        <img src="../static/src/icon/icons8-upload-to-cloud-100.png" alt="Cloud" id="efp-forum-cloudimg" draggable="false">
-                        <h1>Drag file to upload</h1>
-                        <h2>or</h2>
-                        <button type="button" id="efp-forum-browsefilesbutton" onclick="document.getElementById('efp-forum-input-file').click();">Browse Files</button>
-                        <h3>Max file size: <b>100MB</b></h3>
-                        <h3>Supported file types: <b>JPG, JPEG, PNG, GIF</b></h3>
+                        <img src="../static/src/img/randomimage1.jpg" alt="">
                     </div>
                 </div>
         
