@@ -4012,7 +4012,7 @@ input[type="submit"]:hover {
 @media (max-width: 430px) {
     .applications-content-card {
         width: 90%;
-        margin-bottom: 120px;
+        margin-bottom: 100px;
     }
 
     .applicant-flex {
