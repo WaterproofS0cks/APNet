@@ -10,7 +10,7 @@ from datetime import datetime, timedelta
 from ConnectDatabase import dbConnection
 from RetrieveDatabase import dbRetrieve
 from CreateDatabase import dbCreate
-from UpdateDatabase import dbModify, imageUploader, dbInsert
+from UpdateDatabase import dbModify, ImageUploader, dbInsert
 from ChartDatabase import dbChart
 from LoadingContent import Content
 
@@ -41,7 +41,7 @@ db_create.create_database()
 db_conn.commit()
 db_conn.close()
 
-uploader = imageUploader(app.config["UPLOAD_FOLDER"])
+uploader = ImageUploader(app.config["UPLOAD_FOLDER"])
 
 @app.route("/session")
 def check_session():
