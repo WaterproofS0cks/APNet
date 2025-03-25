@@ -81,7 +81,7 @@ def register():
     else:
         return render_template("register.html")
 
-@auth.route('/resetpassword', methods=["POST", "GET"])
+@auth.route('/resetpassword/1', methods=["POST", "GET"])
 def resetpassword():
     if request.method == "POST":
         email = request.form['email']
@@ -108,7 +108,7 @@ If you did not attempt to reset your password. Please ignore this message."""
     else:
         return render_template("resetpassword.html")
 
-@auth.route("/resetpassword/code", methods=["POST", "GET"])
+@auth.route("/resetpassword/2", methods=["POST", "GET"])
 def resetpassword_code():
     #[TODO] REMOVE  or 1 == 1
     if "target_email" in session:
@@ -122,7 +122,7 @@ def resetpassword_code():
     else:
         return redirect(url_for(".resetpassword"))
     
-@auth.route("/resetpassword/new-password", methods=['POST', 'GET'])
+@auth.route("/resetpassword/3", methods=['POST', 'GET'])
 def resetpassword_password():
     #[TODO] REMOVE  or 1 == 1
     if "target_email" in session:
@@ -140,7 +140,7 @@ def resetpassword_password():
     else:
         return redirect(url_for(".resetpassword"))
     
-@auth.route("/resetpassword/complete", methods=['GET'])
+@auth.route("/resetpassword/4", methods=['GET'])
 def resetpassword_complete():
     return render_template("resetpassword_complete.html")
     
