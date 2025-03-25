@@ -34,13 +34,14 @@ app = Flask(__name__)
 app.register_blueprint(auth, url_prefix="/auth")
 app.register_blueprint(user_profile, url_prefix="/user")
 app.secret_key = SECRET_KEY
+app.config["UPLOAD_FOLDER"] = os.path.join("static", "src", "img")
 app.permanent_session_lifetime = timedelta(days=1)
 
 db_create.create_database()
 db_conn.commit()
 db_conn.close()
 
-
+uploader = imageUploader(app.config["UPLOAD_FOLDER"])
 
 @app.route("/session")
 def check_session():
@@ -82,8 +83,9 @@ def upload_post():
     post_type = request.form["post_type"]
     user_id = request.form["userID"]
     caption = request.form["caption"]
-    title = request.form.get("title") 
-    filename, _ = imageUploader.upload(request.files.get("image")) if "image" in request.files else (None, None)
+    title = request.form.get("title")
+    file = request.files.get("image")
+    filename = uploader.upload(file) if file else None
 
     try:
         if post_type == "forum":
