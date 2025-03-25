@@ -83,7 +83,7 @@ def create_post():
 def upload_post():
     try:
         post_type = request.form["post_type"]
-        user_id = request.form.get("userID", None)
+        user_id = request.form.get("userID", 1)
         caption = request.form["caption"]
         title = request.form.get("title", None)
         file = request.files.get("image")

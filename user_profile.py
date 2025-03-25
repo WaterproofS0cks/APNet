@@ -101,9 +101,20 @@ def likedPosts():
 def bookmarkedPosts():
     return render_template("bookmarkedposts.html")
 
+
+# Applications pages flow
 @user_profile.route('/applications', methods=['POST', 'GET'])
 def applications():
     return render_template("applications.html")
+
+@user_profile.route('/applications/joined', methods=['POST', 'GET'])
+def applicationsJoined():
+    return render_template("applications_joined.html")
+
+@user_profile.route('/applications/created', methods=['POST', 'GET'])
+def applicationsCreated():
+    return render_template("applications_created.html")
+
 
 @user_profile.route('/otherprofile', methods=['POST', 'GET'])
 def otherProfile():
