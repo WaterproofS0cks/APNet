@@ -34,7 +34,7 @@
             <div class="ha-right-container">
 
                 <div class="ha-createpost-container">
-                    <a href="/create">                        
+                    <a href="forumspecific.html">                        
                         <img src="../static/src/icon/icons8-plus-48.png" alt="Plus" id="ha-plusicon">
                         <h2>Create Post</h2>
                     </a>
@@ -183,78 +183,35 @@
     </div>
 
     <!-- CREATE POST CONTENT -->
-    <div class="cp-main-container">
-        <div class="cp-title-container">
+    <div class="efp-main-container">
+        <div class="efp-title-container">
             <h1>Create Post</h1>
-        </div>
-        
-        <div class="cp-filter-container">
-
-            <label for="cp-postSelect">Type of Post:</label>
-            <select id="cp-postSelect" onchange="updateInputs()">
-                <option value="forum">Forum</option>
-                <option value="recruitment">Recruitment</option>
-            </select>
-
         </div>
 
         <!-- FORUM FIELDS -->
-        <form action="/upload" method="POST" enctype="multipart/form-data" id="cp-forum-form">
-            <input type="hidden" name="post_type" value="forum">
-            <div id="cp-forumInputs">
+        <form action="/upload" method="POST" enctype="multipart/form-data" id="efp-forum-form">
+            <div id="efp-forumInputs">
                 <h1>Image</h1>
-                <div id="cp-forum-drop-area">
-                    <div class="cp-forum-imagecontainer" id="cp-forum-imageview">
-                        <input type="file" accept="image/*" id="cp-forum-input-file" name="file" hidden>
-                        <img src="../static/src/icon/icons8-upload-to-cloud-100.png" alt="Cloud" id="cp-forum-cloudimg" draggable="false">
+                <div id="efp-forum-drop-area">
+                    <div class="efp-forum-imagecontainer" id="efp-forum-imageview">
+                        <input type="file" accept="image/*" id="efp-forum-input-file" name="file" hidden>
+                        <img src="../static/src/icon/icons8-upload-to-cloud-100.png" alt="Cloud" id="efp-forum-cloudimg" draggable="false">
                         <h1>Drag file to upload</h1>
                         <h2>or</h2>
-                        <button type="button" id="cp-forum-browsefilesbutton" onclick="document.getElementById('cp-forum-input-file').click();">Browse Files</button>
+                        <button type="button" id="efp-forum-browsefilesbutton" onclick="document.getElementById('efp-forum-input-file').click();">Browse Files</button>
                         <h3>Max file size: <b>100MB</b></h3>
                         <h3>Supported file types: <b>JPG, JPEG, PNG, GIF</b></h3>
                     </div>
                 </div>
         
-                <h1>Caption <span class="cp-required">*</span></h1>
-                <textarea name="caption" id="cp-forum-caption-text" placeholder="Enter your caption here..."></textarea>
+                <h1>Caption <span class="efp-required">*</span></h1>
+                <textarea name="caption" id="efp-forum-caption-text" placeholder="Enter your caption here..."></textarea>
         
-                <div class="cp-forum-button-container">
-                    <button class="cp-forum-post-button" id="cp-post-button" type="submit">Post</button>
+                <div class="efp-forum-button-container">
+                    <button class="efp-forum-post-button" id="efp-post-button" type="submit">Post</button>
                 </div>
             </div>
         </form>
-
-        <!-- RECRUITMENT FIELDS -->
-        <form action="/upload" method="POST" enctype="multipart/form-data" id="cp-recruitment-form">
-            <input type="hidden" name="post_type" value="recruitment">
-            <div id="cp-recruitmentInputs">
-
-                <h1>Title <span class="cp-required">*</span></h1>
-                <input type="text" id="cp-recruit-title-text" placeholder="Enter your title here...">
-
-                <h1>Image</h1>
-                <div id="cp-recruit-drop-area">
-                    <div class="cp-recruit-imagecontainer" id="cp-recruit-imageview">
-                        <input type="file" accept="image/*" id="cp-recruit-input-file" hidden>
-                        <img src="../static/src/icon/icons8-upload-to-cloud-100.png" alt="Cloud" id="cp-recruit-cloudimg">
-                        <h1>Drag file to upload</h1>
-                        <h2>or</h2>
-                        <button id="cp-recruit-browsefilesbutton" onclick="document.getElementById('cp-recruit-input-file').click(); return false;">Browse Files</button>
-                        <h3>Max file size: <b>100MB</b></h3>
-                        <h3>Supported file types: <b>JPG, JPEG, PNG, GIF</b></h3>
-                    </div>
-                </div>
-
-                <h1>Caption <span class="cp-required">*</span></h1>
-                <textarea name="" id="cp-recruit-caption-text" placeholder="Enter your caption here..."></textarea>
-
-                <div class="cp-recruit-button-container">
-                    <button class="cp-recruit-post-button" id="cp-recruit-button">Post</button>
-                </div>
-
-            </div>
-         </form>
-
     </div>
 
     <footer>
@@ -287,15 +244,15 @@
 
 
     <script>
-        const dropAreaForum = document.getElementById('cp-forum-drop-area');
-        const inputFileForum = document.getElementById('cp-forum-input-file');
-        const imageViewForum = document.getElementById('cp-forum-imageview');
+        const dropAreaForum = document.getElementById('efp-forum-drop-area');
+        const inputFileForum = document.getElementById('efp-forum-input-file');
+        const imageViewForum = document.getElementById('efp-forum-imageview');
 
         function updateInputs() {
-            const postSelect = document.getElementById('cp-postSelect');
-            const forumInputs = document.getElementById('cp-forum-form');
-            const recruitmentInputs = document.getElementById('cp-recruitment-form');
-            const mainContainer = document.querySelector('.cp-main-container');
+            const postSelect = document.getElementById('efp-postSelect');
+            const forumInputs = document.getElementById('efp-forum-form');
+            const recruitmentInputs = document.getElementById('efp-recruitment-form');
+            const mainContainer = document.querySelector('.efp-main-container');
 
             if (postSelect.value === 'forum') {
                 forumInputs.style.display = 'block'; 
@@ -333,9 +290,9 @@
             uploadForumImage();
         }
 
-        const dropAreaRecruit = document.getElementById('cp-recruit-drop-area');
-        const inputFileRecruit = document.getElementById('cp-recruit-input-file');
-        const imageViewRecruit = document.getElementById('cp-recruit-imageview');
+        const dropAreaRecruit = document.getElementById('efp-recruit-drop-area');
+        const inputFileRecruit = document.getElementById('efp-recruit-input-file');
+        const imageViewRecruit = document.getElementById('efp-recruit-imageview');
 
         function uploadRecruitImage() {
             if (inputFileRecruit.files.length > 0) {
