@@ -119,7 +119,7 @@ class dbCreate:
             CREATE TABLE IF NOT EXISTS Reports (
                 reportID SERIAL PRIMARY KEY,
                 placementID INT NOT NULL,
-                type VARCHAR(20) CHECK (penaltyType IN ('User', 'Forum', 'Recruitment'))     
+                type VARCHAR(20) CHECK (type IN ('User', 'Forum', 'Recruitment')),     
                 description TEXT,
                 timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
                 status VARCHAR(10) CHECK (status IN ('Processing', 'Accepted', 'Rejected'))
