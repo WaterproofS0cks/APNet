@@ -10,7 +10,7 @@ body {
     font-family: Arial, sans-serif;
 }
 
-.content-card {
+.content-card, .applications-content-card {
     max-width: 800px;
     margin: 120px auto 20px auto;
     padding: 20px;
@@ -3991,7 +3991,30 @@ input[type="submit"]:hover {
     text-decoration: underline;
 }
 
+.applications-activity-img-responsive {
+    display: none;
+}
+
+.applications-activity-img {
+    display: flex;
+    flex-shrink: 0;
+    margin-left: 20px;
+}
+
+.applications-activity-img img {
+    width: 300px;
+    height: 150px;
+    object-fit: cover;
+}
+
+
+
 @media (max-width: 430px) {
+    .applications-content-card {
+        width: 90%;
+        margin-bottom: 120px;
+    }
+
     .applicant-flex {
         flex-direction: column;
         align-items: center;
@@ -3999,6 +4022,25 @@ input[type="submit"]:hover {
 
     .applicant-card {
         width: 100%;
+    }
+
+    .applications-activity-img-responsive {
+        display: flex;
+        flex-shrink: 0;
+    }
+
+    .applications-activity-img-responsive img {
+        width: 270px;
+        height: 135px;
+        margin: 10px 0;
+    }
+    
+    .applications-activity-img {
+        display: none;
+    }
+
+    #applicant-view {
+        margin-top: 25px;
     }
 }
 
