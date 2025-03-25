@@ -49,7 +49,7 @@ class dbCreate:
             CREATE TABLE IF NOT EXISTS RecruitmentComment (
                 recruitmentCommentID SERIAL PRIMARY KEY,       
                 userID INT NOT NULL REFERENCES Users(userID),
-                recruitmentID INT NOT NULL REFERENCES Recruitment(recruitmentID),
+                recruitmentID INT NOT NULL REFERENCES Recruitment(recruitmentID) ON DELETE CASCADE,
                 comment TEXT NOT NULL,
                 timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP
             );
@@ -59,7 +59,7 @@ class dbCreate:
         self.execute_query("""
             CREATE TABLE IF NOT EXISTS RecruitmentEngagement (
                 userID INT NOT NULL REFERENCES Users(userID),
-                recruitmentID INT NOT NULL REFERENCES Recruitment(recruitmentID),
+                recruitmentID INT NOT NULL REFERENCES Recruitment(recruitmentID) ON DELETE CASCADE,
                 bookmark BOOLEAN DEFAULT FALSE,
                 liked BOOLEAN DEFAULT FALSE,
                 PRIMARY KEY (userID, recruitmentID)
@@ -97,7 +97,7 @@ class dbCreate:
             CREATE TABLE IF NOT EXISTS PostComment (
                 postCommentID SERIAL PRIMARY KEY,       
                 userID INT NOT NULL REFERENCES Users(userID),
-                postID INT NOT NULL REFERENCES Post(postID),
+                postID INT NOT NULL REFERENCES Post(postID) ON DELETE CASCADE,
                 comment TEXT NOT NULL,
                 timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP
             );
@@ -107,7 +107,7 @@ class dbCreate:
         self.execute_query("""
             CREATE TABLE IF NOT EXISTS PostEngagement (
                 userID INT NOT NULL REFERENCES Users(userID),
-                postID INT NOT NULL REFERENCES Post(postID),
+                postID INT NOT NULL REFERENCES Post(postID) ON DELETE CASCADE,
                 bookmark BOOLEAN DEFAULT FALSE,
                 liked BOOLEAN DEFAULT FALSE,
                 PRIMARY KEY (userID, postID)
@@ -118,8 +118,8 @@ class dbCreate:
         self.execute_query("""
             CREATE TABLE IF NOT EXISTS Reports (
                 reportID SERIAL PRIMARY KEY,
-                userID INT NOT NULL REFERENCES Users(userID),
-                reportedUserID INT REFERENCES Users(userID) ON DELETE SET NULL,
+                placementID INT NOT NULL,
+                type VARCHAR(20) CHECK (penaltyType IN ('User', 'Forum', 'Recruitment'))     
                 description TEXT,
                 timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
                 status VARCHAR(10) CHECK (status IN ('Processing', 'Accepted', 'Rejected'))
@@ -131,10 +131,10 @@ class dbCreate:
             CREATE TABLE IF NOT EXISTS PenaltyHistory (
                 penaltyID SERIAL PRIMARY KEY,
                 userID INT NOT NULL REFERENCES Users(userID),
-                reportID INT NOT NULL REFERENCES Reports(reportID),
+                reportID INT NOT NULL REFERENCES Reports(reportID) ON DELETE CASCADE,
+                description TEXT,
                 timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-                issuedBy INT NOT NULL REFERENCES Users(userID),
-                penaltyType VARCHAR(20) CHECK (penaltyType IN ('Banned', 'Muted', 'Delete Post', 'Delete Recruitment'))
+                penaltyType VARCHAR(20) CHECK (penaltyType IN ('Banned', 'Muted'))
             );
         """)
 

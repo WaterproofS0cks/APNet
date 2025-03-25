@@ -206,7 +206,7 @@
                 <div id="cp-forum-drop-area">
                     <div class="cp-forum-imagecontainer" id="cp-forum-imageview">
                         <input type="file" accept="image/*" id="cp-forum-input-file" hidden>
-                        <img src="../static/src/icon/icons8-upload-to-cloud-100.png" alt="Cloud" id="cp-forum-cloudimg">
+                        <img src="../static/src/icon/icons8-upload-to-cloud-100.png" alt="Cloud" id="cp-forum-cloudimg" draggable="false">
                         <h1>Drag file to upload</h1>
                         <h2>or</h2>
                         <button id="cp-forum-browsefilesbutton" onclick="document.getElementById('cp-forum-input-file').click(); return false;">Browse Files</button>
@@ -378,6 +378,49 @@
         inputFileRecruit.addEventListener("change", uploadRecruitImage);
 
         window.onload = updateInputs;
+
+
+        document.addEventListener("DOMContentLoaded", function () {
+            document.getElementById("cp-recruit-button").addEventListener("click", function (event) {
+                event.preventDefault(); 
+                sendFormData();
+            });
+
+            function sendFormData() {
+                let formData = new FormData();
+                const postType = document.getElementById("cp-postSelect").value;
+                formData.append("post_type", postType);
+
+                if (postType === "forum") {
+                    formData.append("caption", document.getElementById("cp-forum-caption-text").value);
+                    const fileInput = document.getElementById("cp-forum-input-file").files[0];
+                    if (fileInput) formData.append("image", fileInput);
+                } else if (postType === "recruitment") {
+                    formData.append("title", document.getElementById("cp-recruit-title-text").value);
+                    formData.append("caption", document.getElementById("cp-recruit-caption-text").value);
+                    const fileInput = document.getElementById("cp-recruit-input-file").files[0];
+                    if (fileInput) formData.append("image", fileInput);
+                }
+
+                fetch("/uploadpost", {
+                    method: "POST",
+                    body: formData
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        alert("Post created successfully!");
+                    } else {
+                        alert("Error creating post: " + data.message);
+                    }
+                })
+                .catch(error => {
+                    console.error("Error:", error);
+                    alert("An error occurred while creating the post.");
+                });
+            }
+        });
     </script>
+
 </body>
 </html>

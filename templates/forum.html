@@ -353,6 +353,19 @@
                 : "../static/src/icon/icons8-bookmark-50.png";
         }
         
+        async function checkSession() {
+            try {
+                let response = await fetch("/session");
+                let data = await response.json();
+
+                if (data.session) {
+                    window.location.href = "/auth/register";
+                    return;
+                }
+            } catch (error) {
+                console.error("It Is A Session Error... AGAIN!", error);
+            }
+        }
 
         // 3 Dot Menu Filter
         function filter3DotMenu(loggedInUserId) {
@@ -428,19 +441,17 @@
 
                 if (!postId || !action) return;
 
-                console.log(action); //Remove Later
-                console.log(postId);
-                console.log(actionContainer);
+                checkSession();
                 if (action === "liked" || action === "bookmark") {
                     fetch("/engagement", {
                         method: "POST",
                         headers: { "Content-Type": "application/json" },
                         body: JSON.stringify({ post_id: postId, action: action }),
                     })
-                    .then((response) => response.json())
-                    .then((data) => {
-                        if (data.error) {
-                            alert(data.error);
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.redirect) {
+                            window.location.href = data.redirect;
                             return;
                         }
 

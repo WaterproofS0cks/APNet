@@ -133,29 +133,7 @@
                     <div class="dashboard-column-lg">
                         <div class="dashboard-card">
                             <div style="overflow-x:auto;">
-                                <table class="dashboard-table">
-                                    <tr>
-                                        <th>Username</th>
-                                        <th>Reason</th>
-                                        <th>Option</th>
-                                    </tr>
-                                    <tr>
-                                        <td>ProlexicGT</td>
-                                        <td>Hate Speech & Discrimination</td>
-                                        <td><u>Ban</u></td>
-                                    </tr>
-                                    <tr>
-                                        <td>WaterproofSocks</td>
-                                        <td>Harassment & Bullying</td>
-                                        <td><u>Ban</u></td>
-                                    </tr>
-                                    <tr>
-                                        <td>HyperUniverse1st</td>
-                                        <td>Spam & Fake Accounts</td>
-                                        <td><u>Ban</u></td>
-                                    </tr>
-                                    <!-- Add a new entry here -->
-                                </table>
+                                <div id="reported-users-container"></div>
                             </div>
                         </div>
                     </div>
@@ -167,29 +145,7 @@
                     <div class="dashboard-column-lg">
                         <div class="dashboard-card">
                             <div style="overflow-x:auto;">
-                                <table class="dashboard-table">
-                                    <tr>
-                                        <th>Title</th>
-                                        <th>Reason</th>
-                                        <th>Option</th>
-                                    </tr>
-                                    <tr>
-                                        <td>Post title 1</td>
-                                        <td>This is a reason 1</td>
-                                        <td><u>Remove</u></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Post title 2</td>
-                                        <td>This is a reason 2</td>
-                                        <td><u>Remove</u></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Post title 3</td>
-                                        <td>This is a reason 3</td>
-                                        <td><u>Remove</u></td>
-                                    </tr>
-                                    <!-- Add a new entry here -->
-                                </table>
+                                <div id="reported-posts-container"></div>
                             </div>
                         </div>
                     </div>
@@ -201,19 +157,7 @@
                     <div class="dashboard-column-lg">
                         <div class="dashboard-card">
                             <div style="overflow-x:auto;">
-                                <table class="dashboard-table">
-                                    <tr>
-                                        <th>Username</th>
-                                        <th>Reason</th>
-                                        <th>Option</th>
-                                    </tr>
-                                    <tr>
-                                        <td>JavaRuntime</td>
-                                        <td>Violent or Graphic Content</td>
-                                        <td><u>Unban</u></td>
-                                    </tr>
-                                    <!-- Add a new entry here -->
-                                </table>
+                                <div id="penalized-users-container"></div>
                             </div>
                         </div>
                     </div>
@@ -256,6 +200,60 @@
             });
         });
 
+
+        document.addEventListener("DOMContentLoaded", function () {
+            fetch('/load_tables')
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('penalized-users-container').innerHTML = data.penalized_users;
+                    document.getElementById('reported-users-container').innerHTML = data.reported_users;
+                    document.getElementById('reported-posts-container').innerHTML = data.reported_posts;
+                })
+                .catch(error => console.error('Error loading tables:', error));
+});
     </script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            document.body.addEventListener("click", function (event) {
+                if (event.target.tagName === "U") {
+                    const action = event.target.getAttribute("data-action");
+                    const userId = event.target.getAttribute("data-user");
+                    const postId = event.target.getAttribute("data-id");
+                    const postType = event.target.getAttribute("data-type");
+
+                    let endpoint = "";
+                    let data = {};
+
+                    if (userId) {
+                        endpoint = "/update_penalty"; 
+                        data = { userId: userId, action: action };
+                    } else if (postId && postType) {
+                        endpoint = "/update_reported_post";
+                        data = { postId: postId, postType: postType, action: action };
+                    } else if (postId) {
+                        endpoint = "/update_reported_user";
+                        data = { userId: postId, action: action };
+                    }
+
+                    if (endpoint) {
+                        fetch(endpoint, {
+                            method: "POST",
+                            headers: {
+                                "Content-Type": "application/json",
+                            },
+                            body: JSON.stringify(payload),
+                        })
+                        .then(response => response.json())
+                        .then(data => {
+                            alert(data.message);
+                            location.reload();
+                        })
+                        .catch(error => console.error("Error:", error));
+                    }
+                }
+            });
+        });
+    </script>
+
 </body>
 {% endblock content %}

@@ -61,7 +61,7 @@
     </header>
     
     <div class="fms-undo-container">
-        <a href="forum.html">
+        <a href="javascript:window.history.back();">
             <img src="../static/src/icon/icons8-undo-96.png" alt="Undo Button" id="fms-undo-icon">
             <h1>Back</h1>
         </a>
@@ -105,7 +105,7 @@
             
             <div class="fms-image-container">
                 <!-- INSERT IMAGE HERE -->
-                <img src="../static/src/img/randomimage3.jpg" alt="">
+                <img src=" {{ image }}" alt="">
             </div>
             
             <div class="fms-button-container">
@@ -116,7 +116,7 @@
                     <img src= "{{ like_icon }}" alt="Heart" id="fms-post-hearticon">
                     <h2>Like</h2>
                     <!-- LIKE AMOUNT -->
-                    <h4>{{ like_count }}</h4>
+                    <h4>({{ like_count }})</h4>
                 </div>
                 
                 <!-- BOOKMARK BUTTON -->

@@ -16,9 +16,10 @@ class dbRetrieve:
             else:
                 self.db_connection.cur.execute(query)
 
+            return self.db_connection.cur
         except Exception as e:
             print(f"Error executing query: {e}")
-            return None
+            return None 
 
     def retrieve_all(self, tablename):
         query = f'SELECT * FROM "{tablename}";'
@@ -35,10 +36,10 @@ class dbRetrieve:
         self.execute_query(query)
         return self.db_connection.cur.fetchall()
 
-    def retrieve(self, tablename, columns="*", condition=None, params=None):
-        query = f'SELECT {columns} FROM {tablename}'
+    def retrieve(self, tablename, columns="*", condition=None, params=None, join=""):
+        query = f"SELECT {columns} FROM {tablename} {join}"
         if condition:
-            query += f' WHERE {condition}'
+            query += f" WHERE {condition}"
         query += ";"
         self.execute_query(query, params, cursor_type='dict')
         return self.db_connection.cur.fetchall()
@@ -51,13 +52,27 @@ class dbRetrieve:
         self.execute_query(query, params, cursor_type='dict')
         return self.db_connection.cur.fetchone()
 
+    def retrieve_actively_penalized(self):
+        query = """
+            SELECT u.userid, u.username, ph.description, ph.penaltyType
+            FROM Users u
+            JOIN PenaltyHistory ph ON u.userID = ph.userID
+            WHERE u.penalty IS NOT NULL
+            AND ph.timestamp = (
+                SELECT MAX(timestamp) FROM PenaltyHistory 
+                WHERE userID = u.userID
+            )
+        """
+        self.execute_query(query, cursor_type='dict')
+        return self.db_connection.cur.fetchall()
+
     def retrieve_entries(self, type, limit=5, loaded_ids=None, searched_term=''):
         if type == "post":
             query = """
                 SELECT 
                     post.postID AS id,
                     post.description, 
-                    TO_CHAR(post.timestamp, 'DD-MM-YYYY') AS timestamp, 
+                    TO_CHAR(post.timestamp, 'DD Month YYYY') AS timestamp, 
                     post.image, 
                     post.userID, 
                     users.username, 
@@ -81,7 +96,7 @@ class dbRetrieve:
                     recruitment.recruitmentID AS id, 
                     recruitment.header, 
                     recruitment.description, 
-                    TO_CHAR(recruitment.timestamp, 'DD-MM-YYYY') AS timestamp, 
+                    TO_CHAR(recruitment.timestamp, 'DD Month YYYY') AS timestamp, 
                     recruitment.image, 
                     recruitment.userID, 
                     users.username, 

@@ -112,7 +112,8 @@ class imageUploader:
         return "." in filename and filename.rsplit(".", 1)[1].lower() in self.allowed_extensions
 
     def upload(self, file):
-        if file and self.check_extension(file.filename):
+        # if file and self.check_extension(file.filename):
+        if file:
             filename = secure_filename(file.filename)
             filepath = os.path.join(self.upload_folder, filename)
             file.save(filepath)
