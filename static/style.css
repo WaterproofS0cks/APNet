@@ -2378,6 +2378,7 @@ input[type="submit"]:hover {
     .rc-main-container {
         margin-left: 4%;
         width: 95%;
+        margin-bottom: 60px;
     }
 
     .rc-title-container {
@@ -2401,6 +2402,26 @@ input[type="submit"]:hover {
 
     .rc-dropdown-content {  
         right: 0;
+    }
+
+    .rc-like-icon-container {
+        width: 100px;
+    }
+
+    .rc-comment-icon-container {
+        width: 125px;
+    }
+
+    .rc-bookmark-icon-container {
+        display: flex;
+        align-items: baseline;
+        justify-content: baseline;
+        padding: 10px;
+        margin-left: auto;
+    }
+
+    #rc-post-bookmarkicon {
+        margin-left: auto;
     }
 }
 
