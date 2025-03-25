@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/x-icon" href="../static/src/favicon/favicon.ico">
     <link rel="stylesheet" href="../static/style.css">    
+    <script type="text/javascript" src="{{ url_for('static', filename='scripts/SearchBarFunction.js') }}"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
@@ -491,23 +492,24 @@
             });
 
             // Searchbar
-            const searchContainer = document.getElementById('ha-searchbar');
-            searchContainer.addEventListener("keypress", function(event) {
-                if (event.key === "Enter") {
-                    event.preventDefault(); 
+            // const searchContainer = document.getElementById('ha-searchbar');
+            // searchContainer.addEventListener("keypress", function(event) {
+            //     if (event.key === "Enter") {
+            //         event.preventDefault(); 
 
-                    const searchTerm = searchContainer.value.trim();
+            //         const searchTerm = searchContainer.value.trim();
 
-                    if (searchTerm) {
-                        window.location.href = "/?search=" + encodeURIComponent(searchTerm);
-                    }
-                }
-            });
+            //         if (searchTerm) {
+            //             window.location.href = "/?search=" + encodeURIComponent(searchTerm);
+            //         }
+            //     }
+            // });
         
-            const urlParams = new URLSearchParams(window.location.search);
-            const searchTerm = urlParams.get('search') || '';
-            loadPosts(searchTerm);
+            // const urlParams = new URLSearchParams(window.location.search);
+            // const searchTerm = urlParams.get('search') || '';
+            // loadPosts(searchTerm);
         });
+
 
         // Scrolling
         window.addEventListener('scroll', () => {
