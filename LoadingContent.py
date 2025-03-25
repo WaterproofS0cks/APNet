@@ -22,7 +22,7 @@ class Content():
         loaded_ids = request.args.get('loaded_ids', default='[]', type=str)
         type = request.args.get('type')
         entries_per_page = 5
-        print(f'HEYHEYHEYHEYHEYHEYHEYHEY {user_id}')
+
         loaded_ids = json.loads(loaded_ids)
 
         entries = db_retrieve.retrieve_entries(type, entries_per_page, loaded_ids, search_term)
