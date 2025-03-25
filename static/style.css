@@ -4067,12 +4067,6 @@ input[type="submit"]:hover {
     object-fit: cover;
 }
 
-.applications-menu-img img {
-    height: 70px;
-    width: 70px;
-    object-fit: cover;
-}
-
 
 
 @media (max-width: 430px) {
