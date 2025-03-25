@@ -10,11 +10,9 @@
             <h2>Applications</h2>
         </div>
 
-        <!-- This is a single application post -->
         <div class="activity-card">
             <div class="activity-flex">
                 <div class="activity-attr">
-                    <sub>2 weeks ago</sub>
                     <h3>This is an application</h3>
 
                     <div class="applications-activity-img-responsive">
@@ -23,47 +21,29 @@
 
                     <p>This is a description of an application that you have applied to</p>
                 </div>
-                <div class="applications-activity-img">
+                <!-- <div class="applications-activity-img">
                     <img src="{{ url_for('static', filename='src/img/default-events.jpg') }}" alt="Placeholder Image">
-                </div>
+                </div> -->
             </div>
-            <div class="activity-margin">
-                <h3>Applicants</h3>
-                <div class="applicant-flex">
-                    <!-- The first four applicants will be displayed by default -->
-                    <div class="applicant-card">Emily</div>
-                    <div class="applicant-card">Ryan</div>
-                    <div class="applicant-card">Olivia</div>
-                    <div class="applicant-card">Lucas</div>
-                    <!-- Subsequent applicants will be hidden until the user press "View more" -->
-                    <div class="applicant-card applicant-extra">Sophia</div>
-                    <div class="applicant-card applicant-extra">Ethan</div>
-                    <div class="applicant-card applicant-extra">Ava</div>
-                    <div class="applicant-card applicant-extra">Scott</div>
-                </div>
-                <p id="applicant-view" class="applicant-view" onclick="viewToggle()">View more</p>
-            </div>                     
         </div>
 
-        <!-- Add additional application posts here -->
+        <div class="activity-card">
+            <div class="activity-flex">
+                <div class="activity-attr">
+                    <h3>This is an application</h3>
+
+                    <div class="applications-activity-img-responsive">
+                        <img src="{{ url_for('static', filename='src/img/default-events.jpg') }}" alt="Placeholder Image">
+                    </div>
+
+                    <p>This is a description of an application that you have applied to</p>
+                </div>
+                <!-- <div class="applications-activity-img">
+                    <img src="{{ url_for('static', filename='src/img/default-events.jpg') }}" alt="Placeholder Image">
+                </div> -->
+            </div>
+        </div>
 
     </div>
-
-    <script>
-        function viewToggle() {
-            const additionalApplicants = document.querySelectorAll('.applicant-extra');
-            const viewMoreBtn = document.getElementById('applicant-view');
-
-            additionalApplicants.forEach(item => {
-                item.style.display = (item.style.display === 'none' || item.style.display === '') ? 'flex' : 'none';
-            });
-
-            if (viewMoreBtn.innerText === 'View more') {
-                viewMoreBtn.innerText = 'View less';
-            } else {
-                viewMoreBtn.innerText = 'View more';
-            }
-        }
-    </script>
 </body>
 {% endblock content %}

@@ -1674,7 +1674,12 @@ input[type="submit"]:hover {
     font-size: 26px;
     text-decoration: none;
     margin: 5px 0 0 0;
-    color: #a7a7a7;
+    /* color: #a7a7a7; */
+    color: #666;
+}
+
+#fms-responsive-back {
+    display: none;
 }
 
 .fms-main-container { 
@@ -1926,14 +1931,18 @@ input[type="submit"]:hover {
 
 @media (max-width: 430px) {
     .fms-undo-container {
+        top: 75px;
         left: 0;
-        background-color: green;
         width: 43px;
         height: 43px;
+        z-index: 1;
     }
 
-    .fms-undo-container h1 {
-        display: none;
+
+    #fms-undo-icon {
+        margin-left: 7px;
+        width: 35px;
+        height: auto;
     }
 
     .fms-main-container {
@@ -1941,8 +1950,16 @@ input[type="submit"]:hover {
     }
 
     .fms-post-layout {
-        margin: 0 0 40px 40px;
+        margin: 80px 0 100px 0px;
         width: 100%;
+    }
+
+    .fms-like-icon-container {
+        width: 100px;
+    }
+
+    .fms-comments-container {
+        padding: 10px 10px 0px 5px;
     }
 }
 
@@ -2538,7 +2555,7 @@ input[type="submit"]:hover {
 
 .rca-desc-container {
     width: 100%;
-    height: auto; /* Allow height to adjust based on content */
+    height: auto;
 }
 
 .rca-desc-container h2 {
@@ -2583,8 +2600,51 @@ input[type="submit"]:hover {
     transition: background-color 0.3s;
 }
 
-/* profile.html */
+@media (max-width: 430px) {
+    .rca-image-container {
+        display: none;
+    }
 
+    #rca-form {
+        display: flex;
+        width: 95%;
+        margin: 100px auto;
+        overflow-y: scroll;
+    }
+    
+    .rca-content-container {
+        border-left: 0px;
+    }
+
+    .rca-top-container {
+        height: 50px;
+    }
+    
+    .rca-title-container {
+        width: 75%;
+    }
+
+    .rca-title-container h2 {
+        font-size: 28px;
+    }
+
+    .rca-back-container {
+        justify-content: flex-end;
+    }
+
+    .rca-back-container h2 {
+        display: none;
+    }
+
+    #rca-undoicon {
+        margin-right: 0;
+        width: 40px;
+        height: auto;
+    }
+}
+
+
+/* profile.html */
 .profile {
     display: flex;
     margin-bottom: 20px;

@@ -1,15 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/x-icon" href="../static/src/favicon/favicon.ico">
-    <link rel="stylesheet" href="../static/style.css">    
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
-    <title>APNet</title>
-</head>
+{% extends "header-b.html" %}
+{% block title %}Recruitment Application{% endblock title %}
+{% block content %}
 <style>
     body {
         padding: 0;
@@ -24,45 +15,10 @@
     }
 </style>
 <body>
-
-    <!-- HEADER -->
-    <header>
-
-        <div class="hb-main-container">
-
-            <div class="hb-logo-container">
-                <img src="../static/src/img/apnet-logo.png" alt="APNet logo" id="hb-logo-img">
-            </div>
-
-            <div class="hb-right-container">
-
-                <a href="forum.html"><h1>Forum</h1></a>
-                <a href="#"><h1>Recruitment</h1></a>
-                <a href="aboutus.html"><h1>About Us</h1></a>
-                <a href="faq.html"><h1>FAQ</h1></a>
-                <a href="termsofservice.html"><h1>Terms of Service</h1></a> 
-
-                <img src="../static/src/img/default-pfp.png" alt="Pfp" id="hb-pfp-img">
-                <div class="hb-popup-menu" id="hb-popup-menu">
-                    <ul>
-                        <li><a href="settings.html">Settings</a></li>
-                        <li><a href="profile.html">My Profile</a></li>
-                        <li><a href="bookmarkedposts.html">Bookmarks</a></li>
-                        <li><a href="logout.html">Logout</a></li>
-                    </ul>
-                </div>
-
-            </div>
-
-            <img src="../static/src/icon/icons8-menu-vertical-white-64.png" id="hb-menuicon">
-
-        </div>
-
-    </header>
     
     <div class="fms-undo-container">
         <a href="javascript:window.history.back();">
-            <img src="../static/src/icon/icons8-undo-96.png" alt="Undo Button" id="fms-undo-icon">
+            <img src="../static/src/icon/icons8-undo-dark-96.png" alt="Undo Button" id="fms-undo-icon">
             <h1>Back</h1>
         </a>
     </div>
@@ -232,4 +188,4 @@
         });
     </script>
 </body>
-</html>
+{% endblock content %}
