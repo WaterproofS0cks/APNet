@@ -358,7 +358,7 @@
                 let response = await fetch("/session");
                 let data = await response.json();
 
-                if (data.session) {
+                if (!data.session) {
                     window.location.href = "/auth/register";
                     return;
                 }

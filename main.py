@@ -45,7 +45,6 @@ db_conn.close()
 @app.route("/session")
 def check_session():
     user_id = session.get('id')
-    print('hi look here i am here')
     if user_id:
         return jsonify({"session": True})
     return jsonify({"session": False})
