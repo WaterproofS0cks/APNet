@@ -1926,8 +1926,8 @@ input[type="submit"]:hover {
 
 @media (max-width: 430px) {
     .fms-undo-container {
+        display: none;
         left: 0;
-        background-color: green;
         width: 43px;
         height: 43px;
     }
@@ -1941,8 +1941,16 @@ input[type="submit"]:hover {
     }
 
     .fms-post-layout {
-        margin: 0 0 40px 40px;
+        margin: 10px 0 100px 0px;
         width: 100%;
+    }
+
+    .fms-like-icon-container {
+        width: 100px;
+    }
+
+    .fms-comments-container {
+        padding: 10px 10px 0px 5px;
     }
 }
 
