@@ -1,0 +1,40 @@
+{% extends "header-b.html" %}
+{% block title %}Applications{% endblock title %}
+{% block content %}
+<body>
+    <div class="applications-content-card">
+        <div class="card-header">
+            <a href="/user/applications" class="btn-icon">
+                <img src="{{ url_for('static', filename='src/icon/icons8-back-96.png') }}" alt="Back Icon">
+            </a>
+            <h2>Applications - Applied</h2>
+        </div>
+
+        <!-- This is a single application post -->
+        <div class="activity-card">
+            <div class="activity-flex">
+                <div class="activity-attr">
+                    <sub>2 weeks ago</sub>
+                    <h3>This is an application</h3>
+
+                    <div class="applications-activity-img-responsive">
+                        <img src="{{ url_for('static', filename='src/img/default-events.jpg') }}" alt="Placeholder Image">
+                    </div>
+
+                    <p>This is a description of an application that you have created</p>
+                </div>
+                <div class="applications-activity-img">
+                    <img src="{{ url_for('static', filename='src/img/default-events.jpg') }}" alt="Placeholder Image">
+                </div>
+            </div>
+            <div class="activity-margin">
+                <h3>Applicants</h3>
+                <p>123 people applied</p>
+            </div>
+        </div>
+
+        <!-- Add additional application posts here -->
+
+    </div>
+</body>
+{% endblock content %}

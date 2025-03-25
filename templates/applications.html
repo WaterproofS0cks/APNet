@@ -11,43 +11,53 @@
         </div>
 
         <a href="applications/applied" class="applications-card-url">
-            <div class="activity-card" id="applicationCard">
+            <div class="activity-card" onmouseover="changeImage(this, 'applied')" onmouseout="resetImage(this, 'applied')">
                 <div class="activity-flex">
                     <div class="activity-attr">
                         <h3>Applied</h3>
                         <p>Click here to view all the applications that you have applied.</p>
                     </div>
                     <div class="applications-menu-img">
-                        <img src="{{ url_for('static', filename='src/icon/noun-summary-3082102-black.png') }}" alt="Joined Applications">
+                        <img src="{{ url_for('static', filename='src/icon/noun-summary-3082102-black.png') }}" alt="Applied Applications" class="activity-image" id="applied-image">
                     </div>
                 </div>
             </div>
         </a>
-
+        
         <a href="applications/created" class="applications-card-url">
-            <div class="activity-card">
+            <div class="activity-card" onmouseover="changeImage(this, 'created')" onmouseout="resetImage(this, 'created')">
                 <div class="activity-flex">
                     <div class="activity-attr">
                         <h3>Created</h3>
                         <p>Click here to view all the applications that you have created.</p>
                     </div>
                     <div class="applications-menu-img">
-                        <img src="{{ url_for('static', filename='src/icon/noun-add-notes-3971091-black.png') }}" alt="Created Applications">
+                        <img src="{{ url_for('static', filename='src/icon/noun-add-notes-3971091-black.png') }}" alt="Created Applications" class="activity-image" id="created-image">
                     </div>
                 </div>
             </div>
-        </a>
+        </a>        
 
     </div>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const appDiv = document.querySelector('#applicationCard');
+        function changeImage(element, type) {
+            const img = element.querySelector('.activity-image');
+            if (type === 'applied') {
+                img.src = "{{ url_for('static', filename='src/icon/noun-summary-3082102-dark-blue.png') }}";
+            } else if (type === 'created') {
+                img.src = "{{ url_for('static', filename='src/icon/noun-add-notes-3971091-dark-blue.png') }}";
+            }
+        }
 
-            appDiv.addEventListener('click', function() {
-                console.log('Div was clicked!');
-            });
-        });
+        function resetImage(element, type) {
+            const img = element.querySelector('.activity-image');
+            if (type === 'applied') {
+                img.src = "{{ url_for('static', filename='src/icon/noun-summary-3082102-black.png') }}";
+            } else if (type === 'created') {
+                img.src = "{{ url_for('static', filename='src/icon/noun-add-notes-3971091-black.png') }}";
+            }
+        }
     </script>
 </body>
 {% endblock content %}
