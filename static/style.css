@@ -3886,7 +3886,7 @@ input[type="submit"]:hover {
 .faq-section {
     background-color: #fff;
     padding: 20px;
-    border-radius: 8px;
+    /* border-radius: 8px; */
     margin-top: 20px;
     border-left: 4px solid #0a4693;
 }
