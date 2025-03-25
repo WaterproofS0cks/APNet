@@ -102,23 +102,16 @@ class dbModify(dbInsert):
         return result[0] if result else False 
 
 
-class imageUploader:
-    def __init__(self, upload_folder, allowed_extensions=None):
-        self.upload_folder = upload_folder
-        self.allowed_extensions = allowed_extensions or {"png", "jpg", "jpeg", "gif"}
-        os.makedirs(self.upload_folder, exist_ok=True)
-
-    def check_extension(self, filename):
-        return "." in filename and filename.rsplit(".", 1)[1].lower() in self.allowed_extensions
+class ImageUploader:
+    def __init__(self, upload_folder):
+        self.upload_folder = os.path.join(upload_folder) 
+        os.makedirs(self.upload_folder, exist_ok=True)  
 
     def upload(self, file):
-        # if file and self.check_extension(file.filename):
         if file:
             filename = secure_filename(file.filename)
             filepath = os.path.join(self.upload_folder, filename)
-            file.save(filepath)
+            file.save(filepath) 
+            return filepath  
 
-            file_extension = filename.rsplit(".", 1)[1].lower()
-            return filename, file_extension
-        
-        return None, None
+        return None
