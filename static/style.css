@@ -1598,7 +1598,7 @@ input[type="submit"]:hover {
 @media (max-width: 430px) {
     .fm-main-container {
         width: 95%;
-        margin-left: 2.5%;
+        margin-left: 2%;
         margin-bottom: 90px;
     }
 
@@ -1649,7 +1649,6 @@ input[type="submit"]:hover {
 
 /* forumspecific.html */
 .fms-undo-container {
-    /* background-color: green; */
     position: absolute;
     height: 45px;
     width: 160px;
@@ -1927,7 +1926,6 @@ input[type="submit"]:hover {
 
 @media (max-width: 430px) {
     .fms-undo-container {
-        /* top: 0; */
         left: 0;
         background-color: green;
         width: 43px;
@@ -1950,31 +1948,6 @@ input[type="submit"]:hover {
 
 
 /* createpost.html (Marcus) */
-.crp-main-container {
-    display: flex;
-    flex-direction: column;
-    background-color: pink;
-    margin: 120px auto 0 auto;
-    padding: 20px;
-    height: 2000px;
-    width: 75%;
-    border-radius: 15px;
-}
-
-.crp-main-container h1 {
-    font-family: "Roboto", sans-serif;
-    font-size: 42px;
-    margin: 10px auto;
-    word-spacing: 1.2px;
-}
-
-.crp-hr1 {
-    border: 2px solid #ccc;
-    margin: 5px 0;
-}
-
-
-/* createpost2.html (Marcus) */
 .cp-main-container {
     display: flex;
     flex-direction: column;
@@ -1989,7 +1962,6 @@ input[type="submit"]:hover {
 }
 
 .cp-title-container {
-    /* background-color: skyblue; */
     display: flex;
     align-items: center;
     width: 100%;
@@ -2056,6 +2028,9 @@ input[type="submit"]:hover {
     background-position: center;
 }
 
+#cp-forum-input-file, #cp-recruit-input-file {
+    background-color: #000;
+}
 
 #cp-forum-cloudimg, #cp-recruit-cloudimg {
     width: 120px;
@@ -2149,6 +2124,87 @@ input[type="submit"]:hover {
     background-color: #0056b3;
 }
 
+@media (max-width: 430px) {
+    .cp-main-container {
+        height: 117vh;
+        width: 88vw;
+        margin: 95px 6% 200px 6%;
+        padding: 20px 30px;
+        border-radius: 8px;
+        background-color: #f6f6f6;
+    }
+    
+    .cp-main-container.recruitment-active {
+        height: 127vh;
+    }
+    
+    .cp-title-container {
+        margin-top: 0px;
+        height: 75px;
+    }
+    
+    .cp-title-container h1 {
+        font-size: 35px;
+        margin: 0 auto;
+    }
+    
+    .cp-filter-container {
+        margin-top: 10px;
+    }
+    
+    #cp-forumInputs h1, #cp-recruitmentInputs h1 { 
+        font-size: 21px;
+    }
+    
+    .cp-required {
+        font-size: 20px;
+    }
+    
+    .cp-forum-imagecontainer, .cp-recruit-imagecontainer {
+        height: 380px;
+        margin: 5px 0 25px 0;
+        border: 4px dashed #ccc;
+        border-radius: 12px;
+    }
+    
+    #cp-forum-cloudimg, #cp-recruit-cloudimg {
+        width: 100px;
+        height: auto;
+    }
+    
+    .cp-forum-imagecontainer h2, .cp-recruit-imagecontainer h2 {
+        margin: 4px 0 10px 0;
+    }
+    
+    #cp-forum-browsefilesbutton, #cp-recruit-browsefilesbutton {
+        font-size: 14px;
+        width: 130px;
+        margin-bottom: 20px;
+    }
+    
+    .cp-forum-imagecontainer h3, .cp-recruit-imagecontainer h3 {
+        font-size: 14px;
+    }
+
+    .cp-forum-button-container, .cp-recruit-button-container {
+        width: 100%;
+        height: 35px;
+        margin: 20px 0 0 0;
+    }
+    
+    #cp-recruit-title-text {
+        font-family: "Roboto", sans-serif;
+        font-size: 15px;
+        height: 40px;
+        width: 100%;
+        margin-bottom: 20px;
+    }
+    
+    .cp-forum-post-button, .cp-recruit-post-button {
+        margin-left: 220px;
+    }
+}
+
 
 /* recruitment.html */
 .rc-post-layout {
@@ -2195,7 +2251,7 @@ input[type="submit"]:hover {
     font-family: "Roboto", sans-serif;
     font-weight: bold;
     font-size: 15px;
-    color: #333333 ;
+    color: #333333;
     margin: 0 5px 0 9px;
 }
 
@@ -2316,6 +2372,36 @@ input[type="submit"]:hover {
 
 .rc-apply-button:hover {
     background-color: #0056b3;
+}
+
+@media (max-width: 430px) {
+    .rc-main-container {
+        margin-left: 4%;
+        width: 95%;
+    }
+
+    .rc-title-container {
+        height: 70px;
+    }
+
+    .rc-title-container h1 {
+        font-size: 22px;
+        word-spacing: 1px;
+    }
+
+    .rc-profiledetails h1 {
+        margin-left: 3px;
+        margin-right: 7px;
+        font-size: 13px;
+    }
+
+    .rc-profiledetails h2 {
+        margin: 0 3px;
+    }
+
+    .rc-dropdown-content {  
+        right: 0;
+    }
 }
 
 
@@ -2607,6 +2693,7 @@ input[type="submit"]:hover {
     padding: 20px;
     border-radius: 8px;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    margin-top: 20px;
 }
 
 .post-attr {
@@ -2853,6 +2940,54 @@ input[type="submit"]:hover {
     display: flex;
     justify-content: space-between;
     align-items: center;
+}
+
+.settings-pfp {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.settings-pfp img {
+    width: 150px;
+    height: 150px;
+    border-radius: 100%;
+    object-fit: cover;
+    margin-bottom: 20px;
+}
+
+.settings-pfp div {
+    display: flex;
+    flex-direction: column;
+}
+
+.settings-pfp p {
+    margin-left: 10px;
+    word-wrap: break-word;
+}
+
+.settings-pfp input {
+    margin-top: 10px;
+}
+
+@media (max-width: 768px) {
+    .settings-pfp {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .settings-pfp img {
+        margin-bottom: 0;
+    }
+
+    .settings-pfp p {
+        text-align: left;
+    }
+
+    .settings-pfp input {
+        margin-top: 10px;
+        width: 100%;
+    }
 }
 
 
@@ -3512,6 +3647,7 @@ input[type="submit"]:hover {
 
 .card-filter {
     margin-bottom: 30px;
+    width: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -3598,13 +3734,21 @@ input[type="submit"]:hover {
     }
 }
 
+@media (max-width: 430px) {
+    #dashboard-content-card {
+        margin-bottom: 110px;
+    }
+
+    #database, #filter {
+        width: 100%;
+    }
+}
+
 
 
 /* events.html */
 
-.events-card {
-    display: flex;
-    justify-content: space-between;
+.activity-card {
     background-color: #fff;
     padding: 40px;
     border-radius: 8px;
@@ -3612,38 +3756,43 @@ input[type="submit"]:hover {
     margin-top: 20px;
 }
 
-.events-card p {
+.activity-flex {
+    display: flex;
+    justify-content: space-between;
+}
+
+.activity-card p {
     margin-top: 20px;
     color: #666;
 }
 
-.events-card a {
+.activity-card a {
     text-decoration: none;
     font-weight: bold;
     color: #666;
 }
 
-.events-card a:hover {
+.activity-card a:hover {
     text-decoration: underline;
     font-weight: bold;
     color: #666;
 }
 
-.events-card sub {
+.activity-card sub {
     display: inline-block;
     margin-bottom: 20px;
 }
 
-.events-attr {
+.activity-attr {
     flex: 1;
 }
 
-.events-img {
+.activity-img {
     flex-shrink: 0;
     margin-left: 20px;
 }
 
-.events-img img {
+.activity-img img {
     width: 300px;
     height: 150px;
     object-fit: cover;
@@ -3778,8 +3927,62 @@ input[type="submit"]:hover {
 }
 
 
+
 /* bookmarks.html */
 
 .bookmarks-card {
     margin-top: 20px;
+}
+
+
+
+/* applications.html */
+
+.applicant-card {
+    background-color: #e7e9eb;
+    border: 1px solid #71717A;
+    padding: 16px;
+    border-radius: 8px;
+    margin-top: 20px;
+    height: 50px;
+    width: 150px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.applicant-flex {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+}
+
+.applicant-extra {
+    display: none;
+}
+
+.applicant-view {
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.applicant-view:hover {
+    text-decoration: underline;
+}
+
+@media (max-width: 430px) {
+    .applicant-flex {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .applicant-card {
+        width: 100%;
+    }
+}
+
+@media (min-width: 431px) {
+    .applicant-flex {
+        justify-content: space-between;
+    }
 }
