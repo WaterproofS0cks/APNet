@@ -1,0 +1,85 @@
+{% extends "header-b.html" %}
+{% block title %}Reports{% endblock title %}
+{% block content %}
+<body>
+    <div class="content-card">
+        <div class="card-header">
+            <a href="/user/settings" class="btn-icon">
+                <img src="{{ url_for('static', filename='src/icon/icons8-back-96.png') }}" alt="Back Icon">
+            </a>
+            <h2>Reports</h2>
+        </div>
+        <div class="card-description">
+            <p>View all your active posts and user reports with their status.</p>
+
+            <div class="card-filter">
+                <form action="" method="">
+                    <div>
+                        <label for="type">Type:</label>
+                        <select name="type" id="type" onchange="toggleDiv()" required style="margin-bottom: 0px;">
+                            <option value="" disabled selected>-- Select --</option>
+                            <option value="posts">Posts</option>
+                            <option value="users">Users</option>
+                        </select>
+                    </div>
+                    <!-- <input type="submit" value="Filter" id="filter-button"> -->
+                </form>
+            </div>
+
+        </div>
+
+        <!-- REPORTED POSTS -->
+        <div id="reported_posts" style="display: none;">
+            <a href="#" class="reports-card-url">
+                <div class="activity-card">
+                    <div class="activity-flex">
+                        <div class="activity-attr">
+                            <sub>Date</sub>
+                            <h3>This is a post title</h3>
+                            <p>Add a report status here</p>     
+                        </div>
+                    </div>
+                </div>
+            </a>
+    
+            <!-- Add additional reported posts here -->
+
+        </div>
+
+        <!-- REPORTED USERS -->
+        <div id="reported_users" style="display: none;">
+            <a href="#" class="reports-card-url">
+                <div class="activity-card">
+                    <div class="activity-flex">
+                        <div class="activity-attr">
+                            <sub>Date</sub>
+                            <h3>This is a user name</h3>
+                            <p>Add a report status here</p>     
+                        </div>
+                    </div>
+                </div>
+            </a>
+    
+            <!-- Add additional reported users here -->
+
+        </div>
+    </div>
+
+    <script>
+        function toggleDiv() {
+            let values = document.getElementById("type").value;
+
+            let posts = document.getElementById("reported_posts");
+            let users = document.getElementById("reported_users");
+
+            if (values === "posts") {
+                posts.style.display = "block";
+                users.style.display = "none";
+            } else if (values === "users") {
+                users.style.display = "block";
+                posts.style.display = "none";
+            }
+        }
+    </script>
+</body>
+{% endblock content %}

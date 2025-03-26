@@ -2994,6 +2994,12 @@ input[type="submit"]:hover {
     gap: 10px;
 }
 
+.card-description {
+    margin: 15px 20px 30px;
+    padding-left: 20px;
+    color: #666;
+}
+
 .card-section {
     background-color: #fff;
     padding: 40px; /* Padding intentionally set to 40px instead of 20px */
@@ -4080,11 +4086,11 @@ input[type="submit"]:hover {
 
 .applications-card-url .activity-card {
     transition: all 0.3s ease-in-out;
-    border: 4px solid transparent;
+    border: 3px solid transparent;
 }
 
 .applications-card-url .activity-card:hover {
-    border: 4px solid #0056b3;
+    border: 3px solid #0056b3;
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
 }
 
@@ -4128,4 +4134,23 @@ input[type="submit"]:hover {
     .applicant-flex {
         justify-content: space-between;
     }
+}
+
+
+
+/* reports.html */
+
+.reports-card-url {
+    text-decoration: none;
+    color: inherit;
+}
+
+.reports-card-url .activity-card {
+    transition: all 0.3s ease-in-out;
+    border: 3px solid transparent;
+}
+
+.reports-card-url .activity-card:hover {
+    border: 3px solid #666;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
 }
