@@ -4,12 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/x-icon" href="../static/src/favicon/favicon.ico">
-    <link rel="stylesheet" href="../static/style.css">
-    <link rel="stylesheet" href="../static/style2.css">
+    <link rel="stylesheet" href="../static/style.css">    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
-    <title>Create Post</title>
+    <title>Edit Recruitment Post</title>
 
     <style>
         html {
@@ -35,7 +34,7 @@
             <div class="ha-right-container">
 
                 <div class="ha-createpost-container">
-                    <a href="forumspecific.html">                        
+                    <a href="recruitmentspecific.html">                        
                         <img src="../static/src/icon/icons8-plus-48.png" alt="Plus" id="ha-plusicon">
                         <h2>Create Post</h2>
                     </a>
@@ -111,7 +110,7 @@
         <div class="nb-mainpages-container">    
 
             <a href="#"><div class="nb-mainpages-home">
-                 <img src="../static/src/icon/icons8-forum-darkblue-50.png" alt="Forum Default Icon" id="nb-forumicon">
+                 <img src="../static/src/icon/icons8-forum-darkblue-50.png" alt="Recruitment Default Icon" id="nb-forumicon">
                  <h2>Forum</h2>
             </div></a> 
 
@@ -182,43 +181,41 @@
         </div>
 
     </div>
+    
 
-    <!-- CREATE POST CONTENT -->
+    <!-- EDIT POST CONTENT -->
     <div class="erp-main-container">
         <div class="erp-title-container">
-            <h1>Create Post</h1>
+            <h1>Edit Recruitment Post</h1>
         </div>
 
-        <!-- RECRUITMENT FIELDS -->
+        <!-- FORUM FIELDS -->
         <form action="/upload" method="POST" enctype="multipart/form-data" id="erp-recruitment-form">
             <div id="erp-recruitmentInputs">
 
-                <h1>Title <span class="erp-required">*</span></h1>
-                <input type="text" id="erp-recruit-title-text" placeholder="Enter your title here...">
+                <h1>Title</h1>
+                <input type="text" id="erp-recruit-title-text">
 
-                <h1>Image</h1>
-                <div id="erp-recruit-drop-area">
-                    <div class="erp-recruit-imagecontainer" id="erp-recruit-imageview">
-                        <input type="file" accept="image/*" id="erp-recruit-input-file" hidden>
-                        <img src="../static/src/icon/icons8-upload-to-cloud-100.png" alt="Cloud" id="erp-recruit-cloudimg">
-                        <h1>Drag file to upload</h1>
-                        <h2>or</h2>
-                        <button id="erp-recruit-browsefilesbutton" onclick="document.getElementById('erp-recruit-input-file').click(); return false;">Browse Files</button>
-                        <h3>Max file size: <b>100MB</b></h3>
-                        <h3>Supported file types: <b>JPG, JPEG, PNG, GIF</b></h3>
+                <div class="erp-image-title-container">
+                    <h1>Image</h1>
+                    <input type="file" id="erp-changeimage-button" hidden>
+                    <label for="erp-changeimage-button" class="erp-change-button">Change</label>
+                </div>
+
+                <div id="erp-recruitment-drop-area">
+                    <div class="erp-recruitment-imagecontainer" id="erp-recruitment-imageview">
+                        <img src="../static/src/img/basketball-club.png" alt="" style="width: 100%; height: 100%; object-fit: contain;">
                     </div>
                 </div>
-
-                <h1>Caption <span class="erp-required">*</span></h1>
-                <textarea name="" id="erp-recruit-caption-text" placeholder="Enter your caption here..."></textarea>
-
-                <div class="erp-recruit-button-container">
-                    <button class="erp-recruit-post-button" id="erp-recruit-button">Post</button>
+        
+                <h1>Caption</h1>
+                <textarea name="caption" id="erp-recruitment-caption-text" placeholder="Enter your caption here..."></textarea>
+        
+                <div class="erp-recruitment-button-container">
+                    <button class="erp-recruitment-post-button" id="erp-post-button" type="submit">Post</button>
                 </div>
-
             </div>
-         </form>
-
+        </form>
     </div>
 
     <footer>
@@ -226,8 +223,8 @@
         <div class="header-footer-main-container">
             
             <div class="header-footer-container1">
-                <img src="../static/src/icon/icons8-forum-blue-50.png" alt="Forum Icon" class="header-footer-forumblueicon">
-                <h2>Forum</h2>
+                <img src="../static/src/icon/icons8-recruitment-blue-50.png" alt="Recruitment Icon" class="header-footer-recruitmentblueicon">
+                <h2>Recruitment</h2>
             </div>
     
             <div class="header-footer-container2">
@@ -251,99 +248,52 @@
 
 
     <script>
-        const dropAreaForum = document.getElementById('erp-forum-drop-area');
-        const inputFileForum = document.getElementById('erp-forum-input-file');
-        const imageViewForum = document.getElementById('erp-forum-imageview');
-
-        function updateInputs() {
-            const postSelect = document.getElementById('erp-postSelect');
-            const forumInputs = document.getElementById('erp-forum-form');
-            const recruitmentInputs = document.getElementById('erp-recruitment-form');
-            const mainContainer = document.querySelector('.erp-main-container');
-
-            if (postSelect.value === 'forum') {
-                forumInputs.style.display = 'block'; 
-                recruitmentInputs.style.display = 'none'; 
-                mainContainer.classList.remove('recruitment-active');
-            } else if (postSelect.value === 'recruitment') {
-                forumInputs.style.display = 'none'; 
-                recruitmentInputs.style.display = 'block'; 
-                mainContainer.classList.add('recruitment-active'); 
+        const dropAreaRecruitment = document.getElementById('erp-recruitment-drop-area');
+        const inputFileRecruitment = document.getElementById('erp-changeimage-button');
+        const imageViewRecruitment = document.getElementById('erp-recruitment-imageview').querySelector('img');
+    
+        function uploadRecruitmentImage() {
+            if (inputFileRecruitment.files.length > 0) {
+                let recruitmentImgLink = URL.createObjectURL(inputFileRecruitment.files[0]);
+                imageViewRecruitment.src = recruitmentImgLink; 
+                imageViewRecruitment.style.display = 'block'; 
             }
         }
-
-        function uploadForumImage() {
-            if (inputFileForum.files.length > 0) {
-                let forumImgLink = URL.createObjectURL(inputFileForum.files[0]);
-                imageViewForum.style.backgroundImage = `url(${forumImgLink})`; 
-                imageViewForum.textContent = "";
-            }
-        }
-
+    
+        // Drag and drop functionality
         ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
-            dropAreaForum.addEventListener(eventName, preventDefaults, false); 
+            dropAreaRecruitment.addEventListener(eventName, preventDefaults, false); 
             document.body.addEventListener(eventName, preventDefaults, false); 
         });
-
-        dropAreaForum.addEventListener('dragover', highlight, false);
-        dropAreaForum.addEventListener('dragleave', unhighlight, false);
-        dropAreaForum.addEventListener('drop', handleForumDrop, false);
-
-        function handleForumDrop(e) {
+    
+        dropAreaRecruitment.addEventListener('dragover', highlight, false);
+        dropAreaRecruitment.addEventListener('dragleave', unhighlight, false);
+        dropAreaRecruitment.addEventListener('drop', handleRecruitmentDrop, false);
+    
+        function handleRecruitmentDrop(e) {
             let dt = e.dataTransfer;
             let files = dt.files;
-
-            inputFileForum.files = files;
-            uploadForumImage();
+    
+            inputFileRecruitment.files = files;
+            uploadRecruitmentImage();
         }
-
-        const dropAreaRecruit = document.getElementById('erp-recruit-drop-area');
-        const inputFileRecruit = document.getElementById('erp-recruit-input-file');
-        const imageViewRecruit = document.getElementById('erp-recruit-imageview');
-
-        function uploadRecruitImage() {
-            if (inputFileRecruit.files.length > 0) {
-                let recruitImgLink = URL.createObjectURL(inputFileRecruit.files[0]);
-                imageViewRecruit.style.backgroundImage = `url(${recruitImgLink})`; 
-                imageViewRecruit.textContent = "";
-            }
-        }
-
-        ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
-            dropAreaRecruit.addEventListener(eventName, preventDefaults, false); 
-            document.body.addEventListener(eventName, preventDefaults, false); 
-        });
-
-        dropAreaRecruit.addEventListener('dragover', highlight, false);
-        dropAreaRecruit.addEventListener('dragleave', unhighlight, false);
-        dropAreaRecruit.addEventListener('drop', handleRecruitDrop, false);
-
-        function handleRecruitDrop(e) {
-            let dt = e.dataTransfer;
-            let files = dt.files;
-
-            inputFileRecruit.files = files;
-            uploadRecruitImage();
-        }
-
-        // Common Functions
+    
+        
         function preventDefaults(e) {
             e.preventDefault();
             e.stopPropagation();
         }
-
+    
         function highlight(e) {
             e.currentTarget.classList.add('highlight');
         }
-
+    
         function unhighlight(e) {
             e.currentTarget.classList.remove('highlight');
         }
-
-        inputFileForum.addEventListener("change", uploadForumImage);
-        inputFileRecruit.addEventListener("change", uploadRecruitImage);
-
-        window.onload = updateInputs;
+    
+        inputFileRecruitment.addEventListener("change", uploadRecruitmentImage);
+        
     </script>
 
 </body>

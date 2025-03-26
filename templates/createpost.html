@@ -109,12 +109,12 @@
     
         <div class="nb-mainpages-container">    
 
-            <a href="/"><div class="nb-mainpages-home">
+            <a href="#"><div class="nb-mainpages-home">
                  <img src="../static/src/icon/icons8-forum-darkblue-50.png" alt="Forum Default Icon" id="nb-forumicon">
                  <h2>Forum</h2>
             </div></a> 
 
-            <a href="recruitment"><div class="nb-mainpages-recruitment">
+            <a href="#"><div class="nb-mainpages-recruitment">
                 <img src="../static/src/icon/icons8-resume-48.png" alt="Resume Default Icon" id="nb-resumeicon">
                 <h2>Recruitment</h2>
             </div></a> 
@@ -168,12 +168,12 @@
             </div></a>
           
 
-            <a href="faq"><div class="nb-resources-faqs">
+            <a href="#"><div class="nb-resources-faqs">
                 <img src="../static/src/icon/icons8-faq-gray-50.png" alt="FAQ Default Icon" id="nb-faqicon">
                 <h2>FAQs</h2>
             </div></a>
 
-            <a href="terms"><div class="nb-resources-tnc">
+            <a href="#"><div class="nb-resources-tnc">
                 <img src="../static/src/icon/icons8-scales-48.png" alt="Scales Default Icon" id="nb-scalesicon">
                 <h2>Terms and Conditions</h2>
             </div></a>
@@ -204,7 +204,7 @@
             <div id="cp-forumInputs">
                 <h1>Image</h1>
                 <div id="cp-forum-drop-area">
-                    <input type="file" accept="image/*" id="cp-forum-input-file" name="file" hidden>
+                    <input type="file" accept="image/*" id="cp-forum-input-file" name="file" hidden required>
                     <div class="cp-forum-imagecontainer" id="cp-forum-imageview">
                         
                         <img src="../static/src/icon/icons8-upload-to-cloud-100.png" alt="Cloud" id="cp-forum-cloudimg" draggable="false">
@@ -217,7 +217,7 @@
                 </div>
                 
                 <h1>Caption <span class="cp-required">*</span></h1>
-                <textarea name="caption" id="cp-forum-caption-text" placeholder="Enter your caption here..."></textarea>
+                <textarea name="caption" id="cp-forum-caption-text" placeholder="Enter your caption here..." required></textarea>
                 
                 <div class="cp-forum-button-container">
                     <button class="cp-forum-post-button" id="cp-post-button" type="submit">Post</button>
@@ -231,11 +231,11 @@
             <div id="cp-recruitmentInputs">
 
                 <h1>Title <span class="cp-required">*</span></h1>
-                <input type="text" id="cp-recruit-title-text" placeholder="Enter your title here...">
+                <input type="text" id="cp-recruit-title-text" placeholder="Enter your title here..." required>
 
                 <h1>Image</h1>
                 <div id="cp-recruit-drop-area">
-                    <input type="file" accept="image/*" id="cp-recruit-input-file" name="file" hidden>
+                    <input type="file" accept="image/*" id="cp-recruit-input-file" name="file" hidden required>
                     <div class="cp-recruit-imagecontainer" id="cp-recruit-imageview">
                         <img src="../static/src/icon/icons8-upload-to-cloud-100.png" alt="Cloud" id="cp-recruit-cloudimg">
                         <h1>Drag file to upload</h1>
@@ -247,7 +247,7 @@
                 </div>
 
                 <h1>Caption <span class="cp-required">*</span></h1>
-                <textarea name="" id="cp-recruit-caption-text" placeholder="Enter your caption here..."></textarea>
+                <textarea name="" id="cp-recruit-caption-text" placeholder="Enter your caption here..." required></textarea>
 
                 <div class="cp-recruit-button-container">
                     <button class="cp-recruit-post-button" id="cp-recruit-button">Post</button>

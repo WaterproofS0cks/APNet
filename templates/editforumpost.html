@@ -8,7 +8,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
-    <title>Create Post</title>
+    <title>Edit Forum Post</title>
 
     <style>
         html {
@@ -182,7 +182,7 @@
 
     </div>
 
-    <!-- CREATE POST CONTENT -->
+    <!-- EDIT POST CONTENT -->
     <div class="efp-main-container">
         <div class="efp-title-container">
             <h1>Edit Forum Post</h1>
@@ -200,11 +200,11 @@
 
                 <div id="efp-forum-drop-area">
                     <div class="efp-forum-imagecontainer" id="efp-forum-imageview">
-                        <img src="../static/src/img/randomimage1.jpg" alt="">
+                        <img src="../static/src/img/randomimage2.jpg" alt="" style="width: 100%; height: 100%; object-fit: contain;">
                     </div>
                 </div>
         
-                <h1>Caption <span class="efp-required">*</span></h1>
+                <h1>Caption</h1>
                 <textarea name="caption" id="efp-forum-caption-text" placeholder="Enter your caption here..."></textarea>
         
                 <div class="efp-forum-button-container">
@@ -245,98 +245,51 @@
 
     <script>
         const dropAreaForum = document.getElementById('efp-forum-drop-area');
-        const inputFileForum = document.getElementById('efp-forum-input-file');
-        const imageViewForum = document.getElementById('efp-forum-imageview');
-
-        function updateInputs() {
-            const postSelect = document.getElementById('efp-postSelect');
-            const forumInputs = document.getElementById('efp-forum-form');
-            const recruitmentInputs = document.getElementById('efp-recruitment-form');
-            const mainContainer = document.querySelector('.efp-main-container');
-
-            if (postSelect.value === 'forum') {
-                forumInputs.style.display = 'block'; 
-                recruitmentInputs.style.display = 'none'; 
-                mainContainer.classList.remove('recruitment-active');
-            } else if (postSelect.value === 'recruitment') {
-                forumInputs.style.display = 'none'; 
-                recruitmentInputs.style.display = 'block'; 
-                mainContainer.classList.add('recruitment-active'); 
-            }
-        }
-
+        const inputFileForum = document.getElementById('efp-changeimage-button');
+        const imageViewForum = document.getElementById('efp-forum-imageview').querySelector('img');
+    
         function uploadForumImage() {
             if (inputFileForum.files.length > 0) {
                 let forumImgLink = URL.createObjectURL(inputFileForum.files[0]);
-                imageViewForum.style.backgroundImage = `url(${forumImgLink})`; 
-                imageViewForum.textContent = "";
+                imageViewForum.src = forumImgLink; 
+                imageViewForum.style.display = 'block'; 
             }
         }
-
+    
+        // Drag and drop functionality
         ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
             dropAreaForum.addEventListener(eventName, preventDefaults, false); 
             document.body.addEventListener(eventName, preventDefaults, false); 
         });
-
+    
         dropAreaForum.addEventListener('dragover', highlight, false);
         dropAreaForum.addEventListener('dragleave', unhighlight, false);
         dropAreaForum.addEventListener('drop', handleForumDrop, false);
-
+    
         function handleForumDrop(e) {
             let dt = e.dataTransfer;
             let files = dt.files;
-
+    
             inputFileForum.files = files;
             uploadForumImage();
         }
+    
 
-        const dropAreaRecruit = document.getElementById('efp-recruit-drop-area');
-        const inputFileRecruit = document.getElementById('efp-recruit-input-file');
-        const imageViewRecruit = document.getElementById('efp-recruit-imageview');
-
-        function uploadRecruitImage() {
-            if (inputFileRecruit.files.length > 0) {
-                let recruitImgLink = URL.createObjectURL(inputFileRecruit.files[0]);
-                imageViewRecruit.style.backgroundImage = `url(${recruitImgLink})`; 
-                imageViewRecruit.textContent = "";
-            }
-        }
-
-        ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
-            dropAreaRecruit.addEventListener(eventName, preventDefaults, false); 
-            document.body.addEventListener(eventName, preventDefaults, false); 
-        });
-
-        dropAreaRecruit.addEventListener('dragover', highlight, false);
-        dropAreaRecruit.addEventListener('dragleave', unhighlight, false);
-        dropAreaRecruit.addEventListener('drop', handleRecruitDrop, false);
-
-        function handleRecruitDrop(e) {
-            let dt = e.dataTransfer;
-            let files = dt.files;
-
-            inputFileRecruit.files = files;
-            uploadRecruitImage();
-        }
-
-        // Common Functions
         function preventDefaults(e) {
             e.preventDefault();
             e.stopPropagation();
         }
-
+    
         function highlight(e) {
             e.currentTarget.classList.add('highlight');
         }
-
+    
         function unhighlight(e) {
             e.currentTarget.classList.remove('highlight');
         }
-
+    
         inputFileForum.addEventListener("change", uploadForumImage);
-        inputFileRecruit.addEventListener("change", uploadRecruitImage);
-
-        window.onload = updateInputs;
+        
     </script>
 
 </body>
