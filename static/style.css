@@ -2141,6 +2141,13 @@ input[type="submit"]:hover {
     background-color: #0056b3;
 }
 
+.cp-error-message {
+    display: none;
+    color: red;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
 @media (max-width: 430px) {
     .cp-main-container {
         height: 117vh;

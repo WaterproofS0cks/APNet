@@ -204,7 +204,7 @@
             <div id="cp-forumInputs">
                 <h1>Image</h1>
                 <div id="cp-forum-drop-area">
-                    <input type="file" accept="image/*" id="cp-forum-input-file" name="file" hidden required>
+                    <input type="file" accept=".jpg, .jpeg, .png, .gif" id="cp-forum-input-file" name="file" hidden required>
                     <div class="cp-forum-imagecontainer" id="cp-forum-imageview">
                         
                         <img src="../static/src/icon/icons8-upload-to-cloud-100.png" alt="Cloud" id="cp-forum-cloudimg" draggable="false">
@@ -214,6 +214,11 @@
                         <h3>Max file size: <b>100MB</b></h3>
                         <h3>Supported file types: <b>JPG, JPEG, PNG, GIF</b></h3>
                     </div>
+                </div>
+
+                <!-- Error message for forum -->
+                <div class="cp-error-message" id="cp-forum-error-message">
+                    Unsupported file type. Please upload a JPG, JPEG, PNG, or GIF file.
                 </div>
                 
                 <h1>Caption <span class="cp-required">*</span></h1>
@@ -235,7 +240,7 @@
 
                 <h1>Image</h1>
                 <div id="cp-recruit-drop-area">
-                    <input type="file" accept="image/*" id="cp-recruit-input-file" name="file" hidden required>
+                    <input type="file" accept=".jpg, .jpeg, .png, .gif" id="cp-recruit-input-file" name="file" hidden required>
                     <div class="cp-recruit-imagecontainer" id="cp-recruit-imageview">
                         <img src="../static/src/icon/icons8-upload-to-cloud-100.png" alt="Cloud" id="cp-recruit-cloudimg">
                         <h1>Drag file to upload</h1>
@@ -246,6 +251,11 @@
                     </div>
                 </div>
 
+                <!-- Error message for recruitment -->
+                <div class="cp-error-message" id="cp-recruit-error-message">
+                    Unsupported file type. Please upload a JPG, JPEG, PNG, or GIF file.
+                </div>
+
                 <h1>Caption <span class="cp-required">*</span></h1>
                 <textarea name="" id="cp-recruit-caption-text" placeholder="Enter your caption here..." required></textarea>
 
@@ -254,8 +264,7 @@
                 </div>
 
             </div>
-         </form>
-
+        </form>
     </div>
 
     <footer>
@@ -399,7 +408,31 @@
                 // You can also update the UI or perform other actions here
             }
         });
+
+
+        // Validation for Unsupported Files uploaded using "Browse Files" button
+        document.getElementById('cp-forum-input-file').addEventListener('change', function(event) {
+            validateFile(event.target, 'forum');
+        });
+
+        document.getElementById('cp-recruit-input-file').addEventListener('change', function(event) {
+            validateFile(event.target, 'recruitment');
+        });
+
+        function validateFile(input, type) {
+            const file = input.files[0];
+            const supportedTypes = ['image/jpeg', 'image/png', 'image/gif'];
+            const errorMessageId = type === 'forum' ? 'cp-forum-error-message' : 'cp-recruit-error-message';
+
+            if (file && !supportedTypes.includes(file.type)) {
+                document.getElementById(errorMessageId).style.display = 'block';
+                // Clears the input value
+                input.value = '';
+            } else {
+                document.getElementById(errorMessageId).style.display = 'none';
+            }
+        }
     </script>
 
 </body>
-</html>
+</html> 
