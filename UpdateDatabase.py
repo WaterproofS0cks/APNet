@@ -102,7 +102,7 @@ class dbModify(dbInsert):
         return result[0] if result else False 
 
 
-class ImageUploader:
+class imageUploader:
     def __init__(self, upload_folder):
         self.upload_folder = os.path.join(upload_folder) 
         os.makedirs(self.upload_folder, exist_ok=True)  

@@ -63,7 +63,11 @@ class Content():
                         <h1>{entry['username']}</h1>
                         <h2>Posted on {entry['timestamp']}</h2>
 
-                        {f'<h2>Posted on {entry["header"]}</h2>' if type == "recruitment" else ''}
+                        {f""" 
+                        <div class="rc-title-container">
+                            <h1>{entry['header']}</h1>
+                        </div>
+                         """ if type == "recruitment" else ''}
 
                         <div class="fm-more-container">
                             <div class="fm-dropdown">
@@ -86,13 +90,15 @@ class Content():
                         </div>
 
                     </div>
-
+                    
                     <div class="fm-image-container">
-                        <a href="specificpost?postid={entry['id']}"> <img src="{entry['image']}" alt="Post Image"> </a>
+                        <a href='specificpost?postid={entry["id"]}'> 
+                            <img src="{entry["image"]}" alt="Post Image"> 
+                        </a>
                     </div>
+                    
 
                     <div class="fm-button-container">
-
                         <div class="fm-like-icon-container" data-action="liked">
                             <img src="{like_icon}" alt="Heart" id="fm-post-hearticon">
                             <h2>Like</h2>
