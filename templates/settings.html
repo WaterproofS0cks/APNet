@@ -46,6 +46,14 @@
             </form>
         </div>
         <div class="card-section">
+            <h3>Moderation</h3>
+            <div class="button-component">
+                <a href="{{ url_for('reports') }}" style="text-decoration: none;">
+                    <button class="button-black">View reports</button>
+                </a>
+            </div>
+        </div>
+        <div class="card-section">
             <h3>Security</h3>
             <div class="button-component">
                 <a href="{{ url_for('auth.resetpassword') }}" style="text-decoration: none;">

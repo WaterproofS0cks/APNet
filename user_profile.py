@@ -104,6 +104,10 @@ def likedPosts():
 def bookmarkedPosts():
     return render_template("bookmarkedposts.html")
 
+@user_profile.route('/otherprofile', methods=['POST', 'GET'])
+def otherProfile():
+    return render_template("otherprofile.html")
+
 
 # Applications pages flow
 @user_profile.route('/applications', methods=['POST', 'GET'])
@@ -117,8 +121,3 @@ def applicationsApplied():
 @user_profile.route('/applications/created', methods=['POST', 'GET'])
 def applicationsCreated():
     return render_template("applications_created.html")
-
-
-@user_profile.route('/otherprofile', methods=['POST', 'GET'])
-def otherProfile():
-    return render_template("otherprofile.html")
