@@ -34,7 +34,7 @@ app = Flask(__name__)
 app.register_blueprint(auth, url_prefix="/auth")
 app.register_blueprint(user_profile, url_prefix="/user")
 app.secret_key = SECRET_KEY
-app.config["UPLOAD_FOLDER"] = os.path.join("static", "src", "img")
+app.config["UPLOAD_FOLDER"] = os.path.join("static", "src", "post")
 app.permanent_session_lifetime = timedelta(days=1)
 
 db_create.create_database()
