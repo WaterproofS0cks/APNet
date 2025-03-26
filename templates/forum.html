@@ -6,6 +6,7 @@
     <link rel="icon" type="image/x-icon" href="../static/src/favicon/favicon.ico">
     <link rel="stylesheet" href="../static/style.css">    
     <script type="text/javascript" src="{{ url_for('static', filename='scripts/SearchBarFunction.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='scripts/PostFunction.js') }}" defer></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
@@ -274,7 +275,7 @@
         // });
     </script>
 
-    <script>
+    <!-- <script>
         
         let currentPage = 1;
         let loadedPostIds = new Set();
@@ -488,7 +489,7 @@
                 loadPosts(searchTerm);
             }
         });    
-    </script>
+    </script> -->
 
 </body>
 </html>
