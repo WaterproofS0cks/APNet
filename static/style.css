@@ -2223,6 +2223,256 @@ input[type="submit"]:hover {
 }
 
 
+/* editforumpost.html */
+.efp-main-container {
+    display: flex;
+    flex-direction: column;
+    height: 140vh;
+    width: 50vw;
+    margin: 70px 0 200px 23%;
+    padding: 20px;
+}
+
+.efp-title-container {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 50px;
+    margin: 5px 0 0px 0;
+}
+
+.efp-title-container h1 {
+    font-family: "Roboto", sans-serif;
+    font-size: 36px;
+    margin-bottom: 15px;
+}
+
+#efp-forumInputs h1 {
+    font-family: "Roboto", sans-serif;
+    font-size: 22px;
+    font-weight: normal;
+    margin-bottom: 10px;
+}
+
+.efp-image-title-container {
+    display: flex;
+    align-items: center;
+}
+
+.efp-change-button {
+    font-family: "Roboto", sans-serif;
+    font-size: 17px;
+    color: #fff;
+    background-color: #7AB0DD;
+    border-radius: 10px;
+    padding: 5px 10px;
+    margin-left: 10px;
+    cursor: pointer;
+}
+
+.efp-required {
+    font-size: 21px;
+    color: red;
+}
+
+.efp-forum-imagecontainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    width: 100%;
+    height: 430px;
+    margin: 5px 0 25px 0;
+    border: 2px solid #ccc;
+    border-radius: 16px;
+    object-position: center;
+    object-fit: cover;
+}
+
+#efp-forum-imageview {
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+#efp-forum-input-file {
+    background-color: #000;
+}
+
+#efp-forum-cloudimg {
+    width: 120px;
+    height: auto;
+}
+
+.efp-forum-imagecontainer h1 {
+    font-family: "Roboto", sans-serif;
+    font-size: 24px;
+    font-weight: normal;
+    color: #666;
+}
+
+.efp-forum-imagecontainer h2 {
+    font-family: "Roboto", sans-serif;
+    font-size: 16px;
+    font-weight: normal;
+    color: #666;
+    margin: 10px 0;
+}
+
+#efp-forum-browsefilesbutton {
+    font-family: "Roboto", sans-serif;
+    font-size: 16px;
+    color: #7AB0DD;
+    width: 150px;
+    border-radius: 50px;
+    margin-bottom: 30px;
+    padding: 5px;
+    border: 2px solid #7AB0DD;
+    background-color: white;
+    cursor: pointer;
+}
+
+.efp-forum-imagecontainer h3 {
+    font-family: "Roboto", sans-serif;
+    font-size: 15px;
+    font-weight: normal;
+    color: #666;
+    margin: 5px 0;
+}
+
+#efp-forum-browsefilesbutton:hover {
+    background-color: #d2e9ff;
+    transition: background-color 0.2s ease;
+    cursor: pointer;
+}
+
+#efp-forum-caption-text {
+    font-family: "Roboto", sans-serif;
+    font-size: 16px;
+    text-align: justify;
+    padding: 10px;
+    width: 100%;
+    height: 270px;
+    line-height: 1.5;
+    border-color: #ccc;
+    border-radius: 8px;
+    resize: none;
+}
+
+.efp-forum-button-container {
+    width: 100%;
+    height: 35px;
+    margin: 20px 0 0 0;
+}
+
+#efp-recruit-title-text {
+    font-family: "Roboto", sans-serif;
+    font-size: 15px;
+    height: 40px;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.efp-forum-post-button {
+    font-family: "Roboto", sans-serif;
+    font-size: 16px;
+    width: 100px;
+    height: 35px;
+    margin-left: 580px;
+    background-color: #7AB0DD;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.efp-forum-post-button:hover {
+    background-color: #0056b3;
+}
+
+@media (max-width: 430px) {
+    .efp-main-container {
+        height: 117vh;
+        width: 88vw;
+        margin: 95px 6% 200px 6%;
+        padding: 20px 30px;
+        border-radius: 8px;
+        background-color: #f6f6f6;
+    }
+    
+    .efp-main-container.recruitment-active {
+        height: 127vh;
+    }
+    
+    .efp-title-container {
+        margin-top: 0px;
+        height: 75px;
+    }
+    
+    .efp-title-container h1 {
+        font-size: 35px;
+        margin: 0 auto;
+    }
+    
+    .efp-filter-container {
+        margin-top: 10px;
+    }
+    
+    #efp-forumInputs h1, #efp-recruitmentInputs h1 { 
+        font-size: 21px;
+    }
+    
+    .efp-required {
+        font-size: 20px;
+    }
+    
+    .efp-forum-imagecontainer, .efp-recruit-imagecontainer {
+        height: 380px;
+        margin: 5px 0 25px 0;
+        border: 4px dashed #ccc;
+        border-radius: 12px;
+    }
+    
+    #efp-forum-cloudimg, #efp-recruit-cloudimg {
+        width: 100px;
+        height: auto;
+    }
+    
+    .efp-forum-imagecontainer h2, .efp-recruit-imagecontainer h2 {
+        margin: 4px 0 10px 0;
+    }
+    
+    #efp-forum-browsefilesbutton, #efp-recruit-browsefilesbutton {
+        font-size: 14px;
+        width: 130px;
+        margin-bottom: 20px;
+    }
+    
+    .efp-forum-imagecontainer h3, .efp-recruit-imagecontainer h3 {
+        font-size: 14px;
+    }
+
+    .efp-forum-button-container, .efp-recruit-button-container {
+        width: 100%;
+        height: 35px;
+        margin: 20px 0 0 0;
+    }
+    
+    #efp-recruit-title-text {
+        font-family: "Roboto", sans-serif;
+        font-size: 15px;
+        height: 40px;
+        width: 100%;
+        margin-bottom: 20px;
+    }
+    
+    .efp-forum-post-button, .efp-recruit-post-button {
+        margin-left: 220px;
+    }
+}
+
+
 /* recruitment.html */
 .rc-post-layout {
     background-color: white;
