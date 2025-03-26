@@ -2648,6 +2648,11 @@ input[type="submit"]:hover {
     background-color: #0056b3;
 }
 
+@media (max-width: 430px) {
+    
+}
+
+
 
 /* recruitment.html */
 .rc-post-layout {
