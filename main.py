@@ -77,37 +77,43 @@ def specific_post():
     
 @app.route('/create', methods=["GET", "POST"])
 def create_post():
-    return render_template('createpost.html')
+    if "user" in session:
+        return render_template('createpost.html')
+    else:
+        return redirect("/auth/login")
 
 @app.route('/upload', methods=["GET", "POST"])
 def upload_post():
-    try:
+    if request.method == "POST":
         post_type = request.form["post_type"]
         user_id = request.form.get("userID", 1)
         caption = request.form["caption"]
         title = request.form.get("title", None)
         file = request.files.get("image")
+        try:
+            if not caption:
+                raise ValueError("Caption is required.")
+            
+            filename = None
+            if file:
+                filename = uploader.upload(file)
 
-        if not caption:
-            raise ValueError("Caption is required.")
-        
-        filename = None
-        if file:
-            filename = uploader.upload(file)
+            print("HEYHEYHEY")
+            print(request.form)
 
-        print("HEYHEYHEY")
-        print(request.form)
+            if post_type == "forum":
+                dbInsert.insert("Post", [1, caption, filename])
+            elif post_type == "recruitment":
+                if not title:
+                    raise ValueError("Title is required for recruitment posts.")
+                dbInsert.insert("Post", [user_id, title, caption, filename])
 
-        if post_type == "forum":
-            dbInsert.insert("Post", [1, caption, filename])
-        elif post_type == "recruitment":
-            if not title:
-                raise ValueError("Title is required for recruitment posts.")
-            dbInsert.insert("Post", [user_id, title, caption, filename])
-
-        return jsonify({"success": True, "filename": filename})
-    except Exception as e:
-        return jsonify({"success": False, "error": str(e)})
+            # return jsonify({"success": True, "filename": filename})
+            return redirect("/")
+        except Exception as e:
+            # return redirect("/")
+            print(request.form)
+            return jsonify({"success": False, "error": str(e)})
 
 @app.route('/terms', methods=['GET'])
 def TermsOfService():

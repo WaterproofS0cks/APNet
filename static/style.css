@@ -4136,7 +4136,7 @@ input[type="submit"]:hover {
 .faq-section {
     background-color: #fff;
     padding: 20px;
-    border-radius: 8px;
+    /* border-radius: 8px; */
     margin-top: 20px;
     border-left: 4px solid #0a4693;
 }
@@ -4322,6 +4322,22 @@ input[type="submit"]:hover {
     width: 70px;
     object-fit: cover;
 }
+
+.applications-card-url {
+    text-decoration: none;
+    color: inherit;
+}
+
+.applications-card-url .activity-card {
+    /* transition: all 0.3s ease-in-out; */
+    border: 4px solid transparent;
+}
+
+.applications-card-url .activity-card:hover {
+    border: 4px solid #0056b3;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+}
+
 
 @media (max-width: 430px) {
     .applications-content-card {

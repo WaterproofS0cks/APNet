@@ -107,9 +107,9 @@ def bookmarkedPosts():
 def applications():
     return render_template("applications.html")
 
-@user_profile.route('/applications/joined', methods=['POST', 'GET'])
-def applicationsJoined():
-    return render_template("applications_joined.html")
+@user_profile.route('/applications/applied', methods=['POST', 'GET'])
+def applicationsApplied():
+    return render_template("applications_applied.html")
 
 @user_profile.route('/applications/created', methods=['POST', 'GET'])
 def applicationsCreated():
