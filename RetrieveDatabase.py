@@ -1,4 +1,5 @@
 from psycopg2.extras import DictCursor
+from flask import session
 
 class dbRetrieve:
     def __init__(self, db_connection):
@@ -66,87 +67,104 @@ class dbRetrieve:
         self.execute_query(query, cursor_type='dict')
         return self.db_connection.cur.fetchall()
 
-    def retrieve_entries(self, type, limit=5, loaded_ids=None, searched_term=''):
-        if type == "post":
-            query = """
-                SELECT 
-                    post.postID AS id,
-                    post.description, 
-                    TO_CHAR(post.timestamp, 'DD Month YYYY') AS timestamp, 
-                    post.image, 
-                    post.userID, 
-                    users.username, 
-                    users.profilePicture, 
-                    users.fullname,
-                    users.registerDate,
-                    COALESCE(COUNT(DISTINCT comment.postCommentID), 0) AS comments_count,
-                    COALESCE(COUNT(DISTINCT engagement.userID), 0) AS likes_count
-                FROM post
-                JOIN users ON post.userID = users.userID
-                LEFT JOIN postcomment AS comment ON post.postID = comment.postID
-                LEFT JOIN postengagement AS engagement ON post.postID = engagement.postID AND engagement.liked = TRUE
-            """
+
+
+    def base_post_query(self):
+        query = """
+            SELECT 
+                post.postID AS id,
+                post.description, 
+                TO_CHAR(post.timestamp, 'DD Month YYYY') AS timestamp, 
+                post.image, 
+                post.userID, 
+                users.username, 
+                users.profilePicture, 
+                users.fullname,
+                users.registerDate,
+                COALESCE(COUNT(DISTINCT comment.postCommentID), 0) AS comments_count,
+                COALESCE(COUNT(DISTINCT engagement.userID), 0) AS likes_count
+            FROM post
+            JOIN users ON post.userID = users.userID
+            LEFT JOIN postcomment AS comment ON post.postID = comment.postID
+            LEFT JOIN postengagement AS engagement ON post.postID = engagement.postID
+        """
+        return query
+
+    def base_recruitment_query(self):
+        query = """
+            SELECT 
+                recruitment.recruitmentID AS id, 
+                recruitment.header, 
+                recruitment.description, 
+                TO_CHAR(recruitment.timestamp, 'DD Month YYYY') AS timestamp, 
+                recruitment.image, 
+                recruitment.userID, 
+                users.username, 
+                users.profilePicture, 
+                users.fullname,
+                users.registerDate,
+                COALESCE(COUNT(DISTINCT comment.recruitmentCommentID), 0) AS comments_count,
+                COALESCE(COUNT(DISTINCT engagement.userID), 0) AS likes_count
+            FROM recruitment
+            JOIN users ON recruitment.userID = users.userID
+            LEFT JOIN recruitmentcomment AS comment ON recruitment.recruitmentID = comment.recruitmentID
+            LEFT JOIN recruitmentengagement AS engagement ON recruitment.recruitmentID = engagement.recruitmentID
+        """
+        return query
+    
+    def retrieve_entries(self, post_type, page_type, entries_per_page, loaded_ids, search_term, user_id=None):
+        params = []
+        
+        if post_type == "post":
+            table_name = "post"
             id_column = "post.postID"
             search_column = "post.description"
             timestamp_column = "post.timestamp"
+            user_id_column = "post.userID"
+            base_query = self.base_post_query()
 
-        elif type == "recruitment":
-            query = """
-                SELECT 
-                    recruitment.recruitmentID AS id, 
-                    recruitment.header, 
-                    recruitment.description, 
-                    TO_CHAR(recruitment.timestamp, 'DD Month YYYY') AS timestamp, 
-                    recruitment.image, 
-                    recruitment.userID, 
-                    users.username, 
-                    users.profilePicture, 
-                    users.fullname,
-                    users.registerDate,
-                    COALESCE(COUNT(DISTINCT comment.postCommentID), 0) AS comments_count,
-                    COALESCE(COUNT(DISTINCT engagement.userID), 0) AS likes_count
-                FROM recruitment
-                JOIN users ON recruitment.userID = users.userID
-                LEFT JOIN recruitmentcomment AS comment ON recruitment.recruitmentID = comment.recruitmentID
-                LEFT JOIN recruitmentengagement AS engagement ON recruitment.recruitmentID = engagement.recruitmentID AND engagement.liked = TRUE
-            """
+        elif post_type == "recruitment":
+            table_name = "recruitment"
             id_column = "recruitment.recruitmentID"
             search_column = "recruitment.header"
             timestamp_column = "recruitment.timestamp"
-
+            user_id_column = "recruitment.userID"
+            base_query = self.base_recruitment_query()
         else:
-            print("Invalid entry type")
             return []
+        if page_type == "bookmark" and user_id:
+            base_query += " WHERE engagement.bookmark = TRUE AND engagement.userID = %s"
+            params.append(user_id)
 
-        conditions = []
-        params = []
+        elif page_type == "liked" and user_id:
+            base_query += " WHERE engagement.liked = TRUE AND engagement.userID = %s"
+            params.append(user_id)
 
-        if searched_term:
-            conditions.append(f"{search_column} ILIKE %s")
-            params.append(f"%{searched_term}%")
+        elif page_type == "" and user_id:
+            base_query += f" WHERE {user_id_column} = %s"
+            params.append(user_id)
+
 
         if loaded_ids:
-            placeholders = ", ".join(["%s"] * len(loaded_ids))
-            conditions.append(f"{id_column} NOT IN ({placeholders})")
+            base_query += " AND " if "WHERE" in base_query else " WHERE "
+            base_query += f"{id_column} NOT IN ({','.join(['%s'] * len(loaded_ids))})"
             params.extend(loaded_ids)
 
-        if conditions:
-            query += " WHERE " + " AND ".join(conditions)
+        if search_term:
+            base_query += " AND " if "WHERE" in base_query else " WHERE "
+            base_query += f"{search_column} ILIKE %s"
+            params.append(f"%{search_term}%")
 
-        query += f"""
-            GROUP BY {id_column}, {search_column}, {timestamp_column}, 
-                    post.image, users.username, users.profilePicture, 
-                    users.fullname, users.registerDate
-            ORDER BY {timestamp_column} DESC
-            LIMIT %s;
+        base_query += f"""
+            GROUP BY {id_column}, {user_id_column}, users.username, users.profilePicture, users.fullname, 
+                    {table_name}.description, {table_name}.timestamp, {table_name}.image, users.registerDate
+            ORDER BY {timestamp_column} DESC 
+            LIMIT %s
         """
-
-        params.append(limit)
-
+        params.append(entries_per_page)
+        print(base_query)
         try:
-            self.execute_query(query, tuple(params), cursor_type='dict')
-            results = self.db_connection.cur.fetchall()
-            return results if results else []
+            return self.execute_query(base_query, params, cursor_type='dict')
         except Exception as e:
-            print(f"Error executing query: {e}")
+            print("Database Query Error:", e)
             return []

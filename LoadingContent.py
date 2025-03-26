@@ -20,116 +20,194 @@ class Content():
         user_id = session.get('id')
         search_term = request.args.get('search', '')
         loaded_ids = request.args.get('loaded_ids', default='[]', type=str)
-        type = request.args.get('type')
+        post_type = request.args.get('post_type')
+        page_type = request.args.get('page_type')
         entries_per_page = 5
 
         loaded_ids = json.loads(loaded_ids)
 
-        entries = db_retrieve.retrieve_entries(type, entries_per_page, loaded_ids, search_term)
+        entries = db_retrieve.retrieve_entries(post_type, page_type, entries_per_page, loaded_ids, search_term)
 
         if not entries:
             return jsonify({'html': '', 'no_more_posts': True, 'user_id': user_id})
 
         html = ''
         for entry in entries:
-            id = entry['id']
+            if post_type == "post":
+                id = entry['id']
 
-            if user_id and type == 'post':
-                engagement = db_retrieve.retrieve(
-                    'PostEngagement', 
-                    'bookmark, liked', 
-                    'postID = %s AND userID = %s', 
-                    (id, user_id)
-                )
-            elif user_id and type == 'recruitment':
-                engagement = db_retrieve.retrieve(
-                    'RecruitmentEngagement', 
-                    'bookmark, liked', 
-                    'postID = %s AND userID = %s', 
-                    (id, user_id)
-                )
-            else:
-                engagement = None
+                if user_id and post_type == 'post':
+                    engagement = db_retrieve.retrieve(
+                        'PostEngagement', 
+                        'bookmark, liked', 
+                        'postID = %s AND userID = %s', 
+                        (id, user_id)
+                    )
+                else:
+                    engagement = None
 
-            engagement_data = engagement[0] if engagement else {'bookmark': False, 'liked': False}
+                engagement_data = engagement[0] if engagement else {'bookmark': False, 'liked': False}
 
-            like_icon = "../static/src/icon/icons8-heart-red-50.png" if engagement_data['liked'] else "../static/src/icon/icons8-heart-50.png"
-            bookmark_icon = "../static/src/icon/icons8-bookmark-evendarkergreen-500.png" if engagement_data['bookmark'] else "../static/src/icon/icons8-bookmark-50.png"
+                like_icon = "../static/src/icon/icons8-heart-red-50.png" if engagement_data['liked'] else "../static/src/icon/icons8-heart-50.png"
+                bookmark_icon = "../static/src/icon/icons8-bookmark-evendarkergreen-500.png" if engagement_data['bookmark'] else "../static/src/icon/icons8-bookmark-50.png"
+                
+                html += f'''
+                    <div class="fm-post-layout" data-post-id="{entry['id']}" data-user-id="{entry['userid']}">
+                        <div class="fm-profiledetails">
+                            <img src="{entry.get('profilePicture', '/static/src/img/default-pfp.png')}" alt="Pfp" id="fm-post-pfp">
+                            <h1>{entry['username']}</h1>
+                            <h2> • </h2>
+                            <h2>Posted on {entry['timestamp']}</h2>
 
-            html += f'''
-                <div class="fm-post-layout" data-post-id="{entry['id']}" data-user-id="{entry['userid']}">
-                    <div class="fm-profiledetails">
-                        <img src="{entry.get('profilePicture', '/static/src/img/default-pfp.png')}" alt="Pfp" id="fm-post-pfp">
-                        <h1>{entry['username']}</h1>
-                        <h2>Posted on {entry['timestamp']}</h2>
-
-                        {f""" 
-                        <div class="rc-title-container">
-                            <h1>{entry['header']}</h1>
-                        </div>
-                         """ if type == "recruitment" else ''}
-
-                        <div class="fm-more-container">
-                            <div class="fm-dropdown">
-                                <span><img src="../static/src/icon/icons8-ellipsis-48.png" alt="Elipses" id="fm-moreicon" height="24" width="24"></span>
-                                <div class="fm-dropdown-content">
-                                    <a href="#" class="fm-dropdown-item">
-                                        <img src="../static/src/icon/icons8-flag-48.png" alt="Report Post" id="fm-reportposticon" height="20" width="20"> Report Post
-                                    </a>
-                                    <a href="#" class="fm-dropdown-item">
-                                        <img src="../static/src/icon/icons8-danger-50.png" alt="Report User" id="fm-reportusericon" height="20" width="20"> Report User
-                                    </a>
-                                    <a href="#" class="fm-dropdown-item">
-                                        <img src="../static/src/icon/icons8-edit-96.png" alt="Edit" id="fm-editicon" height="20" width="20">Edit Post
-                                    </a>
-                                    <a href="#" class="fm-dropdown-item">
-                                        <img src="../static/src/icon/icons8-delete-48.png" alt="Delete" id="fm-deleteicon" height="20" width="20">Delete Post
-                                    </a>
+                            <div class="fm-more-container">
+                                <div class="fm-dropdown">
+                                    <span><img src="../static/src/icon/icons8-ellipsis-48.png" alt="Elipses" id="fm-moreicon" height="24" width="24"></span>
+                                    <div class="fm-dropdown-content">
+                                        <a href="#" class="fm-dropdown-item">
+                                            <img src="../static/src/icon/icons8-flag-48.png" alt="Report Post" id="fm-reportposticon" height="20" width="20"> Report Post
+                                        </a>
+                                        <a href="#" class="fm-dropdown-item">
+                                            <img src="../static/src/icon/icons8-danger-50.png" alt="Report User" id="fm-reportusericon" height="20" width="20"> Report User
+                                        </a>
+                                        <a href="#" class="fm-dropdown-item">
+                                            <img src="../static/src/icon/icons8-edit-96.png" alt="Edit" id="fm-editicon" height="20" width="20">Edit Post
+                                        </a>
+                                        <a href="#" class="fm-dropdown-item">
+                                            <img src="../static/src/icon/icons8-delete-48.png" alt="Delete" id="fm-deleteicon" height="20" width="20">Delete Post
+                                        </a>
+                                    </div>
                                 </div>
+                            </div>
+
+                        </div>
+                        
+                        <div class="fm-image-container">
+                            <a href='specificpost?postid={entry["id"]}'> 
+                                <img src="{entry["image"]}" alt="Post Image"> 
+                            </a>
+                        </div>
+                        
+
+                        <div class="fm-button-container">
+                            <div class="fm-like-icon-container" data-action="liked">
+                                <img src="{like_icon}" alt="Heart" id="fm-post-hearticon">
+                                <h2>Like</h2>
+                                <h4>({entry['likes_count']})</h4>
+                            </div>
+
+                            <div class="fm-comment-icon-container" data-action="specific">
+                                <img src="../static/src/icon/icons8-comment-50.png" alt="Comment" id="fm-post-commenticon">
+                                <h2>Comment</h2>
+                                <h4>({entry['comments_count']})</h4>
+                            </div>
+
+                            <div class="fm-bookmark-icon-container" data-action="bookmark">
+                                <img src="{bookmark_icon}" alt="Bookmark" id="fm-post-bookmarkicon">
                             </div>
                         </div>
 
-                    </div>
-                    
-                    <div class="fm-image-container">
-                        <a href='specificpost?postid={entry["id"]}'> 
-                            <img src="{entry["image"]}" alt="Post Image"> 
-                        </a>
-                    </div>
-                    
-
-                    <div class="fm-button-container">
-                        <div class="fm-like-icon-container" data-action="liked">
-                            <img src="{like_icon}" alt="Heart" id="fm-post-hearticon">
-                            <h2>Like</h2>
-                            <h4>({entry['likes_count']})</h4>
-                        </div>
-
-                        <div class="fm-comment-icon-container" data-action="specific">
-                            <img src="../static/src/icon/icons8-comment-50.png" alt="Comment" id="fm-post-commenticon">
-                            <h2>Comment</h2>
-                            <h4>({entry['comments_count']})</h4>
-                        </div>
-
-                        <div class="fm-bookmark-icon-container" data-action="bookmark">
-                            <img src="{bookmark_icon}" alt="Bookmark" id="fm-post-bookmarkicon">
-                        </div>
-                    </div>
-
-                    
-                    <div class="fm-caption-container">
                         
-                        <h1>{entry['username']}</h1>
-                        <h2>{entry['description']}</h2>
+                        <div class="fm-caption-container">
+                            
+                            <h1>{entry['username']}</h1>
+                            <h2>{entry['description']}</h2>
+                        </div>
+
                     </div>
+                '''
 
-                    {'<div class="post-footer">'
-                    '<span class="interest-text">Interested? Join Us Now!</span>'
-                    '<button class="apply-button">Apply</button>'
-                    '</div>' if type == "recruitment" else ''}
 
-                </div>
-            '''
+            elif post_type == "recruitment":
+                id = entry['id']
+
+                if user_id:
+                    engagement = db_retrieve.retrieve(
+                        'RecruitmentEngagement', 
+                        'bookmark, liked', 
+                        'recruitmentID = %s AND userID = %s', 
+                        (id, user_id)
+                    )
+                else:
+                    engagement = None
+
+                engagement_data = engagement[0] if engagement else {'bookmark': False, 'liked': False}
+
+                like_icon = "../static/src/icon/icons8-heart-red-50.png" if engagement_data['liked'] else "../static/src/icon/icons8-heart-50.png"
+                bookmark_icon = "../static/src/icon/icons8-bookmark-evendarkergreen-500.png" if engagement_data['bookmark'] else "../static/src/icon/icons8-bookmark-50.png"
+
+                html += f'''
+                    <div class="fm-post-layout" data-post-id="{entry['id']}" data-user-id="{entry['userid']}">
+
+                        <div class="rc-title-container">
+                            <h1>{entry["header"]}</h1>
+                        </div>
+
+                        
+                        <div class="rc-profiledetails">
+                            <img src="{entry.get('profilePicture', '/static/src/img/default-pfp.png')}" alt="Default pfp icon" id="rc-post-pfp">
+                            <h1>{entry['username']}</h1>
+                            <h2> • </h2>
+                            <h2>Posted on {entry['timestamp']}</h2>
+
+                            <div class="fm-more-container">
+                                <div class="fm-dropdown">
+                                    <span><img src="../static/src/icon/icons8-ellipsis-48.png" alt="Elipses" id="fm-moreicon" height="24" width="24"></span>
+                                    <div class="fm-dropdown-content">
+                                        <a href="#" class="fm-dropdown-item">
+                                            <img src="../static/src/icon/icons8-flag-48.png" alt="Report Post" id="fm-reportposticon" height="20" width="20"> Report Post
+                                        </a>
+                                        <a href="#" class="fm-dropdown-item">
+                                            <img src="../static/src/icon/icons8-danger-50.png" alt="Report User" id="fm-reportusericon" height="20" width="20"> Report User
+                                        </a>
+                                        <a href="#" class="fm-dropdown-item">
+                                            <img src="../static/src/icon/icons8-edit-96.png" alt="Edit" id="fm-editicon" height="20" width="20">Edit Post
+                                        </a>
+                                        <a href="#" class="fm-dropdown-item">
+                                            <img src="../static/src/icon/icons8-delete-48.png" alt="Delete" id="fm-deleteicon" height="20" width="20">Delete Post
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>               
+
+                        </div>
+
+                        <div class="fm-image-container">
+                            <a href='specificrecruitment?postid={entry["id"]}'> 
+                                <img src="{entry["image"]}" alt="Post Image"> 
+                            </a>
+                        </div>
+                        
+                        <div class="fm-button-container">
+                            <div class="fm-like-icon-container" data-action="liked">
+                                <img src="{like_icon}" alt="Heart" id="fm-post-hearticon">
+                                <h2>Like</h2>
+                                <h4>({entry['likes_count']})</h4>
+                            </div>
+
+                            <div class="fm-comment-icon-container" data-action="specific">
+                                <img src="../static/src/icon/icons8-comment-50.png" alt="Comment" id="fm-post-commenticon">
+                                <h2>Comment</h2>
+                                <h4>({entry['comments_count']})</h4>
+                            </div>
+
+                            <div class="fm-bookmark-icon-container" data-action="bookmark">
+                                <img src="{bookmark_icon}" alt="Bookmark" id="fm-post-bookmarkicon">
+                            </div>
+                        </div>
+
+                        <div class="rc-caption-container">
+                            <h1>CLUB DESCRIPTION</h1>
+
+                            <h2>{entry['description']}</h2>
+                        </div>
+
+                        <div class="rc-post-footer">
+                            <span class="rc-interest-text">Interested? Join Us Now!</span>
+                            <!-- MAKE IT LEAD TO THE RECRUITMENT APPLICATION -->
+                            <a href="recruitmentapplication?postid={entry["id"]}"><button class="rc-apply-button">Apply</button></a>
+                        </div>
+                    </div>
+                '''
         return jsonify({'html': html, 'no_more_posts': False, 'user_id': user_id})
 
     def load_engagement():
@@ -227,6 +305,17 @@ class Content():
 
         load_actively_penalized_users_data = db_retrieve.retrieve_actively_penalized()
 
+        if not load_actively_penalized_users_data:
+            table_html += f"""
+                <tr>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>-</td>
+                </tr>
+            </table>
+            """
+            return table_html
+
         for entry in load_actively_penalized_users_data:
             if entry["penaltyType"] == "Banned":
                 options_html = f"""
@@ -279,6 +368,16 @@ class Content():
             params=("Processing", "User")
         )
 
+        if not load_reported_user_data:
+            table_html += f"""
+                <tr>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>-</td>
+                </tr>
+            </table>
+            """
+
         for entry in load_reported_user_data:
             user_data = db_retrieve.retrieve_one(
                 tablename="Users",
@@ -325,6 +424,16 @@ class Content():
             condition="status = %s AND (type = %s OR type = %s)",
             params=("Processing", "Forum", "Recruitment")
         )
+
+        if not load_reported_post_data:
+            table_html += f"""
+                <tr>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>-</td>
+                </tr>
+            </table>
+            """
 
         for entry in load_reported_post_data:
 

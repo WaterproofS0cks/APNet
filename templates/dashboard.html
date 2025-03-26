@@ -214,27 +214,45 @@
     </script>
     <script>
         document.addEventListener("DOMContentLoaded", function () {
+            function loadTables() {
+                fetch('/load_tables')
+                    .then(response => response.json())
+                    .then(data => {
+                        console.log("Loaded data:", data); // Debugging log
+    
+                        // ✅ Clear and replace old content
+                        document.getElementById('penalized-users-container').innerHTML = data.penalized_users;
+                        document.getElementById('reported-users-container').innerHTML = data.reported_users;
+                        document.getElementById('reported-posts-container').innerHTML = data.reported_posts;
+                    })
+                    .catch(error => console.error('Error loading tables:', error));
+            }
+    
+            // ✅ Load tables on page load
+            loadTables();
+    
+            // ✅ Event listener for clicking <u> elements
             document.body.addEventListener("click", function (event) {
                 if (event.target.tagName === "U") {
                     const action = event.target.getAttribute("data-action");
                     const userId = event.target.getAttribute("data-user");
                     const postId = event.target.getAttribute("data-id");
                     const postType = event.target.getAttribute("data-type");
-
+    
                     let endpoint = "";
-                    let data = {};
-
+                    let payload = {};
+    
                     if (userId) {
                         endpoint = "/update_penalty"; 
-                        data = { userId: userId, action: action };
+                        payload = { userId: userId, action: action };
                     } else if (postId && postType) {
                         endpoint = "/update_reported_post";
-                        data = { postId: postId, postType: postType, action: action };
+                        payload = { postId: postId, postType: postType, action: action };
                     } else if (postId) {
                         endpoint = "/update_reported_user";
-                        data = { userId: postId, action: action };
+                        payload = { userId: postId, action: action };
                     }
-
+    
                     if (endpoint) {
                         fetch(endpoint, {
                             method: "POST",
@@ -246,7 +264,7 @@
                         .then(response => response.json())
                         .then(data => {
                             alert(data.message);
-                            location.reload();
+                            loadTables(); // ✅ Reload tables after update
                         })
                         .catch(error => console.error("Error:", error));
                     }

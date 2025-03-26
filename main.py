@@ -43,6 +43,7 @@ db_conn.close()
 
 uploader = imageUploader(app.config["UPLOAD_FOLDER"])
 
+
 @app.route("/session")
 def check_session():
     user_id = session.get('id')
@@ -51,30 +52,29 @@ def check_session():
     return jsonify({"session": False})
 
 
-
+#Finished
 @app.route('/')
 def forum():
     return render_template('forum.html')
 
 
-
+#
 @app.route('/load_more')
 @app.route('/recruitment/load_more')
 def post():
     return Content.load_post()
 
-
-
+#Finished
 @app.route('/engagement', methods=['POST'])
 def engagement():
     return Content.load_engagement()
 
-
-
+#Finished
 @app.route('/specificpost', methods=["GET", "POST"])
 def specific_post():
     return Content.load_specific_forum()
-    
+
+#Finished  
 @app.route('/create', methods=["GET", "POST"])
 def create_post():
     if "user" in session:
@@ -82,6 +82,7 @@ def create_post():
     else:
         return redirect("/auth/login")
 
+#Finished
 @app.route('/upload', methods=["GET", "POST"])
 def upload_post():
     db_conn = dbConnection(
@@ -96,7 +97,7 @@ def upload_post():
     if request.method == "POST":
 
         post_type = request.form["post_type"]
-        user_id = request.form.get("userID")
+        user_id = session.get("id")
         caption = request.form["caption"]
         title = request.form.get("title", None)
         file = request.files.get('file')
@@ -106,13 +107,13 @@ def upload_post():
             filename = uploader.upload(file)
 
         if post_type == "forum":
-            db_insert.insert("Post", [1, caption, filename])
+            db_insert.insert("Post", [user_id, caption, filename])
         elif post_type == "recruitment":
-            db_insert.insert("Post", [user_id, title, caption, filename])
+            db_insert.insert("Recruitment", [user_id, title, caption, filename, True])
 
     return redirect("/")
 
-
+#Finished
 @app.route('/terms', methods=['GET'])
 def TermsOfService():
     return render_template("termsofservice.html")
@@ -187,11 +188,10 @@ def Dashboard():
     #     # title="Registered Users Over Time", 
     #     # lineLabel="Registered Users"
     # )
-
+    
     chart_html = db_chart.set_graph(database_value, filter_value)
 
     db_conn.close()
-
     if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
         return jsonify({'chart': chart_html})
 
@@ -208,7 +208,7 @@ def Dashboard():
         application_count=application_count,
         banned_count=banned_count, 
         muted_count=muted_count,
-        reported_count=reported_count
+        reported_count=reported_count,
         )
 
 
@@ -278,12 +278,6 @@ def update_reported_post():
 @app.route('/aboutus', methods=['GET'])
 def AboutUs():
     return render_template('aboutus.html')
-
-
-
-@app.route('/reports', methods=['POST', 'GET'])
-def reports():
-    return render_template("reports.html")
 
 
 

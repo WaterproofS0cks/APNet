@@ -1,10 +1,13 @@
+const post_type = document.querySelector("script[data-type]")?.getAttribute("data-type") || "";
+const page_type = document.querySelector("script[data-page]")?.getAttribute("data-page") || "";
+
 let currentPage = 1;
 let loadedPostIds = new Set();
 const postContainer = document.getElementById('postContainer');
 let isLoading = false;
 
 // Loading Post
-function loadPosts(searchTerm = '', type = 'post') {
+function loadPosts(searchTerm = '') {
     if (isLoading) return;
 
     isLoading = true;
@@ -17,10 +20,10 @@ function loadPosts(searchTerm = '', type = 'post') {
 
     const url = '/load_more?page=' + currentPage + 
                 '&loaded_ids=' + JSON.stringify(Array.from(loadedPostIds)) + 
-                '&type=' + encodeURIComponent(type) +
+                '&post_type=' + post_type +
+                '&page_type=' + page_type +
                 (searchTerm ? '&search=' + encodeURIComponent(searchTerm) : '');
 
-    //Will Change This To Post When I Can
     fetch(url)
         .then(response => response.json())
         .then(data => {
@@ -76,8 +79,6 @@ function updateBookmarkUI(container, bookmark) {
         : "../static/src/icon/icons8-bookmark-50.png";
 }
 
-
-// 3 Dot Menu Filter
 function filter3DotMenu(loggedInUserId) {
     document.querySelectorAll(".fm-post-layout").forEach(post => {
         const postUserId = post.getAttribute("data-user-id");
