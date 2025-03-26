@@ -7,7 +7,8 @@ document.addEventListener('DOMContentLoaded', function() {
             const searchTerm = searchContainer.value.trim();
 
             if (searchTerm) {
-                window.location.href = "/?search=" + encodeURIComponent(searchTerm);
+                const baseUrl = window.location.href.split('?')[0]; 
+                window.location.href = baseUrl + "?search=" + encodeURIComponent(searchTerm);
             }
         }
     });

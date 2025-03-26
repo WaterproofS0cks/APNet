@@ -6,6 +6,7 @@
     <link rel="icon" type="image/x-icon" href="../static/src/favicon/favicon.ico">
     <link rel="stylesheet" href="../static/style.css">    
     <script type="text/javascript" src="{{ url_for('static', filename='scripts/SearchBarFunction.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='scripts/PostFunction.js') }}" defer></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
@@ -274,7 +275,7 @@
         // });
     </script>
 
-    <script>
+    <!-- <script>
         
         let currentPage = 1;
         let loadedPostIds = new Set();
@@ -354,19 +355,6 @@
                 : "../static/src/icon/icons8-bookmark-50.png";
         }
         
-        async function checkSession() {
-            try {
-                let response = await fetch("/session");
-                let data = await response.json();
-
-                if (!data.session) {
-                    window.location.href = "/auth/login";
-                    return;
-                }
-            } catch (error) {
-                console.error("It Is A Session Error... AGAIN!", error);
-            }
-        }
 
         // 3 Dot Menu Filter
         function filter3DotMenu(loggedInUserId) {
@@ -442,7 +430,6 @@
 
                 if (!postId || !action) return;
 
-                checkSession();
                 if (action === "liked" || action === "bookmark") {
                     fetch("/engagement", {
                         method: "POST",
@@ -491,23 +478,6 @@
                 }
             });
 
-            // Searchbar
-            // const searchContainer = document.getElementById('ha-searchbar');
-            // searchContainer.addEventListener("keypress", function(event) {
-            //     if (event.key === "Enter") {
-            //         event.preventDefault(); 
-
-            //         const searchTerm = searchContainer.value.trim();
-
-            //         if (searchTerm) {
-            //             window.location.href = "/?search=" + encodeURIComponent(searchTerm);
-            //         }
-            //     }
-            // });
-        
-            // const urlParams = new URLSearchParams(window.location.search);
-            // const searchTerm = urlParams.get('search') || '';
-            // loadPosts(searchTerm);
         });
 
 
@@ -519,7 +489,7 @@
                 loadPosts(searchTerm);
             }
         });    
-    </script>
+    </script> -->
 
 </body>
 </html>

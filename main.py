@@ -10,7 +10,7 @@ from datetime import datetime, timedelta
 from ConnectDatabase import dbConnection
 from RetrieveDatabase import dbRetrieve
 from CreateDatabase import dbCreate
-from UpdateDatabase import dbModify, ImageUploader, dbInsert
+from UpdateDatabase import dbModify, imageUploader, dbInsert
 from ChartDatabase import dbChart
 from LoadingContent import Content
 
@@ -34,14 +34,14 @@ app = Flask(__name__)
 app.register_blueprint(auth, url_prefix="/auth")
 app.register_blueprint(user_profile, url_prefix="/user")
 app.secret_key = SECRET_KEY
-app.config["UPLOAD_FOLDER"] = os.path.join("static", "src", "img")
+app.config["UPLOAD_FOLDER"] = os.path.join("static", "src", "post")
 app.permanent_session_lifetime = timedelta(days=1)
 
 db_create.create_database()
 db_conn.commit()
 db_conn.close()
 
-uploader = ImageUploader(app.config["UPLOAD_FOLDER"])
+uploader = imageUploader(app.config["UPLOAD_FOLDER"])
 
 @app.route("/session")
 def check_session():
@@ -84,36 +84,34 @@ def create_post():
 
 @app.route('/upload', methods=["GET", "POST"])
 def upload_post():
+    db_conn = dbConnection(
+        dbname=os.getenv("DBNAME"),
+        user=os.getenv("USER"),
+        password=os.getenv("PASSWORD"),
+    )
+
+    db_conn.connect()
+    db_insert = dbInsert(db_conn)
+
     if request.method == "POST":
+
         post_type = request.form["post_type"]
-        user_id = request.form.get("userID", 1)
+        user_id = request.form.get("userID")
         caption = request.form["caption"]
         title = request.form.get("title", None)
-        file = request.files.get("image")
-        try:
-            if not caption:
-                raise ValueError("Caption is required.")
-            
-            filename = None
-            if file:
-                filename = uploader.upload(file)
+        file = request.files.get('file')
+           
+        filename = None
+        if file:
+            filename = uploader.upload(file)
 
-            print("HEYHEYHEY")
-            print(request.form)
+        if post_type == "forum":
+            db_insert.insert("Post", [1, caption, filename])
+        elif post_type == "recruitment":
+            db_insert.insert("Post", [user_id, title, caption, filename])
 
-            if post_type == "forum":
-                dbInsert.insert("Post", [1, caption, filename])
-            elif post_type == "recruitment":
-                if not title:
-                    raise ValueError("Title is required for recruitment posts.")
-                dbInsert.insert("Post", [user_id, title, caption, filename])
+    return redirect("/")
 
-            # return jsonify({"success": True, "filename": filename})
-            return redirect("/")
-        except Exception as e:
-            # return redirect("/")
-            print(request.form)
-            return jsonify({"success": False, "error": str(e)})
 
 @app.route('/terms', methods=['GET'])
 def TermsOfService():

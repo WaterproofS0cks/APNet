@@ -44,7 +44,7 @@ def updateProfile():
                     cur.execute("UPDATE Users SET username = %s WHERE username = %s", (new_data['username'], session.get('user')))
                     session['user'] = new_data['username']
                 except psycopg2.errors.UniqueViolation:
-                    return render_template('settings.html', erruser="Username Already Exist.")
+                    return render_template('settings.html', erruser="Username already exist.")
             if new_data['bio'] != '':
                 try:
                     cur.execute("UPDATE Users SET bio = %s WHERE username = %s", (new_data['bio'], session.get('user')))
@@ -56,7 +56,7 @@ def updateProfile():
                     cur.execute("UPDATE Users SET link = %s WHERE username = %s", (new_data['link'], session.get('user')))
                     session['link'] = new_data['link']
                 except psycopg2.errors.StringDataRightTruncation:
-                    return render_template('settings.html', errbio="Link max length 255 characters.")
+                    return render_template('settings.html', errlink="Link max length 512 characters.")
             conn.commit()
             conn.close()
             return redirect('/user/profile')
@@ -73,14 +73,17 @@ def updateAccount():
             cur = conn.cursor()
             new_data = request.form
             if new_data['fullname'] != '':
-                cur.execute("UPDATE Users SET fullname = %s WHERE username = %s", (new_data['fullname'], session.get('user')))
-                session['fullname'] = new_data['fullname']
+                try:
+                    cur.execute("UPDATE Users SET fullname = %s WHERE username = %s", (new_data['fullname'], session.get('user')))
+                    session['fullname'] = new_data['fullname']
+                except psycopg2.errors.StringDataRightTruncation:
+                    return render_template('settings.html', errname="Full name max length 255 characters.")
             if new_data['email'] != '':
                 try:
                     cur.execute("UPDATE Users SET email = %s WHERE username = %s", (new_data['email'], session.get('email')))
                     session['email'] = new_data['email']
                 except psycopg2.errors.UniqueViolation:
-                    return render_template('settings.html', erremail="Email Already Exist.")
+                    return render_template('settings.html', erremail="Email already exist.")
             conn.commit()
             conn.close()
             return redirect('/user/profile')

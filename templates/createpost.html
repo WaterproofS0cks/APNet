@@ -204,20 +204,21 @@
             <div id="cp-forumInputs">
                 <h1>Image</h1>
                 <div id="cp-forum-drop-area">
+                    <input type="file" accept="image/*" id="cp-forum-input-file" name="file" hidden>
                     <div class="cp-forum-imagecontainer" id="cp-forum-imageview">
-                        <input type="file" accept="image/*" id="cp-forum-input-file" name="file" hidden>
+                        
                         <img src="../static/src/icon/icons8-upload-to-cloud-100.png" alt="Cloud" id="cp-forum-cloudimg" draggable="false">
                         <h1>Drag file to upload</h1>
                         <h2>or</h2>
-                        <button type="button" id="cp-forum-browsefilesbutton" onclick="document.getElementById('cp-forum-input-file').click();">Browse Files</button>
+                        <button type="button" id="cp-forum-browsefilesbutton" data-file="" name="file" onclick="document.getElementById('cp-forum-input-file').click();">Browse Files</button>
                         <h3>Max file size: <b>100MB</b></h3>
                         <h3>Supported file types: <b>JPG, JPEG, PNG, GIF</b></h3>
                     </div>
                 </div>
-        
+                
                 <h1>Caption <span class="cp-required">*</span></h1>
                 <textarea name="caption" id="cp-forum-caption-text" placeholder="Enter your caption here..."></textarea>
-        
+                
                 <div class="cp-forum-button-container">
                     <button class="cp-forum-post-button" id="cp-post-button" type="submit">Post</button>
                 </div>
@@ -234,8 +235,8 @@
 
                 <h1>Image</h1>
                 <div id="cp-recruit-drop-area">
+                    <input type="file" accept="image/*" id="cp-recruit-input-file" name="file" hidden>
                     <div class="cp-recruit-imagecontainer" id="cp-recruit-imageview">
-                        <input type="file" accept="image/*" id="cp-recruit-input-file" hidden>
                         <img src="../static/src/icon/icons8-upload-to-cloud-100.png" alt="Cloud" id="cp-recruit-cloudimg">
                         <h1>Drag file to upload</h1>
                         <h2>or</h2>
@@ -310,9 +311,14 @@
 
         function uploadForumImage() {
             if (inputFileForum.files.length > 0) {
-                let forumImgLink = URL.createObjectURL(inputFileForum.files[0]);
+                let selectedFile = inputFileForum.files[0];
+                let forumImgLink = URL.createObjectURL(selectedFile);
                 imageViewForum.style.backgroundImage = `url(${forumImgLink})`; 
                 imageViewForum.textContent = "";
+
+                const browseButton = document.getElementById('cp-forum-browsefilesbutton');
+                browseButton.setAttribute('data-file', selectedFile.name);
+                browseButton.textContent = `Selected: ${selectedFile.name}`;
             }
         }
 
@@ -380,6 +386,19 @@
         inputFileRecruit.addEventListener("change", uploadRecruitImage);
 
         window.onload = updateInputs;
+
+        function triggerFileInput() {
+            document.getElementById('cp-forum-input-file').click();
+        }
+
+        // Add an event listener to handle file selection
+        document.getElementById('cp-forum-input-file').addEventListener('change', function() {
+            const file = this.files[0]; // Get the selected file
+            if (file) {
+                console.log("Selected file:", file.name); // Log the file name
+                // You can also update the UI or perform other actions here
+            }
+        });
     </script>
 
 </body>
