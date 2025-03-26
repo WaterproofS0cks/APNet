@@ -2400,7 +2400,7 @@ input[type="submit"]:hover {
 
 @media (max-width: 430px) {
     .efp-main-container {
-        height: 117vh;
+        height: 112vh;
         width: 88vw;
         margin: 95px 6% 200px 6%;
         padding: 20px 30px;
@@ -2418,7 +2418,7 @@ input[type="submit"]:hover {
     }
     
     .efp-title-container h1 {
-        font-size: 35px;
+        font-size: 38px;
         margin: 0 auto;
     }
     
@@ -2426,55 +2426,22 @@ input[type="submit"]:hover {
         margin-top: 10px;
     }
     
-    #efp-forumInputs h1, #efp-recruitmentInputs h1 { 
+    #efp-forumInputs h1 { 
         font-size: 21px;
-    }
-    
-    .efp-required {
-        font-size: 20px;
     }
     
     .efp-forum-imagecontainer, .efp-recruit-imagecontainer {
         height: 380px;
         margin: 5px 0 25px 0;
-        border: 4px dashed #ccc;
-        border-radius: 12px;
-    }
-    
-    #efp-forum-cloudimg, #efp-recruit-cloudimg {
-        width: 100px;
-        height: auto;
-    }
-    
-    .efp-forum-imagecontainer h2, .efp-recruit-imagecontainer h2 {
-        margin: 4px 0 10px 0;
-    }
-    
-    #efp-forum-browsefilesbutton, #efp-recruit-browsefilesbutton {
-        font-size: 14px;
-        width: 130px;
-        margin-bottom: 20px;
-    }
-    
-    .efp-forum-imagecontainer h3, .efp-recruit-imagecontainer h3 {
-        font-size: 14px;
     }
 
-    .efp-forum-button-container, .efp-recruit-button-container {
+    .efp-forum-button-container {
         width: 100%;
         height: 35px;
         margin: 20px 0 0 0;
     }
-    
-    #efp-recruit-title-text {
-        font-family: "Roboto", sans-serif;
-        font-size: 15px;
-        height: 40px;
-        width: 100%;
-        margin-bottom: 20px;
-    }
-    
-    .efp-forum-post-button, .efp-recruit-post-button {
+       
+    .efp-forum-post-button {
         margin-left: 220px;
     }
 }
@@ -2649,7 +2616,55 @@ input[type="submit"]:hover {
 }
 
 @media (max-width: 430px) {
+    .erp-main-container {
+        height: 122vh;
+        width: 88vw;
+        margin: 95px 6% 200px 6%;
+        padding: 20px 30px;
+        border-radius: 8px;
+        background-color: #f6f6f6;
+    }
     
+    .erp-main-container.recruitment-active {
+        height: 127vh;
+    }
+    
+    .erp-title-container {
+        margin-top: 0px;
+        height: 75px;
+    }
+    
+    .erp-title-container h1 {
+        font-size: 32px;
+        margin: 0 auto;
+    }
+    
+    .erp-filter-container {
+        margin-top: 10px;
+    }
+    
+    #erp-recruitmentInputs h1 { 
+        font-size: 21px;
+    }
+    
+    .erp-required {
+        font-size: 20px;
+    }
+    
+    .erp-recruitment-imagecontainer {
+        height: 380px;
+        margin: 5px 0 25px 0;
+    }
+
+    .erp-recruitment-button-container {
+        width: 100%;
+        height: 35px;
+        margin: 20px 0 0 0;
+    }
+    
+    .erp-recruitment-post-button {
+        margin-left: 220px;
+    }
 }
 
 
