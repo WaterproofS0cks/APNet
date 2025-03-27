@@ -43,6 +43,10 @@ def setting():
 
             user_data = db_retrieve.retrieve_one("users", "*", "userid = %s", (user_id,))
 
+            erruser = request.args.get("erruser")
+            errbio = request.args.get("errbio")
+            errlink = request.args.get("errlink")
+
             return render_template(
                 "settings.html",
                 pfp=user_data["profilepicture"],
@@ -51,7 +55,10 @@ def setting():
                 link=user_data["link"],
                 fullname=user_data["fullname"],
                 email=user_data["email"],
-                phone=user_data["phone"]
+                phone=user_data["phone"],
+                erruser=erruser if erruser else "",
+                errbio=errbio if errbio else "",
+                errlink=errlink if errlink else ""
                 )
     else:
         return redirect(url_for('auth.login'))
@@ -161,8 +168,10 @@ def updateProfile():
         user=os.getenv("USER"),
         password=os.getenv("PASSWORD"),
     )
+
     db_conn.connect()
     db_modify = dbModify(db_conn)
+    db_retrieve = dbRetrieve(db_conn)
 
     user_id = session.get("id")
     pfp = request.files.get("pfp")
@@ -178,12 +187,15 @@ def updateProfile():
 
     try:
         if username:
-            existing_user = db_conn.retrieve_one("users", "userid", "username = %s", (username,))
+            existing_user = db_retrieve.retrieve_one("users", "userid", "username = %s", (username,))
             if existing_user and existing_user[0] != user_id:
-                return render_template('settings.html', erruser="Username already exists.")
+                return redirect(url_for("user_profile.setting", erruser="Username already exists."))
 
         data = {"profilePicture": pfp_filename, "username": username, "bio": bio, "link": link}
         condition = {"userid": user_id}
+        
+        if not username:
+            return redirect(url_for("user_profile.setting", erruser="Username cannot be empty"))
 
         db_modify.update("Users", data, condition)
 
@@ -194,10 +206,10 @@ def updateProfile():
 
     except StringDataRightTruncation as e:
         if "bio" in str(e):
-            return render_template('settings.html', errbio="Bio max length 255 characters.")
+            return redirect(url_for("user_profile.setting", errbio="Bio max length 255 characters."))
         if "link" in str(e):
-            return render_template('settings.html', errlink="Link max length 512 characters.")
-    
+            return redirect(url_for("user_profile.setting", errlink="Link max length 512 characters."))
+
     return redirect("/user/profile")
 
 
