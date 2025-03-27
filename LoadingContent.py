@@ -150,7 +150,7 @@ class Content():
                         
                         <div class="rc-profiledetails">
                             <a href='/user/profile?uid={entry['username']}'> 
-                            <img src="{entry['profilePicture']}" alt="Default pfp icon" id="rc-post-pfp">
+                            <img src="{entry['profilepicture']}" alt="Default pfp icon" id="rc-post-pfp">
                             <h1>{entry['username']}</h1>
                             </a>
                             <h2> • </h2>
