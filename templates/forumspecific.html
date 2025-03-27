@@ -1,7 +1,7 @@
 {% extends "header-b.html" %}
 {% block title %}Specific Forum{% endblock title %}
 {% block content %}
-<script type="text/javascript" src="{{ url_for('static', filename='scripts/SpecificFunction.js') }}" data-type="recruitment" data-page="" defer></script>
+<script type="text/javascript" src="{{ url_for('static', filename='scripts/SpecificFunction.js') }}" data-type="post" data-page="" defer></script>
 
 <style>
     body {
@@ -107,89 +107,5 @@
         </div>
 
     </div>
-
-    <script>
-        
-        document.addEventListener("DOMContentLoaded", function() {
-
-        // COMMENT FUNCTION
-        document.getElementById('addCommentButton').addEventListener('click', function() {
-        const commentInput = document.getElementById('commentInput');
-        const commentText = commentInput.value.trim();
-
-        if (commentText) {
-            fetch('/createcomment', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ comment: commentText })
-            })
-            .then(response => {
-                if (response.redirected) {
-                    window.location.href = response.url;
-                    return;
-                }
-                return response.json();
-            })
-            .then(data => {
-                if (!data) return;
-
-                const commentsList = document.querySelector('.fms-comments-list');
-
-                const newComment = document.createElement('div');
-                newComment.className = 'fms-comment';
-
-                const profileImg = document.createElement('img');
-                profileImg.src = '../static/src/img/default-pfp.png';
-                profileImg.alt = 'Profile Picture';
-                profileImg.className = 'fms-pfp-placeholder'; 
-                profileImg.style.width = '40px';
-                profileImg.style.height = '40px'; 
-                profileImg.style.borderRadius = '50%'; 
-
-                const usernameSpan = document.createElement('span');
-                usernameSpan.className = 'fms-username-placeholder'; 
-                usernameSpan.textContent = data.username + ': ';
-
-                const commentSpan = document.createElement('span');
-                commentSpan.className = 'fms-comment-text'; 
-                commentSpan.textContent = commentText;
-
-                newComment.appendChild(profileImg);
-                newComment.appendChild(usernameSpan);
-                newComment.appendChild(commentSpan);
-
-                commentsList.appendChild(newComment);
-
-                commentInput.value = '';
-            })
-            .catch(error => console.error("Error posting comment:", error));
-        }
-    });
-
-
-        // HEADER PFP DROPDOWN
-        var profileImg = document.getElementById('hb-pfp-img');
-        var popupMenu = document.getElementById('hb-popup-menu');
-
-        profileImg.addEventListener('click', function(event) {
-            if (popupMenu.style.display === "block") {
-                popupMenu.style.display = "none";
-            } else {
-                popupMenu.style.display = "block";
-            }
-            event.stopPropagation();
-            });
-
-
-        // CLOSES DROPDOWNS IF CLICKED ELSEWHERE
-        document.addEventListener('click', function(event) {
-            if (!profileImg.contains(event.target) && !popupMenu.contains(event.target)) {
-                popupMenu.style.display = "none";
-            }
-        });
-        });
-    </script>
 </body>
 {% endblock content %}

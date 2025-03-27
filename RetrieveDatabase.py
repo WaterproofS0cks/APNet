@@ -37,10 +37,12 @@ class dbRetrieve:
         self.execute_query(query)
         return self.db_connection.cur.fetchall()
 
-    def retrieve(self, tablename, columns="*", condition=None, params=None, join=""):
+    def retrieve(self, tablename, columns="*", condition=None, params=None, join="", order=""):
         query = f"SELECT {columns} FROM {tablename} {join}"
         if condition:
             query += f" WHERE {condition}"
+        if order:
+            query += f" {order}"
         query += ";"
         self.execute_query(query, params, cursor_type='dict')
         return self.db_connection.cur.fetchall()

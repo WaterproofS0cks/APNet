@@ -207,7 +207,6 @@ class Content():
 
                         <div class="rc-post-footer">
                             <span class="rc-interest-text">Interested? Join Us Now!</span>
-                            <!-- MAKE IT LEAD TO THE RECRUITMENT APPLICATION -->
                             <a href="recruitmentapplication?postid={entry["id"]}"><button class="rc-apply-button">Apply</button></a>
                         </div>
                     </div>
@@ -227,22 +226,25 @@ class Content():
         user_id = session.get('id')
 
         data = request.json
+        post_type = data.get('post_type')
         post_id = data.get('post_id')
         action = data.get('action')
 
         if not post_id or action not in ["liked", "bookmark"]:
             return jsonify({'error': 'Invalid request'}), 400
 
-        status = db_modify.toggle_engagement(user_id, post_id, action)
+        status = db_modify.toggle_engagement(user_id, post_id, action, post_type)
 
         response = {'bookmark': status} if action == "bookmark" else {}
 
         if action == "liked":
-            likes_count = db_retrieve.retrieve("PostEngagement", "COUNT(*)", "postID = %s AND liked = TRUE", (post_id,))
+            if post_type == "post":
+                likes_count = db_retrieve.retrieve("PostEngagement", "COUNT(*)", "postID = %s AND liked = TRUE", (post_id,))
+            if post_type == "recruitment":
+                likes_count = db_retrieve.retrieve("RecruitmentEngagement", "COUNT(*)", "recruitmentID = %s AND liked = TRUE", (post_id,))
             likes_count = likes_count[0] if likes_count else 0  
             response.update({'liked': status, 'likes_count': likes_count})
 
-        print(response)
         return jsonify(response)
     
     def load_specific_forum():
@@ -306,9 +308,10 @@ class Content():
         columns = "Users.username, Users.profilePicture, PostComment.comment, TO_CHAR(PostComment.timestamp, 'DD Month YYYY HH24:MI') AS timestamp"
         condition = "PostComment.postID = %s"
         params = (post_id,)
-        join = "JOIN Users ON PostComment.userID = Users.userID ORDER BY PostComment.timestamp DESC"
-        
-        comments = db_retrieve.retrieve("PostComment", columns, condition, params, join)
+        join = "JOIN Users ON PostComment.userID = Users.userID"
+        order = "ORDER BY PostComment.timestamp DESC"
+
+        comments = db_retrieve.retrieve("PostComment", columns, condition, params, join, order)
 
         comments_html = ""
         for comment in comments:

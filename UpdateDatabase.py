@@ -77,20 +77,27 @@ class dbModify(dbInsert):
 
         self.execute_query(query, params)
 
-    def toggle_engagement(self, user_id, post_id, action):
+    def toggle_engagement(self, user_id, post_id, action, post_type):
         if action not in ["liked", "bookmark"]:
             raise ValueError("Invalid action. Must be 'liked' or 'bookmark'.")
 
-        query = f"""
-            INSERT INTO PostEngagement (userID, PostID, {action})
-            VALUES (%s, %s, TRUE)
-            ON CONFLICT (userID, PostID)
-            DO UPDATE SET {action} = NOT PostEngagement.{action}
-            RETURNING {action};
-        """
-
-        print("Executing Query:", query)
-        print("With Values:", (user_id, post_id))
+        if post_type == "post": 
+            query = f"""
+                INSERT INTO PostEngagement (userID, PostID, {action})
+                VALUES (%s, %s, TRUE)
+                ON CONFLICT (userID, PostID)
+                DO UPDATE SET {action} = NOT PostEngagement.{action}
+                RETURNING {action};
+            """
+        
+        elif post_type == "recruitment": 
+            query = f"""
+                INSERT INTO RecruitmentEngagement (userID, RecruitmentID, {action})
+                VALUES (%s, %s, TRUE)
+                ON CONFLICT (userID, RecruitmentID)
+                DO UPDATE SET {action} = NOT RecruitmentEngagement.{action}
+                RETURNING {action};
+            """
 
         cursor = self.db_connection.cur
         cursor.execute(query, (user_id, post_id))

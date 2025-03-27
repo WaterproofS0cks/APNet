@@ -86,8 +86,8 @@ def comment():
 @app.route("/createcomment", methods=["POST"])
 def create_comment():
     if "id" not in session:
-        return redirect(url_for("auth_login"))
-    
+        return "", 401
+
     db_conn = dbConnection(
         dbname=os.getenv("DBNAME"),
         user=os.getenv("USER"),
@@ -98,9 +98,18 @@ def create_comment():
     db_insert = dbInsert(db_conn)
 
     data = request.get_json()
-    comment_text = data.get("comment")
+    user_id = session.get("id")
+    post_id = data.get("id")
+    comment = data.get("comment")
+    page_type = data.get("page_type")
 
-    
+    if page_type == "post":
+        db_insert.insert("PostComment", (user_id, post_id, comment))
+    elif page_type == "recruitment":
+        db_insert.insert("RecruitmentComment", (user_id, post_id, comment))
+    else:
+        return "", 400
+    return "", 204 
 
 #Finished  
 @app.route('/create', methods=["GET", "POST"])

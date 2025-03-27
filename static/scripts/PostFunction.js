@@ -155,7 +155,7 @@ document.addEventListener('DOMContentLoaded', function() {
             fetch("/engagement", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ post_id: postId, action: action }),
+                body: JSON.stringify({ post_id: postId, action: action, post_type: post_type }),
             })
             .then(response => response.json())
             .then(data => {
@@ -172,7 +172,12 @@ document.addEventListener('DOMContentLoaded', function() {
             })
             .catch((error) => console.error("Error:", error));
         } else if (action === "specific") {
-            window.location.href = "/specificpost?postid=" + encodeURIComponent(postId);
+
+            if (post_type === "post") {
+                window.location.href = "/specificpost?postid=" + encodeURIComponent(postId);
+            } else if (post_type === "recruitment") {
+                window.location.href = "/specificrecruitment?postid=" + encodeURIComponent(postId);
+            }
         }
     });
 
