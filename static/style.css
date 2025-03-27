@@ -1439,7 +1439,7 @@ input[type="submit"]:hover {
 .fm-image-container, .rc-image-container {
     height: 365.4px;    
     width: 100%;
-    margin: 10px 0 0 0;
+    margin: 5px 0 0 0;
     border: 2px solid #94bfe3; 
     background-color: #000;
 }
@@ -2730,6 +2730,17 @@ input[type="submit"]:hover {
     font-size: 15px;
     color: #333333;
     margin: 0 5px 0 9px;
+}
+
+.rc-profiledetails a {
+    text-decoration: none;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.rc-profiledetails a:hover {
+    text-decoration: underline;
 }
 
 .rc-profiledetails h2 {

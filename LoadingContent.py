@@ -178,7 +178,7 @@ class Content():
 
                         </div>
 
-                        <div class="fm-image-container">
+                        <div class="rc-image-container">
                             <a href='specificrecruitment?postid={entry["id"]}'> 
                                 <img src="{entry["image"]}" alt="Post Image"> 
                             </a>
