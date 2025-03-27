@@ -133,7 +133,7 @@ class Content():
                 else:
                     engagement = None
 
-                like_count = db_retrieve.retrieve_one("RecrutimentEngagement", "COUNT(*)", "liked = TRUE AND postID = %s", (id,))[0]
+                like_count = db_retrieve.retrieve_one("RecruitmentEngagement", "COUNT(*)", "liked = TRUE AND recruitmentID = %s", (id,))[0]
                 engagement_data = engagement[0] if engagement else {'bookmark': False, 'liked': False}
 
                 like_icon = "../static/src/icon/icons8-heart-red-50.png" if engagement_data['liked'] else "../static/src/icon/icons8-heart-50.png"
@@ -185,7 +185,7 @@ class Content():
                             <div class="fm-like-icon-container" data-action="liked">
                                 <img src="{like_icon}" alt="Heart" id="fm-post-hearticon">
                                 <h2>Like</h2>
-                                <h4>({entry['likes_count']})</h4>
+                                <h4>({like_count})</h4>
                             </div>
 
                             <div class="fm-comment-icon-container" data-action="specific">
@@ -268,7 +268,7 @@ class Content():
 
         user_data = db_retrieve.retrieve_one("Users", "*", "userID = %s", (post_data["userid"],))
 
-        like_count = db_retrieve.retrieve_one("PostEngagement", "COUNT(*)", "liked = TRUE AND postID = %s", (post_id,))[0]
+        like_count = db_retrieve.retrieve("PostEngagement", "COUNT(*)", "liked = TRUE AND postID = %s", (post_id,))[0]
         engagement_data = db_retrieve.retrieve_one("PostEngagement", "*", "userID = %s AND postID = %s", (user_id, post_id)) or {}
 
         userid = post_data["userid"]
