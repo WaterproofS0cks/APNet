@@ -43,7 +43,6 @@ db_conn.close()
 
 uploader = imageUploader(app.config["UPLOAD_FOLDER"])
 
-
 @app.route("/session")
 def check_session():
     user_id = session.get('id')
@@ -60,7 +59,6 @@ def forum():
 
 #
 @app.route('/load_more')
-@app.route('/recruitment/load_more')
 def post():
     return Content.load_post()
 
@@ -70,6 +68,7 @@ def engagement():
     return Content.load_engagement()
 
 #Finished
+@app.route('/user/specificpost', methods=["GET", "POST"])
 @app.route('/specificpost', methods=["GET", "POST"])
 def specific_post():
     return Content.load_specific_forum()

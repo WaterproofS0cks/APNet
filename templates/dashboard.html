@@ -218,9 +218,8 @@
                 fetch('/load_tables')
                     .then(response => response.json())
                     .then(data => {
-                        console.log("Loaded data:", data); // Debugging log
+                        console.log("Loaded data:", data);
     
-                        // ✅ Clear and replace old content
                         document.getElementById('penalized-users-container').innerHTML = data.penalized_users;
                         document.getElementById('reported-users-container').innerHTML = data.reported_users;
                         document.getElementById('reported-posts-container').innerHTML = data.reported_posts;
@@ -228,10 +227,8 @@
                     .catch(error => console.error('Error loading tables:', error));
             }
     
-            // ✅ Load tables on page load
             loadTables();
     
-            // ✅ Event listener for clicking <u> elements
             document.body.addEventListener("click", function (event) {
                 if (event.target.tagName === "U") {
                     const action = event.target.getAttribute("data-action");
@@ -264,7 +261,7 @@
                         .then(response => response.json())
                         .then(data => {
                             alert(data.message);
-                            loadTables(); // ✅ Reload tables after update
+                            loadTables();
                         })
                         .catch(error => console.error("Error:", error));
                     }

@@ -1,113 +1,19 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/x-icon" href="../static/src/favicon/favicon.ico">
-    <link rel="stylesheet" href="../static/style.css">    
-    <script type="text/javascript" src="{{ url_for('static', filename='scripts/SearchBarFunction.js') }}"></script>
-    <script type="text/javascript" src="{{ url_for('static', filename='scripts/PostFunction.js') }}" data-type="post" data-page="" defer></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
-    <title>APNet</title>
+{% extends "header-a.html" %}
+{% block title %}APNet{% endblock title %}
+{% block content %}
 
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-            background-color: #F7F7F7;
-            min-height: 100vh;
-            padding-bottom: 50px;
-        }  
-    
-    </style>
-</head>
+<script type="text/javascript" src="{{ url_for('static', filename='scripts/PostFunction.js') }}" data-type="post" data-page="" defer></script>
+
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        background-color: #F7F7F7;
+        min-height: 100vh;
+        padding-bottom: 50px;
+    }  
+</style>
 <body>
-    <!-- HEADER CONTENT -->
-    <header>
-        <div class="ha-main-container">
-
-            <div class="ha-logo-container">
-                <a href="/"><img src="../static/src/img/apnet-logo.png" id="ha-logo-img"></a>
-            </div>
-
-            <div class="ha-search-container">
-                <input type="text" id="ha-searchbar" placeholder="Search APNet...">
-            </div>
-            
-            <div class="ha-right-container">
-
-                <div class="ha-createpost-container">
-                    <a href="create">                        
-                        <img src="../static/src/icon/icons8-plus-48.png" alt="Plus" id="ha-plusicon">
-                        <h2>Create Post</h2>
-                    </a>
-                </div>
-
-                <img src="../static/src/icon/icons8-notification-50.png" alt="Notification Icon" id="ha-notificon">
-                <div class="fm-notif-main-container">
-                    <h2>Notifications</h2>
-                    <!-- INSERT NOTIFICATIONS -->
-                    <ul>
-                        <li>
-                            <img src="../static/src/img/aboutus-eventcollage.png" alt="Notifimg" id="fm-notifimg">
-                            <b>INSERT USERNAME </b> has liked your post <i>1w</i>
-                        </li>
-                        <li>
-                            <img src="../static/src/img/aboutus-eventcollage.png" alt="Notifimg" id="fm-notifimg">
-                            <b>INSERT USERNAME </b> has liked your post <i>1w</i>
-                        </li>
-                        <li>
-                            <img src="../static/src/img/aboutus-eventcollage.png" alt="Notifimg" id="fm-notifimg">
-                            <b>INSERT USERNAME </b> has liked your post <i>1w</i>
-                        </li>
-                        <li>
-                            <img src="../static/src/img/aboutus-eventcollage.png" alt="Notifimg" id="fm-notifimg">
-                            <b>INSERT USERNAME </b> has liked your post <i>1w</i>
-                        </li>
-                        <li>
-                            <img src="../static/src/img/aboutus-eventcollage.png" alt="Notifimg" id="fm-notifimg">
-                            <b>INSERT USERNAME </b> has liked your post <i>1w</i>
-                        </li>
-                        <li>
-                            <img src="../static/src/img/aboutus-eventcollage.png" alt="Notifimg" id="fm-notifimg">
-                            <b>INSERT USERNAME </b> has liked your post <i>1w</i>
-                        </li>
-                        <li>
-                            <img src="../static/src/img/aboutus-eventcollage.png" alt="Notifimg" id="fm-notifimg">
-                            <b>INSERT USERNAME </b> has liked your post <i>1w</i>
-                        </li>
-                        <li>
-                            <img src="../static/src/img/aboutus-eventcollage.png" alt="Notifimg" id="fm-notifimg">
-                            <b>INSERT USERNAME </b> has liked your post <i>1w</i>
-                        </li>
-            
-                    </ul>
-            
-                    <h3><-------- NO NEW NOTIFICATIONS --------></h3>
-                </div>
-
-                <img src="../static/src/img/default-pfp.png" alt="Pfp" id="ha-pfpimg">
-                <div class="ha-popup-menu" id="ha-popup-menu">
-                    <ul>
-                        <li><a href="settings.html">Settings</a></li>
-                        <li><a href="profile.html">My Profile</a></li>
-                        <li><a href="bookmarkedposts.html">Bookmarks</a></li>
-                        <li><a href="logout.html">Logout</a></li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="ha-right-responsive-container">
-                <img src="../static/src/icon/icons8-search-60.png" id="ha-searchicon">
-                <img src="../static/src/icon/icons8-menu-vertical-white-64.png" id="ha-menuicon">
-            </div>
-
-        </div>
-    </header>
-    
-
     <!-- NAV BAR -->
     <div class="nb-left-container">
 
@@ -188,19 +94,9 @@
 
     </div>
 
-    <!-- BODY CONTENT -->
     <div class="fm-main-container" id="postContainer">
-        
         <div id="no-more-posts" style="display:none; text-align: center; font-size: 20px;">No more posts to load</div>
-        
     </div>
-
-
-    <!-- NOTIFICATION POPUP MENU -->
-
-
-
-
 
     <!-- FOOTER CONTENT -->
     <footer>
@@ -228,52 +124,6 @@
             </div>
     
         </div>
-    
     </footer>
-
-    <script>
-        // document.addEventListener("DOMContentLoaded", function() {
-            // TOGGLING FM-NOTIF-MAIN-CONTAINER
-            // var notifIcon = document.getElementById('ha-notificon');
-            // var notifContainer = document.querySelector('.fm-notif-main-container');
-
-            // notifIcon.addEventListener('click', function(event) {
-            //     if (notifContainer.style.display === "flex") {
-            //         notifContainer.style.display = "none";
-            //         notifIcon.src = "../static/src/icon/icons8-notification-50.png"; 
-            //     } else {
-            //         notifContainer.style.display = "flex";
-            //         notifIcon.src = "../static/src/icon/icons8-notification-blue-48.png"; 
-            //     }
-            //     event.stopPropagation(); 
-            // });
-
-            // PFP DROPDOWN
-            // var profileImg = document.getElementById('ha-pfpimg');
-            // var popupMenu = document.getElementById('ha-popup-menu');
-
-            // profileImg.addEventListener('click', function(event) {
-            //     if (popupMenu.style.display === "block") {
-            //         popupMenu.style.display = "none";
-            //     } else {
-            //         popupMenu.style.display = "block";
-            //     }
-            //     event.stopPropagation();
-            // });
-
-
-            // CLOSING THE CONTAINER IF CLICKED ELSEWHERE
-        //     document.addEventListener('click', function(event) {
-        //         if (!notifIcon.contains(event.target) && !notifContainer.contains(event.target)) {
-        //             notifContainer.style.display = "none";
-        //             notifIcon.src = "../static/src/icon/icons8-notification-50.png";
-        //         }
-        //         if (!profileImg.contains(event.target) && !popupMenu.contains(event.target)) {
-        //             popupMenu.style.display = "none";
-        //         }
-        //     });
-        // });
-    </script>
-
 </body>
-</html>
+{% endblock content %}

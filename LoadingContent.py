@@ -7,7 +7,7 @@ from RetrieveDatabase import dbRetrieve
 from UpdateDatabase import dbModify
 
 class Content():
-    def load_post():
+    def load_post(user_id=None):
         db_conn = dbConnection(
             dbname=os.getenv("DBNAME"),
             user=os.getenv("USER"),
@@ -17,7 +17,9 @@ class Content():
         db_conn.connect()
         db_retrieve = dbRetrieve(db_conn)
 
-        user_id = session.get('id')
+        if not user_id:
+            user_id = session.get('id')
+
         search_term = request.args.get('search', '')
         loaded_ids = request.args.get('loaded_ids', default='[]', type=str)
         post_type = request.args.get('post_type')
@@ -26,7 +28,7 @@ class Content():
 
         loaded_ids = json.loads(loaded_ids)
 
-        entries = db_retrieve.retrieve_entries(post_type, page_type, entries_per_page, loaded_ids, search_term)
+        entries = db_retrieve.retrieve_entries(post_type, page_type, entries_per_page, loaded_ids, search_term, user_id)
 
         if not entries:
             return jsonify({'html': '', 'no_more_posts': True, 'user_id': user_id})
@@ -267,13 +269,15 @@ class Content():
         like_count = db_retrieve.retrieve_one("PostEngagement", "COUNT(*)", "liked = TRUE AND postID = %s", (post_id,))[0]
         engagement_data = db_retrieve.retrieve_one("PostEngagement", "*", "userID = %s AND postID = %s", (user_id, post_id)) or {}
 
+        userid = post_data["userid"]
         profile_picture = user_data.get("profilePicture") or "/static/src/img/default-pfp.png"
         like_icon = ("../static/src/icon/icons8-heart-red-50.png" if engagement_data.get("liked") else "../static/src/icon/icons8-heart-50.png")
         bookmark_icon = ("../static/src/icon/icons8-bookmark-evendarkergreen-500.png" if engagement_data.get("bookmark") else "../static/src/icon/icons8-bookmark-50.png")
         date = post_data["timestamp"].strftime("%d %B %Y")
-
+        
         return render_template(
             "forumspecific.html",
+            userid=userid,
             profile_picture=profile_picture,
             username=user_data.get("username", "Unknown"),
             timestamp=date,

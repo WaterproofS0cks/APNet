@@ -1,6 +1,8 @@
 {% extends "header-b.html" %}
 {% block title %}Recruitment Application{% endblock title %}
 {% block content %}
+<script type="text/javascript" src="{{ url_for('static', filename='scripts/SpecificFunction.js') }}" data-type="recruitment" data-page="" defer></script>
+
 <style>
     body {
         padding: 0;
@@ -26,7 +28,7 @@
     <!-- BODY CONTENT -->
     <div class="fms-main-container">
         
-        <div class="fms-post-layout">
+        <div class="fms-post-layout" data-user-id= "{{ userid }}">
             
             <div class="fms-profiledetails">
                 <!-- INSERT PFP HERE -->
@@ -109,21 +111,6 @@
     <script>
         
         document.addEventListener("DOMContentLoaded", function() {
-
-        // DROPDOWN THINGGY
-        var dropdown = document.querySelector('.fms-dropdown');
-        var dropdownContent = document.querySelector('.fms-dropdown-content');
-
-        dropdown.addEventListener('click', function(event) {
-            dropdownContent.style.display = (dropdownContent.style.display === "block") ? "none" : "block";
-            event.stopPropagation();
-        });
-
-        document.addEventListener('click', function(event) {
-            if (!dropdown.contains(event.target)) {
-                dropdownContent.style.display = "none";
-            }
-        });
 
         // COMMENT FUNCTION
         document.getElementById('addCommentButton').addEventListener('click', function() {

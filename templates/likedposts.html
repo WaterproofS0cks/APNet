@@ -1,44 +1,24 @@
 {% extends "header-b.html" %}
 {% block title %}Likes{% endblock title %}
 {% block content %}
+
+<script type="text/javascript" src="{{ url_for('static', filename='scripts/PostFunction.js') }}" data-type="post" data-page="liked" defer></script>
+
 <body>
-    <div class="content-card">
+    <br><br>
+    <!-- <div class="content-card"> -->
         <div class="card-header">
             <a href="profile" class="btn-icon">
-                <img src="{{ url_for('static', filename='src/icon/icons8-back-96.png') }}" alt="Back Icon">
+                <img src="{{ url_for('static', filename='src/icon/icons8-back-96.png') }}" alt="Back Icon"><h2>Likes</h2>
+                
             </a>
-            <h2>Likes</h2>
+            
         </div>
 
-        <!-- This is a single liked post -->
-        <div class="activity-margin">
-            <div class="post">
-                <div class="post-attr">
-                    <p>@username • Recruitment</p>
-                    <p>Date</p>
-                </div>
-                <div class="post-title">
-                    <h3>This is a liked post</h3>
-                </div>
-                <div class="post-img">
-                    <img src="{{ url_for('static', filename='src/img/default-events.jpg') }}" alt="Placeholder Image">
-                </div>
-                <div class="post-inter">
-                    <button class="button-grey">
-                        <img src="{{ url_for('static', filename='src/icon/icons8-like-96.png') }}" alt="Like Icon">Like
-                    </button>
-                    <button class="button-grey">
-                        <img src="{{ url_for('static', filename='src/icon/icons8-comment-96.png') }}" alt="Comment Icon">Comment
-                    </button>
-                    <button class="button-grey">
-                        <img src="{{ url_for('static', filename='src/icon/icons8-bookmark-96.png') }}" alt="Bookmark Icon">Bookmark
-                    </button>
-                </div>
-            </div>
+        <div class="fm-main-container" id="postContainer">
+            <div id="no-more-posts" style="display:none; text-align: center; font-size: 20px;">No more posts to load</div>
         </div>
 
-        <!-- Add additional liked posts here -->
-
-    </div>
+    <!-- </div> -->
 </body>
 {% endblock content %}

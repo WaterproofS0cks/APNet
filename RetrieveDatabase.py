@@ -140,7 +140,7 @@ class dbRetrieve:
             base_query += " WHERE engagement.liked = TRUE AND engagement.userID = %s"
             params.append(user_id)
 
-        elif page_type == "" and user_id:
+        elif page_type == "self" and user_id:
             base_query += f" WHERE {user_id_column} = %s"
             params.append(user_id)
 

@@ -6,7 +6,6 @@ let loadedPostIds = new Set();
 const postContainer = document.getElementById('postContainer');
 let isLoading = false;
 
-// Loading Post
 function loadPosts(searchTerm = '') {
     if (isLoading) return;
 
@@ -177,19 +176,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-
-
-
-
-    document.body.addEventListener("click", function (event) { 
-        let actionContainer = event.target.closest("[data-action]");
-        if (!actionContainer && event.target.tagName === "IMG") {
-            actionContainer = event.target.parentElement.closest("[data-action]");
-        }
-    });
-
-
-    // 3 Dot Menu Scroll
     window.addEventListener('scroll', function() {
         if (isLoading) return;
         
@@ -200,10 +186,12 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
+    const urlParams = new URLSearchParams(window.location.search);
+    const searchTerm = urlParams.get('search') || '';
+    loadPosts(searchTerm);
+
 });
 
-
-// Scrolling
 window.addEventListener('scroll', () => {
     if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 10 && !isLoading) {
         const urlParams = new URLSearchParams(window.location.search);
