@@ -33,8 +33,9 @@
                     <ul>
                         <li><a href="/user/profile">My Profile</a></li>
                         <li><a href="/user/bookmarks">Bookmarks</a></li>
-                        [TODO] ADD HANDLING: IF USER IS ADMIN, DASHBOARD BUTTON IS VISIBLE
+                        {% if session.get('role') == "A" %}
                         <li><a href="/dashboard">Dashboard</a></li>
+                        {% endif %}
                         <li><a href="/user/settings">Settings</a></li>
                         <li><a class="header-logout" href="/auth/logout">Logout</a></li>
                     </ul>
