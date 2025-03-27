@@ -1,107 +1,17 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/x-icon" href="../static/src/favicon/favicon.ico">
-    <link rel="stylesheet" href="../static/style.css">    
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
-    <title>Create Post</title>
+{% extends "header-a.html" %}
+{% block title %}Create Post{% endblock title %}
+{% block content %}
 
-    <style>
-        html {
-            height: 100%;
-        }
-        body {
-            margin-top: 70px;
-        }
-    </style>
-</head>
+<style>
+    html {
+        height: 100%;
+    }
+    body {
+        margin-top: 70px;
+    }
+</style>
+
 <body>
-    <header>
-        <div class="ha-main-container">
-
-            <div class="ha-logo-container">
-                <a href="/"><img src="../static/src/img/apnet-logo.png" id="ha-logo-img"></a>
-            </div>
-
-            <div class="ha-search-container">
-                <input type="text" id="ha-searchbar" placeholder="Search APNet...">
-            </div>
-            
-            <div class="ha-right-container">
-
-                <div class="ha-createpost-container">
-                    <a href="/create">                        
-                        <img src="../static/src/icon/icons8-plus-48.png" alt="Plus" id="ha-plusicon">
-                        <h2>Create Post</h2>
-                    </a>
-                </div>
-
-                <img src="../static/src/icon/icons8-notification-50.png" alt="Notification Icon" id="ha-notificon">
-                <div class="fm-notif-main-container">
-                    <h2>Notifications</h2>
-                    <!-- INSERT NOTIFICATIONS -->
-                    <ul>
-                        <li>
-                            <img src="../static/src/img/aboutus-eventcollage.png" alt="Notifimg" id="fm-notifimg">
-                            <b>INSERT USERNAME </b> has liked your post <i>1w</i>
-                        </li>
-                        <li>
-                            <img src="../static/src/img/aboutus-eventcollage.png" alt="Notifimg" id="fm-notifimg">
-                            <b>INSERT USERNAME </b> has liked your post <i>1w</i>
-                        </li>
-                        <li>
-                            <img src="../static/src/img/aboutus-eventcollage.png" alt="Notifimg" id="fm-notifimg">
-                            <b>INSERT USERNAME </b> has liked your post <i>1w</i>
-                        </li>
-                        <li>
-                            <img src="../static/src/img/aboutus-eventcollage.png" alt="Notifimg" id="fm-notifimg">
-                            <b>INSERT USERNAME </b> has liked your post <i>1w</i>
-                        </li>
-                        <li>
-                            <img src="../static/src/img/aboutus-eventcollage.png" alt="Notifimg" id="fm-notifimg">
-                            <b>INSERT USERNAME </b> has liked your post <i>1w</i>
-                        </li>
-                        <li>
-                            <img src="../static/src/img/aboutus-eventcollage.png" alt="Notifimg" id="fm-notifimg">
-                            <b>INSERT USERNAME </b> has liked your post <i>1w</i>
-                        </li>
-                        <li>
-                            <img src="../static/src/img/aboutus-eventcollage.png" alt="Notifimg" id="fm-notifimg">
-                            <b>INSERT USERNAME </b> has liked your post <i>1w</i>
-                        </li>
-                        <li>
-                            <img src="../static/src/img/aboutus-eventcollage.png" alt="Notifimg" id="fm-notifimg">
-                            <b>INSERT USERNAME </b> has liked your post <i>1w</i>
-                        </li>
-            
-                    </ul>
-            
-                    <h3><-------- NO NEW NOTIFICATIONS --------></h3>
-                </div>
-
-                <img src="../static/src/img/default-pfp.png" alt="Pfp" id="ha-pfpimg">
-                <div class="ha-popup-menu" id="ha-popup-menu">
-                    <ul>
-                        <li><a href="settings.html">Settings</a></li>
-                        <li><a href="profile.html">My Profile</a></li>
-                        <li><a href="bookmarkedposts.html">Bookmarks</a></li>
-                        <li><a href="logout.html">Logout</a></li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="ha-right-responsive-container">
-                <img src="../static/src/icon/icons8-search-60.png" id="ha-searchicon">
-                <img src="../static/src/icon/icons8-menu-vertical-white-64.png" id="ha-menuicon">
-            </div>
-
-        </div>
-    </header>
-
     <!-- NAV BAR -->
     <div class="nb-left-container">
 
@@ -435,4 +345,4 @@
     </script>
 
 </body>
-</html> 
+{% endblock content %}
