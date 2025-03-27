@@ -3273,6 +3273,13 @@ input[type="submit"]:hover {
     margin-top: 10px;
 }
 
+.profile-fm-main-container {
+    height: 100%;
+    width: 100%;
+    margin: 20px 0 0 0;
+    padding: 20px;
+}
+
 @media (max-width: 430px) {
     .profile {
         display: flex;
