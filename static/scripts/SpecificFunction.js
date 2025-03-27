@@ -54,11 +54,13 @@ document.addEventListener("DOMContentLoaded", function() {
     fetch('/get_session')
         .then(response => response.json())
         .then(data => {
-            loggedInUserId = data.session_id;
-            console.log("Session ID:", loggedInUserId);
-            filter3DotMenu(loggedInUserId);
+            if (data.session) {
+                loggedInUserId = data.session_id;
+                filter3DotMenu(loggedInUserId);
+            } else if (data.redirect) {
+                window.location.href = data.redirect;
+            }
         })
-        .catch(error => console.error("Error fetching session:", error));
 
     document.body.addEventListener("click", function(event) {
         const clickedDropdown = event.target.closest(".fms-dropdown");
@@ -123,4 +125,20 @@ document.addEventListener("DOMContentLoaded", function() {
             });
         }
     });
+
+    const commentsList = document.querySelector('.fms-comments-list');
+
+    const urlParams = new URLSearchParams(window.location.search);
+    const postId = urlParams.get("post_id");
+
+    if (postId) {
+        const url = `/comment?post_id=${postId}`;
+
+        fetch(url)
+            .then(response => response.json())
+            .then(data => {
+                commentsList.innerHTML = data.html;
+            })
+            .catch(error => console.error('Error loading comments:', error));
+    }
 });

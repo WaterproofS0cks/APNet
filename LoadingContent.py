@@ -291,6 +291,38 @@ class Content():
             bookmark_icon=bookmark_icon
         )
     
+    def load_comment():
+        db_conn = dbConnection(
+            dbname=os.getenv("DBNAME"),
+            user=os.getenv("USER"),
+            password=os.getenv("PASSWORD"),
+        )
+
+        db_conn.connect()
+        db_retrieve = dbRetrieve(db_conn)
+
+        post_id = request.args.get('post_id')
+
+        columns = "Users.username, Users.profilePicture, PostComment.comment, TO_CHAR(PostComment.timestamp, 'DD Month YYYY HH24:MI') AS timestamp"
+        condition = "PostComment.postID = %s"
+        params = (post_id,)
+        join = "JOIN Users ON PostComment.userID = Users.userID ORDER BY PostComment.timestamp DESC"
+        
+        comments = db_retrieve.retrieve("PostComment", columns, condition, params, join)
+
+        comments_html = ""
+        for comment in comments:
+            profile_picture = comment['profilepicture'] if comment['profilepicture'] else "../static/src/img/default-pfp.png"
+            comments_html += f"""
+            <div class="fms-comment">
+                <img src="{profile_picture}" alt="Profile Picture" class="fms-pfp-placeholder" 
+                     style="width:40px; height:40px; border-radius:50%;">
+                <span class="fms-username-placeholder">{comment['username']}: </span>
+                <span class="fms-comment-text">{comment['comment']}</span>
+            </div>
+            """
+        return jsonify({"html": comments_html})
+
     def load_penalized_users_table():
         db_conn = dbConnection(
             dbname=os.getenv("DBNAME"),

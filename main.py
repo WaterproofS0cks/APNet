@@ -52,8 +52,9 @@ def check_session():
 
 @app.route("/get_session")
 def get_session():
-    print(session.get("id"))
-    return jsonify({"session_id": session.get("id")})
+    if "id" not in session:
+        return jsonify({session.get("id")})
+    return redirect(url_for("auth.login"))
 
 #Finished
 @app.route('/')
@@ -76,6 +77,30 @@ def engagement():
 @app.route('/specificpost', methods=["GET", "POST"])
 def specific_post():
     return Content.load_specific_forum()
+
+#Finished
+@app.route('/comment', methods=['GET'])
+def comment():
+    return Content.load_comment()
+
+@app.route("/createcomment", methods=["POST"])
+def create_comment():
+    if "id" not in session:
+        return redirect(url_for("auth_login"))
+    
+    db_conn = dbConnection(
+        dbname=os.getenv("DBNAME"),
+        user=os.getenv("USER"),
+        password=os.getenv("PASSWORD"),
+    )
+
+    db_conn.connect()
+    db_insert = dbInsert(db_conn)
+
+    data = request.get_json()
+    comment_text = data.get("comment")
+
+    
 
 #Finished  
 @app.route('/create', methods=["GET", "POST"])
