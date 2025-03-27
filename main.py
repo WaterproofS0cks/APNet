@@ -310,7 +310,7 @@ def AboutUs():
 
 # Reports
 @app.route('/reports', methods=['POST', 'GET'])
-def reports():
+def Reports():
     return render_template("reports.html")
 
 
