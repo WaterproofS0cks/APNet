@@ -240,6 +240,7 @@ body {
 
 .hb-right-container {
     display: flex;
+    justify-content: flex-end;
     align-items: center;
     height: 70px;
     width: 61%;
@@ -247,9 +248,9 @@ body {
 }
 
 #hb-pfp-img {
-    height: 55px;
-    width: 55px;
-    margin: 0 10px 0 auto;
+    height: 60px;
+    width: 60px;
+    margin: 0 10px 0 10px;
 }
 
 .hb-right-container a {
