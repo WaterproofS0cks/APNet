@@ -92,10 +92,6 @@ def updateAccount():
     else:
         return redirect(url_for("auth.login"))
 
-@user_profile.route('/events', methods=['POST', 'GET'])
-def events():
-    return render_template("events.html")
-
 @user_profile.route('/likes', methods=['POST', 'GET'])
 def likedPosts():
     return render_template("likedposts.html")

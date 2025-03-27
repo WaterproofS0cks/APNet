@@ -158,14 +158,21 @@ body {
     padding: 15px 15px;
     text-decoration: none;
     color: black;
+    transition: background-color 0.2s, color 0.2s;
 }
 
 .ha-popup-menu ul li:hover, .hb-popup-menu ul li:hover {
     background-color: #f0f0f0;
 }
 
-.header-right-responsive-container {
-    display: none;
+.header-logout {
+    font-weight: bold;
+}
+
+.header-logout:hover {
+    background-color: red;
+    font-weight: normal;
+    color: #fff;
 }
 
 @media (max-width: 430px) {
@@ -233,6 +240,7 @@ body {
 
 .hb-right-container {
     display: flex;
+    justify-content: flex-end;
     align-items: center;
     height: 70px;
     width: 61%;
@@ -240,9 +248,9 @@ body {
 }
 
 #hb-pfp-img {
-    height: 55px;
-    width: 55px;
-    margin: 0 10px 0 auto;
+    height: 60px;
+    width: 60px;
+    margin: 0 10px 0 10px;
 }
 
 .hb-right-container a {
@@ -3190,11 +3198,10 @@ input[type="submit"]:hover {
 }
 
 .btn-icon {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
+    display: inline-block;
+    width: 32px;
+    height: 32px;
     cursor: pointer;
-    text-decoration: none;
 }
 
 .btn-icon img {
@@ -3272,6 +3279,80 @@ input[type="submit"]:hover {
     gap: 10px;
     align-items: center;
     margin-top: 10px;
+}
+
+.profile-fm-main-container {
+    height: 100%;
+    width: 100%;
+    margin: 20px 0 0 0;
+    padding: 20px;
+}
+
+/* Tabs for profile page */
+.tabs {
+    display: flex;
+    width: 100%;
+    background-color: #f0f0f0; /* Can use #f5f5f5 for lighter tab background */
+    border-radius: 8px;
+    overflow: hidden;
+    margin-bottom: 30px;
+}
+
+.tablink {
+    background-color: transparent;
+    padding: 14px 0;
+    cursor: pointer;
+    text-align: center;
+    font-size: 16px;
+    flex: 1;
+    border: none;
+    position: relative;
+    transition: color 0.3s ease;
+}
+
+.tablink:hover {
+    color: #0056b3;
+}
+
+.tablink.active {
+    color: #0056b3;
+    font-weight: bold;
+}
+
+.tablink::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 10%;
+    width: 0;
+    height: 3px;
+    border-radius: 4px;
+    background-color: transparent;
+    transition: background-color 0.3s ease;
+}
+
+.tablink.active::after {
+    background-color: #0056b3;
+    width: 80%;
+}
+
+.tabcontent {
+    display: none;
+}
+
+.active {
+    display: block;
+}
+
+/* Horizontal Line for profile page */
+.horizontal-line {
+    width: 100%;
+    height: 2px;
+    background-color: #dedede;
+    border: none;
+    border-radius: 4px;
+    margin-top: 30px;
+    margin-bottom: 30px;
 }
 
 @media (max-width: 430px) {
@@ -3448,7 +3529,7 @@ input[type="submit"]:hover {
 
 /* settings.html */
 
-.card-header {
+/* .card-header {
     margin-top: 100px;
     margin-left: 100px;
     position: fixed;
@@ -3456,10 +3537,16 @@ input[type="submit"]:hover {
     padding: 10px;
     border-radius: 5px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-    z-index: 1000;  
-    /* height: 45px;
+    z-index: 1000;
+    height: 45px;
     width: 160px;
-    margin: 40px 0 0 30px; */
+    margin: 40px 0 0 30px;
+} */
+
+.card-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
 }
 
 .card-description {
@@ -4562,6 +4649,10 @@ input[type="submit"]:hover {
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
 }
 
+.applications-container {
+    display: flex;
+    gap: 40px;
+}
 
 @media (max-width: 430px) {
     .applications-content-card {
