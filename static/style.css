@@ -1324,6 +1324,8 @@ input[type="submit"]:hover {
 
 .fm-post-layout {
     background-color: white;
+    display: flex;
+    flex-direction: column;
     position: relative;
     width: 95%;
     margin-bottom: 40px;
@@ -1335,6 +1337,7 @@ input[type="submit"]:hover {
 
 .fm-profiledetails, .rc-profiledetails {
     display: flex;
+    flex-direction: row;
     align-items: center;
     height: 50.4px;
     padding: 10px;
@@ -1358,6 +1361,7 @@ input[type="submit"]:hover {
 .fm-profiledetails a {
     text-decoration: none;
     display: flex;
+    flex-direction: row;
     align-items: center;
 }
 
@@ -4211,12 +4215,11 @@ input[type="submit"]:hover {
 
 .tos-container {
     width: 80%;
-    margin: auto;
+    margin: 20px auto;
     background: white;
     border-radius: 8px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     padding: 20px;
-    margin: 0 0 20px 100px;
 }
 
 .tos-container h1, .tos-container h2, .tos-container h3 {
