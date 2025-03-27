@@ -1,4 +1,5 @@
 from flask import Blueprint, current_app, render_template, request, session, redirect, url_for
+from psycopg2.errors import StringDataRightTruncation
 import psycopg2
 import os
 from dotenv import load_dotenv
@@ -152,38 +153,52 @@ def applicationsCreated():
 
 @user_profile.route('/updateProfile', methods=['POST'])
 def updateProfile():
+    if "id" not in session:
+        return redirect(url_for("auth.login"))
 
     db_conn = dbConnection(
         dbname=os.getenv("DBNAME"),
         user=os.getenv("USER"),
         password=os.getenv("PASSWORD"),
     )
-
     db_conn.connect()
     db_modify = dbModify(db_conn)
 
-    if request.method == "POST":
+    user_id = session.get("id")
+    pfp = request.files.get("pfp")
+    username = request.form.get("username")
+    bio = request.form.get("bio")
+    link = request.form.get("link")
 
-        user_id = session.get("id")
-        pfp = request.files.get("pfp")
-        username = request.form.get("username")
-        bio = request.form.get("bio")
-        link = request.form.get("link")
-    
-        uploader = imageUploader(current_app.config["UPLOAD_FOLDER"])
+    uploader = imageUploader(current_app.config["UPLOAD_FOLDER"])
 
-        pfp_filename = None
-        if pfp:
-            pfp_filename = uploader.upload(pfp)
-        else:
-            pfp_filename = "/static/src/img/default-pfp.png"
-        
+    pfp_filename = session.get("pfp", "/static/src/img/default-pfp.png")
+    if pfp:
+        pfp_filename = uploader.upload(pfp)
+
+    try:
+        if username:
+            existing_user = db_conn.retrieve_one("users", "userid", "username = %s", (username,))
+            if existing_user and existing_user[0] != user_id:
+                return render_template('settings.html', erruser="Username already exists.")
+
         data = {"profilePicture": pfp_filename, "username": username, "bio": bio, "link": link}
         condition = {"userid": user_id}
 
         db_modify.update("Users", data, condition)
 
-    return redirect("profile")
+        session["pfp"] = pfp_filename
+        session["username"] = username
+        session["bio"] = bio
+        session["link"] = link
+
+    except StringDataRightTruncation as e:
+        if "bio" in str(e):
+            return render_template('settings.html', errbio="Bio max length 255 characters.")
+        if "link" in str(e):
+            return render_template('settings.html', errlink="Link max length 512 characters.")
+    
+    return redirect("/user/profile")
 
 
 # @user_profile.route('/updateAccount', methods=['POST'])
