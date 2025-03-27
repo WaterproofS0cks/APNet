@@ -1,6 +1,6 @@
 function updateLikeUI(container, liked, count) {
     const likeCountElement = container.querySelector("h4");
-    const likeIcon = container.querySelector("img");
+    const likeIcon = container.querySelector("#fms-post-hearticon");
 
     likeIcon.src = liked
         ? "../static/src/icon/icons8-heart-red-50.png"
@@ -12,7 +12,7 @@ function updateLikeUI(container, liked, count) {
 }
 
 function updateBookmarkUI(container, bookmark) {
-    const bookmarkIcon = container.querySelector("img");
+    const bookmarkIcon = container.querySelector("#fms-post-bookmarkicon");
     if (!bookmarkIcon) return;
 
     bookmarkIcon.src = bookmark
@@ -31,15 +31,15 @@ function filter3DotMenu(loggedInUserId) {
             const editPost = dropdown.querySelector("#fms-editicon")?.parentElement;
             const deletePost = dropdown.querySelector("#fms-deleteicon")?.parentElement;
 
-            if (reportPost && reportUser && editPost && deletePost) {
+            if (reportPost && reportUser  && editPost && deletePost) {
                 if (String(loggedInUserId) === String(postUserId)) {
                     reportPost.style.display = "none";
-                    reportUser.style.display = "none";
+                    reportUser .style.display = "none";
                     editPost.style.display = "block";
                     deletePost.style.display = "block";
                 } else {
                     reportPost.style.display = "block";
-                    reportUser.style.display = "block";
+                    reportUser .style.display = "block";
                     editPost.style.display = "none";
                     deletePost.style.display = "none";
                 }
@@ -49,6 +49,17 @@ function filter3DotMenu(loggedInUserId) {
 }
 
 document.addEventListener("DOMContentLoaded", function() {
+    let loggedInUserId;
+
+    fetch('/get_session')
+        .then(response => response.json())
+        .then(data => {
+            loggedInUserId = data.session_id;
+            console.log("Session ID:", loggedInUserId);
+            filter3DotMenu(loggedInUserId);
+        })
+        .catch(error => console.error("Error fetching session:", error));
+
     document.body.addEventListener("click", function(event) {
         const clickedDropdown = event.target.closest(".fms-dropdown");
         
@@ -69,42 +80,44 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 
     document.body.addEventListener("click", function(event) {
-        let actionContainer = event.target.closest("[data-action]");
-        if (!actionContainer && event.target.tagName === "IMG") {
-            actionContainer = event.target.parentElement.closest("[data-action]");
+        const targetId = event.target.id;
+        let action = null;
+    
+        if (targetId === "fms-post-hearticon") {
+            action = "liked";
+        } else if (targetId === "fms-post-bookmarkicon") {
+            action = "bookmark";
         }
-        if (!actionContainer) return;
-
-        const postElement = actionContainer.closest(".fms-post-layout");
+    
+        if (!action) return;
+    
+        const postElement = event.target.closest(".fms-post-layout");
         if (!postElement) return;
-
-        const postId = postElement.getAttribute("data-post-id");
-        const action = actionContainer.getAttribute("data-action");
-        if (!postId || !action) return;
-
-        if (action === "liked" || action === "bookmark") {
-            fetch("/engagement", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ post_id: postId, action: action }),
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.redirect) {
-                    window.location.href = data.redirect;
-                    return;
-                }
-
-                if (action === "liked") {
-                    updateLikeUI(actionContainer, data.liked, data.likes_count);
-                } else if (action === "bookmark") {
-                    updateBookmarkUI(actionContainer, data.bookmark);
-                }
-            })
-            .catch(error => console.error("Error:", error));
-        }
+    
+        const postId = postElement.getAttribute("data-user-id"); // Assuming this represents post ID
+        if (!postId) return;
+    
+        fetch("/engagement", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ post_id: postId, action: action }),
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.redirect) {
+                window.location.href = data.redirect;
+                return;
+            }
+    
+            if (action === "liked") {
+                updateLikeUI(postElement, data.liked, data.likes_count);
+            } else if (action === "bookmark") {
+                updateBookmarkUI(postElement, data.bookmark);
+            }
+        })
+        .catch(error => console.error("Error:", error));
     });
-
+    
     window.addEventListener("scroll", function() {
         if (window.innerHeight + window.scrollY < document.body.offsetHeight - 10) {
             document.querySelectorAll(".fms-dropdown-content").forEach(dropdown => {

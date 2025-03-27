@@ -50,6 +50,10 @@ def check_session():
         return jsonify({"session": True})
     return jsonify({"session": False})
 
+@app.route("/get_session")
+def get_session():
+    print(session.get("id"))
+    return jsonify({"session_id": session.get("id")})
 
 #Finished
 @app.route('/')
