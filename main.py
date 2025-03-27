@@ -308,12 +308,18 @@ def AboutUs():
     return render_template('aboutus.html')
 
 
+# Reports
+@app.route('/reports', methods=['POST', 'GET'])
+def reports():
+    return render_template("reports.html")
+
+
 # [TODO] TEMPORARY ENDPOINTS: ADD A CUSTOM ID AT THE END TO LINK A SPECIFIC POST
-@app.route('/editforum', methods=['GET'])
+@app.route('/edit/forum', methods=['GET'])
 def EditForumPost():
     return render_template('editforumpost.html')
 
-@app.route('/editrecruitment', methods=['GET'])
+@app.route('/edit/recruitment', methods=['GET'])
 def EditRecruitmentPost():
     return render_template('editrecruitmentpost.html')
 
