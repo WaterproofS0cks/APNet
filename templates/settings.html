@@ -53,6 +53,11 @@
                     <input type="email" id="email" name="email">
                     
                 <p style="width: 90%; margin-top: -10px; margin-bottom: 10px; color: red;">{{erremail}}</p>
+                <label for="phone">Phone Number</label>
+
+                    <input type="tel" id="phone" name="phone" pattern="[0-9]*" oninput="this.setCustomValidity('')" oninvalid="this.setCustomValidity('Please enter a valid phone number (numeric only).')">
+
+                <p style="width: 90%; margin-top: -10px; margin-bottom: 10px; color: red;">{{errphone}}</p>
                 <input type="submit" value="Update account">
             </form>
         </div>
@@ -60,7 +65,7 @@
             <h3>Moderation</h3>
             <div class="button-component">
                 <a href="{{ url_for('Reports') }}" style="text-decoration: none;">
-                    <button class="button-black">View reports</button>
+                    <button class="button-grey">View reports</button>
                 </a>
             </div>
         </div>
@@ -68,7 +73,7 @@
             <h3>Security</h3>
             <div class="button-component">
                 <a href="{{ url_for('auth.resetpassword') }}" style="text-decoration: none;">
-                    <button class="button-black">Reset password</button>
+                    <button class="button-grey">Reset password</button>
                 </a>
                 <button class="button-red">Delete account</button>
             </div>

@@ -88,12 +88,12 @@ def updateAccount():
                     session['email'] = new_data['email']
                 except psycopg2.errors.UniqueViolation:
                     return render_template('settings.html', erremail="Email already exist.")
-            if new_data['email'] != '':
+            if new_data['phone'] != '':
                 try:
-                    cur.execute("UPDATE Users SET phone = %s WHERE username = %s", (new_data['userPhone'], session.get('phone')))
+                    cur.execute("UPDATE Users SET phone = %s WHERE username = %s", (new_data['phone'], session.get('phone')))
                     session['phone'] = new_data['phone']
                 except psycopg2.errors.UniqueViolation:
-                    return render_template('settings.html', erremail="Phone Number already exist.")
+                    return render_template('settings.html', errphone="Phone Number already exist.")
             conn.commit()
             conn.close()
             return redirect('/user/profile')
