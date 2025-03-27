@@ -3273,6 +3273,7 @@ input[type="submit"]:hover {
     margin-top: 10px;
 }
 
+<<<<<<< HEAD
 /* Tabs for profile page */
 .tabs {
     display: flex;
@@ -3338,6 +3339,13 @@ input[type="submit"]:hover {
     border-radius: 4px;
     margin-top: 30px;
     margin-bottom: 30px;
+=======
+.profile-fm-main-container {
+    height: 100%;
+    width: 100%;
+    margin: 20px 0 0 0;
+    padding: 20px;
+>>>>>>> 27a386bb959195ed49e0fd7afb72bd87e8b0e79a
 }
 
 @media (max-width: 430px) {
