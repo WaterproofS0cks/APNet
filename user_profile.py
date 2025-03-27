@@ -137,7 +137,7 @@ def updateProfile():
     if request.method == "POST":
 
         user_id = session.get("id")
-        pfp = request.files.get("pfp", "/static/src/img/default-pfp.png")
+        pfp = request.files.get("pfp")
         username = request.form.get("username")
         bio = request.form.get("bio")
         link = request.form.get("link")
@@ -147,6 +147,8 @@ def updateProfile():
         pfp_filename = None
         if pfp:
             pfp_filename = uploader.upload(pfp)
+        else:
+            pfp_filename = "/static/src/img/default-pfp.png"
         
         data = {"profilePicture": pfp_filename, "username": username, "bio": bio, "link": link}
         condition = {"userid": user_id}
