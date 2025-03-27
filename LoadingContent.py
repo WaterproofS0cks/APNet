@@ -57,11 +57,13 @@ class Content():
                 html += f'''
                     <div class="fm-post-layout" data-post-id="{entry['id']}" data-user-id="{entry['userid']}">
                         <div class="fm-profiledetails">
+                            <a href='/user/profile?uid={entry['username']}'> 
                             <img src="{entry['profilepicture']}" alt="Pfp" id="fm-post-pfp">
+                            
                             <h1>{entry['username']}</h1>
+                            </a>
                             <h2> • </h2>
                             <h2>Posted on {entry['timestamp']}</h2>
-
                             <div class="fm-more-container">
                                 <div class="fm-dropdown">
                                     <span><img src="../static/src/icon/icons8-ellipsis-48.png" alt="Elipses" id="fm-moreicon" height="24" width="24"></span>
