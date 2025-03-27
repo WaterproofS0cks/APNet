@@ -84,16 +84,16 @@ def updateAccount():
                     return render_template('settings.html', errname="Full name max length 255 characters.")
             if new_data['email'] != '':
                 try:
-                    cur.execute("UPDATE Users SET email = %s WHERE username = %s", (new_data['email'], session.get('email')))
+                    cur.execute("UPDATE Users SET email = %s WHERE username = %s", (new_data['email'], session.get('user')))
                     session['email'] = new_data['email']
                 except psycopg2.errors.UniqueViolation:
                     return render_template('settings.html', erremail="Email already exist.")
             if new_data['phone'] != '':
                 try:
-                    cur.execute("UPDATE Users SET phone = %s WHERE username = %s", (new_data['phone'], session.get('phone')))
+                    cur.execute("UPDATE Users SET phone = %s WHERE username = %s", (new_data['phone'], session.get('user')))
                     session['phone'] = new_data['phone']
                 except psycopg2.errors.UniqueViolation:
-                    return render_template('settings.html', errphone="Phone Number already exist.")
+                    return render_template('settings.html', errphone="Phone number already exist.")
             conn.commit()
             conn.close()
             return redirect('/user/profile')
