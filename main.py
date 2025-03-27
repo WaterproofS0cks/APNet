@@ -56,6 +56,8 @@ def get_session():
         return jsonify({session.get("id")})
     return redirect(url_for("auth.login"))
 
+
+
 #Finished
 @app.route('/')
 def forum():
@@ -331,6 +333,7 @@ def EditForumPost():
 @app.route('/edit/recruitment', methods=['GET'])
 def EditRecruitmentPost():
     return render_template('editrecruitmentpost.html')
+
 
 
 if __name__ == "__main__":

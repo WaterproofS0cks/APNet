@@ -59,23 +59,23 @@ class dbModify(dbInsert):
 
         valid_columns = self.find_table_columns(table_name)
 
-        updates = {col: update_data[col] for col in update_data if col in valid_columns}
-        conditions = {col: condition[col] for col in condition if col in valid_columns}
+        updates = {columns: update_data[columns] for columns in update_data if columns in valid_columns}
 
         if not updates:
             raise ValueError("No valid columns to update.")
-        if not conditions:
+        if not condition:
             raise ValueError("No valid condition columns provided.")
         
         query = f"""
             UPDATE {table_name} 
-            SET {", ".join(f"{col} = %s" for col in updates)}
-            WHERE {" AND ".join(f"{col} = %s" for col in conditions)};
+            SET {", ".join(f"{columns} = %s" for columns in updates)}
+            WHERE {" AND ".join(f"{columns} = %s" for columns in condition)};
         """
 
-        params = tuple(updates.values()) + tuple(conditions.values())
+        params = tuple(updates.values()) + tuple(condition.values())
 
         self.execute_query(query, params)
+        self.db_connection.conn.commit() 
 
     def toggle_engagement(self, user_id, post_id, action, post_type):
         if action not in ["liked", "bookmark"]:

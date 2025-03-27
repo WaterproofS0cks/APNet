@@ -1,7 +1,11 @@
-from flask import Blueprint, render_template, request, session, redirect, url_for
+from flask import Blueprint, current_app, render_template, request, session, redirect, url_for
 import psycopg2
 import os
 from dotenv import load_dotenv
+
+from ConnectDatabase import dbConnection
+from RetrieveDatabase import dbRetrieve
+from UpdateDatabase import dbModify, imageUploader
 
 load_dotenv()
 DBNAME = os.getenv("DBNAME")
@@ -29,41 +33,41 @@ def setting():
     else:
         return redirect(url_for('auth.login'))
     
-@user_profile.route('/updateProfile', methods=['POST'])
-def updateProfile():
-    if "user" in session:
-        if request.method == "POST":
-            conn = psycopg2.connect(dbname=DBNAME, user=USER, password=PASSWORD)
-            cur = conn.cursor()
-            new_data = request.form
-            if new_data['pfp'] != '':
-                cur.execute("UPDATE Users SET pfp = %s WHERE username = %s", (new_data['pfp'], session.get('user')))
-                session['pfp'] = new_data['pfp']
-            if new_data['username'] != '':
-                try:
-                    cur.execute("UPDATE Users SET username = %s WHERE username = %s", (new_data['username'], session.get('user')))
-                    session['user'] = new_data['username']
-                except psycopg2.errors.UniqueViolation:
-                    return render_template('settings.html', erruser="Username already exist.")
-            if new_data['bio'] != '':
-                try:
-                    cur.execute("UPDATE Users SET bio = %s WHERE username = %s", (new_data['bio'], session.get('user')))
-                    session['bio'] = new_data['bio']
-                except psycopg2.errors.StringDataRightTruncation:
-                    return render_template('settings.html', errbio="Bio max length 255 characters.")
-            if new_data['link'] != '':
-                try:
-                    cur.execute("UPDATE Users SET link = %s WHERE username = %s", (new_data['link'], session.get('user')))
-                    session['link'] = new_data['link']
-                except psycopg2.errors.StringDataRightTruncation:
-                    return render_template('settings.html', errlink="Link max length 512 characters.")
-            conn.commit()
-            conn.close()
-            return redirect('/user/profile')
-        else:
-            return redirect("/user/profile")
-    else:
-        return redirect(url_for("auth.login"))
+# @user_profile.route('/updateProfile', methods=['POST'])
+# def updateProfile():
+#     if "user" in session:
+#         if request.method == "POST":
+#             conn = psycopg2.connect(dbname=DBNAME, user=USER, password=PASSWORD)
+#             cur = conn.cursor()
+#             new_data = request.form
+#             if new_data['pfp'] != '':
+#                 cur.execute("UPDATE Users SET pfp = %s WHERE username = %s", (new_data['pfp'], session.get('user')))
+#                 session['pfp'] = new_data['pfp']
+#             if new_data['username'] != '':
+#                 try:
+#                     cur.execute("UPDATE Users SET username = %s WHERE username = %s", (new_data['username'], session.get('user')))
+#                     session['user'] = new_data['username']
+#                 except psycopg2.errors.UniqueViolation:
+#                     return render_template('settings.html', erruser="Username already exist.")
+#             if new_data['bio'] != '':
+#                 try:
+#                     cur.execute("UPDATE Users SET bio = %s WHERE username = %s", (new_data['bio'], session.get('user')))
+#                     session['bio'] = new_data['bio']
+#                 except psycopg2.errors.StringDataRightTruncation:
+#                     return render_template('settings.html', errbio="Bio max length 255 characters.")
+#             if new_data['link'] != '':
+#                 try:
+#                     cur.execute("UPDATE Users SET link = %s WHERE username = %s", (new_data['link'], session.get('user')))
+#                     session['link'] = new_data['link']
+#                 except psycopg2.errors.StringDataRightTruncation:
+#                     return render_template('settings.html', errlink="Link max length 512 characters.")
+#             conn.commit()
+#             conn.close()
+#             return redirect('/user/profile')
+#         else:
+#             return redirect("/user/profile")
+#     else:
+#         return redirect(url_for("auth.login"))
     
 @user_profile.route('/updateAccount', methods=['POST'])
 def updateAccount():
@@ -117,3 +121,64 @@ def applicationsApplied():
 @user_profile.route('/applications/created', methods=['POST', 'GET'])
 def applicationsCreated():
     return render_template("applications_created.html")
+
+@user_profile.route('/updateProfile', methods=['POST'])
+def updateProfile():
+
+    db_conn = dbConnection(
+        dbname=os.getenv("DBNAME"),
+        user=os.getenv("USER"),
+        password=os.getenv("PASSWORD"),
+    )
+
+    db_conn.connect()
+    db_modify = dbModify(db_conn)
+
+    if request.method == "POST":
+
+        user_id = session.get("id")
+        pfp = request.files.get("pfp", "/static/src/img/default-pfp.png")
+        username = request.form.get("username")
+        bio = request.form.get("bio")
+        link = request.form.get("link")
+    
+        uploader = imageUploader(current_app.config["UPLOAD_FOLDER"])
+
+        pfp_filename = None
+        if pfp:
+            pfp_filename = uploader.upload(pfp)
+        
+        data = {"profilePicture": pfp_filename, "username": username, "bio": bio, "link": link}
+        condition = {"userid": user_id}
+
+        db_modify.update("Users", data, condition)
+
+    return redirect("profile")
+
+
+# @user_profile.route('/updateAccount', methods=['POST'])
+# def updateProfile():
+
+#     db_conn = dbConnection(
+#         dbname=os.getenv("DBNAME"),
+#         user=os.getenv("USER"),
+#         password=os.getenv("PASSWORD"),
+#     )
+
+#     db_conn.connect()
+#     db_modify = dbModify(db_conn)
+
+#     if request.method == "POST":
+
+#         user_id = session.get("id")
+#         fullname = request.form.get("fullname")
+#         email = request.form.get("email")
+
+#         data = {"fullname": fullname, "email": email}
+#         condition = {"userid": user_id}
+
+#     db_modify.update("users", data, condition)
+
+#     return redirect("profile")
+
+
