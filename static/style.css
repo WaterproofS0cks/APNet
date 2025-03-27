@@ -1357,6 +1357,8 @@ input[type="submit"]:hover {
 
 .fm-profiledetails a {
     text-decoration: none;
+    display: flex;
+    align-items: center;
 }
 
 .fm-profiledetails a:hover {
