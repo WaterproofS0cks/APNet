@@ -5,20 +5,18 @@
 <script type="text/javascript" src="{{ url_for('static', filename='scripts/PostFunction.js') }}" data-type="post" data-page="liked" defer></script>
 
 <body>
-    <br><br>
-    <!-- <div class="content-card"> -->
+    <div class="content-card">
         <div class="card-header">
             <a href="profile" class="btn-icon">
-                <img src="{{ url_for('static', filename='src/icon/icons8-back-96.png') }}" alt="Back Icon"><h2>Likes</h2>
-                
+                <img src="{{ url_for('static', filename='src/icon/icons8-back-96.png') }}" alt="Back Icon">
             </a>
-            
+            <h2>Likes</h2>
         </div>
 
         <div class="fm-main-container" id="postContainer">
-            <div id="no-more-posts" style="display:none; text-align: center; font-size: 20px;">No more posts to load</div>
+            <div id="no-more-posts" style="display: none; text-align: center; font-size: 20px;">No more posts to load</div>
         </div>
 
-    <!-- </div> -->
+    </div>
 </body>
 {% endblock content %}
