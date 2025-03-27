@@ -4587,18 +4587,24 @@ input[type="submit"]:hover {
     border: 1px solid #71717A;
     padding: 16px;
     border-radius: 8px;
-    margin-top: 20px;
+
     height: 50px;
     width: 150px;
+
     display: flex;
     align-items: center;
     justify-content: center;
+    box-sizing: border-box;
+
+    margin-top: 20px;
+    margin-left: 8px;
+    margin-right: 8px;
 }
 
 .applicant-flex {
     display: flex;
     flex-wrap: wrap;
-    justify-content: flex-start;
+    justify-content: center;
 }
 
 .applicant-extra {
@@ -4657,11 +4663,6 @@ input[type="submit"]:hover {
 }
 
 @media (max-width: 430px) {
-    .applications-content-card {
-        width: 90%;
-        margin-bottom: 100px;
-    }
-
     .applicant-flex {
         flex-direction: column;
         align-items: center;
@@ -4681,7 +4682,7 @@ input[type="submit"]:hover {
         height: 135px;
         margin: 10px 0;
     }
-    
+
     .applications-activity-img {
         display: none;
     }
@@ -4691,27 +4692,21 @@ input[type="submit"]:hover {
     }
 }
 
-@media (min-width: 431px) {
-    .applicant-flex {
-        justify-content: space-between;
-    }
-}
-
 
 
 /* reports.html */
 
-.reports-card-url {
+.click-card-url {
     text-decoration: none;
     color: inherit;
 }
 
-.reports-card-url .activity-card {
+.click-card-url .activity-card {
     transition: all 0.3s ease-in-out;
     border: 3px solid transparent;
 }
 
-.reports-card-url .activity-card:hover {
+.click-card-url .activity-card:hover {
     border: 3px solid #666;
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
 }

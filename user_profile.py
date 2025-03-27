@@ -105,7 +105,7 @@ def otherProfile():
     return render_template("otherprofile.html")
 
 
-# Applications pages flow
+# Applications Pages
 @user_profile.route('/applications', methods=['POST', 'GET'])
 def applications():
     return render_template("applications.html")
