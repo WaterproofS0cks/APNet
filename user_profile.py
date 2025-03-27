@@ -29,7 +29,29 @@ def setting():
         if request.method == "POST":
             return redirect('/user/profile')
         else:
-            return render_template("settings.html")
+            
+            db_conn = dbConnection(
+                dbname=os.getenv("DBNAME"),
+                user=os.getenv("USER"),
+                password=os.getenv("PASSWORD"),
+            )
+
+            db_conn.connect()
+            db_retrieve = dbRetrieve(db_conn)
+            user_id = session.get("id")
+
+            user_data = db_retrieve.retrieve_one("users", "*", "userid = %s", (user_id,))
+
+            return render_template(
+                "settings.html",
+                pfp=user_data["profilepicture"],
+                username=user_data["username"],
+                bio=user_data["bio"],
+                link=user_data["link"],
+                fullname=user_data["fullname"],
+                email=user_data["email"],
+                phone=user_data["phone"]
+                )
     else:
         return redirect(url_for('auth.login'))
     
@@ -84,16 +106,16 @@ def updateAccount():
                     return render_template('settings.html', errname="Full name max length 255 characters.")
             if new_data['email'] != '':
                 try:
-                    cur.execute("UPDATE Users SET email = %s WHERE username = %s", (new_data['email'], session.get('user')))
+                    cur.execute("UPDATE Users SET email = %s WHERE username = %s", (new_data['email'], session.get('email')))
                     session['email'] = new_data['email']
                 except psycopg2.errors.UniqueViolation:
                     return render_template('settings.html', erremail="Email already exist.")
-            if new_data['phone'] != '':
+            if new_data['email'] != '':
                 try:
-                    cur.execute("UPDATE Users SET phone = %s WHERE username = %s", (new_data['phone'], session.get('user')))
+                    cur.execute("UPDATE Users SET phone = %s WHERE username = %s", (new_data['userPhone'], session.get('phone')))
                     session['phone'] = new_data['phone']
                 except psycopg2.errors.UniqueViolation:
-                    return render_template('settings.html', errphone="Phone number already exist.")
+                    return render_template('settings.html', erremail="Phone Number already exist.")
             conn.commit()
             conn.close()
             return redirect('/user/profile')

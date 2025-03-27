@@ -59,7 +59,6 @@ class Content():
                         <div class="fm-profiledetails">
                             <a href='/user/profile?uid={entry['username']}'> 
                             <img src="{entry['profilepicture']}" alt="Pfp" id="fm-post-pfp">
-                            
                             <h1>{entry['username']}</h1>
                             </a>
                             <h2> • </h2>
@@ -150,8 +149,10 @@ class Content():
 
                         
                         <div class="rc-profiledetails">
+                            <a href='/user/profile?uid={entry['username']}'> 
                             <img src="{entry['profilePicture']}" alt="Default pfp icon" id="rc-post-pfp">
                             <h1>{entry['username']}</h1>
+                            </a>
                             <h2> • </h2>
                             <h2>Posted on {entry['timestamp']}</h2>
 

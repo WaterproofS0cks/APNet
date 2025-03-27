@@ -14,26 +14,27 @@
             <form action="/user/updateProfile" enctype="multipart/form-data" method="POST">
                 <label for="pfp">Profile Picture</label>
                 <div class="settings-pfp">
-                    <img src="{{ session.get('pfp') }}" id="pfp-img" alt="User Profile">
+                    <img src="{{ pfp }}" id="pfp-img" alt="User Profile">
                     <div>
+
                         <p>It's recommended to use a picture that's at least 150 x 150 pixels. Use a JPG, JPEG, or PNG file. Make sure your picture follows the APNet Terms of Service.</p>
                         <input type="file" id="pfp" name="pfp" accept=".jpg, .jpeg, .png" onchange="previewImage(event)">
-                        
+
                     </div>
                 </div>
                 <label for="username">Username</label>
 
-                    <input type="text" id="username" name="username">
+                    <input type="text" id="username" name="username" value = "{{ username }}">
 
                 <p style="width: 90%; margin-top: -10px; margin-bottom: 10px; color: red;">{{erruser}}</p>
                 <label for="bio">Bio</label>
 
-                    <input type="text" id="bio" name="bio">
+                    <input type="text" id="bio" name="bio" value = "{{ bio }}">
 
                 <p style="width: 90%; margin-top: -10px; margin-bottom: 10px; color: red;">{{errbio}}</p>
                 <label for="link">External Link</label>
 
-                    <input type="url" id="link" name="link">
+                    <input type="url" id="link" name="link" value = "{{ link }}">
 
                 <p style="width: 90%; margin-top: -10px; margin-bottom: 10px; color: red;">{{errlink}}</p>
 
@@ -45,17 +46,17 @@
             <form action="/user/updateAccount" method="POST">
                 <label for="name">Name</label>
 
-                    <input type="text" id="name" name="fullname">
+                    <input type="text" id="name" name="fullname" value = "{{ fullname }}">
 
                 <p style="width: 90%; margin-top: -10px; margin-bottom: 10px; color: red;">{{errname}}</p>
                 <label for="email">Email Address</label>
 
-                    <input type="email" id="email" name="email">
+                    <input type="email" id="email" name="email" value = "{{ email }}">
                     
                 <p style="width: 90%; margin-top: -10px; margin-bottom: 10px; color: red;">{{erremail}}</p>
                 <label for="phone">Phone Number</label>
 
-                    <input type="tel" id="phone" name="phone" pattern="[0-9]*" oninput="this.setCustomValidity('')" oninvalid="this.setCustomValidity('Please enter a valid phone number (numeric only).')">
+                    <input type="tel" id="phone" name="phone" value = "{{ phone }}" pattern="[0-9]*" oninput="this.setCustomValidity('')" oninvalid="this.setCustomValidity('Please enter a valid phone number (numeric only).')">
 
                 <p style="width: 90%; margin-top: -10px; margin-bottom: 10px; color: red;">{{errphone}}</p>
                 <input type="submit" value="Update account">
