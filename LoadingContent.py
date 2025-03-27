@@ -48,6 +48,7 @@ class Content():
                 else:
                     engagement = None
 
+                like_count = db_retrieve.retrieve_one("PostEngagement", "COUNT(*)", "liked = TRUE AND postID = %s", (id,))[0]
                 engagement_data = engagement[0] if engagement else {'bookmark': False, 'liked': False}
 
                 like_icon = "../static/src/icon/icons8-heart-red-50.png" if engagement_data['liked'] else "../static/src/icon/icons8-heart-50.png"
@@ -94,7 +95,7 @@ class Content():
                             <div class="fm-like-icon-container" data-action="liked">
                                 <img src="{like_icon}" alt="Heart" id="fm-post-hearticon">
                                 <h2>Like</h2>
-                                <h4>({entry['likes_count']})</h4>
+                                <h4>({like_count})</h4>
                             </div>
 
                             <div class="fm-comment-icon-container" data-action="specific">
@@ -274,7 +275,7 @@ class Content():
         like_icon = ("../static/src/icon/icons8-heart-red-50.png" if engagement_data.get("liked") else "../static/src/icon/icons8-heart-50.png")
         bookmark_icon = ("../static/src/icon/icons8-bookmark-evendarkergreen-500.png" if engagement_data.get("bookmark") else "../static/src/icon/icons8-bookmark-50.png")
         date = post_data["timestamp"].strftime("%d %B %Y")
-        
+
         return render_template(
             "forumspecific.html",
             userid=userid,
