@@ -1,7 +1,6 @@
 {% extends "header-a.html" %}
 {% block title %}Create Post{% endblock title %}
 {% block content %}
-
 <style>
     html {
         height: 100%;
@@ -19,12 +18,12 @@
     
         <div class="nb-mainpages-container">    
 
-            <a href="#"><div class="nb-mainpages-home">
+            <a href="/"><div class="nb-mainpages-home">
                  <img src="../static/src/icon/icons8-forum-darkblue-50.png" alt="Forum Default Icon" id="nb-forumicon">
                  <h2>Forum</h2>
             </div></a> 
 
-            <a href="#"><div class="nb-mainpages-recruitment">
+            <a href="recruitment"><div class="nb-mainpages-recruitment">
                 <img src="../static/src/icon/icons8-resume-48.png" alt="Resume Default Icon" id="nb-resumeicon">
                 <h2>Recruitment</h2>
             </div></a> 
@@ -50,14 +49,14 @@
                 </div>
             </a>
 
-            <a href="#">
+            <a href="user/likes">
                 <div class="nb-otherpages-likedposts">
                     <img src="../static/src/icon/icons8-heart-red-50.png" alt="Heart Default Icon" id="nb-hearticon">
                     <h2>Liked Posts</h2>
                 </div>
             </a>
 
-            <a href="#">
+            <a href="user/bookmarks">
                 <div class="nb-otherpages-bookmark">
                     <img src="../static/src/icon/icons8-bookmark-evendarkergreen-500.png" alt="Bookmark Default Icon" id="nb-bookmarkicon">
                     <h2>Bookmarked Posts</h2>
@@ -78,12 +77,12 @@
             </div></a>
           
 
-            <a href="#"><div class="nb-resources-faqs">
+            <a href="faq"><div class="nb-resources-faqs">
                 <img src="../static/src/icon/icons8-faq-gray-50.png" alt="FAQ Default Icon" id="nb-faqicon">
                 <h2>FAQs</h2>
             </div></a>
 
-            <a href="#"><div class="nb-resources-tnc">
+            <a href="terms"><div class="nb-resources-tnc">
                 <img src="../static/src/icon/icons8-scales-48.png" alt="Scales Default Icon" id="nb-scalesicon">
                 <h2>Terms and Conditions</h2>
             </div></a>

@@ -308,6 +308,15 @@ def AboutUs():
     return render_template('aboutus.html')
 
 
+# [TODO] TEMPORARY ENDPOINTS: ADD A CUSTOM ID AT THE END TO LINK A SPECIFIC POST
+@app.route('/editforum', methods=['GET'])
+def EditForumPost():
+    return render_template('editforumpost.html')
+
+@app.route('/editrecruitment', methods=['GET'])
+def EditRecruitmentPost():
+    return render_template('editrecruitmentpost.html')
+
 
 if __name__ == "__main__":
     app.run(debug=True)
