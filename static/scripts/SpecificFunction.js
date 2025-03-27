@@ -1,6 +1,6 @@
-function updateLikeUI(container, liked, count) {
-    const likeCountElement = container.querySelector("h4");
-    const likeIcon = container.querySelector("#fms-post-hearticon");
+function updateLikeUI(liked, count) {
+    const likeCountElement = document.getElementById("likeCount");
+    const likeIcon = document.getElementById("fms-post-hearticon");
 
     likeIcon.src = liked
         ? "../static/src/icon/icons8-heart-red-50.png"
@@ -11,8 +11,8 @@ function updateLikeUI(container, liked, count) {
     }
 }
 
-function updateBookmarkUI(container, bookmark) {
-    const bookmarkIcon = container.querySelector("#fms-post-bookmarkicon");
+function updateBookmarkUI(bookmark) {
+    const bookmarkIcon = document.getElementById("fms-post-bookmarkicon");
     if (!bookmarkIcon) return;
 
     bookmarkIcon.src = bookmark
@@ -91,10 +91,8 @@ document.addEventListener("DOMContentLoaded", function() {
     
         if (!action) return;
     
-        const postElement = event.target.closest(".fms-post-layout");
-        if (!postElement) return;
-    
-        const postId = postElement.getAttribute("data-user-id"); // Assuming this represents post ID
+        const postElement = document.querySelector(".fms-post-layout");
+        const postId = postElement.getAttribute("data-post-id"); 
         if (!postId) return;
     
         fetch("/engagement", {
@@ -110,9 +108,9 @@ document.addEventListener("DOMContentLoaded", function() {
             }
     
             if (action === "liked") {
-                updateLikeUI(postElement, data.liked, data.likes_count);
+                updateLikeUI(data.liked, data.likes_count);
             } else if (action === "bookmark") {
-                updateBookmarkUI(postElement, data.bookmark);
+                updateBookmarkUI(data.bookmark);
             }
         })
         .catch(error => console.error("Error:", error));

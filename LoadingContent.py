@@ -133,6 +133,7 @@ class Content():
                 else:
                     engagement = None
 
+                like_count = db_retrieve.retrieve_one("RecrutimentEngagement", "COUNT(*)", "liked = TRUE AND postID = %s", (id,))[0]
                 engagement_data = engagement[0] if engagement else {'bookmark': False, 'liked': False}
 
                 like_icon = "../static/src/icon/icons8-heart-red-50.png" if engagement_data['liked'] else "../static/src/icon/icons8-heart-50.png"
@@ -278,6 +279,7 @@ class Content():
 
         return render_template(
             "forumspecific.html",
+            post_id=post_id,
             userid=userid,
             profile_picture=profile_picture,
             username=user_data.get("username", "Unknown"),

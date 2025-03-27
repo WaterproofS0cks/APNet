@@ -1,5 +1,5 @@
 {% extends "header-b.html" %}
-{% block title %}Recruitment Application{% endblock title %}
+{% block title %}Specific Forum{% endblock title %}
 {% block content %}
 <script type="text/javascript" src="{{ url_for('static', filename='scripts/SpecificFunction.js') }}" data-type="recruitment" data-page="" defer></script>
 
@@ -28,7 +28,7 @@
     <!-- BODY CONTENT -->
     <div class="fms-main-container">
         
-        <div class="fms-post-layout" data-user-id= "{{ userid }}">
+        <div class="fms-post-layout" data-user-id= "{{ userid }}" data-post-id= "{{ post_id }}">
             
             <div class="fms-profiledetails">
                 <!-- INSERT PFP HERE -->
@@ -74,7 +74,7 @@
                     <img src= "{{ like_icon }}" alt="Heart" id="fms-post-hearticon">
                     <h2>Like</h2>
                     <!-- LIKE AMOUNT -->
-                    <h4>({{ like_count }})</h4>
+                    <h4 id="likeCount">({{ like_count }})</h4>
                 </div>
                 
                 <!-- BOOKMARK BUTTON -->
