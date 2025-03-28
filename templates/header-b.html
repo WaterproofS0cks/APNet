@@ -45,7 +45,18 @@
             </div>
 
             <div class="hb-responsive-right-container">
-                <img src="../static/src/icon/icons8-menu-vertical-96.png" alt="help">
+                <img src="../static/src/icon/icons8-menu-vertical-96.png" alt="help" id="hb-menu-icon">
+                <div class="hb-responsive-menu-popup" id="hb-responsive-menu-popup">
+                    <ul>
+                        <li><a href="/user/settings">Settings</a></li>
+                        <li><a href="/contact">About Us</a></li>
+                        <li><a href="/faq">FAQ</a></li>
+                        {% if session.get('role') == "A" %}
+                        <li><a href="/dashboard">Dashboard</a></li>
+                        {% endif %}
+                        <li><a href="/auth/logout">Logout</a></li>
+                    </ul>
+                </div>
             </div>
 
         </div>
@@ -93,13 +104,30 @@
                     popupMenu.style.display = "block";
                 }
                 event.stopPropagation();
-                });
+            });
 
+            // RESPONSIVE MENU DROPDOWN
+            var menuIcon = document.getElementById('hb-menu-icon');
+            var menuPopup = document.getElementById('hb-responsive-menu-popup');
+
+            menuIcon.addEventListener('click', function(event) {
+                if (menuPopup.style.display === "block") {
+                    menuPopup.style.display = "none";
+                } else {
+                    menuPopup.style.display = "block";
+                }
+                event.stopPropagation();
+            });
 
             // CLOSES DROPDOWNS IF CLICKED ELSEWHERE
             document.addEventListener('click', function(event) {
+                // Close profile dropdown
                 if (!profileImg.contains(event.target) && !popupMenu.contains(event.target)) {
                     popupMenu.style.display = "none";
+                }
+                // Close menu dropdown
+                if (!menuIcon.contains(event.target) && !menuPopup.contains(event.target)) {
+                    menuPopup.style.display = "none";
                 }
             });
         });

@@ -44,7 +44,6 @@ body {
     font-family: "Roboto", sans-serif;
     font-size: 10px;
     width: 65px
-    
 }
 
 .ha-logo-container {
@@ -225,6 +224,43 @@ body {
         width: auto;
         margin: 0 4px;
     }
+
+    .ha-responsive-menu-popup {
+        display: none; 
+        position: absolute;
+        top: 70px;
+        right: 0;
+        min-width: 180px;
+        background-color: #fff;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        z-index: 1000;
+    }
+    
+    .ha-responsive-menu-popup ul {
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+    }
+    
+    .ha-responsive-menu-popup ul li {
+        text-align: left;
+        font-family: "Roboto", sans-serif;
+        font-size: 20px;
+    }
+    
+    .ha-responsive-menu-popup ul li a {
+        display: block;
+        padding: 15px 15px;
+        text-decoration: none;
+        color: black;
+        transition: background-color 0.2s, color 0.2s;
+    }
+    
+    .ha-responsive-menu-popup ul li:hover {
+        background-color: #f0f0f0;
+    }
 }
 
 /* HEADER B (Marcus)*/
@@ -307,7 +343,6 @@ body {
 
     .hb-responsive-right-container {
         display: flex;
-        /* background-color: green; */
         margin-left: auto;
         height: 100%;
         width: 14%;
@@ -318,6 +353,42 @@ body {
         margin-left: auto;
         height: 90%;
         width: auto;
+    }
+
+    .hb-responsive-menu-popup {
+        display: none; 
+        position: absolute;
+        top: 90px;
+        right: 0;
+        min-width: 180px;
+        background-color: #fff;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        z-index: 1000;
+    }
+    
+    .hb-responsive-menu-popup ul {
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+    }
+    
+    .hb-responsive-menu-popup ul li {
+        font-family: "Roboto", sans-serif;
+        font-size: 20px;
+    }
+    
+    .hb-responsive-menu-popup ul li a {
+        display: block;
+        padding: 15px 15px;
+        text-decoration: none;
+        color: black;
+        transition: background-color 0.2s, color 0.2s;
+    }
+    
+    .hb-responsive-menu-popup ul li:hover {
+        background-color: #f0f0f0;
     }
 }
 
