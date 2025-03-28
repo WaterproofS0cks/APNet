@@ -3161,6 +3161,7 @@ input[type="submit"]:hover {
 }
 
 .rcas-image-container {
+    display: flex;
     position: fixed;
     right: 0;
     background-color: #1d1d1d;
@@ -3329,6 +3330,49 @@ input[type="submit"]:hover {
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s;
+}
+
+@media (max-width: 430px) {
+    .rcas-body {
+        overflow: visible;
+    }
+    
+    .rcas-image-container {
+        display: none;
+    }
+
+    .rcas-content-container {
+        width: 95%;
+        height: 127vh;
+        margin: 0 auto;
+        overflow-y: visible;
+    }
+
+    .rcas-top-container {
+        margin-top: 0px;
+        margin-bottom: 40px;
+    }
+
+    .rcas-title-container {
+        width: 70%;
+    }
+
+    .rcas-back-container {
+        width: 20%;
+    }
+
+    .rcas-back-container h2 {
+        display: none;
+    }
+
+    #rcas-undoicon {
+        width: 40px;
+        height: auto;
+    }
+
+    .rcas-desc-container textarea {
+        margin-bottom: 0px;
+    }
 }
 
 
