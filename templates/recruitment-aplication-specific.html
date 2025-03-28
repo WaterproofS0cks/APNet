@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="../static/src/favicon/favicon.ico">
+    <link rel="stylesheet" href="../static/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <title>Document</title>
+</head>
+<body>
+    <header>
+        <div class="hb-main-container">
+
+            <a class="hb-logo-container" href="/">
+                <img src="../static/src/img/apnet-logo.png" alt="APNet logo" id="hb-logo-img">
+            </a>
+
+            <div class="hb-right-container">
+
+                <a href="/"><h1>Forum</h1></a>
+                <a href="/recruitment"><h1>Recruitment</h1></a>
+                <a href="/aboutus"><h1>About Us</h1></a>
+                <a href="/faq"><h1>FAQ</h1></a>
+                <a href="/terms"><h1>Terms of Service</h1></a> 
+                <!-- {% if "user" not in session %}
+                <a href="/auth/login"><h1 style="color: #007bff; text-decoration: underline;">Sign In</h1></a>
+                {% else %} -->
+                <img src="../static/src/img/default-pfp.png" alt="Pfp" id="hb-pfp-img">
+                <div class="hb-popup-menu" id="hb-popup-menu">
+                    <ul>
+                        <li><a href="/user/profile">My Profile</a></li>
+                        <li><a href="/user/bookmarks">Bookmarks</a></li>
+                        {% if session.get('role') == "A" %}
+                        <li><a href="/dashboard">Dashboard</a></li>
+                        {% endif %}
+                        <li><a href="/user/settings">Settings</a></li>
+                        <li><a class="header-logout" href="/auth/logout">Logout</a></li>
+                    </ul>
+                </div>
+                <!-- {% endif %} -->
+
+            </div>
+
+            <div class="hb-responsive-right-container">
+                <img src="../static/src/icon/icons8-menu-vertical-96.png" alt="help">
+            </div>
+
+        </div>
+    </header>
+
+    <div class="rcas-main-container">
+
+        <div class="rcas-content-container">
+            <form action="" id="rcas-form">
+                <div class="rcas-top-container">
+                
+                    <div class="rcas-title-container">
+                        <h2>Recruitment Title</h2>
+                    </div>
+        
+                    <a href="recruitment" class="rcas-back-container">
+                        <img src="../static/src/icon/icons8-undo-96.png" id="rcas-undoicon">
+                        <h2>Back</h2>
+                    </a>
+                    
+                </div>
+    
+                <div class="rcas-tpno-container">
+                    <h2>TP Number <span class="rcas-required">*</span></h2>
+                    <input type="text" id="rcas-tpno" placeholder="Enter your TP Number...">
+                </div>
+        
+                <div class="rcas-role-container">
+                    <h2>Event Position <span class="rcas-required">*</span></h2>
+                    <input type="text" id="rcas-role" placeholder="Enter your Event Position...">
+                </div>
+        
+                <div class="rcas-desc-container">
+                    <h2>Tell us a little more about yourself <span class="rcas-required">*</span></h2>
+                    <textarea name="" id="" cols="99" rows="18" placeholder="Enter your text here..."></textarea>
+                </div>
+        
+                <div class="rcas-button-container">
+                    <button class="rcas-button" id="rcas-submit-button">Submit</button>
+                </div>
+            </form>
+        </div>
+
+        <div class="rcas-image-container">
+            <img src="../static/src/img/basketball-club.png" alt="">
+        </div>
+
+    </div>
+
+    <footer>
+        <div class="header-footer-main-container">
+            
+            <div class="header-footer-container1">
+                <img src="../static/src/icon/icons8-forum-blue-50.png" alt="Forum Icon" class="header-footer-forumblueicon">
+                <h2>Forum</h2>
+            </div>
+    
+            <div class="header-footer-container2">
+                <img src="../static/src/icon/icons8-resume-white-50.png" alt="Recruit Icon" class="header-footer-recruitwhiteicon">
+                <h2>Recruitment</h2>
+            </div>
+    
+            <div class="header-footer-container3">
+                <img src="../static/src/icon/icons8-notification-white-48.png" alt="Notification Icon" class="header-footer-notifwhiteicon">
+                <h2>Notifications</h2>
+            </div>
+    
+            <div class="header-footer-container4">
+                <a href="profile.html"><img src="../static/src/img/default-pfp.png" alt="Profile Pic Icon" class="header-footer-pfpicon"></a>
+                <h2>Profile</h2>
+            </div>
+    
+        </div>
+    </footer>
+
+</body>
+</html>

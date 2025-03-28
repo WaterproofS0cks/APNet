@@ -278,7 +278,6 @@ body {
     text-decoration: underline;
 }
 
-
 .hb-responsive-right-container,
 #hb-menuicon {
     display: none;
@@ -3138,6 +3137,154 @@ input[type="submit"]:hover {
         width: 40px;
         height: auto;
     }
+}
+
+
+/* recruitment-application-specific.html */
+.rcas-main-container {
+    display: flex;
+    height: calc(100vh - 100px);
+    width: 100%;
+    margin-top: 100px;
+}
+
+.rcas-content-container {
+    background: #F7F7F7;
+    height: 100%;
+    width: 40%;
+}
+
+.rcas-image-container {
+    position: fixed;
+    right: 0;
+    background-color: #1d1d1d;
+    width: 60%; 
+    height: 100%;
+}
+
+.rcas-image-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.rcas-top-container {
+    display: flex;
+    width: 100%;
+    height: 5%;
+    margin-bottom: 35px;
+}
+
+.rcas-back-container {
+    display: flex;
+    align-items: center;
+    width: 21%;
+    height: 100%;
+    text-decoration: none;
+    margin-left: auto;
+}
+
+#rcas-undoicon {
+    height: 100%;
+    width: auto;
+    margin-right: 10px;
+}
+
+.rcas-back-container h2 {
+    font-family: "Roboto", sans-serif;
+    font-size: 24px;
+    color: #ccc;
+    margin-right: 5px;
+}
+
+.rcas-title-container h2 {
+    font-family: "Roboto", sans-serif;
+    font-size: 30px;
+    color: #000;
+}
+
+.rcas-required {
+    color: red;
+}
+
+.rcas-title-container {
+    display: flex;
+    align-items: center;
+    width: 50%;
+    height: 100%;
+}
+
+.rcas-tpno-container,
+.rcas-role-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%; 
+    margin-bottom: 45px;
+}
+
+.rcas-tpno-container h2, .rcas-role-container h2 {
+    font-family: "Roboto", sans-serif;
+    font-size: 21px;
+    font-weight: normal;
+    color: #666;
+    margin-bottom: 8px;
+}
+
+.rcas-tpno-container input, .rcas-role-container input {
+    font-family: "Roboto", sans-serif;
+    font-size: 13px;
+    width: 100%;
+    height: 32px;
+    padding: 3px 6px;
+    border-radius: 4px;
+    margin-bottom: 0px;
+}
+
+.rcas-desc-container {
+    width: 100%;
+    height: auto;
+}
+
+.rcas-desc-container h2 {
+    font-family: "Roboto", sans-serif;
+    font-size: 19px;
+    font-weight: normal;
+    color: #666;
+    margin-bottom: 8px;
+}
+
+.rcas-desc-container textarea {
+    font-family: "Roboto", sans-serif;
+    font-size: 15px;
+    text-align: justify;
+    width: 100%;
+    height: 300px;
+    margin-bottom: 15px;
+    padding: 6px;
+    line-height: 1.5;
+    border-radius: 5px;
+    resize: none;
+}
+
+.rcas-button-container {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 8%;
+}
+
+.rcas-button {
+    font-family: "Roboto", sans-serif;
+    font-size: 16px;
+    width: 100px;
+    height: 35px;
+    margin: 10px 0 30px auto;
+    background-color: #7AB0DD;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
 }
 
 
