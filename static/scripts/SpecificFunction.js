@@ -75,9 +75,18 @@ document.addEventListener("DOMContentLoaded", function() {
                 commentSpan.className = 'fms-comment-text';
                 commentSpan.textContent = commentText;
 
+                const deleteButton = document.createElement('button');
+                deleteButton.className = 'delete-comment-btn';
+                deleteButton.textContent = 'Delete';
+            
+                deleteButton.addEventListener('click', function() {
+                    // [TODO] Add function to delete comment here
+                });
+
                 newComment.appendChild(profileImg);
                 newComment.appendChild(usernameSpan);
                 newComment.appendChild(commentSpan);
+                newComment.appendChild(deleteButton);
 
                 commentsList.appendChild(newComment);
                 commentInput.value = '';

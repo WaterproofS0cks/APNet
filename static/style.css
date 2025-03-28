@@ -1994,6 +1994,11 @@ input[type="submit"]:hover {
     background-color: #5495ce;
     border: 1px solid #a1a1a1;
     border-radius: 4px;
+    cursor: pointer;
+}
+
+.fms-comment-input button:hover {
+    background-color: #4087c1;
 }
 
 .fms-comments-list {
@@ -5064,4 +5069,24 @@ input[type="submit"]:hover {
 .click-card-url .activity-card:hover {
     border: 3px solid #666;
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+}
+
+
+
+/* forumspecific.html */
+
+.delete-comment-btn {
+    font-family: "Roboto", sans-serif;
+    font-size: 14px;
+    color: #fff;
+    margin-left: auto;
+    padding: 8px 12px;
+    background-color: #f44336;
+    border: 1px solid #a1a1a1;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.delete-comment-btn:hover {
+    background-color: #d32f2f;
 }
