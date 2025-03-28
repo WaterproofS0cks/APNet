@@ -10,7 +10,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
     <title>Document</title>
 </head>
-<body>
+<body class="rcas-body">
     <header>
         <div class="hb-main-container">
 
@@ -54,39 +54,58 @@
     <div class="rcas-main-container">
 
         <div class="rcas-content-container">
-            <form action="" id="rcas-form">
-                <div class="rcas-top-container">
-                
-                    <div class="rcas-title-container">
-                        <h2>Recruitment Title</h2>
-                    </div>
-        
-                    <a href="recruitment" class="rcas-back-container">
-                        <img src="../static/src/icon/icons8-undo-96.png" id="rcas-undoicon">
-                        <h2>Back</h2>
-                    </a>
-                    
+            <div class="rcas-top-container">
+            
+                <div class="rcas-title-container">
+                    <h2>Recruitment Title</h2>
                 </div>
     
-                <div class="rcas-tpno-container">
-                    <h2>TP Number <span class="rcas-required">*</span></h2>
-                    <input type="text" id="rcas-tpno" placeholder="Enter your TP Number...">
+                <a href="/user/applications/created" class="rcas-back-container">
+                    <img src="../static/src/icon/icons8-undo-96.png" id="rcas-undoicon">
+                    <h2>Back</h2>
+                </a>
+                
+            </div>
+
+            <div class="rcas-username-container">
+                <h2>Username</h2>
+                <div class="rcas-username-input">
+                    <a href="profile.html" id="rcas-username">INSERT USERNAME</a>
                 </div>
-        
-                <div class="rcas-role-container">
-                    <h2>Event Position <span class="rcas-required">*</span></h2>
-                    <input type="text" id="rcas-role" placeholder="Enter your Event Position...">
-                </div>
-        
-                <div class="rcas-desc-container">
-                    <h2>Tell us a little more about yourself <span class="rcas-required">*</span></h2>
-                    <textarea name="" id="" cols="99" rows="18" placeholder="Enter your text here..."></textarea>
-                </div>
-        
+            </div>
+
+            <div class="rcas-fullname-container">
+                <h2>Full Name</h2>
+                <input type="text" id="rcas-fullname" value="INSERT FULLNAME" readonly>
+            </div>
+            
+            <div class="rcas-tpno-container">
+                <h2>TP Number</h2>
+                <input type="text" id="rcas-tpno" value="INSERT TP NUMBER" readonly>
+            </div>
+    
+            <div class="rcas-role-container">
+                <h2>Event Position</h2>
+                <input type="text" id="rcas-role" value="INSERT EVENT POSITION" readonly>
+            </div>
+    
+            <div class="rcas-phoneno-container">
+                <h2>Phone Number</h2>
+                <input type="text" id="rcas-phoneno" value="INSERT PHONE NUMBER" readonly>
+            </div>
+
+            <div class="rcas-desc-container">
+                <h2>Tell us a little more about yourself</h2>
+                <textarea name="" id="" cols="99" rows="18" placeholder="INSERT INFO STUFF THINGGY" readonly></textarea>
+            </div>
+    
+            <form action="" id="rcas-form">
                 <div class="rcas-button-container">
-                    <button class="rcas-button" id="rcas-submit-button">Submit</button>
+                    <button class="rcas-button" style="background-color: rgb(255, 40, 40); margin-right: 10px;" id="rcas-reject-button">Reject</button>
+                    <button class="rcas-button" style="background-color: rgb(53, 244, 53);" id="rcas-reject-button">Accept</button>
                 </div>
             </form>
+
         </div>
 
         <div class="rcas-image-container">

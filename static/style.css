@@ -3141,6 +3141,10 @@ input[type="submit"]:hover {
 
 
 /* recruitment-application-specific.html */
+.rcas-body {
+    overflow: hidden;
+}
+
 .rcas-main-container {
     display: flex;
     height: calc(100vh - 100px);
@@ -3150,8 +3154,10 @@ input[type="submit"]:hover {
 
 .rcas-content-container {
     background: #F7F7F7;
-    height: 100%;
+    height: 87vh;
     width: 40%;
+    padding: 20px 25px;
+    overflow-y: auto;
 }
 
 .rcas-image-container {
@@ -3172,12 +3178,14 @@ input[type="submit"]:hover {
     display: flex;
     width: 100%;
     height: 5%;
-    margin-bottom: 35px;
+    margin-bottom: 55px;
+    margin-top: 20px;
 }
 
 .rcas-back-container {
     display: flex;
     align-items: center;
+    justify-content: flex-end;
     width: 21%;
     height: 100%;
     text-decoration: none;
@@ -3192,7 +3200,7 @@ input[type="submit"]:hover {
 
 .rcas-back-container h2 {
     font-family: "Roboto", sans-serif;
-    font-size: 24px;
+    font-size: 26px;
     color: #ccc;
     margin-right: 5px;
 }
@@ -3215,14 +3223,21 @@ input[type="submit"]:hover {
 }
 
 .rcas-tpno-container,
-.rcas-role-container {
+.rcas-role-container,
+.rcas-fullname-container,
+.rcas-username-container,
+.rcas-phoneno-container {
     display: flex;
     flex-direction: column;
     width: 100%; 
-    margin-bottom: 45px;
+    margin-bottom: 30px;
 }
 
-.rcas-tpno-container h2, .rcas-role-container h2 {
+.rcas-tpno-container h2,
+.rcas-role-container h2,
+.rcas-fullname-container h2,
+.rcas-username-container h2,
+.rcas-phoneno-container h2 {
     font-family: "Roboto", sans-serif;
     font-size: 21px;
     font-weight: normal;
@@ -3230,14 +3245,43 @@ input[type="submit"]:hover {
     margin-bottom: 8px;
 }
 
-.rcas-tpno-container input, .rcas-role-container input {
+.rcas-tpno-container input, 
+.rcas-role-container input,
+.rcas-fullname-container input,
+.rcas-phoneno-container input {
     font-family: "Roboto", sans-serif;
-    font-size: 13px;
+    font-size: 15px;
     width: 100%;
-    height: 32px;
-    padding: 3px 6px;
+    height: 40px;
+    padding: 3px 10px;
     border-radius: 4px;
     margin-bottom: 0px;
+    cursor: default;
+}
+
+.rcas-username-input {
+    font-family: "Roboto", sans-serif;
+    font-size: 15px;
+    width: 100%;
+    height: 40px; 
+    padding: 3px 10px; 
+    border-radius: 4px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    text-decoration: none; 
+    display: flex; 
+    align-items: center;
+}
+
+.rcas-username-container a {
+    display: flex; 
+    align-items: center;
+    text-decoration: none; 
+    color: #0a4d94;
+}
+
+.rcas-username-container a:hover {
+    text-decoration: underline;
 }
 
 .rcas-desc-container {
@@ -3264,6 +3308,7 @@ input[type="submit"]:hover {
     line-height: 1.5;
     border-radius: 5px;
     resize: none;
+    cursor: default;
 }
 
 .rcas-button-container {
@@ -3276,10 +3321,9 @@ input[type="submit"]:hover {
 .rcas-button {
     font-family: "Roboto", sans-serif;
     font-size: 16px;
-    width: 100px;
+    width: 49%;
     height: 35px;
-    margin: 10px 0 30px auto;
-    background-color: #7AB0DD;
+    margin: 30px 0px;
     color: #fff;
     border: none;
     border-radius: 5px;
