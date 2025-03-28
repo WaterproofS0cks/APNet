@@ -40,6 +40,13 @@ body {
     z-index: 1000;
 }
 
+#ha-signin {
+    font-family: "Roboto", sans-serif;
+    font-size: 10px;
+    width: 65px
+    
+}
+
 .ha-logo-container {
     display: flex;
     height: 50px;
@@ -81,7 +88,7 @@ body {
     align-items: center;
     justify-content: center;
     height: 90%;
-    width: 75%;
+    width: 55%;
     border: 1px solid #fff;
     border-radius: 20px;
     padding: 2px;
@@ -113,6 +120,7 @@ body {
 }
 
 #ha-pfpimg {
+    margin-left: 10px;
     height: 50px;
     width: 50px;
 }
@@ -1503,6 +1511,14 @@ input[type="submit"]:hover {
     color: #000;
 }
 
+.fm-comment-icon-container a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    color: #000;
+}
+
 #fm-post-commenticon {
     width: 23px;
     height: 23px;
@@ -2793,6 +2809,14 @@ input[type="submit"]:hover {
     border-radius: 20px;
     padding: 10px;
     margin-left: 10px;
+}
+
+.rc-comment-icon-container a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #000;
+    text-decoration: none;
 }
 
 #rc-post-commenticon {

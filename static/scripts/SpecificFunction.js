@@ -20,6 +20,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
         if (targetId === "fms-post-hearticon") {
             action = "liked";
+            console.log("hi")
         } else if (targetId === "fms-post-bookmarkicon") {
             action = "bookmark";
         } else if (targetId === "addCommentButton") {

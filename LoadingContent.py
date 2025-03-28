@@ -100,9 +100,11 @@ class Content():
                             </div>
 
                             <div class="fm-comment-icon-container" data-action="specific">
-                                <img src="../static/src/icon/icons8-comment-50.png" alt="Comment" id="fm-post-commenticon">
-                                <h2>Comment</h2>
-                                <h4>({entry['comments_count']})</h4>
+                                <a href='specificpost?postid={entry["id"]}'> 
+                                    <img src="../static/src/icon/icons8-comment-50.png" alt="Comment" id="fm-post-commenticon">
+                                    <h2>Comment</h2>
+                                    <h4>({entry['comments_count']})</h4>
+                                </a>
                             </div>
 
                             <div class="fm-bookmark-icon-container" data-action="bookmark">
@@ -192,9 +194,11 @@ class Content():
                             </div>
 
                             <div class="fm-comment-icon-container" data-action="specific">
-                                <img src="../static/src/icon/icons8-comment-50.png" alt="Comment" id="fm-post-commenticon">
-                                <h2>Comment</h2>
-                                <h4>({entry['comments_count']})</h4>
+                                <a href='specificrecruitment?postid={entry["id"]}'> 
+                                    <img src="../static/src/icon/icons8-comment-50.png" alt="Comment" id="fm-post-commenticon">
+                                    <h2>Comment</h2>
+                                    <h4>({entry['comments_count']})</h4>
+                                </a>
                             </div>
 
                             <div class="fm-bookmark-icon-container" data-action="bookmark">

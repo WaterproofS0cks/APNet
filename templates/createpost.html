@@ -45,7 +45,7 @@
             <a href="#">
                 <div class="nb-otherpages-applicantlisting">
                     <img src="../static/src/icon/icons8-name-tag-yellow-96.png" alt="Person Default Icon" id="nb-personicon">
-                    <h2>View Applicants</h2>
+                    <h2>My Applied Events</h2>
                 </div>
             </a>
 
@@ -111,7 +111,7 @@
         <form action="/upload" method="POST" enctype="multipart/form-data" id="cp-forum-form">
             <input type="hidden" name="post_type" value="forum">
             <div id="cp-forumInputs">
-                <h1>Image</h1>
+                <h1>Image <span class="cp-required">*</span></h1>
                 <div id="cp-forum-drop-area">
                     <input type="file" accept=".jpg, .jpeg, .png, .gif" id="cp-forum-input-file" name="file" hidden required>
                     <div class="cp-forum-imagecontainer" id="cp-forum-imageview">
@@ -147,7 +147,7 @@
                 <h1>Title <span class="cp-required">*</span></h1>
                 <input type="text" name="title" id="cp-recruit-title-text" placeholder="Enter your title here..." required>
 
-                <h1>Image</h1>
+                <h1>Image <span class="cp-required">*</span></h1>
                 <div id="cp-recruit-drop-area">
                     <input type="file" accept=".jpg, .jpeg, .png, .gif" id="cp-recruit-input-file" name="file" hidden required>
                     <div class="cp-recruit-imagecontainer" id="cp-recruit-imageview">

@@ -75,7 +75,7 @@
                     <h3><-------- NO NEW NOTIFICATIONS --------></h3>
                 </div>
                 {% if "user" not in session %}
-                <a href="/auth/login"><h1 style="color: #007bff; text-decoration: underline;">Sign In</h1></a>
+                <a href="/auth/login" id="ha-signin"><h1 style="color: #007bff; text-decoration: underline;">Sign In</h1></a>
                 {% else %}
                 <img src="../static/src/img/default-pfp.png" alt="Pfp" id="ha-pfpimg">
                 <div class="ha-popup-menu" id="ha-popup-menu">

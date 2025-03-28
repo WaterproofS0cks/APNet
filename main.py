@@ -111,7 +111,7 @@ def create_comment():
         db_insert.insert("RecruitmentComment", (user_id, post_id, comment))
     else:
         return "", 400
-    return "", 204 
+    return jsonify({ comment: "True" })
 
 #Finished  
 @app.route('/create', methods=["GET", "POST"])
