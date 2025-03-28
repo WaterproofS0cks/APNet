@@ -22,6 +22,7 @@ body {
 @media (max-width: 430px) {
     .content-card {
         max-width: 380px;
+        margin-bottom: 100px;
     }
     
 }
