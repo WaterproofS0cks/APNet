@@ -114,6 +114,18 @@ document.addEventListener("DOMContentLoaded", function() {
         .catch(error => console.error("Error:", error));
     });
 
+    // "Enter" key to send comment
+    const commentInput = document.getElementById('commentInput');
+    commentInput.addEventListener('keydown', function(event) {
+        if (event.key === 'Enter') {
+            event.preventDefault();
+            const addCommentButton = document.getElementById('addCommentButton');
+            if (addCommentButton) {
+                addCommentButton.click();
+            }
+        }
+    });
+
     // Fetch and load comments
     const commentsList = document.querySelector('.fms-comments-list');
     const postId = document.querySelector(".fms-post-layout").getAttribute("data-post-id");
@@ -164,19 +176,19 @@ document.addEventListener("DOMContentLoaded", function() {
 
             if (dropdown) {
                 const reportPost = dropdown.querySelector("#fms-reportposticon")?.parentElement;
-                const reportUser  = dropdown.querySelector("#fms-reportusericon")?.parentElement;
+                const reportUser = dropdown.querySelector("#fms-reportusericon")?.parentElement;
                 const editPost = dropdown.querySelector("#fms-editicon")?.parentElement;
                 const deletePost = dropdown.querySelector("#fms-deleteicon")?.parentElement;
 
-                if (reportPost && reportUser  && editPost && deletePost) {
+                if (reportPost && reportUser && editPost && deletePost) {
                     if (String(loggedInUserId) === String(postUserId)) {
                         reportPost.style.display = "none";
-                        reportUser .style.display = "none";
+                        reportUser.style.display = "none";
                         editPost.style.display = "block";
                         deletePost.style.display = "block";
                     } else {
                         reportPost.style.display = "block";
-                        reportUser .style.display = "block";
+                        reportUser.style.display = "block";
                         editPost.style.display = "none";
                         deletePost.style.display = "none";
                     }
