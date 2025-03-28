@@ -148,6 +148,7 @@ body {
 
 .hb-popup-menu {
     top: 100px;
+    min-width: 180px;
 }
 
 .ha-popup-menu ul, .hb-popup-menu ul {
@@ -156,9 +157,14 @@ body {
     margin: 0;
 }
 
-.ha-popup-menu ul li, .hb-popup-menu ul li {
+.ha-popup-menu ul li {
     font-family: "Roboto", sans-serif;
     font-size: 18px;
+}
+
+.hb-popup-menu ul li {
+    font-family: "Roboto", sans-serif;
+    font-size: 20px;
 }
 
 .ha-popup-menu ul li a, .hb-popup-menu ul li a {
