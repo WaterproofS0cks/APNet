@@ -19,7 +19,6 @@ user_profile = Blueprint("user_profile", __name__, static_folder="static", templ
 def profile():
     if "user" in session:
         if request.method == "GET" and request.args.get('uid') == None:
-            print("hihihihi")
             return render_template("profile.html", name = session.get('user'), bio = session.get('bio'), link = session.get('link'))
         elif request.method == "GET" and request.args.get('uid') != None:
             value = request.args.get('uid')
@@ -153,10 +152,6 @@ def likedPosts():
 @user_profile.route('/bookmarks', methods=['POST', 'GET'])
 def bookmarkedPosts():
     return render_template("bookmarkedposts.html")
-
-@user_profile.route('/otherprofile', methods=['POST', 'GET'])
-def otherProfile():
-    return render_template("otherprofile.html")
 
 
 # Applications Pages
