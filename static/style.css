@@ -215,6 +215,7 @@ body {
 
     .ha-right-responsive-container {
         display: flex;
+        justify-content: flex-end;
         margin-left: auto;
         height: 100%;
         width: 25%;
