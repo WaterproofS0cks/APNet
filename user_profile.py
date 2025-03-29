@@ -19,6 +19,7 @@ user_profile = Blueprint("user_profile", __name__, static_folder="static", templ
 def profile():
     if "user" in session:
         if request.method == "GET" and request.args.get('uid') == None:
+            print("hihihihi")
             return render_template("profile.html", name = session.get('user'), bio = session.get('bio'), link = session.get('link'))
         elif request.method == "GET" and request.args.get('uid') != None:
             value = request.args.get('uid')
@@ -32,7 +33,8 @@ def profile():
             db_retrieve = dbRetrieve(db_conn)
 
             user_data = db_retrieve.retrieve_one("users", "*", "username = %s", (value,))
-            return render_template("profile.html", pfp = user_data['profilepicture'], name = user_data['username'], bio = user_data['bio'], link = user_data['link'])
+
+            return render_template("profile.html", pfp = user_data['profilepicture'], name = user_data['username'], bio = user_data['bio'], link = user_data['link'], user_id = user_data['userid'])
     else:
         return redirect(url_for('auth.login'))
     

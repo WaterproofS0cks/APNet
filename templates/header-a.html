@@ -97,12 +97,12 @@
                 <img src="../static/src/icon/icons8-menu-vertical-white-64.png" id="ha-menuicon">
                 <div class="ha-responsive-menu-popup" id="ha-responsive-menu-popup">
                     <ul>
-                        <li><a href="/user/settings">Settings</a></li>
-                        <li><a href="/contact">About Us</a></li>
-                        <li><a href="/faq">FAQ</a></li>
                         {% if session.get('role') == "A" %}
                         <li><a href="/dashboard">Dashboard</a></li>
                         {% endif %}
+                        <li><a href="/faq">FAQ</a></li>
+                        <li><a href="/contact">About Us</a></li>
+                        <li><a href="/user/settings">Settings</a></li>
                         <li><a href="/auth/logout">Logout</a></li>
                     </ul>
                 </div>
