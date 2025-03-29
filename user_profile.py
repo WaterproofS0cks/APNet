@@ -18,9 +18,21 @@ user_profile = Blueprint("user_profile", __name__, static_folder="static", templ
 @user_profile.route('/profile', methods=['POST', 'GET'])
 def profile():
     if "user" in session:
-        if request.method == "GET":
-            print(session.get("pfp"))
+        if request.method == "GET" and request.args.get('uid') == None:
             return render_template("profile.html", name = session.get('user'), bio = session.get('bio'), link = session.get('link'))
+        elif request.method == "GET" and request.args.get('uid') != None:
+            value = request.args.get('uid')
+            db_conn = dbConnection(
+                dbname=os.getenv("DBNAME"),
+                user=os.getenv("USER"),
+                password=os.getenv("PASSWORD"),
+            )
+
+            db_conn.connect()
+            db_retrieve = dbRetrieve(db_conn)
+
+            user_data = db_retrieve.retrieve_one("users", "*", "username = %s", (value,))
+            return render_template("profile.html", pfp = user_data['profilepicture'], name = user_data['username'], bio = user_data['bio'], link = user_data['link'])
     else:
         return redirect(url_for('auth.login'))
     
@@ -150,11 +162,11 @@ def otherProfile():
 def applications():
     return render_template("applications.html")
 
-@user_profile.route('/applications/applied', methods=['POST', 'GET'])
+@user_profile.route('/applications-applied', methods=['POST', 'GET'])
 def applicationsApplied():
     return render_template("applications_applied.html")
 
-@user_profile.route('/applications/created', methods=['POST', 'GET'])
+@user_profile.route('/applications-created', methods=['POST', 'GET'])
 def applicationsCreated():
     return render_template("applications_created.html")
 

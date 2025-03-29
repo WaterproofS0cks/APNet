@@ -8,7 +8,11 @@
     <div class="content-card">
         <div class="profile">
             <div class="profile-img">
+                {% if request.args.get('uid') == None %}
                 <img src="{{ session.get('pfp') }}" alt="User Profile">
+                {% else %}
+                <img src="{{ pfp }}" alt="User Profile">
+                {% endif %}
             </div>
             <div class="profile-desc">
                 <h2>{{ name }}</h2>
@@ -16,9 +20,11 @@
             </div>
             <div class="profile-btn">
                 <div class="profile-btn-group">
+                    {% if request.args.get('uid') == None %}
                     <a href="settings" class="btn-icon">
                         <img src="{{ url_for('static', filename='src/icon/icons8-settings-96.png') }}" alt="Settings Icon">
                     </a>
+                    {% endif %}
                 </div>
                 {% if link %}
                 <a href="{{ link }}" target="_blank" style="text-decoration: none;">
@@ -29,12 +35,14 @@
                 {% endif %}
             </div>
         </div>
-
+        {% if request.args.get('uid') == None %}
+        <!-- {{ request.args.get('uid') }} -->
         <div class="navigation">
             <a href="likes" class="button-black" style="text-decoration: none;">Likes</a>
             <a href="bookmarks" class="button-black" style="text-decoration: none;">Bookmarks</a>
             <a href="applications" class="button-black" style="text-decoration: none;">Applications</a>
         </div>
+        {% endif %}
 
 
         <div class="horizontal-line"></div>
