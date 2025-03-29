@@ -340,7 +340,7 @@ def update_reported_post():
     return jsonify({"message": f"Post {post_id} has been {action.lower()}ed."})
 
 
-@app.route('/aboutus', methods=['GET'])
+@app.route('/about', methods=['GET'])
 def AboutUs():
     return render_template('aboutus.html')
 
