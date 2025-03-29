@@ -123,6 +123,7 @@ body {
     margin-left: 10px;
     height: 50px;
     width: 50px;
+    border-radius: 100%;
 }
 
 .ha-right-responsive-container {
@@ -302,6 +303,7 @@ body {
     height: 60px;
     width: 60px;
     margin: 0 10px 0 10px;
+    border-radius: 100%;
 }
 
 .hb-right-container a {

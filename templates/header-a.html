@@ -77,7 +77,7 @@
                 {% if "user" not in session %}
                 <a href="/auth/login" id="ha-signin"><h1 style="color: #007bff; text-decoration: underline;">Sign In</h1></a>
                 {% else %}
-                <img src="../static/src/img/default-pfp.png" alt="Pfp" id="ha-pfpimg">
+                <img src="{{ session.get('pfp') }}" alt="Pfp" id="ha-pfpimg">
                 <div class="ha-popup-menu" id="ha-popup-menu">
                     <ul>
                         <li><a href="/user/profile">My Profile</a></li>
