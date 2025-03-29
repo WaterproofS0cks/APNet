@@ -193,7 +193,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
 
     if (postId) {
-        fetch(`/comment?post_id=${postId}`)
+        fetch(`/comment?post_id=${postId}&post_type=${post_type}`)
             .then(response => response.json())  
             .then(data => {
                 commentsList.innerHTML = data.html;
