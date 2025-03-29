@@ -33,7 +33,7 @@ class dbChart:
         today = datetime.today().date()
         yesterday = today - timedelta(days=1)
 
-        if not user_data:    
+        if not user_data:
             dates = [yesterday, today]
             user_count = [0, 0]
         else:
