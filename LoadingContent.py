@@ -351,6 +351,22 @@ class Content():
         print(html)
         return jsonify({"html": html})
 
+
+    def load_applicant(recruitment_id):
+        db_conn = dbConnection(
+                dbname=os.getenv("DBNAME"),
+                user=os.getenv("USER"),
+                password=os.getenv("PASSWORD"),
+        )
+
+        db_conn.connect()
+        db_retrieve = dbRetrieve(db_conn)
+        
+
+        user_data = db_retrieve.retrieve("application", "*", "userid = %s",(recruitment_id,))
+        
+        return jsonify({"html": html})
+
     def load_applications():
         
         return jsonify({"html": html})
