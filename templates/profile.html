@@ -1,7 +1,8 @@
 {% extends "header-b.html" %}
 {% block title %}Profile{% endblock title %}
 {% block content %}
-<script type="text/javascript" src="{{ url_for('static', filename='scripts/PostFunction.js') }}" data-type="post" data-page="self" defer></script>
+<script type="text/javascript" src="{{ url_for('static', filename='scripts/PostFunction.js') }}" data-type="post" data-page="self" data-container="postContainer" defer></script>
+<script type="text/javascript" src="{{ url_for('static', filename='scripts/PostFunction.js') }}" data-type="recruitment" data-page="self" data-container="postContaine" defer></script>
 
 <body>
     <div class="content-card">
@@ -46,62 +47,14 @@
         
         <div id="Forum" class="tabcontent">
             <!-- This is a forum post -->
-            <div class="post">
-                <div class="post-attr">
-                    <p>@username</p>
-                    <p>Date</p>
-                </div>
-                <div class="post-title">
-                    <h3>This is a forum post</h3>
-                </div>
-                <div class="post-img">
-                    <img src="{{ url_for('static', filename='src/img/default-events.jpg') }}" alt="Placeholder Image">
-                </div>
-                <div class="post-inter">
-                    <button class="button-grey">
-                        <img src="{{ url_for('static', filename='src/icon/icons8-like-96.png') }}" alt="Like Icon">Like
-                    </button>
-                    <button class="button-grey">
-                        <img src="{{ url_for('static', filename='src/icon/icons8-comment-96.png') }}" alt="Comment Icon">Comment
-                    </button>
-                    <button class="button-grey">
-                        <img src="{{ url_for('static', filename='src/icon/icons8-bookmark-96.png') }}" alt="Bookmark Icon">Bookmark
-                    </button>
-                </div>
+            <div class = "fm-main-container" id="postContainer">
             </div>
-
-            <!-- Add more forum posts here -->
-
         </div>
     
         <div id="Recruitment" class="tabcontent">
             <!-- This is a recruitment post -->
-            <div class="post">
-                <div class="post-attr">
-                    <p>@username</p>
-                    <p>Date</p>
-                </div>
-                <div class="post-title">
-                    <h3>This is a recruitment post</h3>
-                </div>
-                <div class="post-img">
-                    <img src="{{ url_for('static', filename='src/img/default-events.jpg') }}" alt="Placeholder Image">
-                </div>
-                <div class="post-inter">
-                    <button class="button-grey">
-                        <img src="{{ url_for('static', filename='src/icon/icons8-like-96.png') }}" alt="Like Icon">Like
-                    </button>
-                    <button class="button-grey">
-                        <img src="{{ url_for('static', filename='src/icon/icons8-comment-96.png') }}" alt="Comment Icon">Comment
-                    </button>
-                    <button class="button-grey">
-                        <img src="{{ url_for('static', filename='src/icon/icons8-bookmark-96.png') }}" alt="Bookmark Icon">Bookmark
-                    </button>
-                </div>
+            <div class = "fm-main-container" id="postContaine">
             </div>
-
-            <!-- Add more recruitment posts here -->
-
         </div>
 
 
