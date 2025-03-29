@@ -305,15 +305,75 @@ class Content():
             post_id=post_id,
             userid=userid,
             profile_picture=profile_picture,
-            username=user_data.get("username", "Unknown"),
+            username=user_data.get("username"),
             timestamp=date,
-            image=post_data.get("image", ""),
-            description=post_data.get("description", "No description available."),
+            image=post_data.get("image"),
+            description=post_data.get("description"),
+            like_icon=like_icon,
+            like_count=count,
+            bookmark_icon=bookmark_icon
+        )
+
+
+
+    
+    def load_recruitment_forum():
+        post_id = request.args.get('postid', '')
+        user_id = session.get('id')
+
+        if not post_id:
+            return redirect(url_for("forum"))
+
+        db_conn = dbConnection(
+            dbname=os.getenv("DBNAME"),
+            user=os.getenv("USER"),
+            password=os.getenv("PASSWORD"),
+        )
+
+        db_conn.connect()
+        db_retrieve = dbRetrieve(db_conn)
+
+        post_data = db_retrieve.retrieve_one("Recruitment", condition="recruitmentID = %s", params=(post_id,))
+
+        if not post_data:
+            return redirect(url_for("forum"))
+
+        user_data = db_retrieve.retrieve_one("Users", "*", "userID = %s", (post_data["userid"],))
+
+        like_count = db_retrieve.retrieve_one("RecruitmentEngagement", "COUNT(*)", "liked = TRUE AND recruitmentID = %s", (post_id,))
+        engagement_data = db_retrieve.retrieve_one("RecruitmentEngagement", "*", "userID = %s AND recruitmentID = %s", (user_id, post_id)) or {}
+
+        userid = post_data["userid"]
+        header = post_data["header"]
+        count = like_count['count']
+        profile_picture = user_data["profilepicture"]
+        like_icon = ("../static/src/icon/icons8-heart-red-50.png" if engagement_data.get("liked") else "../static/src/icon/icons8-heart-50.png")
+        bookmark_icon = ("../static/src/icon/icons8-bookmark-evendarkergreen-500.png" if engagement_data.get("bookmark") else "../static/src/icon/icons8-bookmark-50.png")
+        date = post_data["timestamp"].strftime("%d %B %Y")
+
+        return render_template(
+            "recruitmentspecific.html",
+            post_id=post_id,
+            userid=userid,
+            profile_picture=profile_picture,
+            username=user_data.get("username"),
+            timestamp=date,
+            header=header,
+            image=post_data.get("image"),
+            description=post_data.get("description"),
             like_icon=like_icon,
             like_count=count,
             bookmark_icon=bookmark_icon
         )
     
+   
+
+
+
+
+
+
+
     def load_comment():
         db_conn = dbConnection(
             dbname=os.getenv("DBNAME"),
@@ -325,15 +385,26 @@ class Content():
         db_retrieve = dbRetrieve(db_conn)
 
         post_id = request.args.get('post_id')
+        post_type = request.args.get('post_type')
         user_id = session.get("id")
 
-        columns = "Users.username, Users.profilePicture, PostComment.comment, PostComment.userid, PostComment.postcommentid AS id, TO_CHAR(PostComment.timestamp, 'DD Month YYYY HH24:MI') AS timestamp"
-        condition = "PostComment.postID = %s"
-        params = (post_id,)
-        join = "JOIN Users ON PostComment.userID = Users.userID"
-        order = "ORDER BY PostComment.timestamp DESC"
+        if post_type == "post":
+            table = "PostComment"
+            columns = "Users.username, Users.profilePicture, PostComment.comment, PostComment.userid, PostComment.postcommentid AS id, TO_CHAR(PostComment.timestamp, 'DD Month YYYY HH24:MI') AS timestamp"
+            condition = "PostComment.postID = %s"
+            params = (post_id,)
+            join = "JOIN Users ON PostComment.userID = Users.userID"
+            order = "ORDER BY PostComment.timestamp DESC"
 
-        comments = db_retrieve.retrieve("PostComment", columns, condition, params, join, order)
+        elif post_type == "post":
+            table = "RecruitmentComment"
+            columns = "Users.username, Users.profilePicture, RecruitmentComment.comment, RecruitmentComment.userid, RecruitmentComment.recruitmentcommentid AS id, TO_CHAR(RecruitmentComment.timestamp, 'DD Month YYYY HH24:MI') AS timestamp"
+            condition = "RecruitmentComment.recruitmentID = %s"
+            params = (post_id,)
+            join = "JOIN Users ON RecruitmentComment.userID = Users.userID"
+            order = "ORDER BY RecruitmentComment.timestamp DESC"
+
+        comments = db_retrieve.retrieve(table, columns, condition, params, join, order)
 
         html = ""
         for comment in comments:

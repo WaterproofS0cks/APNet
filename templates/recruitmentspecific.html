@@ -1,0 +1,115 @@
+{% extends "header-b.html" %}
+{% block title %}Specific Forum{% endblock title %}
+{% block content %}
+<script type="text/javascript" src="{{ url_for('static', filename='scripts/SpecificFunction.js') }}" data-type="recruitment" data-page="" defer></script>
+
+<style>
+    body {
+        padding: 0;
+        margin: 0;
+        background-color: #F7F7F7;
+    }
+
+    @media (max-width: 430px) {
+        body {
+            padding: 0;
+        }
+    }
+</style>
+<body>
+    
+    <div class="fms-undo-container">
+        <a href="/">
+            <img src="../static/src/icon/icons8-undo-dark-96.png" alt="Undo Button" id="fms-undo-icon">
+            <h1>Back</h1>
+        </a>
+    </div>
+    
+    <!-- BODY CONTENT -->
+    <div class="fms-main-container">
+        
+        <div class="fms-post-layout" data-user-id= "{{ userid }}" data-post-id= "{{ post_id }}">
+            
+            <div class="rc-title-container">
+                <h1>{{ header }}</h1>
+            </div>
+
+            <div class="fms-profiledetails">
+                <!-- INSERT PFP HERE -->
+                <img src="{{ profile_picture }}" alt="Default pfp icon" id="fms-post-pfp">
+                <!-- INSERT USERNAME HERE -->
+                <h1>{{ username }}</h1>
+                <!-- INSERT LAST CREATION DATE THING -->
+                <h2> • </h2>
+                <h2>Posted on {{ timestamp }}</h2>
+
+                <div class="fms-more-container">
+                    <div class="fms-dropdown">
+                        <span><img src="../static/src/icon/icons8-ellipsis-48.png" alt="Elipses" id="fms-moreicon" height="24" width="24"></span>
+                        <div class="fms-dropdown-content">
+                            <a href="#" class="fms-dropdown-item">
+                                <img src="../static/src/icon/icons8-flag-48.png" alt="Report Post" id="fms-reportposticon" height="30" width="30"> Report Post
+                            </a>
+                            <a href="#" class="fms-dropdown-item">
+                                <img src="../static/src/icon/icons8-danger-50.png" alt="Report User" id="fms-reportusericon" height="30" width="30"> Report User
+                            </a>
+                            <a href="#" class="fms-dropdown-item">
+                                <img src="../static/src/icon/icons8-edit-96.png" alt="Edit Post" id="fms-editicon" height="30" width="30">Edit Post
+                            </a>
+                            <a href="#" class="fms-dropdown-item">
+                                <img src="../static/src/icon/icons8-delete-48.png" alt="Delete Post" id="fms-deleteicon" height="30" width="30">Delete Post
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            
+            <div class="fms-image-container">
+                <!-- INSERT IMAGE HERE -->
+                <img src=" {{ image }}" alt="">
+            </div>
+            
+            <div class="fms-button-container">
+
+                
+                <!-- LIKE BUTTON -->
+                <div class="fms-like-icon-container">
+                    <img src= "{{ like_icon }}" alt="Heart" id="fms-post-hearticon">
+                    <h2>Like</h2>
+                    <!-- LIKE AMOUNT -->
+                    <h4 id="likeCount">({{ like_count }})</h4>
+                </div>
+                
+                <!-- BOOKMARK BUTTON -->
+                <div class="fm-bookmark-icon-container">
+                    <img src="{{ bookmark_icon }}" alt="Bookmark" id="fms-post-bookmarkicon">
+                </div>
+            </div>
+
+
+            <!-- INSERT CAPTION -->
+            <div class="fms-caption-container">
+                <h1>{{ username }}</h1>
+                <h2>{{ description }}</h2>
+            </div>
+
+            <!-- INSERT COMMENT -->
+            <div class="fms-comments-container">
+                
+                <div class="fms-comment-input">
+                    <input type="text" id="commentInput" placeholder="Add a comment...">
+                    <button id="addCommentButton">Comment</button>
+                </div>
+
+                <div class="fms-comments-list">
+                    <!-- Comments will be dynamically added here -->
+                </div>
+
+            </div> 
+
+        </div>
+
+    </div>
+</body>
+{% endblock content %}

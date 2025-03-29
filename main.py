@@ -75,6 +75,11 @@ def engagement():
 def specific_post():
     return Content.load_specific_forum()
 
+@app.route('/user/specificrecruitment', methods=["GET", "POST"])
+@app.route('/specificrecruitment', methods=["GET", "POST"])
+def specific_recruitment():
+    return Content.load_recruitment_forum()
+
 #Finished
 @app.route('/comment', methods=['GET'])
 def comment():
