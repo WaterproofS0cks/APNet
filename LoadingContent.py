@@ -282,7 +282,7 @@ class Content():
 
         userid = post_data["userid"]
         count = like_count['count']
-        profile_picture = user_data.get("profilePicture") or "/static/src/img/default-pfp.png"
+        profile_picture = user_data["profilepicture"]
         like_icon = ("../static/src/icon/icons8-heart-red-50.png" if engagement_data.get("liked") else "../static/src/icon/icons8-heart-50.png")
         bookmark_icon = ("../static/src/icon/icons8-bookmark-evendarkergreen-500.png" if engagement_data.get("bookmark") else "../static/src/icon/icons8-bookmark-50.png")
         date = post_data["timestamp"].strftime("%d %B %Y")
