@@ -129,7 +129,7 @@ class dbChart:
             title="Post Created Over Time"
             lineLabel="Created Post"
 
-        elif database == "comment":
+        elif database == "postcomment":
             duration = (filter, 1)
             tablename = database
             column="timestamp"

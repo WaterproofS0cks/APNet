@@ -22,7 +22,7 @@
                                 <select name="database" id="database" required>
                                     <option value="users" {% if database_value == 'users' %}selected{% endif %}>User</option>
                                     <option value="post" {% if database_value == 'post' %}selected{% endif %}>Post</option>
-                                    <option value="comment" {% if database_value == 'comment' %}selected{% endif %}>Comment</option>
+                                    <option value="postcomment" {% if database_value == 'postcomment' %}selected{% endif %}>Comment</option>
                                     <option value="recruitment" {% if database_value == 'recruitment' %}selected{% endif %}>Recruitment</option>
                                     <option value="application" {% if database_value == 'application' %}selected{% endif %}>Application</option>
                                     <option value="penaltyhistory" {% if database_value == 'penaltyhistory' %}selected{% endif %}>Moderation</option>
@@ -212,6 +212,7 @@
                 .catch(error => console.error('Error loading tables:', error));
 });
     </script>
+
     <script>
         document.addEventListener("DOMContentLoaded", function () {
             function loadTables() {
