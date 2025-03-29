@@ -17,14 +17,17 @@ class Content():
         db_conn.connect()
         db_retrieve = dbRetrieve(db_conn)
 
-        if not user_id:
-            user_id = session.get('id')
+        
 
         search_term = request.args.get('search', '')
         loaded_ids = request.args.get('loaded_ids', default='[]', type=str)
         post_type = request.args.get('post_type')
         page_type = request.args.get('page_type')
+        user_id = request.args.get('user_id')
         entries_per_page = 5
+
+        if not user_id:
+            user_id = session.get('id')
 
         loaded_ids = json.loads(loaded_ids)
 

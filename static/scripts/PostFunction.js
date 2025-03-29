@@ -2,6 +2,7 @@
     const scriptTag = document.currentScript;
     const post_type = scriptTag.getAttribute("data-type") || "";
     const page_type = scriptTag.getAttribute("data-page") || "";
+    const user_id = scriptTag.getAttribute("data-user") || "";
     const post_container_id = scriptTag.getAttribute("data-container") || "";
 
     const postContainer = document.getElementById(post_container_id);
@@ -22,10 +23,13 @@
 
         postIds.forEach(postId => loadedPostIds.add(postId));
 
+        console.log(user_id)
+
         const url = '/load_more?page=' + currentPage + 
                     '&loaded_ids=' + JSON.stringify(Array.from(loadedPostIds)) + 
                     '&post_type=' + post_type +
                     '&page_type=' + page_type +
+                    '&user_id=' + user_id +
                     (searchTerm ? '&search=' + encodeURIComponent(searchTerm) : '');
 
         fetch(url)

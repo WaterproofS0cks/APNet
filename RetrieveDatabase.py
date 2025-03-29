@@ -116,7 +116,7 @@ class dbRetrieve:
     
     def retrieve_entries(self, post_type, page_type, entries_per_page, loaded_ids, search_term, user_id=None):
         params = []
-        
+
         if post_type == "post":
             table_name = "post"
             id_column = "post.postID"
