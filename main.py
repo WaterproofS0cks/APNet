@@ -107,8 +107,7 @@ def create_comment():
     if post_type == "post":
         inserted = db_insert.insert("PostComment", (user_id, post_id, comment))
     elif post_type == "recruitment":
-        db_insert.insert("RecruitmentComment", (user_id, post_id, comment))
-        inserted = db_retrieve.retrieve_one("recruitmentcomment", "comment", "recruitmentcommentid=%s", (user_id,))
+        inserted = db_insert.insert("RecruitmentComment", (user_id, post_id, comment))
     else:
         return redirect(url_for('auth.login'))
     comment_id = inserted.get("postcommentid")

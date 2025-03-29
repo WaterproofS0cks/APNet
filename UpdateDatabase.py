@@ -44,9 +44,7 @@ class dbInsert:
         
         self.execute_query(query, tuple(data))
 
-        self.db_connection.cur.execute(query, tuple(data))
         inserted_row = self.db_connection.cur.fetchone()
-
 
         column_names = [desc[0] for desc in self.db_connection.cur.description]
         result = {column_names[i]: inserted_row[i] for i in range(len(inserted_row))}

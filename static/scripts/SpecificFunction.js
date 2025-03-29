@@ -138,11 +138,6 @@ document.addEventListener("DOMContentLoaded", function() {
             const commentText = commentInput.value.trim();
             if (!commentText) return;
 
-            if (!postId) {
-                console.error("Post ID not found.");
-                return;
-            }
-
             fetch('/createcomment', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
