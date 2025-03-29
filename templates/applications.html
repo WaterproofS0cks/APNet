@@ -10,7 +10,7 @@
             <h2>Applications</h2>
         </div>
 
-        <a href="applications/applied" class="applications-card-url">
+        <a href="{{ url_for('user_profile.applicationsApplied') }}" class="applications-card-url">
             <div class="activity-card" onmouseover="changeImage(this, 'applied')" onmouseout="resetImage(this, 'applied')">
                 <div class="activity-flex">
                     <div class="activity-attr">
@@ -24,7 +24,7 @@
             </div>
         </a>
         
-        <a href="applications/created" class="applications-card-url">
+        <a href="{{ url_for('user_profile.applicationsCreated') }}" class="applications-card-url">
             <div class="activity-card" onmouseover="changeImage(this, 'created')" onmouseout="resetImage(this, 'created')">
                 <div class="activity-flex">
                     <div class="activity-attr">
