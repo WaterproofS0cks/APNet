@@ -2292,6 +2292,11 @@ input[type="submit"]:hover {
     .cp-filter-container {
         margin-top: 10px;
     }
+
+    #cp-postSelect {
+        font-size: 13px;
+        width: 110px
+    }
     
     #cp-forumInputs h1, #cp-recruitmentInputs h1 { 
         font-size: 21px;
