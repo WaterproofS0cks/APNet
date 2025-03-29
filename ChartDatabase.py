@@ -117,7 +117,7 @@ class dbChart:
             column="registerdate" 
             xLabel="Date"
             yLabel="Number Of Users"
-            title="Registered Users Over Time"
+            title="Registered Users"
             lineLabel="Registered Users"
 
         elif database == "post":
@@ -126,7 +126,7 @@ class dbChart:
             column="timestamp" 
             xLabel="Date"
             yLabel="Number Of Posts"
-            title="Post Created Over Time"
+            title="Forum Post Created"
             lineLabel="Created Post"
 
         elif database == "recruitmentcomment":
@@ -135,7 +135,7 @@ class dbChart:
             column="timestamp"
             xLabel="Date"
             yLabel="Number Of Comments"
-            title="Comments Over Time"
+            title="Recruitment Comments"
             lineLabel="Comments"
         
         elif database == "postcomment":
@@ -144,7 +144,7 @@ class dbChart:
             column="timestamp"
             xLabel="Date"
             yLabel="Number Of Comments"
-            title="Comments Over Time"
+            title="Forum Comments"
             lineLabel="Comments"
 
         elif database == "recruitment":
@@ -153,7 +153,7 @@ class dbChart:
             column="timestamp"
             xLabel="Date"
             yLabel="Number Of Recruitment Created"
-            title="Recruitment Created Over Time"
+            title="Recruitment Post Created"
             lineLabel="Recruitment Created"
 
         elif database == "application":
@@ -162,7 +162,7 @@ class dbChart:
             column="timestamp"
             xLabel="Date"
             yLabel="Number Of Applications"
-            title="Application Over Time"
+            title="Application"
             lineLabel="Application Applied"
 
         elif database == "penaltyhistory":
@@ -171,7 +171,7 @@ class dbChart:
             column="timestamp"
             xLabel="Date"
             yLabel="Number Of Moderation"
-            title="Moderation Over Time"
+            title="Moderation"
             lineLabel="Users Moderation"
 
         elif database == "reports":
@@ -180,7 +180,7 @@ class dbChart:
             column="timestamp"
             xLabel="Date"
             yLabel="Number Of Reports"
-            title="Reports Over Time"
+            title="Reports"
             lineLabel="Reports"
 
         elif database == "activity":
@@ -189,7 +189,7 @@ class dbChart:
             column="timestamp"
             xLabel="Date"
             yLabel="User Activity"
-            title="Activity Over Time"
+            title="Activity"
             lineLabel="Activity"
 
         else:
@@ -198,7 +198,7 @@ class dbChart:
             column="registerdate"
             xLabel="Registration Date"
             yLabel="Number Of Users"
-            title="Registered Users Over Time"
+            title="Registered Users"
             lineLabel="Registered Users"
 
         return self.plot_graph(duration, tablename, column, xLabel, yLabel, title, lineLabel)
