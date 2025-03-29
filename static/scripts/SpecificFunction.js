@@ -204,13 +204,15 @@ document.addEventListener("DOMContentLoaded", function() {
     commentsList.addEventListener('click', function(event) {
         if (event.target && event.target.classList.contains('delete-comment-btn')) {
             const comment_id = event.target.getAttribute('data-comment-id');
+
             console.log("deleting")
+
             fetch('/deletecomment', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ comment_id: comment_id, post_type: post_type})
+                body: JSON.stringify({ comment_id: comment_id, post_type: post_type })
             })
             .then(response => response.json())
             .then(data => {
@@ -219,6 +221,8 @@ document.addEventListener("DOMContentLoaded", function() {
                     if (commentDiv) {
                         commentDiv.remove(); 
                         console.log("deleting now")
+                    } else {
+                        console.log("Error deleting comment:", data.error)
                     }
                 } else {
                     console.error("Error deleting comment:", data.error);
