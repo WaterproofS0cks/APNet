@@ -1,36 +1,142 @@
-document.addEventListener("DOMContentLoaded", function() {
-    let loggedInUserId;
+function engagement(action, postId, post_type) {
+    
+    if (!postId) return;
 
-    // Fetch session data
-    fetch('/get_session')
-        .then(response => response.json())
-        .then(data => {
-            if (data.session) {
-                loggedInUserId = data.session_id;
-                filter3DotMenu(loggedInUserId);
-            } else if (data.redirect) {
-                window.location.href = data.redirect;
+    fetch("/engagement", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ post_id: postId, action: action, post_type: post_type}),
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.redirect) {
+            window.location.href = data.redirect;
+            return;
+        }
+
+        if (action === "liked") {
+            updateLikeUI(data.liked, data.likes_count);
+        } else if (action === "bookmark") {
+            updateBookmarkUI(data.bookmark);
+        }
+    })
+    .catch(error => console.error("Error:", error));
+}
+
+function updateLikeUI(liked, count) {
+    const likeCountElement = document.getElementById("likeCount");
+    const likeIcon = document.getElementById("fms-post-hearticon");
+
+    likeIcon.src = liked
+        ? "../static/src/icon/icons8-heart-red-50.png"
+        : "../static/src/icon/icons8-heart-50.png";
+
+    if (likeCountElement) {
+        likeCountElement.textContent = `(${count})`;
+    }
+}
+
+function updateBookmarkUI(bookmark) {
+    const bookmarkIcon = document.getElementById("fms-post-bookmarkicon");
+    if (!bookmarkIcon) return;
+
+    bookmarkIcon.src = bookmark
+        ? "../static/src/icon/icons8-bookmark-evendarkergreen-500.png"
+        : "../static/src/icon/icons8-bookmark-50.png";
+}
+
+function filter3DotMenu(sessionUserId) {
+    const post = document.querySelector(".fms-post-layout");
+
+    if (post) {
+        const postUserId = post.getAttribute("data-user-id");
+        const dropdown = post.querySelector(".fms-dropdown-content");
+
+        if (dropdown) {
+            const reportPost = dropdown.querySelector("#fms-reportposticon")?.parentElement;
+            const reportUser = dropdown.querySelector("#fms-reportusericon")?.parentElement;
+            const editPost = dropdown.querySelector("#fms-editicon")?.parentElement;
+            const deletePost = dropdown.querySelector("#fms-deleteicon")?.parentElement;
+
+            if (reportPost && reportUser && editPost && deletePost) {
+                if (String(sessionUserId) === String(postUserId)) {
+                    reportPost.style.display = "none";
+                    reportUser.style.display = "none";
+                    editPost.style.display = "block";
+                    deletePost.style.display = "block";
+                } else {
+                    reportPost.style.display = "block";
+                    reportUser.style.display = "block";
+                    editPost.style.display = "none";
+                    deletePost.style.display = "none";
+                }
             }
-        })
-        .catch(error => console.error("Error fetching session:", error));
+        }
+    }
+}
+
+
+document.addEventListener("DOMContentLoaded", function() {
+    const post_type = document.querySelector("script[data-type]")?.getAttribute("data-type") || "";
+    const postId = document.querySelector(".fms-post-layout").getAttribute("data-post-id");
+    const commentsList = document.querySelector('.fms-comments-list');
+    const commentInput = document.getElementById('commentInput');
 
     document.body.addEventListener("click", function(event) {
         const targetId = event.target.id;
-        let action = null;
-
         if (targetId === "fms-post-hearticon") {
-            action = "liked";
-            console.log("hi")
+            engagement("liked", postId, post_type);
+
         } else if (targetId === "fms-post-bookmarkicon") {
-            action = "bookmark";
-        } else if (targetId === "addCommentButton") {
+            engagement("bookmark", postId, post_type);
+
+        } else if (targetId === "fms-moreicon") {
+                
+            const target = event.target;
+            const clickedDropdown = target.closest('.fms-dropdown');
+            
+            if (clickedDropdown) {
+                const dropdownContent = clickedDropdown.querySelector('.fms-dropdown-content');
+                
+
+                document.querySelectorAll('.fm-dropdown-content').forEach(function(dropdown) {
+                    if (dropdown !== dropdownContent) { 
+                        dropdown.style.display = 'none';
+                    }
+                });
+
+                if (dropdownContent.style.display === "block") {
+                    dropdownContent.style.display = "none"; 
+                } else {
+                    dropdownContent.style.display = "block";
+                }
+
+                event.stopPropagation();
+            
+            } else {
+                document.querySelectorAll('.fm-dropdown-content').forEach(function(dropdown) {
+                dropdown.style.display = 'none';
+                });
+            }
+    
+        }
+    });
+
+    commentInput.addEventListener('keydown', function(event) {
+        if (event.key === 'Enter') {
+            event.preventDefault();
+            const addCommentButton = document.getElementById('addCommentButton');
+            if (addCommentButton) {
+                addCommentButton.click();
+            }
+        }
+    });
+
+    if (addCommentButton) {
+        addCommentButton.addEventListener('click', function(event) {
             const commentInput = document.getElementById('commentInput');
             const commentText = commentInput.value.trim();
             if (!commentText) return;
-
-            const postElement = document.querySelector(".fms-post-layout");
-            const postId = postElement?.getAttribute("data-post-id");
-            const postType = document.querySelector("script[data-type]")?.getAttribute("data-type") || "";
 
             if (!postId) {
                 console.error("Post ID not found.");
@@ -40,12 +146,9 @@ document.addEventListener("DOMContentLoaded", function() {
             fetch('/createcomment', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ comment: commentText, page_type: postType, id: postId })
+                body: JSON.stringify({ comment: commentText, post_type: post_type, id: postId })
             })
             .then(response => {
-                if (response.status === 204) {
-                    return null;  // No content to parse
-                }
                 if (response.redirected) {
                     window.location.href = response.url;
                     return;
@@ -54,13 +157,13 @@ document.addEventListener("DOMContentLoaded", function() {
             })
             .then(data => {
                 if (!data) return;
-
                 const commentsList = document.querySelector('.fms-comments-list');
                 const newComment = document.createElement('div');
                 newComment.className = 'fms-comment';
+                newComment.id = 'comment-' + data.comment_id;
 
                 const profileImg = document.createElement('img');
-                profileImg.src = '../static/src/img/default-pfp.png';
+                profileImg.src = data.pfp;
                 profileImg.alt = 'Profile Picture';
                 profileImg.className = 'fms-pfp-placeholder';
                 profileImg.style.width = '40px';
@@ -78,135 +181,69 @@ document.addEventListener("DOMContentLoaded", function() {
                 const deleteButton = document.createElement('button');
                 deleteButton.className = 'delete-comment-btn';
                 deleteButton.textContent = 'Delete';
-            
-                deleteButton.addEventListener('click', function() {
-                    // [TODO] Add function to delete comment here
-                });
 
                 newComment.appendChild(profileImg);
                 newComment.appendChild(usernameSpan);
                 newComment.appendChild(commentSpan);
                 newComment.appendChild(deleteButton);
 
-                commentsList.appendChild(newComment);
+                commentsList.insertBefore(newComment, commentsList.firstChild);
                 commentInput.value = '';
             })
             .catch(error => console.error("Error posting comment:", error));
-
-            return; // Prevent further processing
-        }
-
-        if (!action) return;
-
-        const postElement = document.querySelector(".fms-post-layout");
-        const postId = postElement?.getAttribute("data-post-id");
-        if (!postId) return;
-
-        fetch("/engagement", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ post_id: postId, action: action }),
-        })
-        .then(response => response.json())
-        .then(data => {
-            if (data.redirect) {
-                window.location.href = data.redirect;
-                return;
-            }
-
-            if (action === "liked") {
-                updateLikeUI(data.liked, data.likes_count);
-            } else if (action === "bookmark") {
-                updateBookmarkUI(data.bookmark);
-            }
-        })
-        .catch(error => console.error("Error:", error));
-    });
-
-    // "Enter" key to send comment
-    const commentInput = document.getElementById('commentInput');
-    commentInput.addEventListener('keydown', function(event) {
-        if (event.key === 'Enter') {
-            event.preventDefault();
-            const addCommentButton = document.getElementById('addCommentButton');
-            if (addCommentButton) {
-                addCommentButton.click();
-            }
-        }
-    });
-
-    // Fetch and load comments
-    const commentsList = document.querySelector('.fms-comments-list');
-    const postId = document.querySelector(".fms-post-layout").getAttribute("data-post-id");
-
-    if (postId) {
-        fetch(`/comment?post_id=${postId}`)
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
-                return response.json();
-            })
-            .then(data => {
-                commentsList.innerHTML = data.html;
-            })
-            .catch(error => console.error('Error loading comments:', error));
-    }
-
-    // Function to update like UI
-    function updateLikeUI(liked, count) {
-        const likeCountElement = document.getElementById("likeCount");
-        const likeIcon = document.getElementById("fms-post-hearticon");
-
-        likeIcon.src = liked
-            ? "../static/src/icon/icons8-heart-red-50.png"
-            : "../static/src/icon/icons8-heart-50.png";
-
-        if (likeCountElement) {
-            likeCountElement.textContent = `(${count})`;
-        }
-    }
-
-    // Function to update bookmark UI
-    function updateBookmarkUI(bookmark) {
-        const bookmarkIcon = document.getElementById("fms-post-bookmarkicon");
-        if (!bookmarkIcon) return;
-
-        bookmarkIcon.src = bookmark
-            ? "../static/src/icon/icons8-bookmark-evendarkergreen-500.png"
-            : "../static/src/icon/icons8-bookmark-50.png";
-    }
-
-    // Function to filter 3-dot menu based on user ID
-    function filter3DotMenu(loggedInUserId) {
-        document.querySelectorAll(".fms-post-layout").forEach(post => {
-            const postUserId = post.getAttribute("data-user-id");
-            const dropdown = post.querySelector(".fms-dropdown-content");
-
-            if (dropdown) {
-                const reportPost = dropdown.querySelector("#fms-reportposticon")?.parentElement;
-                const reportUser = dropdown.querySelector("#fms-reportusericon")?.parentElement;
-                const editPost = dropdown.querySelector("#fms-editicon")?.parentElement;
-                const deletePost = dropdown.querySelector("#fms-deleteicon")?.parentElement;
-
-                if (reportPost && reportUser && editPost && deletePost) {
-                    if (String(loggedInUserId) === String(postUserId)) {
-                        reportPost.style.display = "none";
-                        reportUser.style.display = "none";
-                        editPost.style.display = "block";
-                        deletePost.style.display = "block";
-                    } else {
-                        reportPost.style.display = "block";
-                        reportUser.style.display = "block";
-                        editPost.style.display = "none";
-                        deletePost.style.display = "none";
-                    }
-                }
-            }
         });
     }
 
-    // Header profile picture dropdown functionality
+
+    if (postId) {
+        fetch(`/comment?post_id=${postId}`)
+            .then(response => response.json())  
+            .then(data => {
+                commentsList.innerHTML = data.html;
+            })
+            .catch(error => {
+                console.error(error);
+            });
+    }
+
+    commentsList.addEventListener('click', function(event) {
+        if (event.target && event.target.classList.contains('delete-comment-btn')) {
+            const comment_id = event.target.getAttribute('data-comment-id');
+            console.log("deleting")
+            fetch('/deletecomment', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ comment_id: comment_id, post_type: post_type})
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.delete) { 
+                    const commentDiv = document.getElementById(`comment-${comment_id}`);
+                    if (commentDiv) {
+                        commentDiv.remove(); 
+                        console.log("deleting now")
+                    }
+                } else {
+                    console.error("Error deleting comment:", data.error);
+                }
+            })
+            .catch(error => console.error("Error deleting comment:", error));
+        }
+    });
+
+    fetch('/get_session')
+        .then(response => response.json())
+        .then(data => {
+            if (data.session) {
+                filter3DotMenu(data.session);
+            } else if (data.redirect) {
+                window.location.href = data.redirect;
+            }
+        })
+        .catch(console.error);
+
     const profileImg = document.getElementById('hb-pfp-img');
     const popupMenu = document.getElementById('hb-popup-menu');
 
@@ -222,4 +259,6 @@ document.addEventListener("DOMContentLoaded", function() {
             }
         });
     }
+
+
 });

@@ -43,17 +43,13 @@ db_conn.close()
 
 uploader = imageUploader(app.config["UPLOAD_FOLDER"])
 
-@app.route("/session")
-def check_session():
-    user_id = session.get('id')
-    if user_id:
-        return jsonify({"session": True})
-    return jsonify({"session": False})
 
 @app.route("/get_session")
 def get_session():
-    if "id" not in session:
-        return jsonify({session.get("id")})
+    user_id = session.get('id')
+    print(user_id)
+    if user_id:
+        return jsonify({"session": user_id})
     return redirect(url_for("auth.login"))
 
 
@@ -87,8 +83,9 @@ def comment():
 
 @app.route("/createcomment", methods=["POST"])
 def create_comment():
-    if "id" not in session:
-        return "", 401
+    user_id = session.get('id')
+    if not user_id:
+        return redirect(url_for('auth.login'))
 
     db_conn = dbConnection(
         dbname=os.getenv("DBNAME"),
@@ -98,20 +95,49 @@ def create_comment():
 
     db_conn.connect()
     db_insert = dbInsert(db_conn)
+    db_retrieve = dbRetrieve(db_conn)
+
+    user_data = db_retrieve.retrieve_one("users", "username, profilepicture", "userid=%s", (user_id,))
 
     data = request.get_json()
-    user_id = session.get("id")
     post_id = data.get("id")
     comment = data.get("comment")
-    page_type = data.get("page_type")
+    post_type = data.get("post_type")
 
-    if page_type == "post":
-        db_insert.insert("PostComment", (user_id, post_id, comment))
-    elif page_type == "recruitment":
+    if post_type == "post":
+        inserted = db_insert.insert("PostComment", (user_id, post_id, comment))
+    elif post_type == "recruitment":
         db_insert.insert("RecruitmentComment", (user_id, post_id, comment))
+        inserted = db_retrieve.retrieve_one("recruitmentcomment", "comment", "recruitmentcommentid=%s", (user_id,))
     else:
-        return "", 400
-    return jsonify({ comment: "True" })
+        return redirect(url_for('auth.login'))
+    comment_id = inserted.get("postcommentid")
+    print("creating")
+    return jsonify({ "username":user_data["username"], "pfp":user_data["profilepicture"], "comment_id":comment_id})
+
+@app.route("/deletecomment", methods=["POST"])
+def delete_comment():
+
+    db_conn = dbConnection(
+        dbname=os.getenv("DBNAME"),
+        user=os.getenv("USER"),
+        password=os.getenv("PASSWORD"),
+    )
+
+    db_conn.connect()
+    db_modify = dbModify(db_conn)
+
+    data = request.get_json()
+    comment_id = data.get("comment_id")
+    post_type = data.get("post_type")
+
+    if post_type == "post":
+        condition = {"postcommentid": comment_id}
+        db_modify.delete("PostComment", condition)
+    elif post_type == "recruitment":
+        condition = {"recruitmentcommentid": comment_id}
+        db_modify.delete("RecruitmentComment", condition)
+    return jsonify({"delete": True})
 
 #Finished  
 @app.route('/create', methods=["GET", "POST"])
@@ -119,7 +145,7 @@ def create_post():
     if "user" in session:
         return render_template('createpost.html')
     else:
-        return redirect("/auth/login")
+        return redirect(url_for('auth.login'))
 
 #Finished
 @app.route('/upload', methods=["GET", "POST"])

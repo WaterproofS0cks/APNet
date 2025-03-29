@@ -9,8 +9,6 @@ class dbInsert:
             if not params:
                 raise ValueError("Params are required for insert")
             try:
-                print(f"Executing query: {query}")
-                print(f"With parameters: {params}")
                 self.db_connection.cur.execute(query, params)
             except Exception as e:
                 print(f"An error occurred during table insert: {e}")
@@ -42,29 +40,32 @@ class dbInsert:
         column_string = ", ".join(columns)
         placeholder_string = ", ".join(["%s"] * len(columns))
 
-        query = f"INSERT INTO {table_name} ({column_string}) VALUES ({placeholder_string});"
+        query = f"INSERT INTO {table_name} ({column_string}) VALUES ({placeholder_string}) RETURNING *;"
         
         self.execute_query(query, tuple(data))
+
+        self.db_connection.cur.execute(query, tuple(data))
+        inserted_row = self.db_connection.cur.fetchone()
+
+
+        column_names = [desc[0] for desc in self.db_connection.cur.description]
+        result = {column_names[i]: inserted_row[i] for i in range(len(inserted_row))}
+
         self.db_connection.commit()
-
-
+        
+        return result
 
 class dbModify(dbInsert):
     def __init__(self, db_connection):
         super().__init__(db_connection)
 
     def update(self, table_name, update_data, condition):
-        if not update_data or not condition:
-            raise ValueError("Update data and condition cannot be empty.")
-
         valid_columns = self.find_table_columns(table_name)
 
         updates = {columns: update_data[columns] for columns in update_data if columns in valid_columns}
 
         if not updates:
             raise ValueError("No valid columns to update.")
-        if not condition:
-            raise ValueError("No valid condition columns provided.")
         
         query = f"""
             UPDATE {table_name} 
@@ -76,6 +77,20 @@ class dbModify(dbInsert):
 
         self.execute_query(query, params)
         self.db_connection.conn.commit() 
+
+    def delete(self, table_name, condition):
+
+        where_clause = " AND ".join(f"{columns} = %s" for columns in condition)
+        
+        query = f"""
+            DELETE FROM {table_name} 
+            WHERE {where_clause};
+        """
+        
+        params = tuple(condition.values())
+        
+        self.execute_query(query, params)
+        self.db_connection.conn.commit()
 
     def toggle_engagement(self, user_id, post_id, action, post_type):
         if action not in ["liked", "bookmark"]:
@@ -107,7 +122,6 @@ class dbModify(dbInsert):
         print("Query Result:", result)
 
         return result[0] if result else False 
-
 
 class imageUploader:
     def __init__(self, upload_folder):

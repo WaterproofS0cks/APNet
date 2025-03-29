@@ -78,7 +78,7 @@ function updateBookmarkUI(container, bookmark) {
         : "../static/src/icon/icons8-bookmark-50.png";
 }
 
-function filter3DotMenu(loggedInUserId) {
+function filter3DotMenu(sessionUserId) {
     document.querySelectorAll(".fm-post-layout").forEach(post => {
         const postUserId = post.getAttribute("data-user-id");
         const dropdown = post.querySelector(".fm-dropdown-content");
@@ -90,7 +90,7 @@ function filter3DotMenu(loggedInUserId) {
             const deletePost = dropdown.querySelector("#fm-deleteicon")?.parentElement;
 
             if (reportPost && reportUser && editPost && deletePost) {
-                if (String(loggedInUserId) === String(postUserId)) {
+                if (String(sessionUserId) === String(postUserId)) {
                     reportPost.style.display = "none";
                     reportUser.style.display = "none";
                     editPost.style.display = "block";
