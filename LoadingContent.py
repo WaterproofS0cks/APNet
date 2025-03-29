@@ -277,10 +277,11 @@ class Content():
 
         user_data = db_retrieve.retrieve_one("Users", "*", "userID = %s", (post_data["userid"],))
 
-        like_count = db_retrieve.retrieve("PostEngagement", "COUNT(*)", "liked = TRUE AND postID = %s", (post_id,))[0]
+        like_count = db_retrieve.retrieve_one("PostEngagement", "COUNT(*)", "liked = TRUE AND postID = %s", (post_id,))
         engagement_data = db_retrieve.retrieve_one("PostEngagement", "*", "userID = %s AND postID = %s", (user_id, post_id)) or {}
 
         userid = post_data["userid"]
+        count = like_count['count']
         profile_picture = user_data.get("profilePicture") or "/static/src/img/default-pfp.png"
         like_icon = ("../static/src/icon/icons8-heart-red-50.png" if engagement_data.get("liked") else "../static/src/icon/icons8-heart-50.png")
         bookmark_icon = ("../static/src/icon/icons8-bookmark-evendarkergreen-500.png" if engagement_data.get("bookmark") else "../static/src/icon/icons8-bookmark-50.png")
@@ -296,7 +297,7 @@ class Content():
             image=post_data.get("image", ""),
             description=post_data.get("description", "No description available."),
             like_icon=like_icon,
-            like_count=like_count,
+            like_count=count,
             bookmark_icon=bookmark_icon
         )
     
@@ -311,8 +312,9 @@ class Content():
         db_retrieve = dbRetrieve(db_conn)
 
         post_id = request.args.get('post_id')
+        user_id = session.get("id")
 
-        columns = "Users.username, Users.profilePicture, PostComment.comment, TO_CHAR(PostComment.timestamp, 'DD Month YYYY HH24:MI') AS timestamp"
+        columns = "Users.username, Users.profilePicture, PostComment.comment, PostComment.userid, PostComment.postcommentid AS id, TO_CHAR(PostComment.timestamp, 'DD Month YYYY HH24:MI') AS timestamp"
         condition = "PostComment.postID = %s"
         params = (post_id,)
         join = "JOIN Users ON PostComment.userID = Users.userID"
@@ -320,18 +322,23 @@ class Content():
 
         comments = db_retrieve.retrieve("PostComment", columns, condition, params, join, order)
 
-        comments_html = ""
+        html = ""
         for comment in comments:
             profile_picture = comment['profilepicture'] if comment['profilepicture'] else "../static/src/img/default-pfp.png"
-            comments_html += f"""
-            <div class="fms-comment">
+            html += f"""
+            <div class="fms-comment" id="comment-{comment['id']}">
                 <img src="{profile_picture}" alt="Profile Picture" class="fms-pfp-placeholder" 
                      style="width:40px; height:40px; border-radius:50%;">
                 <span class="fms-username-placeholder">{comment['username']}: </span>
                 <span class="fms-comment-text">{comment['comment']}</span>
-            </div>
             """
-        return jsonify({"html": comments_html})
+
+            if user_id == comment["userid"]:
+                html += f'<button class="delete-comment-btn" data-comment-id="{comment['id']}">Delete</button>'
+
+            html += "</div>"
+
+        return jsonify({"html": html})
 
     def load_penalized_users_table():
         db_conn = dbConnection(
