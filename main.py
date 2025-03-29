@@ -43,7 +43,7 @@ db_conn.close()
 
 uploader = imageUploader(app.config["UPLOAD_FOLDER"])
 
-
+#Finished
 @app.route("/get_session")
 def get_session():
     user_id = session.get('id')
@@ -52,19 +52,17 @@ def get_session():
         return jsonify({"session": user_id})
     return redirect(url_for("auth.login"))
 
-
-
 #Finished
 @app.route('/')
 def forum():
     return render_template('forum.html')
 
-
-
-#
+#Finished
 @app.route('/load_more')
 def post():
     return Content.load_post()
+
+
 
 #Finished
 @app.route('/engagement', methods=['POST'])
@@ -82,6 +80,7 @@ def specific_post():
 def comment():
     return Content.load_comment()
 
+#Finished
 @app.route("/createcomment", methods=["POST"])
 def create_comment():
     user_id = session.get('id')

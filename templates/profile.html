@@ -1,8 +1,8 @@
 {% extends "header-b.html" %}
 {% block title %}Profile{% endblock title %}
 {% block content %}
-<script type="text/javascript" src="{{ url_for('static', filename='scripts/PostFunction.js') }}" data-type="post" data-page="self" data-container="postContainer" defer></script>
-<script type="text/javascript" src="{{ url_for('static', filename='scripts/PostFunction.js') }}" data-type="recruitment" data-page="self" data-container="postContaine" defer></script>
+<script type="text/javascript" src="{{ url_for('static', filename='scripts/PostFunction.js') }}" data-type="post" data-page="self" data-container="forumContainer" defer></script>
+<script type="text/javascript" src="{{ url_for('static', filename='scripts/PostFunction.js') }}" data-type="recruitment" data-page="self" data-container="recruitmentContainer" defer></script>
 
 <body>
     <div class="content-card">
@@ -29,7 +29,7 @@
                 {% endif %}
             </div>
         </div>
-
+        
         <div class="navigation">
             <a href="likes" class="button-black" style="text-decoration: none;">Likes</a>
             <a href="bookmarks" class="button-black" style="text-decoration: none;">Bookmarks</a>
@@ -47,13 +47,13 @@
         
         <div id="Forum" class="tabcontent">
             <!-- This is a forum post -->
-            <div class = "profile-fm-main-container" id="postContainer">
+            <div class = "profile-fm-main-container" id="forumContainer">
             </div>
         </div>
     
         <div id="Recruitment" class="tabcontent">
             <!-- This is a recruitment post -->
-            <div class = "profile-rc-main-container" id="postContaine">
+            <div class = "profile-rc-main-container" id="recruitmentContainer">
             </div>
         </div>
 

@@ -341,6 +341,10 @@ class Content():
         print(html)
         return jsonify({"html": html})
 
+    def load_applications():
+        
+        return jsonify({"html": html})
+
     def load_penalized_users_table():
         db_conn = dbConnection(
             dbname=os.getenv("DBNAME"),

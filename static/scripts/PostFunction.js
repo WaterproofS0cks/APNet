@@ -1,13 +1,11 @@
 (function() {
-    // Read the data attributes from the script tag dynamically
     const scriptTag = document.currentScript;
     const post_type = scriptTag.getAttribute("data-type") || "";
     const page_type = scriptTag.getAttribute("data-page") || "";
     const post_container_id = scriptTag.getAttribute("data-container") || "";
 
-    // Ensure post container is available
     const postContainer = document.getElementById(post_container_id);
-    if (!postContainer) return;  // Exit if no container is found for this instance
+    if (!postContainer) return;
 
     let currentPage = 1;
     let loadedPostIds = new Set();
@@ -178,13 +176,34 @@
                     }
                 })
                 .catch((error) => console.error("Error:", error));
-            } else if (action === "specific") {
 
-                if (post_type === "post") {
-                    window.location.href = "/specificpost?postid=" + encodeURIComponent(postId);
-                } else if (post_type === "recruitment") {
-                    window.location.href = "/specificrecruitment?postid=" + encodeURIComponent(postId);
-                }
+            } else if (action === "delete") {
+                fetch("/delete", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ post_id: postId, post_type: post_type }),
+                })
+
+            } else if (action === "edit") {
+                fetch("/edit", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ post_id: postId, post_type: post_type }),
+                })
+
+            } else if (action === "reportpost") {
+                fetch("/reportpost", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ post_id: postId, post_type: post_type }),
+                })
+
+            } else if (action === "reportuser") {
+                fetch("/reportuser", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ post_id: postId, action: action }),
+                })
             }
         });
 
