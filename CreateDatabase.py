@@ -6,7 +6,6 @@ class dbCreate:
         try:
             self.db_connection.cur.execute(table_creation_query)
             self.db_connection.commit() 
-            print(f"Table creation successful")
         except Exception as e:
             print(f"Error table creation: {e}")
 

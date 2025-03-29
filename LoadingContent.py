@@ -53,11 +53,16 @@ class Content():
 
                 like_icon = "../static/src/icon/icons8-heart-red-50.png" if engagement_data['liked'] else "../static/src/icon/icons8-heart-50.png"
                 bookmark_icon = "../static/src/icon/icons8-bookmark-evendarkergreen-500.png" if engagement_data['bookmark'] else "../static/src/icon/icons8-bookmark-50.png"
+
+                if entry['id'] == session.get('id'):
+                    link = f"<a href='/user/profile'>"
+                else:
+                    link = f"<a href='/user/profile?uid={entry['username']}'>"
                 
                 html += f'''
                     <div class="fm-post-layout" data-post-id="{entry['id']}" data-user-id="{entry['userid']}">
                         <div class="fm-profiledetails">
-                            <a href='/user/profile?uid={entry['username']}'> 
+                            {link}
                                 <img src="{entry['profilepicture']}" alt="Pfp" id="fm-post-pfp">
                                 <h1>{entry['username']}</h1>
                             </a>
@@ -142,6 +147,11 @@ class Content():
                 like_icon = "../static/src/icon/icons8-heart-red-50.png" if engagement_data['liked'] else "../static/src/icon/icons8-heart-50.png"
                 bookmark_icon = "../static/src/icon/icons8-bookmark-evendarkergreen-500.png" if engagement_data['bookmark'] else "../static/src/icon/icons8-bookmark-50.png"
 
+                if entry['id'] == session.get('id'):
+                    link = f"<a href='/user/profile'>"
+                else:
+                    link = f"<a href='/user/profile?uid={entry['username']}'>"
+
                 html += f'''
                     <div class="fm-post-layout" data-post-id="{entry['id']}" data-user-id="{entry['userid']}">
 
@@ -151,7 +161,7 @@ class Content():
 
                         
                         <div class="rc-profiledetails">
-                            <a href='/user/profile?uid={entry['username']}'> 
+                            {link}
                             <img src="{entry['profilepicture']}" alt="Default pfp icon" id="rc-post-pfp">
                             <h1>{entry['username']}</h1>
                             </a>
