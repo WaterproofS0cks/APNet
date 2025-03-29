@@ -324,6 +324,7 @@ class Content():
 
         html = ""
         for comment in comments:
+            print({comment['id']})
             profile_picture = comment['profilepicture'] if comment['profilepicture'] else "../static/src/img/default-pfp.png"
             html += f"""
             <div class="fms-comment" id="comment-{comment['id']}">
@@ -337,7 +338,7 @@ class Content():
                 html += f'<button class="delete-comment-btn" data-comment-id="{comment['id']}">Delete</button>'
 
             html += "</div>"
-
+        print(html)
         return jsonify({"html": html})
 
     def load_penalized_users_table():
