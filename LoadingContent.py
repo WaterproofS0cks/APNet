@@ -29,7 +29,7 @@ class Content():
         loaded_ids = json.loads(loaded_ids)
 
         entries = db_retrieve.retrieve_entries(post_type, page_type, entries_per_page, loaded_ids, search_term, user_id)
-
+        
         if not entries:
             return jsonify({'html': '', 'no_more_posts': True, 'user_id': user_id})
 

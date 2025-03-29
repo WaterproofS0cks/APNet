@@ -253,7 +253,8 @@ def Dashboard():
     #     # title="Registered Users Over Time", 
     #     # lineLabel="Registered Users"
     # )
-    
+    count = comment_count + recruitment_count
+
     chart_html = db_chart.set_graph(database_value, filter_value)
 
     db_conn.close()
@@ -268,7 +269,7 @@ def Dashboard():
         # range_value=range_value, 
         user_count=user_count,
         post_count=post_count,
-        comment_count=comment_count,
+        comment_count=count,
         recruitment_count=recruitment_count,
         application_count=application_count,
         banned_count=banned_count, 
