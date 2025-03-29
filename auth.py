@@ -86,8 +86,8 @@ def resetpassword():
     if request.method == "POST":
         email = request.form['email']
         code = str(random.randint(100000,999999))
-        sender = "no-reply@demomailtrap.com"
-        receiver = email
+        sender = "no-reply@demomailtrap.co"
+        receiver = email.strip()
         message = f"""\
 Subject: APNet - Reset Password
 To: {receiver}
@@ -99,6 +99,7 @@ If you did not attempt to reset your password. Please ignore this message."""
         
         session['reset_code'] = code
         session['target_email'] = email
+        print(MAILTRAP_PASSWORD+'\n\n\n\n\nabcdefg')
 
         with smtplib.SMTP("live.smtp.mailtrap.io", 587) as server:
             server.starttls()
