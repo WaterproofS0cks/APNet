@@ -60,6 +60,7 @@ def forum():
     return render_template('forum.html')
 
 
+
 #
 @app.route('/load_more')
 def post():
