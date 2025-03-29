@@ -3647,7 +3647,7 @@ input[type="submit"]:hover {
 .profile-fm-main-container {
     height: 100%;
     width: 100%;
-    margin: 0px 0 0 0;
+    margin: 0 auto;
     padding: 20px;
 }
 
