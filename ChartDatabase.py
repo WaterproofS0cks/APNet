@@ -26,19 +26,19 @@ class dbChart:
     
     def plot_graph(self, duration, tablename, column, xLabel, yLabel, title, lineLabel):
         if duration[0] == "all-time":
-            user_data = self.db_retrieve.retrieve_data_all(tablename, column)
+            data = self.db_retrieve.retrieve_data_all(tablename, column)
         else:
-            user_data = self.retrieve_data(duration, tablename, column)
+            data = self.retrieve_data(duration, tablename, column)
 
         today = datetime.today().date()
         yesterday = today - timedelta(days=1)
 
-        if not user_data:
+        if not data:    
             dates = [yesterday, today]
             user_count = [0, 0]
         else:
-            dates = [record[0] for record in user_data]
-            user_count = [record[1] for record in user_data]
+            dates = [record[0] for record in data]
+            user_count = [record[1] for record in data]
 
         if duration[0] == "all-time" or duration[0] == "days":
             if len(dates) == 1:
@@ -129,6 +129,15 @@ class dbChart:
             title="Post Created Over Time"
             lineLabel="Created Post"
 
+        elif database == "recruitmentcomment":
+            duration = (filter, 1)
+            tablename = database
+            column="timestamp"
+            xLabel="Date"
+            yLabel="Number Of Comments"
+            title="Comments Over Time"
+            lineLabel="Comments"
+        
         elif database == "postcomment":
             duration = (filter, 1)
             tablename = database
