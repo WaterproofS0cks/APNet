@@ -137,6 +137,7 @@ def delete_comment():
     elif post_type == "recruitment":
         condition = {"recruitmentcommentid": comment_id}
         db_modify.delete("RecruitmentComment", condition)
+
     return jsonify({"delete": True})
 
 #Finished  
