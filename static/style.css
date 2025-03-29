@@ -4963,6 +4963,18 @@ input[type="submit"]:hover {
     margin-right: 8px;
 }
 
+#applicant-accepted {
+    background-color: #89AC46;
+    border: 1px solid #1e7e34;
+    color: white;
+}
+
+#applicant-rejected {
+    background-color: #D84040;
+    border: 1px solid #bd2130;
+    color: white;
+}
+
 .applicant-flex {
     display: flex;
     flex-wrap: wrap;
