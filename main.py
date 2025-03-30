@@ -152,6 +152,73 @@ def create_post():
     else:
         return redirect(url_for('auth.login'))
 
+@app.route("/createapplication", methods=["GET", "POST"])
+def create_application():
+    user_id = session.get('id')
+    if not user_id:
+        return redirect(url_for('auth.login'))
+
+    db_conn = dbConnection(
+        dbname=os.getenv("DBNAME"),
+        user=os.getenv("USER"),
+        password=os.getenv("PASSWORD"),
+    )
+
+    db_conn.connect()
+    db_insert = dbInsert(db_conn)
+    db_retrieve = dbRetrieve(db_conn)
+
+    recruitment = request.form.get("recruitmentid")
+    eventposition = request.form.get("position")
+    tpnumber = request.form.get("tpnumber")
+    description = request.form.get("description")
+    status = "Pending"
+
+    check_recruitment = db_retrieve.retrieve_one("recruitment", "recruitmentid", "recruitmentid=%s and status=%s", (recruitment, True))
+    
+    if not check_recruitment:
+        return redirect(url_for('Recruitment'))
+
+    try:
+        value = db_insert.insert("Application", (recruitment, user_id, tpnumber, eventposition, description, status))
+        return redirect(url_for('Recruitment'))
+    except Exception as e:
+        return redirect(url_for('Recruitment'))
+
+@app.route("/load_application", methods=["GET", "POST"])
+def application():
+    return Content.load_application()
+
+@app.route("/load_applicant", methods=["GET", "POST"])
+def applicant():
+    return Content.load_applicants()
+
+@app.route("/applicantspecific", methods=["GET", "POST"])
+def applicant_specific():
+    db_conn = dbConnection(
+        dbname=os.getenv("DBNAME"),
+        user=os.getenv("USER"),
+        password=os.getenv("PASSWORD"),
+    )
+
+    db_conn.connect()
+    db_retrieve = dbRetrieve(db_conn)
+
+    recruitmentid = 1
+    userid = 1
+
+    userdata = db_retrieve.retrieve_one("users", "fullname, phone", "userid = %s", (userid,))
+    applicantdata = db_retrieve.retrieve_one("application", "*", "userid = %s and recruitmentid = %s", (userid, recruitmentid))
+
+    return render_template("recruitment-aplication-specific.html", 
+                           fullname=userdata["fullname"],
+                           tpnumber=applicantdata["tpnumber"],
+                           eventposition=applicantdata["eventposition"],
+                           phonenumber=userdata["phone"],
+                           description=applicantdata["description"],
+                           recruitmentid=recruitmentid
+                           )
+
 #Finished
 @app.route('/upload', methods=["GET", "POST"])
 def upload_post():
