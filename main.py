@@ -540,6 +540,7 @@ def update_reported_user():
         penalty_value = "M"
 
     db_modify.update("Users", {"penalty": penalty_value}, {"userid": user_id})
+    db_modify.update("Reports", {"penalty": penalty_value}, {"userid": user_id})
     return jsonify({"message": f"User {user_id} has been {action.lower()}ed."})
 
 
