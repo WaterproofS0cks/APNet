@@ -103,9 +103,19 @@
             });
         }
 
+        function IAMLOSINGMYMIND() {
+            fetch('/applicantspecific', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                }
+            })
+
+        }
+
         document.addEventListener("DOMContentLoaded", function() {
             loadApplicants();
-    });
+    }); 
 
     </script>
 </body>
