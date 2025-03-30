@@ -1,4 +1,4 @@
-from flask import Flask, render_template, session, request, jsonify, redirect, url_for
+from flask import Flask, render_template, session, request, jsonify, redirect, url_for, render_template_string
 from auth import auth
 from user_profile import user_profile
 # import psycopg2
@@ -109,12 +109,14 @@ def create_comment():
 
     if post_type == "post":
         inserted = db_insert.insert("PostComment", (user_id, post_id, comment))
+        comment_id = inserted.get("postcommentid")
     elif post_type == "recruitment":
         inserted = db_insert.insert("RecruitmentComment", (user_id, post_id, comment))
+        comment_id = inserted.get("recruitmentcommentid")
     else:
         return redirect(url_for('auth.login'))
-    comment_id = inserted.get("postcommentid")
-    print("creating")
+    
+
     return jsonify({ "username":user_data["username"], "pfp":user_data["profilepicture"], "comment_id":comment_id})
 
 @app.route("/deletecomment", methods=["POST"])
@@ -430,6 +432,15 @@ def EditRecruitmentPost():
 def Banned():
     return render_template("banned.html")
 
+
+# Page Not Found
+@app.errorhandler(500)
+def page_not_found(e):
+    return render_template_string('Page Not Found {{ errorCode }}', errorCode='500'), 500
+
+@app.errorhandler(404)
+def page_not_found(e):
+    return render_template_string('Page Not Found {{ errorCode }}', errorCode='404'), 404
 
 
 if __name__ == "__main__":

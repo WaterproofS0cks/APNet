@@ -42,6 +42,7 @@ def login():
                 session['gender'] = user_data[7]
                 session['pfp'] = user_data[8]
                 session['penalty'] = user_data[9]
+                #[TODO] Add entry to Activity Table
                 return redirect('/user/profile')
             else:
                 return render_template("login.html", errmsg="Email or Password incorrect. Please try again")
@@ -75,6 +76,7 @@ def register():
             session['gender'] = user_data[7]
             session['pfp'] = user_data[8]
             session['penalty'] = user_data[9]
+            #[TODO] Add entry to Activity Table
             return redirect('/user/profile')
         except psycopg2.errors.UniqueViolation:
             return render_template("register.html", errmsg="Username or Email already exist. Please try again")

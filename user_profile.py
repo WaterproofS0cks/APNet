@@ -209,7 +209,7 @@ def updateProfile():
         db_modify.update("Users", data, condition)
 
         session["pfp"] = pfp_filename
-        session["username"] = username
+        session["user"] = username
         session["bio"] = bio
         session["link"] = link
 
