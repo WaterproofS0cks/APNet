@@ -221,7 +221,6 @@ def applicant_specific():
         userdata = db_retrieve.retrieve_one("users", "username, fullname, phone", "userid = %s", (user_id,))
         applicantdata = db_retrieve.retrieve_one("application", "*", "userid = %s and recruitmentid = %s", (user_id, recruitment_id))
 
-
         session['APP_NAME'] = userdata["username"]
         session['APP_FNAME'] = userdata["fullname"]
         session['APP_TPNUMBER'] = applicantdata["tpnumber"]
@@ -498,9 +497,17 @@ def load_tables():
     })
 
 
-
 @app.route("/update_penalty", methods=["POST"])
 def update_penalty():
+    db_conn = dbConnection(
+        dbname=os.getenv("DBNAME"),
+        user=os.getenv("USER"),
+        password=os.getenv("PASSWORD"),
+    )
+
+    db_conn.connect()
+    db_modify = dbModify(db_conn)
+
     data = request.json
     user_id = data.get("userId")
     action = data.get("action")
@@ -508,12 +515,21 @@ def update_penalty():
     if action == "Unban" or action == "Unmute":
         penalty_value = None
 
-    dbModify.update("Users", {"penalty": penalty_value}, {"userID": user_id})
+    db_modify.update("Users", {"penalty": penalty_value}, {"userID": user_id})
     return jsonify({"message": f"User {user_id} has been {action.lower()}ed."})
 
 
 @app.route("/update_reported_user", methods=["POST"])
 def update_reported_user():
+    db_conn = dbConnection(
+        dbname=os.getenv("DBNAME"),
+        user=os.getenv("USER"),
+        password=os.getenv("PASSWORD"),
+    )
+
+    db_conn.connect()
+    db_modify = dbModify(db_conn)
+
     data = request.json
     user_id = data.get("userId")
     action = data.get("action")
@@ -523,12 +539,21 @@ def update_reported_user():
     elif action == "Mute":
         penalty_value = "M"
 
-    dbModify.update("Users", {"penalty": penalty_value}, {"userID": user_id})
+    db_modify.update("Users", {"penalty": penalty_value}, {"userid": user_id})
     return jsonify({"message": f"User {user_id} has been {action.lower()}ed."})
 
 
 @app.route("/update_reported_post", methods=["POST"])
 def update_reported_post():
+    db_conn = dbConnection(
+        dbname=os.getenv("DBNAME"),
+        user=os.getenv("USER"),
+        password=os.getenv("PASSWORD"),
+    )
+
+    db_conn.connect()
+    db_modify = dbModify(db_conn)
+
     data = request.json
     post_id = data.get("postId")
     post_type = data.get("postType")
@@ -540,9 +565,9 @@ def update_reported_post():
         table_name = "Recruitment"
 
     if action == "Remove":
-        dbModify.update(table_name, {"status": False}, {"postID": post_id})
+        db_modify.update(table_name, {"status": False}, {"postID": post_id})
     elif action == "Dismiss":
-        dbModify.update("Reports", {"status": "Rejected"}, {"placementID": post_id})
+        db_modify.update("Reports", {"status": "Rejected"}, {"placementID": post_id})
 
     return jsonify({"message": f"Post {post_id} has been {action.lower()}ed."})
 
