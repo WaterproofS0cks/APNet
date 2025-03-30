@@ -227,7 +227,7 @@ class Content():
 
                         <div class="rc-post-footer">
                             <span class="rc-interest-text">Interested? Join Us Now!</span>
-                            <a href="recruitmentapplication?postid={entry["id"]}"><button class="rc-apply-button">Apply</button></a>
+                            <a href="recruitment-application?postid={entry["id"]}"><button class="rc-apply-button">Apply</button></a>
                         </div>
                     </div>
                 '''
@@ -366,14 +366,7 @@ class Content():
             bookmark_icon=bookmark_icon
         )
     
-   
-
-
-
-
-
-
-
+    
     def load_comment():
         db_conn = dbConnection(
             dbname=os.getenv("DBNAME"),
@@ -408,7 +401,6 @@ class Content():
 
         html = ""
         for comment in comments:
-            print({comment['id']})
             profile_picture = comment['profilepicture'] if comment['profilepicture'] else "../static/src/img/default-pfp.png"
             html += f"""
             <div class="fms-comment" id="comment-{comment['id']}">
@@ -426,6 +418,72 @@ class Content():
         return jsonify({"html": html})
 
 
+
+    def load_application():
+        db_conn = dbConnection(
+            dbname=os.getenv("DBNAME"),
+            user=os.getenv("USER"),
+            password=os.getenv("PASSWORD"),
+        )
+
+        db_conn.connect()
+        db_retrieve = dbRetrieve(db_conn)
+
+        user_id = session.get("id")
+
+        applications = db_retrieve.retrieve(
+            "application",
+            "application.*, recruitment.header, recruitment.image AS recruitment_image, recruitment.description AS recruitment_description, TO_CHAR(recruitment.timestamp, 'DD Month YYYY') AS recruitment_timestamp",
+            "application.userid = %s",
+            (user_id,),
+            join="INNER JOIN recruitment ON application.recruitmentID = recruitment.recruitmentID"
+        )
+
+        html = ""
+
+        for application in applications:
+            count_result = db_retrieve.retrieve(
+                "application", 
+                "COUNT(*)", 
+                "recruitmentid = %s", 
+                (application["recruitmentid"],)
+            )
+            count = count_result[0][0] if count_result else 0
+
+            recruitment_image = application['recruitment_image'] or 'static/src/img/default-events.jpg'
+
+            html += f"""
+            <div class="activity-card">
+                <div class="activity-flex">
+                    <div class="activity-attr">
+                        <sub>{application["recruitment_timestamp"]}</sub>
+                        <h3>{application["header"]}</h3>
+
+                        <div class="applications-activity-img-responsive">
+                            <img src="{recruitment_image}" alt="Placeholder Image">
+                        </div>
+
+                        <p>{application["recruitment_description"]}</p>
+                    </div>
+                    <div class="applications-activity-img">
+                        <img src="{recruitment_image}" alt="Recruitment Image">
+                    </div>
+                </div>
+                <div class="applications-container">
+                    <div>
+                        <h3>Applicants</h3>
+                        <p>{count}</p>
+                    </div>
+                    <div>
+                        <h3>Status</h3>
+                        <p>{application["status"]}</p>
+                    </div>
+                </div>
+            </div>
+            """
+
+        return jsonify({"html": html})
+    
     def load_applicant(recruitment_id):
         db_conn = dbConnection(
                 dbname=os.getenv("DBNAME"),
@@ -438,10 +496,6 @@ class Content():
         
 
         user_data = db_retrieve.retrieve("application", "*", "userid = %s",(recruitment_id,))
-        
-        return jsonify({"html": html})
-
-    def load_applications():
         
         return jsonify({"html": html})
 

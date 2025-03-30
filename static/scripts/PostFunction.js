@@ -156,6 +156,7 @@
             if (!postElement) return;
 
             const postId = postElement.getAttribute("data-post-id");
+            const postUserId = postElement.getAttribute("data-user-id");
             const action = actionContainer.getAttribute("data-action");
 
             if (!postId || !action) return;
@@ -206,7 +207,7 @@
                 fetch("/reportuser", {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({ post_id: postId, action: action }),
+                    body: JSON.stringify({ post_id: postUserId, action: action }),
                 })
             }
         });

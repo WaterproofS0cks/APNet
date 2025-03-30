@@ -3,10 +3,10 @@
 {% block content %}
 <body class="rca-body">  
     <div class="rca-image-container">
-        <img src="../static/src/img/randomimage1.jpg" alt="">
+        <img src="{{ image }}" alt="">
     </div>
 
-    <form action="" id="rca-form">
+    <form action="createapplication" method="POST" id="rca-form">
         <div class="rca-content-container">
     
             <div class="rca-top-container">
@@ -21,21 +21,21 @@
                 </a>
                 
             </div>
-
+            <input type="text" name="recruitmentid" value="{{ recruitmentid }}" id="rca-tpno" hidden>
             <!-- Removed rca-info-container -->
             <div class="rca-tpno-container">
                 <h2>TP Number <span class="rca-required">*</span></h2>
-                <input type="text" id="rca-tpno" placeholder="Enter your TP Number...">
+                <input type="text" name="tpnumber" id="rca-tpno" placeholder="Enter your TP Number...">
             </div>
     
             <div class="rca-role-container">
                 <h2>Event Position <span class="rca-required">*</span></h2>
-                <input type="text" id="rca-role" placeholder="Enter your Event Position...">
+                <input type="text" name="position" id="rca-role" placeholder="Enter your Event Position...">
             </div>
     
             <div class="rca-desc-container">
                 <h2>Tell us a little more about yourself <span class="rca-required">*</span></h2>
-                <textarea name="" id="" cols="99" rows="18" placeholder="Enter your text here..."></textarea>
+                <textarea name="description" id="" cols="99" rows="18" placeholder="Enter your text here..."></textarea>
             </div>
     
             <div class="rca-button-container">

@@ -73,7 +73,6 @@ class dbCreate:
                 TPNumber VARCHAR(10) NOT NULL,
                 eventPosition VARCHAR(100),
                 description TEXT NOT NULL,
-                resume VARCHAR(512),
                 timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
                 status VARCHAR(10) CHECK (status IN ('Pending', 'Accepted', 'Rejected')) NOT NULL,
                 PRIMARY KEY (recruitmentID, userID)
@@ -119,7 +118,6 @@ class dbCreate:
                 reportID SERIAL PRIMARY KEY,
                 placementID INT NOT NULL,
                 type VARCHAR(20) CHECK (type IN ('User', 'Forum', 'Recruitment')),     
-                description TEXT,
                 timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
                 status VARCHAR(10) CHECK (status IN ('Processing', 'Accepted', 'Rejected'))
             );
@@ -131,7 +129,6 @@ class dbCreate:
                 penaltyID SERIAL PRIMARY KEY,
                 userID INT NOT NULL REFERENCES Users(userID),
                 reportID INT NOT NULL REFERENCES Reports(reportID) ON DELETE CASCADE,
-                description TEXT,
                 timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
                 penaltyType VARCHAR(20) CHECK (penaltyType IN ('Banned', 'Muted'))
             );

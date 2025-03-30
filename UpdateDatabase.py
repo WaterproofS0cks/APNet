@@ -20,12 +20,12 @@ class dbInsert:
             "Recruitment": ["userID", "header", "description", "image", "status"],
             "RecruitmentComment": ["userID", "recruitmentID", "comment"],
             "RecruitmentEngagement": ["userID", "recruitmentID", "bookmark", "liked"],
-            "Application": ["recruitmentID", "userID", "TPNumber", "eventPosition", "description", "resume", "status"],
+            "Application": ["recruitmentID", "userID", "TPNumber", "eventPosition", "description", "status"],
             "Post": ["userID", "description", "image"],
             "PostComment": ["userID", "postID", "comment"],
             "PostEngagement": ["userID", "postID", "bookmark", "liked"],
-            "Reports": ["userID", "reportedUserID", "description", "status"],
-            "PenaltyHistory": ["userID", "reportID", "issuedBy", "penaltyType"],
+            "Reports": ["placementID", "type", "status"],
+            "PenaltyHistory": ["userID", "reportID", "penaltyType"],
             "Activity": ["userID"],
             "Notification": ["userID", "ActedUserID", "Action"]
         }

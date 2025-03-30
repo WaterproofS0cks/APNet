@@ -152,6 +152,44 @@ def create_post():
     else:
         return redirect(url_for('auth.login'))
 
+@app.route("/createapplication", methods=["GET", "POST"])
+def create_application():
+    user_id = session.get('id')
+    if not user_id:
+        return redirect(url_for('auth.login'))
+
+    db_conn = dbConnection(
+        dbname=os.getenv("DBNAME"),
+        user=os.getenv("USER"),
+        password=os.getenv("PASSWORD"),
+    )
+
+    db_conn.connect()
+    db_insert = dbInsert(db_conn)
+    db_retrieve = dbRetrieve(db_conn)
+
+    recruitment = request.form.get("recruitmentid")
+    eventposition = request.form.get("position")
+    tpnumber = request.form.get("tpnumber")
+    description = request.form.get("description")
+    status = "Pending"
+
+    check_recruitment = db_retrieve.retrieve_one("recruitment", "recruitmentid", "recruitmentid=%s and status=%s", (recruitment, True))
+    
+    if not check_recruitment:
+        return redirect(url_for('Recruitment'))
+
+    try:
+        value = db_insert.insert("Application", (recruitment, user_id, tpnumber, eventposition, description, status))
+        return redirect(url_for('Recruitment'))
+    except Exception as e:
+        return redirect(url_for('Recruitment'))
+    
+
+@app.route("/load_application", methods=["GET", "POST"])
+def application():
+    return Content.load_application()
+
 #Finished
 @app.route('/upload', methods=["GET", "POST"])
 def upload_post():
@@ -204,7 +242,26 @@ def Recruitment():
 
 @app.route('/recruitment-application', methods=['POST', 'GET'])
 def RecruitmentApplication():
-    return render_template("recruitment_application.html")
+    user_id = session.get('id')
+    if not user_id:
+        return redirect(url_for('auth.login'))
+
+    db_conn = dbConnection(
+        dbname=os.getenv("DBNAME"),
+        user=os.getenv("USER"),
+        password=os.getenv("PASSWORD"),
+    )
+
+    db_conn.connect()
+    db_retrieve = dbRetrieve(db_conn)
+    recruitmentid = request.args.get('postid') 
+
+    recruitment = db_retrieve.retrieve_one("recruitment", "image", "recruitmentid=%s and status=%s", (recruitmentid, "true"))
+
+    if not recruitment:
+        return redirect(url_for('forum'))
+
+    return render_template("recruitment_application.html", image=recruitment["image"], recruitmentid=recruitmentid)
 
 
 
