@@ -12,7 +12,7 @@
                     <h2>Recruitment Title</h2>
                 </div>
     
-                <a href="/user/applications/created" class="rcas-back-container">
+                <a href="/user/applications-created" class="rcas-back-container">
                     <img src="../static/src/icon/icons8-undo-96.png" id="rcas-undoicon">
                     <h2>Back</h2>
                 </a>
@@ -22,34 +22,34 @@
             <div class="rcas-username-container">
                 <h2>Username</h2>
                 <div class="rcas-username-input">
-                    <a href="profile.html" id="rcas-username">INSERT USERNAME</a>
+                    <a href="/user/profile?uid={{ session.get('APP_NAME') }}" id="rcas-username">{{ session.get('APP_NAME') }}</a>
                 </div>
             </div>
 
             <div class="rcas-fullname-container">
                 <h2>Full Name</h2>   
                                                         
-                <input type="text" id="rcas-fullname" value="{{ fullname }}" readonly>
+                <input type="text" id="rcas-fullname" value="{{ session.get('APP_FNAME') }}" readonly>
             </div>
             
             <div class="rcas-tpno-container">
                 <h2>TP Number</h2>
-                <input type="text" id="rcas-tpno" value="{{ tpnumber }}" readonly>
+                <input type="text" id="rcas-tpno" value="{{ session.get('APP_TPNUMBER') }}" readonly>
             </div>
     
             <div class="rcas-role-container">
                 <h2>Event Position</h2>
-                <input type="text" id="rcas-role" value="{{ eventposition }}" readonly>
+                <input type="text" id="rcas-role" value="{{ session.get('APP_EVPOS') }}" readonly>
             </div>
     
             <div class="rcas-phoneno-container">
                 <h2>Phone Number</h2>
-                <input type="text" id="rcas-phoneno" value="{{ phonenumber }}" readonly>
+                <input type="text" id="rcas-phoneno" value="{{ session.get('APP_PHONE') }}" readonly>
             </div>
 
             <div class="rcas-desc-container">
                 <h2>Tell us a little more about yourself</h2>
-                <textarea name="" id="" cols="99" rows="18" placeholder="{{ description }}" readonly></textarea>
+                <textarea name="" id="" cols="99" rows="18" placeholder="{{ session.get('APP_DESC') }}" readonly></textarea>
             </div>
     
             <form action="" id="rcas-form">

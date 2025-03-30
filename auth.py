@@ -43,7 +43,7 @@ def login():
                 session['pfp'] = user_data[8]
                 session['penalty'] = user_data[9]
                 #[TODO] Add entry to Activity Table
-                return redirect('/user/profile')
+                return redirect('/')
             else:
                 return render_template("login.html", errmsg="Email or Password incorrect. Please try again")
         except Exception as e:
@@ -77,7 +77,7 @@ def register():
             session['pfp'] = user_data[8]
             session['penalty'] = user_data[9]
             #[TODO] Add entry to Activity Table
-            return redirect('/user/profile')
+            return redirect('/')
         except psycopg2.errors.UniqueViolation:
             return render_template("register.html", errmsg="Username or Email already exist. Please try again")
     else:
@@ -148,7 +148,8 @@ def resetpassword_complete():
 
 @auth.route('/logout')
 def logout():
-    session_data = ['id', 'user', 'fname', 'bio', 'link', 'role', 'email', 'gender', 'pfp', 'penalty']
+    session_data = ['id', 'user', 'fname', 'bio', 'link', 'role', 'email', 'gender', 'pfp', 'penalty', 'fullname', 'phone']
     for i in session_data:
         session.pop(i, None)
+    print(session)
     return redirect(url_for('.login'))
