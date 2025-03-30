@@ -196,8 +196,29 @@ def applicant():
 
 @app.route("/applicantspecific", methods=["GET", "POST"])
 def applicant_specific():
+    db_conn = dbConnection(
+        dbname=os.getenv("DBNAME"),
+        user=os.getenv("USER"),
+        password=os.getenv("PASSWORD"),
+    )
 
-    return render_template("recruitment-aplication-specific.html")
+    db_conn.connect()
+    db_retrieve = dbRetrieve(db_conn)
+
+    recruitmentid = 1
+    userid = 1
+
+    userdata = db_retrieve.retrieve_one("users", "fullname, phone", "userid = %s", (userid,))
+    applicantdata = db_retrieve.retrieve_one("application", ", phone", "userid = %s", (userid,))
+
+    return render_template("recruitment-aplication-specific.html", 
+                           fullname=userdata["fullname"],
+                           tpnumber=applicantdata["tpnumber"],
+                           eventposition=applicantdata["eventposition"],
+                           phonenumber=userdata["phone"],
+                           description=applicantdata["description"],
+                           recruitmentid=recruitmentid
+                           )
 
 #Finished
 @app.route('/upload', methods=["GET", "POST"])

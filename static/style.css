@@ -4999,7 +4999,8 @@ input[type="submit"]:hover {
     }
 
     .applicant-card {
-        width: 100%;
+        font-size: 20px;
+        width: 75%;
     }
 
     .applications-activity-img-responsive {
@@ -5034,6 +5035,7 @@ input[type="submit"]:hover {
 .click-card-url .activity-card {
     transition: all 0.3s ease-in-out;
     border: 3px solid transparent;
+    
 }
 
 .click-card-url .activity-card:hover {
