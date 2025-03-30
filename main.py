@@ -427,10 +427,6 @@ def EditForumPost():
 def EditRecruitmentPost():
     return render_template('editrecruitmentpost.html')
 
-@app.errorhandler(404)
-def not_found(error):
-    return render_template("404.html",404)
-
 @app.errorhandler(Exception)
 def handle_exception(e):
     if isinstance(e, HTTPException):
