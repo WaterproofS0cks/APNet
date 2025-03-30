@@ -211,13 +211,13 @@ def applicant_specific():
 
 
 
-    return render_template("recruitment-aplication-specific.html", 
-                           fullname= ,
-                           tpnumber= ,
-                           eventposition= ,
-                           phonenumber= ,
-                           description= ,
-                           )
+    # return render_template("recruitment-aplication-specific.html", 
+    #                        fullname= ,
+    #                        tpnumber= ,
+    #                        eventposition= ,
+    #                        phonenumber= ,
+    #                        description= ,
+    #                        )
 
 #Finished
 @app.route('/upload', methods=["GET", "POST"])
