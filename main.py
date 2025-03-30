@@ -173,7 +173,9 @@ def create_application():
     tpnumber = request.form.get("tpnumber")
     description = request.form.get("description")
     status = "Pending"
-
+    print("fgfgfg")
+    print(recruitment)
+    print("fgfgfg")
     check_recruitment = db_retrieve.retrieve_one("recruitment", "recruitmentid", "recruitmentid=%s and status=%s", (recruitment, True))
     
     if not check_recruitment:
@@ -279,7 +281,26 @@ def Recruitment():
 
 @app.route('/recruitment-application', methods=['POST', 'GET'])
 def RecruitmentApplication():
-    return render_template("recruitment_application.html")
+    user_id = session.get('id')
+    if not user_id:
+        return redirect(url_for('auth.login'))
+
+    db_conn = dbConnection(
+        dbname=os.getenv("DBNAME"),
+        user=os.getenv("USER"),
+        password=os.getenv("PASSWORD"),
+    )
+
+    db_conn.connect()
+    db_retrieve = dbRetrieve(db_conn)
+    recruitmentid = request.args.get('postid') 
+
+    recruitment = db_retrieve.retrieve_one("recruitment", "image", "recruitmentid=%s and status=%s", (recruitmentid, "true"))
+
+    if not recruitment:
+        return redirect(url_for('forum'))
+
+    return render_template("recruitment_application.html", image=recruitment["image"], recruitmentid=recruitmentid)
 
 
 
