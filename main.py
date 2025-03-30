@@ -1,4 +1,4 @@
-from flask import Flask, render_template, session, request, jsonify, redirect, url_for
+from flask import Flask, render_template, session, request, jsonify, redirect, url_for, render_template_string
 from auth import auth
 from user_profile import user_profile
 # import psycopg2
@@ -426,7 +426,13 @@ def EditForumPost():
 def EditRecruitmentPost():
     return render_template('editrecruitmentpost.html')
 
+@app.errorhandler(500)
+def page_not_found(e):
+    return render_template_string('Page Not Found {{ errorCode }}', errorCode='500'), 500
 
+@app.errorhandler(404)
+def page_not_found(e):
+    return render_template_string('Page Not Found {{ errorCode }}', errorCode='404'), 404
 
 if __name__ == "__main__":
     app.run(debug=True)

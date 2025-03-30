@@ -55,7 +55,7 @@ class Content():
                 like_icon = "../static/src/icon/icons8-heart-red-50.png" if engagement_data['liked'] else "../static/src/icon/icons8-heart-50.png"
                 bookmark_icon = "../static/src/icon/icons8-bookmark-evendarkergreen-500.png" if engagement_data['bookmark'] else "../static/src/icon/icons8-bookmark-50.png"
 
-                if entry['userid'] == session.get('id'):
+                if entry['username'] == session.get('user'):
                     link = f"<a href='/user/profile'>"
                 else:
                     link = f"<a href='/user/profile?uid={entry['username']}'>"
@@ -148,7 +148,7 @@ class Content():
                 like_icon = "../static/src/icon/icons8-heart-red-50.png" if engagement_data['liked'] else "../static/src/icon/icons8-heart-50.png"
                 bookmark_icon = "../static/src/icon/icons8-bookmark-evendarkergreen-500.png" if engagement_data['bookmark'] else "../static/src/icon/icons8-bookmark-50.png"
 
-                if entry['id'] == session.get('id'):
+                if entry['username'] == session.get('user'):
                     link = f"<a href='/user/profile'>"
                 else:
                     link = f"<a href='/user/profile?uid={entry['username']}'>"
@@ -548,14 +548,14 @@ class Content():
                     
                 html += f"""
                     <a href="#" class="click-card-url">
-                        <div class="applicant-card {applicant_id_tag}">{applicant['applicant_username']}</div>
+                        <div class="applicant-card {applicant_id_tag}"><p class=applicant-card-text>{applicant['applicant_username']}</p></div>
                     </a>
                 """
 
             for applicant in applicants[4:]:
                 html += f"""
                     <a href="#" class="click-card-url">
-                        <div class="applicant-card applicant-extra" data-recruitment-id="{recruitment['recruitmentid']}">{applicant['applicant_fullname']}</div>
+                        <div class="applicant-card applicant-extra" data-recruitment-id="{recruitment['recruitmentid']}"><p class=applicant-card-text>{applicant['applicant_fullname']}</p></div>
                     </a>
                 """
 

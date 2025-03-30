@@ -3433,12 +3433,12 @@ input[type="submit"]:hover {
     justify-content: center;
 }
 
-.profile-desc h2 {
+.profile-desc-name {
     display: inline-flex;
     align-items: center;
 }
 
-.profile-desc p {
+.profile-desc-bio {
     margin-top: 8px;
     font-size: 1rem;
     color: #666;
@@ -3688,15 +3688,18 @@ input[type="submit"]:hover {
         display: flex;
         flex-direction: column;
         justify-content: center;
+
+        overflow-x: auto;
+        white-space: nowrap;
     }
     
-    .profile-desc h2 {
+    .profile-desc-name {
         font-size: 20px;
         display: inline-flex;
         align-items: center;
     }
     
-    .profile-desc p {
+    .profile-desc-bio {
         margin-top: 8px;
         font-size: 1rem;
         color: #666;
@@ -4906,6 +4909,16 @@ input[type="submit"]:hover {
     margin-right: 8px;
 }
 
+.applicant-card-text {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 100%;
+    text-align: center;
+
+    margin-top: 0 !important;
+}
+
 #applicant-accepted {
     background-color: #89AC46;
     border: 1px solid #1e7e34;
@@ -4921,7 +4934,7 @@ input[type="submit"]:hover {
 .applicant-flex {
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
+    justify-content: flex-start;
 }
 
 .applicant-extra {
