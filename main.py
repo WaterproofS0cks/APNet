@@ -197,35 +197,36 @@ def applicant():
 
 @app.route("/applicantspecific", methods=["POST", "GET"])
 def applicant_specific():
-    db_conn = dbConnection(
-        dbname=os.getenv("DBNAME"),
-        user=os.getenv("USER"),
-        password=os.getenv("PASSWORD"),
-    )
+    try:
+        db_conn = dbConnection(
+            dbname=os.getenv("DBNAME"),
+            user=os.getenv("USER"),
+            password=os.getenv("PASSWORD"),
+        )
 
-    db_conn.connect()
-    db_retrieve = dbRetrieve(db_conn)
+        db_conn.connect()
+        db_retrieve = dbRetrieve(db_conn)
 
-    data = request.get_json()
-    user_id = data.get('user_id')
-    recruitment_id = data.get('recruitment_id')
+        data = request.get_json()
+        user_id = data.get('user_id')
+        recruitment_id = data.get('recruitment_id')
 
-    userdata = db_retrieve.retrieve_one("users", "username, fullname, phone", "userid = %s", (user_id,))
-    applicantdata = db_retrieve.retrieve_one("application", "*", "userid = %s and recruitmentid = %s", (user_id, recruitment_id))
+        userdata = db_retrieve.retrieve_one("users", "username, fullname, phone", "userid = %s", (user_id,))
+        applicantdata = db_retrieve.retrieve_one("application", "*", "userid = %s and recruitmentid = %s", (user_id, recruitment_id))
 
-    session_data = ['APP_FNAME', 'APP_TPNUMBER', 'APP_EVPOS', 'APP_PHONE', 'APP_DESC', 'APP_RID','APP_NAME']
-    for i in session_data:
-        session.pop(i, None)
 
-    session['APP_NAME'] = userdata["username"]
-    session['APP_FNAME'] = userdata["fullname"]
-    session['APP_TPNUMBER'] = applicantdata["tpnumber"]
-    session['APP_EVPOS'] = applicantdata["eventposition"]
-    session['APP_PHONE'] = userdata["phone"]
-    session['APP_DESC'] = applicantdata["description"]
-    session['APP_RID'] = recruitment_id
-    print(session)
-    return render_template("recruitment-aplication-specific.html")
+        session['APP_NAME'] = userdata["username"]
+        session['APP_FNAME'] = userdata["fullname"]
+        session['APP_TPNUMBER'] = applicantdata["tpnumber"]
+        session['APP_EVPOS'] = applicantdata["eventposition"]
+        session['APP_PHONE'] = userdata["phone"]
+        session['APP_DESC'] = applicantdata["description"]
+        session['APP_RID'] = recruitment_id
+        # session_data = ['APP_FNAME', 'APP_TPNUMBER', 'APP_EVPOS', 'APP_PHONE', 'APP_DESC', 'APP_RID','APP_NAME']
+        # for i in session_data:
+        #     session.pop(i, None)
+    finally:
+        return render_template("recruitment-aplication-specific.html")
 
 @app.route("/test", methods=["GET", "POST"])
 def applicant_specc():
