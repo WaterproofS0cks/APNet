@@ -62,8 +62,6 @@ def forum():
 def post():
     return Content.load_post()
 
-
-
 #Finished
 @app.route('/engagement', methods=['POST'])
 def engagement():
@@ -184,7 +182,6 @@ def create_application():
         return redirect(url_for('Recruitment'))
     except Exception as e:
         return redirect(url_for('Recruitment'))
-    
 
 @app.route("/load_application", methods=["GET", "POST"])
 def application():
@@ -193,7 +190,6 @@ def application():
 @app.route("/load_applicant", methods=["GET", "POST"])
 def applicant():
     return Content.load_applicants()
-
 
 #Finished
 @app.route('/upload', methods=["GET", "POST"])
