@@ -406,11 +406,28 @@ def EditPost():
     db_retrieve = dbRetrieve(db_conn)
 
     data = request.get_json()
+    postid = data.get('post_id')
     post_type = data.get('post_type')
 
+    if post_type == "post":
+        forumdata = db_retrieve.retrieve_one(post_type, "*", "postid = %s", (postid,))
+        editforum(image=forumdata["image"], description=forumdata["description"])
 
+    
+    elif post_type == "recruitment":
+        recruitmentdata = db_retrieve.retrieve_one(post_type, "*", "postid = %s", (postid,))
+        return render_template("editrecruitmentpost.html",
+                               header=recruitmentdata["header"],
+                               image=recruitmentdata["image"],
+                               description=recruitmentdata["description"]
+                                )
+    return
 
-
+def editforum(image, description):
+    return render_template("editforumpost.html",
+                           image=image,
+                           description=description
+                           )
 
 
 
@@ -426,7 +443,7 @@ def Report():
     db_insert = dbInsert(db_conn)
 
     data = request.get_json()
-    placementid = data.get('Id')
+    placementid = data.get('id')
     post_type = data.get('post_type')
     status = "Processing"
 
@@ -453,7 +470,7 @@ def Delete():
     db_modify = dbModify(db_conn)
 
     data = request.get_json()
-    id = data.get('Id')
+    id = data.get('post_id')
     post_type = data.get('post_type')
 
     try:
