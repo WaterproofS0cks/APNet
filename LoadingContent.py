@@ -383,7 +383,7 @@ class Content():
             join = "JOIN Users ON PostComment.userID = Users.userID"
             order = "ORDER BY PostComment.timestamp DESC"
 
-        elif post_type == "post":
+        elif post_type == "recruitment":
             table = "RecruitmentComment"
             columns = "Users.username, Users.profilePicture, RecruitmentComment.comment, RecruitmentComment.userid, RecruitmentComment.recruitmentcommentid AS id, TO_CHAR(RecruitmentComment.timestamp, 'DD Month YYYY HH24:MI') AS timestamp"
             condition = "RecruitmentComment.recruitmentID = %s"

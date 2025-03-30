@@ -156,7 +156,6 @@ document.addEventListener("DOMContentLoaded", function() {
                 const newComment = document.createElement('div');
                 newComment.className = 'fms-comment';
                 newComment.id = 'comment-' + data.comment_id;
-                console.log(newComment)
 
                 const profileImg = document.createElement('img');
                 profileImg.src = data.pfp;
@@ -206,7 +205,6 @@ document.addEventListener("DOMContentLoaded", function() {
     commentsList.addEventListener('click', function(event) {
         if (event.target && event.target.classList.contains('delete-comment-btn')) {
             const comment_id = event.target.getAttribute('data-comment-id');
-            console.log(comment_id)
             console.log("deleting")
 
             fetch('/deletecomment', {
