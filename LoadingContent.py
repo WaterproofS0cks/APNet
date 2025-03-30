@@ -73,16 +73,16 @@ class Content():
                                 <div class="fm-dropdown">
                                     <span><img src="../static/src/icon/icons8-ellipsis-48.png" alt="Elipses" id="fm-moreicon" height="24" width="24"></span>
                                     <div class="fm-dropdown-content">
-                                        <button class="fm-dropdown-item">
+                                        <button onclick="editReportPost(this)" class="fm-dropdown-item">
                                             <img src="../static/src/icon/icons8-flag-48.png" alt="Report Post" id="fm-reportposticon" height="20" width="20"> Report Post
                                         </button>
-                                        <button class="fm-dropdown-item">
+                                        <button onclick="editReportUser(this)" class="fm-dropdown-item">
                                             <img src="../static/src/icon/icons8-danger-50.png" alt="Report User" id="fm-reportusericon" height="20" width="20"> Report User
                                         </button>
-                                        <button class="fm-dropdown-item">
+                                        <button onclick="editPost(this)" class="fm-dropdown-item">
                                             <img src="../static/src/icon/icons8-edit-96.png" alt="Edit" id="fm-editicon" height="20" width="20">Edit Post
                                         </button>
-                                        <button href="#" class="fm-dropdown-item">
+                                        <button onclick="deletePost(this)" class="fm-dropdown-item">
                                             <img src="../static/src/icon/icons8-delete-48.png" alt="Delete" id="fm-deleteicon" height="20" width="20">Delete Post
                                         </button>
                                     </div>
