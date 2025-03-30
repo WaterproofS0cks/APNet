@@ -33,6 +33,8 @@
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ post_id: postId, post_type: postType })
         });
+
+        window.location.replace("/forum-edit");
     }
 
     function deletePost(button) {

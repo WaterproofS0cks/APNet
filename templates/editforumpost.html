@@ -109,12 +109,12 @@
 
                 <div id="efp-forum-drop-area">
                     <div class="efp-forum-imagecontainer" id="efp-forum-imageview">
-                        <img src="../static/src/img/randomimage2.jpg" alt="" style="width: 100%; height: 100%; object-fit: contain;">
+                        <img src="{{ session.get('FORUM_IMAGE') }}" alt="" style="width: 100%; height: 100%; object-fit: contain;">
                     </div>
                 </div>
         
                 <h1>Caption</h1>
-                <textarea name="caption" id="efp-forum-caption-text" placeholder="Enter your caption here..."></textarea>
+                <textarea name="caption" id="efp-forum-caption-text" placeholder="">{{ session.get('FORUM_DESC') }}</textarea>
         
                 <div class="efp-forum-button-container">
                     <button class="efp-forum-post-button" id="efp-post-button" type="submit">Post</button>

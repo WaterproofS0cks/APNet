@@ -395,7 +395,7 @@ def Dashboard():
         return redirect('/')
 
 
-@app.route('/editpost', methods=['POST'])
+@app.route('/editpost', methods=['POST', 'GET'])
 def EditPost():
     db_conn = dbConnection(
         dbname=os.getenv("DBNAME"),
@@ -409,26 +409,28 @@ def EditPost():
     data = request.get_json()
     postid = data.get('post_id')
     post_type = data.get('post_type')
+    
+    print(post_type)
 
     if post_type == "post":
         forumdata = db_retrieve.retrieve_one(post_type, "*", "postid = %s", (postid,))
-        editforum(image=forumdata["image"], description=forumdata["description"])
 
+        session['FORUM_IMAGE'] = forumdata["image"]
+        session['FORUM_DESC'] = forumdata["description"]
     
     elif post_type == "recruitment":
         recruitmentdata = db_retrieve.retrieve_one(post_type, "*", "postid = %s", (postid,))
         return render_template("editrecruitmentpost.html",
-                               header=recruitmentdata["header"],
-                               image=recruitmentdata["image"],
-                               description=recruitmentdata["description"]
+                            header=recruitmentdata["header"],
+                            image=recruitmentdata["image"],
+                            description=recruitmentdata["description"]
                                 )
-    return
+    
+@app.route('/forum-edit', methods=['POST', 'GET'])
+def EditPostData():
+    return render_template("editforumpost.html")
 
-def editforum(image, description):
-    return render_template("editforumpost.html",
-                           image=image,
-                           description=description
-                           )
+    # [TODO] Save edited post data into database
 
 
 
