@@ -547,7 +547,7 @@ class Content():
                     applicant_id_tag =""
                     
                 html += f"""
-                    <a class="applicant-card" 
+                    <a class="applicant-card"
                     {applicant_id_tag} 
                     data-applicant-id="{applicant['applicant_userid']}" 
                     data-recruitment-id="{recruitment['recruitmentid']}" 
@@ -582,7 +582,7 @@ class Content():
                     <p>No One Applied Yet D:</p>
                 """
 
-            html += f"""
+            html += """
                     </div>
                 </div>
             </div>
@@ -605,7 +605,6 @@ class Content():
         <table class="dashboard-table">
             <tr>
                 <th>Username</th>
-                <th>Reason</th>
                 <th>Option</th>
             </tr>
         """
@@ -615,7 +614,6 @@ class Content():
         if not load_actively_penalized_users_data:
             table_html += f"""
                 <tr>
-                    <td>-</td>
                     <td>-</td>
                     <td>-</td>
                 </tr>
@@ -642,7 +640,6 @@ class Content():
             table_html += f"""
             <tr>
                 <td>{entry["username"]}</td>
-                <td>{entry["description"]}</td>
                 {options_html}
             </tr>
             """
@@ -664,7 +661,6 @@ class Content():
         <table class="dashboard-table">
             <tr>
                 <th>Username</th>
-                <th>Reason</th>
                 <th>Option</th>
             </tr>
         """
@@ -678,7 +674,6 @@ class Content():
         if not load_reported_user_data:
             table_html += f"""
                 <tr>
-                    <td>-</td>
                     <td>-</td>
                     <td>-</td>
                 </tr>
@@ -696,7 +691,6 @@ class Content():
             table_html += f"""
             <tr>
                 <td>{user_data["username"]}</td>
-                <td>{entry["description"]}</td>
                 <td>
                     <u data-id="{entry['placementid']}" data-action="Ban">Ban</u> /
                     <u data-id="{entry['placementid']}" data-action="Mute">Mute</u>
@@ -721,7 +715,6 @@ class Content():
         <table class="dashboard-table">
             <tr>
                 <th>ID</th>
-                <th>Reason</th>
                 <th>Option</th>
             </tr>
         """
@@ -737,43 +730,21 @@ class Content():
                 <tr>
                     <td>-</td>
                     <td>-</td>
-                    <td>-</td>
                 </tr>
             </table>
             """
 
         for entry in load_reported_post_data:
 
-            # if entry["type"] == "Forum":
-            #     post_data = db_retrieve.retrieve_one(
-            #         tablename="Post",
-            #         columns="postContent", 
-            #         condition="postid = %s",
-            #         params=(entry["placementid"],)
-            #     )
-
-            # elif entry["type"] == "Recruitment":
-            #     post_data = db_retrieve.retrieve_one(
-            #         tablename="Recruitment",
-            #         columns="recruitmentDetails", 
-            #         condition="recruitmentid = %s",
-            #         params=(entry["placementid"],)
-            #     )
-
-            # if post_data:
-            #     post_content = post_data.get("postContent") or post_data.get("recruitmentDetails")
-
-                table_html += f"""
-                <tr>
-                    <td>{entry['placementid']}</td>
-                    <td>{entry["description"]}</td>
-                    <td>
-                        <u data-id="{entry['placementid']}" data-type="{entry['type']}" data-action="Remove">Remove</u> /
-                        <u data-id="{entry['placementid']}" data-type="{entry['type']}" data-action="Dismiss">Dismiss</u>
-                    </td>
-                </tr>
-                """
-
+            table_html += f"""
+            <tr>
+                <td>{entry['placementid']}</td>
+                <td>
+                    <u data-id="{entry['placementid']}" data-type="{entry['type']}" data-action="Remove">Remove</u> /
+                    <u data-id="{entry['placementid']}" data-type="{entry['type']}" data-action="Dismiss">Dismiss</u>
+                </td>
+            </tr>
+            """
         table_html += "</table>"
         return table_html
 
