@@ -547,25 +547,25 @@ class Content():
                     applicant_id_tag =""
                     
                 html += f"""
-                    <button class="applicant-card" 
+                    <a class="applicant-card" href="/applicantspecific"
                     {applicant_id_tag} 
                     data-applicant-id="{applicant['applicant_userid']}" 
                     data-recruitment-id="{recruitment['recruitmentid']}" 
                     onclick="IAMLOSINGMYMIND(this)">
                     {applicant['applicant_username']}
-                    </button>
+                    </a>
                 """
                 
 
             for applicant in applicants[4:]:
                 html += f"""
-                    <button class="applicant-card applicant-extra" 
+                    <a class="applicant-card applicant-extra"
                     {applicant_id_tag} 
                     data-applicant-id="{applicant['applicant_userid']}" 
                     data-recruitment-id="{recruitment['recruitmentid']}" 
                     onclick="IAMLOSINGMYMIND(this)">
                     {applicant['applicant_username']}
-                    </button>
+                    </a>
                 """
 
             if len(applicants) > 4:

@@ -202,7 +202,7 @@ def application():
 def applicant():
     return Content.load_applicants()
 
-@app.route("/applicantspecific", methods=["POST"])
+@app.route("/applicantspecific", methods=["POST", "GET"])
 def applicant_specific():
     db_conn = dbConnection(
         dbname=os.getenv("DBNAME"),
@@ -217,20 +217,26 @@ def applicant_specific():
     user_id = data.get('user_id')
     recruitment_id = data.get('recruitment_id')
 
-    userdata = db_retrieve.retrieve_one("users", "fullname, phone", "userid = %s", (user_id,))
+    userdata = db_retrieve.retrieve_one("users", "username, fullname, phone", "userid = %s", (user_id,))
     applicantdata = db_retrieve.retrieve_one("application", "*", "userid = %s and recruitmentid = %s", (user_id, recruitment_id))
 
-    return redirect(".applicant_specc"
-                        #    fullname=userdata["fullname"],
-                        #    tpnumber=applicantdata["tpnumber"],
-                        #    eventposition=applicantdata["eventposition"],
-                        #    phonenumber=userdata["phone"],
-                        #    description=applicantdata["description"],
-                        #    recruitmentid=recruitment_id
-                           )
+    session_data = ['APP_FNAME', 'APP_TPNUMBER', 'APP_EVPOS', 'APP_PHONE', 'APP_DESC', 'APP_RID','APP_NAME']
+    for i in session_data:
+        session.pop(i, None)
 
-@app.route("/test", methods=["GET"])
+    session['APP_NAME'] = userdata["username"]
+    session['APP_FNAME'] = userdata["fullname"]
+    session['APP_TPNUMBER'] = applicantdata["tpnumber"]
+    session['APP_EVPOS'] = applicantdata["eventposition"]
+    session['APP_PHONE'] = userdata["phone"]
+    session['APP_DESC'] = applicantdata["description"]
+    session['APP_RID'] = recruitment_id
+    print(session)
+    return render_template("recruitment-aplication-specific.html")
+
+@app.route("/test", methods=["GET", "POST"])
 def applicant_specc():
+    # print(f'Second: {session}\n')
     return render_template("recruitment-aplication-specific.html")
 
 
@@ -312,77 +318,80 @@ def RecruitmentApplication():
 #Finished
 @app.route('/dashboard', methods=['POST', 'GET'])
 def Dashboard():
-    db_conn = dbConnection( 
-        dbname= os.getenv("DBNAME"),
-        user = os.getenv("USER"),
-        password = os.getenv("PASSWORD"),
-    )
-    db_conn.connect()
+    if session.get("role") == "A":
+        db_conn = dbConnection( 
+            dbname= os.getenv("DBNAME"),
+            user = os.getenv("USER"),
+            password = os.getenv("PASSWORD"),
+        )
+        db_conn.connect()
 
-    database_value = request.form.get('database', 'users')
-    filter_value = request.form.get('filter', 'all-time')
-    # range_value = request.form.get('range', '1') 
+        database_value = request.form.get('database', 'users')
+        filter_value = request.form.get('filter', 'all-time')
+        # range_value = request.form.get('range', '1') 
 
-    db_chart = dbChart(db_conn)
-    db_retrieve = dbRetrieve(db_conn)
+        db_chart = dbChart(db_conn)
+        db_retrieve = dbRetrieve(db_conn)
 
-    user_count_result = db_retrieve.retrieve("users", "COUNT(*)")
-    user_count = user_count_result[0][0]
+        user_count_result = db_retrieve.retrieve("users", "COUNT(*)")
+        user_count = user_count_result[0][0]
 
-    post_count_result = db_retrieve.retrieve("post", "COUNT(*)")
-    post_count = post_count_result[0][0]
+        post_count_result = db_retrieve.retrieve("post", "COUNT(*)")
+        post_count = post_count_result[0][0]
 
-    comment_count_result = db_retrieve.retrieve("postcomment", "COUNT(*)")
-    comment_count = comment_count_result[0][0]
+        comment_count_result = db_retrieve.retrieve("postcomment", "COUNT(*)")
+        comment_count = comment_count_result[0][0]
 
-    recruitment_count_result = db_retrieve.retrieve("recruitment", "COUNT(*)")
-    recruitment_count = recruitment_count_result[0][0]
+        recruitment_count_result = db_retrieve.retrieve("recruitment", "COUNT(*)")
+        recruitment_count = recruitment_count_result[0][0]
 
-    application_count_result = db_retrieve.retrieve("application", "COUNT(*)")
-    application_count = application_count_result[0][0]
+        application_count_result = db_retrieve.retrieve("application", "COUNT(*)")
+        application_count = application_count_result[0][0]
 
-    banned_count_result = db_retrieve.retrieve("users", "COUNT(*)", "penalty = %s", ('b',))
-    banned_count = banned_count_result[0][0]  
+        banned_count_result = db_retrieve.retrieve("users", "COUNT(*)", "penalty = %s", ('b',))
+        banned_count = banned_count_result[0][0]  
 
-    muted_count_result = db_retrieve.retrieve("users", "COUNT(*)", "penalty = %s", ('m',))
-    muted_count = muted_count_result[0][0]
+        muted_count_result = db_retrieve.retrieve("users", "COUNT(*)", "penalty = %s", ('m',))
+        muted_count = muted_count_result[0][0]
 
-    reported_count_result = db_retrieve.retrieve("reports", "COUNT(*)")
-    reported_count = reported_count_result[0][0]
+        reported_count_result = db_retrieve.retrieve("reports", "COUNT(*)")
+        reported_count = reported_count_result[0][0]
 
-    # chart_html = chart.plot_graph(
-    #     # duration=(filter_value, int(range_value)),
-    #     duration = (filter_value, 1),
-    #     tablename = database_value, 
-    #     # column="registerdate", 
-    #     # xLabel="Registration Date", 
-    #     # yLabel="Number of Users", 
-    #     # title="Registered Users Over Time", 
-    #     # lineLabel="Registered Users"
-    # )
-    count = comment_count + recruitment_count
+        # chart_html = chart.plot_graph(
+        #     # duration=(filter_value, int(range_value)),
+        #     duration = (filter_value, 1),
+        #     tablename = database_value, 
+        #     # column="registerdate", 
+        #     # xLabel="Registration Date", 
+        #     # yLabel="Number of Users", 
+        #     # title="Registered Users Over Time", 
+        #     # lineLabel="Registered Users"
+        # )
+        count = comment_count + recruitment_count
 
-    chart_html = db_chart.set_graph(database_value, filter_value)
+        chart_html = db_chart.set_graph(database_value, filter_value)
 
-    db_conn.close()
-    if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
-        return jsonify({'chart': chart_html})
+        db_conn.close()
+        if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
+            return jsonify({'chart': chart_html})
 
-    return render_template(
-        "dashboard.html", 
-        chart=chart_html, 
-        filter_value=filter_value, 
-        database_value=database_value, 
-        # range_value=range_value, 
-        user_count=user_count,
-        post_count=post_count,
-        comment_count=count,
-        recruitment_count=recruitment_count,
-        application_count=application_count,
-        banned_count=banned_count, 
-        muted_count=muted_count,
-        reported_count=reported_count,
-    )
+        return render_template(
+            "dashboard.html", 
+            chart=chart_html, 
+            filter_value=filter_value, 
+            database_value=database_value, 
+            # range_value=range_value, 
+            user_count=user_count,
+            post_count=post_count,
+            comment_count=count,
+            recruitment_count=recruitment_count,
+            application_count=application_count,
+            banned_count=banned_count, 
+            muted_count=muted_count,
+            reported_count=reported_count,
+        )
+    else:
+        return redirect('/')
 
 
 @app.route('/editpost', methods=['POST'])
