@@ -1,11 +1,10 @@
-from flask import Flask, render_template, session, request, jsonify, redirect, url_for, render_template_string
+from flask import Flask, render_template, session, request, jsonify, redirect, url_for
 from auth import auth
 from user_profile import user_profile
 # import psycopg2
 import os
 from dotenv import load_dotenv
 from datetime import datetime, timedelta
-from werkzeug.exceptions import HTTPException
 
 
 from ConnectDatabase import dbConnection
@@ -63,6 +62,8 @@ def forum():
 def post():
     return Content.load_post()
 
+
+
 #Finished
 @app.route('/engagement', methods=['POST'])
 def engagement():
@@ -110,14 +111,12 @@ def create_comment():
 
     if post_type == "post":
         inserted = db_insert.insert("PostComment", (user_id, post_id, comment))
-        comment_id = inserted.get("postcommentid")
     elif post_type == "recruitment":
         inserted = db_insert.insert("RecruitmentComment", (user_id, post_id, comment))
-        comment_id = inserted.get("recruitmentcommentid")
     else:
         return redirect(url_for('auth.login'))
-    
-
+    comment_id = inserted.get("postcommentid")
+    print("creating")
     return jsonify({ "username":user_data["username"], "pfp":user_data["profilepicture"], "comment_id":comment_id})
 
 @app.route("/deletecomment", methods=["POST"])
@@ -152,73 +151,6 @@ def create_post():
         return render_template('createpost.html')
     else:
         return redirect(url_for('auth.login'))
-
-@app.route("/createapplication", methods=["GET", "POST"])
-def create_application():
-    user_id = session.get('id')
-    if not user_id:
-        return redirect(url_for('auth.login'))
-
-    db_conn = dbConnection(
-        dbname=os.getenv("DBNAME"),
-        user=os.getenv("USER"),
-        password=os.getenv("PASSWORD"),
-    )
-
-    db_conn.connect()
-    db_insert = dbInsert(db_conn)
-    db_retrieve = dbRetrieve(db_conn)
-
-    recruitment = request.form.get("recruitmentid")
-    eventposition = request.form.get("position")
-    tpnumber = request.form.get("tpnumber")
-    description = request.form.get("description")
-    status = "Pending"
-
-    check_recruitment = db_retrieve.retrieve_one("recruitment", "recruitmentid", "recruitmentid=%s and status=%s", (recruitment, True))
-    
-    if not check_recruitment:
-        return redirect(url_for('Recruitment'))
-
-    try:
-        value = db_insert.insert("Application", (recruitment, user_id, tpnumber, eventposition, description, status))
-        return redirect(url_for('Recruitment'))
-    except Exception as e:
-        return redirect(url_for('Recruitment'))
-
-@app.route("/load_application", methods=["GET", "POST"])
-def application():
-    return Content.load_application()
-
-@app.route("/load_applicant", methods=["GET", "POST"])
-def applicant():
-    return Content.load_applicants()
-
-@app.route("/applicantspecific", methods=["GET", "POST"])
-def applicant_specific():
-    db_conn = dbConnection(
-        dbname=os.getenv("DBNAME"),
-        user=os.getenv("USER"),
-        password=os.getenv("PASSWORD"),
-    )
-
-    db_conn.connect()
-    db_retrieve = dbRetrieve(db_conn)
-
-    recruitmentid = 1
-    userid = 1
-
-    userdata = db_retrieve.retrieve_one("users", "fullname, phone", "userid = %s", (userid,))
-    applicantdata = db_retrieve.retrieve_one("application", ", phone", "userid = %s", (userid,))
-
-    return render_template("recruitment-aplication-specific.html", 
-                           fullname=userdata["fullname"],
-                           tpnumber=applicantdata["tpnumber"],
-                           eventposition=applicantdata["eventposition"],
-                           phonenumber=userdata["phone"],
-                           description=applicantdata["description"],
-                           recruitmentid=recruitmentid
-                           )
 
 #Finished
 @app.route('/upload', methods=["GET", "POST"])
@@ -272,26 +204,7 @@ def Recruitment():
 
 @app.route('/recruitment-application', methods=['POST', 'GET'])
 def RecruitmentApplication():
-    user_id = session.get('id')
-    if not user_id:
-        return redirect(url_for('auth.login'))
-
-    db_conn = dbConnection(
-        dbname=os.getenv("DBNAME"),
-        user=os.getenv("USER"),
-        password=os.getenv("PASSWORD"),
-    )
-
-    db_conn.connect()
-    db_retrieve = dbRetrieve(db_conn)
-    recruitmentid = request.args.get('postid') 
-
-    recruitment = db_retrieve.retrieve_one("recruitment", "image", "recruitmentid=%s and status=%s", (recruitmentid, "true"))
-
-    if not recruitment:
-        return redirect(url_for('forum'))
-
-    return render_template("recruitment_application.html", image=recruitment["image"], recruitmentid=recruitmentid)
+    return render_template("recruitment_application.html")
 
 
 
@@ -453,22 +366,7 @@ def EditForumPost():
 def EditRecruitmentPost():
     return render_template('editrecruitmentpost.html')
 
-@app.errorhandler(500)
-def page_not_found(e):
-    return render_template_string('Page Not Found {{ errorCode }}', errorCode='500'), 500
-
-@app.errorhandler(404)
-def page_not_found(e):
-    return render_template_string('Page Not Found {{ errorCode }}', errorCode='404'), 404
-
-@app.errorhandler(Exception)
-def handle_exception(e):
-    if isinstance(e, HTTPException):
-        return "<h1>Seems like the page you are trying to find does not exist.</h1>"
-
-    return "<h1>Seems like the page you are trying to find does not exist.</h1>"
-
 
 
 if __name__ == "__main__":
-    app.run()
+    app.run(debug=True)
