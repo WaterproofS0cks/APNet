@@ -61,10 +61,6 @@ class dbRetrieve:
             FROM Users u
             JOIN PenaltyHistory ph ON u.userID = ph.userID
             WHERE u.penalty IS NOT NULL
-            AND ph.timestamp = (
-                SELECT MAX(timestamp) FROM PenaltyHistory 
-                WHERE userID = u.userID
-            )
         """
         self.execute_query(query, cursor_type='dict')
         return self.db_connection.cur.fetchall()

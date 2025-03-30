@@ -221,7 +221,6 @@ def applicant_specific():
         userdata = db_retrieve.retrieve_one("users", "username, fullname, phone", "userid = %s", (user_id,))
         applicantdata = db_retrieve.retrieve_one("application", "*", "userid = %s and recruitmentid = %s", (user_id, recruitment_id))
 
-
         session['APP_NAME'] = userdata["username"]
         session['APP_FNAME'] = userdata["fullname"]
         session['APP_TPNUMBER'] = applicantdata["tpnumber"]
