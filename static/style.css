@@ -3431,14 +3431,17 @@ input[type="submit"]:hover {
     display: flex;
     flex-direction: column;
     justify-content: center;
+
+    overflow-x: auto;
+    white-space: nowrap;
 }
 
-.profile-desc h2 {
+.profile-desc-name {
     display: inline-flex;
     align-items: center;
 }
 
-.profile-desc p {
+.profile-desc-bio {
     margin-top: 8px;
     font-size: 1rem;
     color: #666;
