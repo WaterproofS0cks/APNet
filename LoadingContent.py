@@ -506,6 +506,7 @@ class Content():
         for recruitment in recruitments:
 
             applicant_columns = """
+                users.userid AS applicant_userid, 
                 users.username AS applicant_username, 
                 users.fullname AS applicant_fullname, 
                 users.email AS applicant_email,
@@ -547,22 +548,36 @@ class Content():
                     applicant_id_tag =""
                     
                 html += f"""
-                    <a href="#" class="click-card-url">
-                        <div class="applicant-card {applicant_id_tag}"><p class=applicant-card-text>{applicant['applicant_username']}</p></div>
-                    </a>
+                    <button class="applicant-card" 
+                    {applicant_id_tag} 
+                    data-applicant-id="{applicant['applicant_userid']}" 
+                    data-recruitment-id="{recruitment['recruitmentid']}" 
+                    onclick="IAMLOSINGMYMIND(this)">
+                    {applicant['applicant_username']}
+                    </button>
                 """
+                
 
             for applicant in applicants[4:]:
                 html += f"""
-                    <a href="#" class="click-card-url">
-                        <div class="applicant-card applicant-extra" data-recruitment-id="{recruitment['recruitmentid']}"><p class=applicant-card-text>{applicant['applicant_fullname']}</p></div>
-                    </a>
+                    <button class="applicant-card applicant-extra" 
+                    {applicant_id_tag} 
+                    data-applicant-id="{applicant['applicant_userid']}" 
+                    data-recruitment-id="{recruitment['recruitmentid']}" 
+                    onclick="IAMLOSINGMYMIND(this)">
+                    {applicant['applicant_username']}
+                    </button>
                 """
 
             if len(applicants) > 4:
-                html += f"""
-                    <p id="applicant-view-{recruitment['recruitmentid']}" class="applicant-view" data-recruitment-id="{recruitment['recruitmentid']}" onclick="viewToggle(this)">View more</p>
-                """
+                    html += f"""
+                        <p id="applicant-view-{recruitment['recruitmentid']}" 
+                        class="applicant-view" 
+                        data-recruitment-id="{recruitment['recruitmentid']}" 
+                        onclick="viewToggle(this)">
+                        View more
+                        </p>
+                    """
             elif len(applicants) < 1:
                 html += f"""
                     <p>No One Applied Yet D:</p>

@@ -11,7 +11,7 @@
         </div>
 
         <!-- This is a single application post -->
-        <div class="activity-card">
+        <!-- <div class="activity-card">
             <div class="activity-flex">
                 <div class="activity-attr">
                     <sub>Date</sub>
@@ -29,13 +29,13 @@
             </div>
             <div class="activity-margin">
                 <h3>Applicants</h3>
-                <div class="applicant-flex">
+                <div class="applicant-flex"> -->
                     <!-- <a href="#" class="click-card-url">
                         <div class="applicant-card" id="applicant-accepted">Emily</div>
                     </a> -->
 
                     
-                    <button class="applicant-card" id="applicant-accepted" onclick="IAMLOSINGMYMIND()">Emily</button>
+                    <!-- <button class="applicant-card" id="applicant-accepted" onclick="IAMLOSINGMYMIND()">Emily</button>
 
                     <button class="applicant-card" id="applicant-rejected" onclick="IAMLOSINGMYMIND()">Ryan</button>
 
@@ -59,7 +59,7 @@
                 </div>
                 <p id="applicant-view" class="applicant-view" onclick="viewToggle()">View more</p>
             </div>
-        </div>
+        </div> -->
 
         <!-- Add additional application posts here -->
 
@@ -95,15 +95,16 @@
             .catch(error => console.error("Problem with the loading applicant T-T... AGAIN", error));
         }
 
-        function IAMLOSINGMYMIND(user_id, recruitment_id) {
+        function IAMLOSINGMYMIND(button) {
+            const user_id = button.dataset.applicantId;
+            const recruitment_id = button.dataset.recruitmentId;
+            
             fetch('/applicantspecific', {
                 method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ user_id: user_id, recruitment_id: recruitment_id})
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ user_id: user_id, recruitment_id: recruitment_id })
             })
-            .catch(error => console.error("Error sending request:", error));
+            .catch(error => console.error("Error:", error));
         }
 
         document.addEventListener("DOMContentLoaded", function() {

@@ -193,7 +193,7 @@ def application():
 def applicant():
     return Content.load_applicants()
 
-@app.route("/applicantspecific", methods=["GET", "POST"])
+@app.route("/applicantspecific", methods=["POST"])
 def applicant_specific():
     db_conn = dbConnection(
         dbname=os.getenv("DBNAME"),
@@ -204,11 +204,15 @@ def applicant_specific():
     db_conn.connect()
     db_retrieve = dbRetrieve(db_conn)
 
-    recruitmentid = 1
-    userid = 1
+    data = request.get_json()
+    user_id = data.get('user_id')
+    recruitment_id = data.get('recruitment_id')
+    print(data)
 
-    userdata = db_retrieve.retrieve_one("users", "fullname, phone", "userid = %s", (userid,))
-    applicantdata = db_retrieve.retrieve_one("application", "*", "userid = %s and recruitmentid = %s", (userid, recruitmentid))
+    userdata = db_retrieve.retrieve_one("users", "fullname, phone", "userid = %s", (user_id,))
+    applicantdata = db_retrieve.retrieve_one("application", "*", "userid = %s and recruitmentid = %s", (user_id, recruitment_id))
+    print(userdata)
+    print(applicantdata)
 
     return render_template("recruitment-aplication-specific.html", 
                            fullname=userdata["fullname"],
@@ -216,7 +220,7 @@ def applicant_specific():
                            eventposition=applicantdata["eventposition"],
                            phonenumber=userdata["phone"],
                            description=applicantdata["description"],
-                           recruitmentid=recruitmentid
+                           recruitmentid=recruitment_id
                            )
 
 #Finished
