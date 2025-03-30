@@ -39,12 +39,18 @@ const post_type = scriptTag.getAttribute("data-type") || "";
     function deletePost(button) {
         var postLayout = button.closest('.fm-post-layout');
         var postId = postLayout.getAttribute('data-post-id');
+        var postType = postLayout.getAttribute('data-post-type');
         
-        fetch("/delete-post", {
+        fetch("/deletepost", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ postId: postId, post_type: post_type })
-        });
+            body: JSON.stringify({ Id: postId, post_type: postType })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) postLayout.remove();
+        })
+        .catch(() => alert('Error deleting post.'));
     }
 
     window.reportPost = reportPost;

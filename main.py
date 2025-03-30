@@ -318,7 +318,7 @@ def RecruitmentApplication():
 #Finished
 @app.route('/dashboard', methods=['POST', 'GET'])
 def Dashboard():
-    if session.get("role") == "A":
+    if session.get("role") == "U":
         db_conn = dbConnection( 
             dbname= os.getenv("DBNAME"),
             user = os.getenv("USER"),
@@ -430,10 +430,6 @@ def Report():
     post_type = data.get('post_type')
     status = "Processing"
 
-
-
-    placement = int(placementid)
-
     if post_type == "post":
         post = "Forum"
     elif post_type == "recruitment":
@@ -441,12 +437,34 @@ def Report():
     else:
         post = "User"
 
-    db_insert.insert("Reports", (placement, post, status))
-    
-    return redirect("/")
+    db_insert.insert("Reports", (placementid, post, status))
+    return redirect(url_for('forum'))
 
 
+@app.route('/deletepost', methods=['POST'])
+def Delete():
+    db_conn = dbConnection(
+        dbname=os.getenv("DBNAME"),
+        user=os.getenv("USER"),
+        password=os.getenv("PASSWORD"),
+    )
 
+    db_conn.connect()
+    db_modify = dbModify(db_conn)
+
+    data = request.get_json()
+    id = data.get('Id')
+    post_type = data.get('post_type')
+
+    try:
+        if post_type == "post":
+            db_modify.delete("post", {"postid": id})
+        elif post_type == "recruitment":
+            db_modify.delete("recruitment", {"recruitmentid": id})
+
+        return jsonify({"success": True})
+    except Exception as e:
+        return jsonify({"success": False})
 
 
 @app.route('/load_tables', methods=['GET'])
