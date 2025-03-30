@@ -193,6 +193,31 @@ def application():
 def applicant():
     return Content.load_applicants()
 
+@app.route("/applicantspecific", methods=["GET", "POST"])
+def applicant_specific():
+    db_conn = dbConnection(
+        dbname=os.getenv("DBNAME"),
+        user=os.getenv("USER"),
+        password=os.getenv("PASSWORD"),
+    )
+
+    db_conn.connect()
+    db_insert = dbRetrieve(db_conn)
+
+
+    recruitmentid = request.form["recruitment_id"]
+    userid = request.form["user_id"]
+
+
+
+    return render_template("recruitment-aplication-specific.html", 
+                           fullname= ,
+                           tpnumber= ,
+                           eventposition= ,
+                           phonenumber= ,
+                           description= ,
+                           )
+
 #Finished
 @app.route('/upload', methods=["GET", "POST"])
 def upload_post():

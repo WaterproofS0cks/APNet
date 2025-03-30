@@ -83,34 +83,25 @@
         function loadApplicants() {
             fetch('/load_applicant', {
                 method: 'GET',
-                headers: {
-                    'Content-Type': 'application/json',
-                }
+                headers: { 'Content-Type': 'application/json' }
             })
             .then(response => response.json())
             .then(data => {
-                if (data.html) {
-                    console.log(data.html);
-                    const applicationsContainer = document.getElementById("applications-list");
-                    
-                    applicationsContainer.innerHTML = data.html;
-                } else {
-                    console.error("No HTML content received.");
-                }
+                const applicationsContainer = document.getElementById("applications-list");
+                applicationsContainer.innerHTML = data.html;
             })
-            .catch(error => {
-                console.error("Error fetching applicants:", error);
-            });
+            .catch(error => console.error("Problem with the loading applicant T-T... AGAIN", error));
         }
 
-        function IAMLOSINGMYMIND() {
+        function IAMLOSINGMYMIND(user_id, recruitment_id) {
             fetch('/applicantspecific', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                }
+                },
+                body: JSON.stringify({ user_id: user_id, recruitment_id: recruitment_id})
             })
-
+            .catch(error => console.error("Error sending request:", error));
         }
 
         document.addEventListener("DOMContentLoaded", function() {

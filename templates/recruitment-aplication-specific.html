@@ -75,28 +75,29 @@
             </div>
 
             <div class="rcas-fullname-container">
-                <h2>Full Name</h2>
-                <input type="text" id="rcas-fullname" value="INSERT FULLNAME" readonly>
+                <h2>Full Name</h2>   
+                                                        
+                <input type="text" id="rcas-fullname" value="{{ fullname }}" readonly>
             </div>
             
             <div class="rcas-tpno-container">
                 <h2>TP Number</h2>
-                <input type="text" id="rcas-tpno" value="INSERT TP NUMBER" readonly>
+                <input type="text" id="rcas-tpno" value="{{ tpnumber }}" readonly>
             </div>
     
             <div class="rcas-role-container">
                 <h2>Event Position</h2>
-                <input type="text" id="rcas-role" value="INSERT EVENT POSITION" readonly>
+                <input type="text" id="rcas-role" value="{{ eventposition }}" readonly>
             </div>
     
             <div class="rcas-phoneno-container">
                 <h2>Phone Number</h2>
-                <input type="text" id="rcas-phoneno" value="INSERT PHONE NUMBER" readonly>
+                <input type="text" id="rcas-phoneno" value="{{ phonenumber }}" readonly>
             </div>
 
             <div class="rcas-desc-container">
                 <h2>Tell us a little more about yourself</h2>
-                <textarea name="" id="" cols="99" rows="18" placeholder="INSERT INFO STUFF THINGGY" readonly></textarea>
+                <textarea name="" id="" cols="99" rows="18" placeholder="{{ description }}" readonly></textarea>
             </div>
     
             <form action="" id="rcas-form">
