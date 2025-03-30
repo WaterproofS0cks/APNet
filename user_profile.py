@@ -221,7 +221,6 @@ def updateProfile():
 
     return redirect("/user/profile")
 
-
 # @user_profile.route('/updateAccount', methods=['POST'])
 # def updateProfile():
 
