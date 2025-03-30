@@ -220,6 +220,8 @@ def applicant_specific():
 
         userdata = db_retrieve.retrieve_one("users", "username, fullname, phone", "userid = %s", (user_id,))
         applicantdata = db_retrieve.retrieve_one("application", "*", "userid = %s and recruitmentid = %s", (user_id, recruitment_id))
+        recruitmentdata = db_retrieve.retrieve_one("recruitment", "image", "recruitmentid = %s", (recruitment_id,))
+        
 
         session['APP_NAME'] = userdata["username"]
         session['APP_FNAME'] = userdata["fullname"]
@@ -227,18 +229,13 @@ def applicant_specific():
         session['APP_EVPOS'] = applicantdata["eventposition"]
         session['APP_PHONE'] = userdata["phone"]
         session['APP_DESC'] = applicantdata["description"]
+        session['APP_IMG'] = recruitmentdata["image"]
         session['APP_RID'] = recruitment_id
         # session_data = ['APP_FNAME', 'APP_TPNUMBER', 'APP_EVPOS', 'APP_PHONE', 'APP_DESC', 'APP_RID','APP_NAME']
         # for i in session_data:
         #     session.pop(i, None)
     finally:
         return render_template("recruitment-aplication-specific.html")
-
-@app.route("/test", methods=["GET", "POST"])
-def applicant_specc():
-    # print(f'Second: {session}\n')
-    return render_template("recruitment-aplication-specific.html")
-
 
 #Finished
 @app.route('/upload', methods=["GET", "POST"])

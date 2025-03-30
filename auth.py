@@ -24,7 +24,9 @@ def login():
         try:
             cur.execute("SELECT EXISTS (SELECT 1 FROM Users WHERE email = %s AND password = %s)", credentials)
             check = cur.fetchone()
-            if check[0]:
+            cur.execute("SELECT penalty FROM Users WHERE email = %s", (credentials[0],))
+            penalty = cur.fetchone()
+            if check[0] and penalty[0] != "B":
                 date = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
                 cur.execute("UPDATE Users SET LastLogin = %s WHERE email = %s", (date, client["email"]))
                 conn.commit()
@@ -44,6 +46,8 @@ def login():
                 session['penalty'] = user_data[9]
                 #[TODO] Add entry to Activity Table
                 return redirect('/')
+            elif  penalty[0] == "B":
+                return render_template("banned.html")
             else:
                 return render_template("login.html", errmsg="Email or Password incorrect. Please try again")
         except Exception as e:
@@ -151,5 +155,4 @@ def logout():
     session_data = ['id', 'user', 'fname', 'bio', 'link', 'role', 'email', 'gender', 'pfp', 'penalty', 'fullname', 'phone']
     for i in session_data:
         session.pop(i, None)
-    print(session)
     return redirect(url_for('.login'))
