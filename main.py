@@ -110,12 +110,14 @@ def create_comment():
 
     if post_type == "post":
         inserted = db_insert.insert("PostComment", (user_id, post_id, comment))
+        comment_id = inserted.get("postcommentid")
     elif post_type == "recruitment":
         inserted = db_insert.insert("RecruitmentComment", (user_id, post_id, comment))
+        comment_id = inserted.get("recruitmentcommentid")
     else:
         return redirect(url_for('auth.login'))
-    comment_id = inserted.get("postcommentid")
-    print("creating")
+    
+
     return jsonify({ "username":user_data["username"], "pfp":user_data["profilepicture"], "comment_id":comment_id})
 
 @app.route("/deletecomment", methods=["POST"])
@@ -435,6 +437,7 @@ def handle_exception(e):
         return "<h1>Seems like the page you are trying to find does not exist.</h1>"
 
     return "<h1>Seems like the page you are trying to find does not exist.</h1>"
+
 
 if __name__ == "__main__":
     app.run()
