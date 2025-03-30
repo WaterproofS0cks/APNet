@@ -1,2 +1,4 @@
+**/__pycache__/
+**/static/src/post/
 .venv
 .env
