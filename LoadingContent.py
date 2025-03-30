@@ -552,7 +552,7 @@ class Content():
                     data-applicant-id="{applicant['applicant_userid']}" 
                     data-recruitment-id="{recruitment['recruitmentid']}" 
                     onclick="IAMLOSINGMYMIND(this)">
-                    {applicant['applicant_username']}
+                    <p class="applicant-card-text">{applicant['applicant_username']}</p>
                     </a>
                 """
                 
@@ -564,7 +564,7 @@ class Content():
                     data-applicant-id="{applicant['applicant_userid']}" 
                     data-recruitment-id="{recruitment['recruitmentid']}" 
                     onclick="IAMLOSINGMYMIND(this)">
-                    {applicant['applicant_username']}
+                    <p class="applicant-card-text">{applicant['applicant_username']}</p>
                     </a>
                 """
 
