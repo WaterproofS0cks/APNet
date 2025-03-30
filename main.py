@@ -190,6 +190,11 @@ def create_application():
 def application():
     return Content.load_application()
 
+@app.route("/load_applicant", methods=["GET", "POST"])
+def applicant():
+    return Content.load_applicants()
+
+
 #Finished
 @app.route('/upload', methods=["GET", "POST"])
 def upload_post():
