@@ -214,14 +214,18 @@ def applicant_specific():
     print(userdata)
     print(applicantdata)
 
-    return render_template("recruitment-aplication-specific.html", 
-                           fullname=userdata["fullname"],
-                           tpnumber=applicantdata["tpnumber"],
-                           eventposition=applicantdata["eventposition"],
-                           phonenumber=userdata["phone"],
-                           description=applicantdata["description"],
-                           recruitmentid=recruitment_id
+    return redirect(".applicant_specc"
+                        #    fullname=userdata["fullname"],
+                        #    tpnumber=applicantdata["tpnumber"],
+                        #    eventposition=applicantdata["eventposition"],
+                        #    phonenumber=userdata["phone"],
+                        #    description=applicantdata["description"],
+                        #    recruitmentid=recruitment_id
                            )
+
+@app.route("/test", methods=["GET"])
+def applicant_specc():
+    return render_template("recruitment-aplication-specific.html")
 
 #Finished
 @app.route('/upload', methods=["GET", "POST"])
