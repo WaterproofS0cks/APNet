@@ -164,7 +164,6 @@ class dbRetrieve:
             LIMIT %s
         """
         params.append(entries_per_page)
-        print(base_query)
         try:
             return self.execute_query(base_query, params, cursor_type='dict')
         except Exception as e:
