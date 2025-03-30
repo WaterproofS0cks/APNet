@@ -209,7 +209,7 @@ def applicant_specific():
     userid = 1
 
     userdata = db_retrieve.retrieve_one("users", "fullname, phone", "userid = %s", (userid,))
-    applicantdata = db_retrieve.retrieve_one("application", ", phone", "userid = %s", (userid,))
+    applicantdata = db_retrieve.retrieve_one("application", "*", "userid = %s and recruitmentid = %s", (userid, recruitmentid))
 
     return render_template("recruitment-aplication-specific.html", 
                            fullname=userdata["fullname"],
@@ -471,4 +471,4 @@ def handle_exception(e):
 
 
 if __name__ == "__main__":
-    app.run()
+    app.run(debug=True)
