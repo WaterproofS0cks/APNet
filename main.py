@@ -256,7 +256,8 @@ def upload_post():
         caption = request.form["caption"]
         title = request.form.get("title", None)
         file = request.files.get('file')
-           
+        
+        
         filename = None
         if file:
             filename = uploader.upload(file)
