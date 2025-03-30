@@ -539,9 +539,9 @@ class Content():
 
             applicants_to_display = applicants[:4]
             for applicant in applicants_to_display:
-                if applicant['status'] == 'Accepted':
+                if applicant['application_status'] == 'Accepted':
                     applicant_id_tag = 'id="applicant-accepted"'
-                elif applicant['status'] == 'Rejected':
+                elif applicant['application_status'] == 'Rejected':
                     applicant_id_tag = 'id="applicant-rejected"'
                 else:
                     applicant_id_tag =""
