@@ -27,14 +27,20 @@
         var postLayout = button.closest('.fm-post-layout');
         var postId = postLayout.getAttribute('data-post-id');
         var postType = postLayout.getAttribute('data-post-type');
-        
+    
         fetch("/editpost", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ post_id: postId, post_type: postType })
+        })
+        .then(response => {
+            if (response.redirected) {
+                window.location.href = response.url;
+            }
+        })
+        .catch(error => {
+            console.error('Error with the fetch request:', error);
         });
-
-        window.location.replace("/forum-edit");
     }
 
     function deletePost(button) {
