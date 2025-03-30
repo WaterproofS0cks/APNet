@@ -548,14 +548,14 @@ class Content():
                     
                 html += f"""
                     <a href="#" class="click-card-url">
-                        <div class="applicant-card {applicant_id_tag}">{applicant['applicant_username']}</div>
+                        <div class="applicant-card {applicant_id_tag}"><p class=applicant-card-text>{applicant['applicant_username']}</p></div>
                     </a>
                 """
 
             for applicant in applicants[4:]:
                 html += f"""
                     <a href="#" class="click-card-url">
-                        <div class="applicant-card applicant-extra" data-recruitment-id="{recruitment['recruitmentid']}">{applicant['applicant_fullname']}</div>
+                        <div class="applicant-card applicant-extra" data-recruitment-id="{recruitment['recruitmentid']}"><p class=applicant-card-text>{applicant['applicant_fullname']}</p></div>
                     </a>
                 """
 
