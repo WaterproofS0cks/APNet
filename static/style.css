@@ -5060,3 +5060,37 @@ input[type="submit"]:hover {
 .delete-comment-btn:hover {
     background-color: #d32f2f;
 }
+
+
+
+/* banned.html */
+
+.banned-body {
+    margin-top: 200px;
+    align-items: center;
+    background-color: #fff;
+}
+
+.banned-container {
+    text-align: center;
+    padding: 30px;
+    border-radius: 10px;
+}
+
+.banned-image {
+    height: 200px;
+    width: 200px;
+    margin-bottom: 20px;
+}
+
+.banned-title {
+    font-size: 48px;
+    font-weight: bold;
+    color: #721c24;
+}
+
+.banned-message {
+    font-size: 20px;
+    margin-top: 20px;
+    color: #721c24;
+}

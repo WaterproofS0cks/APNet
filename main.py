@@ -425,6 +425,12 @@ def EditRecruitmentPost():
     return render_template('editrecruitmentpost.html')
 
 
+# Banned
+@app.route('/banned', methods=['POST', 'GET'])
+def Banned():
+    return render_template("banned.html")
+
+
 
 if __name__ == "__main__":
     app.run(debug=True)
