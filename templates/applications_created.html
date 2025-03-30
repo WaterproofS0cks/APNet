@@ -2,7 +2,7 @@
 {% block title %}Applications{% endblock title %}
 {% block content %}
 <body>
-    <div class="applications-content-card">
+    <div class="applications-content-card" id="applications-content-card">
         <div class="card-header">
             <a href="/user/applications" class="btn-icon">
                 <img src="{{ url_for('static', filename='src/icon/icons8-back-96.png') }}" alt="Back Icon">
@@ -11,7 +11,7 @@
         </div>
 
         <!-- This is a single application post -->
-        <div class="activity-card">
+        <!-- <div class="activity-card">
             <div class="activity-flex">
                 <div class="activity-attr">
                     <sub>Date</sub>
@@ -29,9 +29,9 @@
             </div>
             <div class="activity-margin">
                 <h3>Applicants</h3>
-                <div class="applicant-flex">
+                <div class="applicant-flex"> -->
                     <!-- The first four applicants will be displayed by default -->
-                    <a href="#" class="click-card-url">
+                    <!-- <a href="#" class="click-card-url">
                         <div class="applicant-card" id="applicant-accepted">Emily</div>
                     </a>
                     <a href="#" class="click-card-url">
@@ -41,10 +41,10 @@
                         <div class="applicant-card">Olivia</div>
                     </a>
                     <a href="#" class="click-card-url">
-                        <div class="applicant-card">Lucas</div>
+                        <div class="applicant-card">Lucas</div> -->
                     </a>
                     <!-- Subsequent applicants will be hidden until the user press "View more" -->
-                    <a href="#" class="click-card-url">
+                    <!-- <a href="#" class="click-card-url">
                         <div class="applicant-card applicant-extra">Sophia</div>
                     </a>
                     <a href="#" class="click-card-url">
@@ -55,31 +55,60 @@
                     </a>
                     <a href="#" class="click-card-url">
                         <div class="applicant-card applicant-extra">Scott</div>
-                    </a>
-                </div>
+                    </a> -->
+                <!-- </div>
                 <p id="applicant-view" class="applicant-view" onclick="viewToggle()">View more</p>
             </div>
-        </div>
+        </div> -->
 
         <!-- Add additional application posts here -->
 
+        <div id="applications-list"></div>
     </div>
 
     <script>
-        function viewToggle() {
-            const additionalApplicants = document.querySelectorAll('.applicant-extra');
-            const viewMoreBtn = document.getElementById('applicant-view');
+        function viewToggle(button) {
+            const recruitmentId = button.getAttribute('data-recruitment-id');
+            const additionalApplicants = document.querySelectorAll(`.applicant-extra[data-recruitment-id="${recruitmentId}"]`);
 
             additionalApplicants.forEach(item => {
                 item.style.display = (item.style.display === 'none' || item.style.display === '') ? 'flex' : 'none';
             });
 
-            if (viewMoreBtn.innerText === 'View more') {
-                viewMoreBtn.innerText = 'View less';
+            if (button.innerText === 'View more') {
+                button.innerText = 'View less';
             } else {
-                viewMoreBtn.innerText = 'View more';
+                button.innerText = 'View more';
             }
         }
+
+        function loadApplicants() {
+            fetch('/load_applicant', {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.html) {
+                    console.log(data.html);
+                    const applicationsContainer = document.getElementById("applications-list");
+                    
+                    applicationsContainer.innerHTML = data.html;
+                } else {
+                    console.error("No HTML content received.");
+                }
+            })
+            .catch(error => {
+                console.error("Error fetching applicants:", error);
+            });
+        }
+
+        document.addEventListener("DOMContentLoaded", function() {
+            loadApplicants();
+    });
+
     </script>
 </body>
 {% endblock content %}

@@ -17,8 +17,6 @@ class Content():
         db_conn.connect()
         db_retrieve = dbRetrieve(db_conn)
 
-        
-
         search_term = request.args.get('search', '')
         loaded_ids = request.args.get('loaded_ids', default='[]', type=str)
         post_type = request.args.get('post_type')
@@ -314,9 +312,6 @@ class Content():
             bookmark_icon=bookmark_icon
         )
 
-
-
-    
     def load_recruitment_forum():
         post_id = request.args.get('postid', '')
         user_id = session.get('id')
@@ -365,7 +360,6 @@ class Content():
             like_count=count,
             bookmark_icon=bookmark_icon
         )
-    
     
     def load_comment():
         db_conn = dbConnection(
@@ -416,8 +410,6 @@ class Content():
             html += "</div>"
         print(html)
         return jsonify({"html": html})
-
-
 
     def load_application():
         db_conn = dbConnection(
@@ -484,20 +476,106 @@ class Content():
 
         return jsonify({"html": html})
     
-    def load_applicant(recruitment_id):
+    def load_applicants():
         db_conn = dbConnection(
-                dbname=os.getenv("DBNAME"),
-                user=os.getenv("USER"),
-                password=os.getenv("PASSWORD"),
+            dbname=os.getenv("DBNAME"),
+            user=os.getenv("USER"),
+            password=os.getenv("PASSWORD"),
         )
 
         db_conn.connect()
         db_retrieve = dbRetrieve(db_conn)
-        
 
-        user_data = db_retrieve.retrieve("application", "*", "userid = %s",(recruitment_id,))
-        
+        user_id = session.get("id")
+
+        recruitment_columns = """
+            recruitment.recruitmentID, 
+            recruitment.header, 
+            recruitment.description AS recruitment_description, 
+            TO_CHAR(recruitment.timestamp, 'DD Month YYYY') AS recruitment_timestamp, 
+            recruitment.image AS recruitment_image
+        """
+
+        recruitment_condition = "recruitment.userid = %s"
+        recruitment_params = (user_id,)
+
+        recruitments = db_retrieve.retrieve("Recruitment AS recruitment", recruitment_columns, recruitment_condition, recruitment_params)
+
+        html = ""
+
+        for recruitment in recruitments:
+
+            applicant_columns = """
+                users.username AS applicant_username, 
+                users.fullname AS applicant_fullname, 
+                users.email AS applicant_email,
+                application.status AS application_status
+            """
+
+            applicant_condition = "application.recruitmentid = %s"
+            applicant_params = (recruitment['recruitmentid'],)
+
+            applicants = db_retrieve.retrieve("Application AS application JOIN Users AS users ON application.userid = users.userid", applicant_columns, applicant_condition, applicant_params)
+
+            html += f"""
+            <div class="activity-card">
+                <div class="activity-flex">
+                    <div class="activity-attr">
+                        <sub>{recruitment["recruitment_timestamp"]}</sub>
+                        <h3>{recruitment["header"]}</h3>
+                        <div class="applications-activity-img-responsive">
+                            <img src="{recruitment["recruitment_image"]}" alt="Placeholder Image">
+                        </div>
+                        <p>{recruitment["recruitment_description"]}</p>
+                    </div>
+                    <div class="applications-activity-img">
+                        <img src="{recruitment["recruitment_image"]}" alt="Placeholder Image">
+                    </div>
+                </div>
+                <div class="activity-margin">
+                    <h3>Applicants</h3>
+                    <div class="applicant-flex">
+            """
+
+            applicants_to_display = applicants[:4]
+            for applicant in applicants_to_display:
+                if applicant['status'] == 'Accepted':
+                    applicant_id_tag = 'id="applicant-accepted"'
+                elif applicant['status'] == 'Rejected':
+                    applicant_id_tag = 'id="applicant-rejected"'
+                else:
+                    applicant_id_tag =""
+                    
+                html += f"""
+                    <a href="#" class="click-card-url">
+                        <div class="applicant-card {applicant_id_tag}">{applicant['applicant_fullname']}</div>
+                    </a>
+                """
+
+            for applicant in applicants[4:]:
+                html += f"""
+                    <a href="#" class="click-card-url">
+                        <div class="applicant-card applicant-extra" data-recruitment-id="{recruitment['recruitmentid']}">{applicant['applicant_fullname']}</div>
+                    </a>
+                """
+
+            if len(applicants) > 4:
+                html += f"""
+                    <p id="applicant-view-{recruitment['recruitmentid']}" class="applicant-view" data-recruitment-id="{recruitment['recruitmentid']}" onclick="viewToggle(this)">View more</p>
+                """
+            elif len(applicants) < 1:
+                html += f"""
+                    <p>No One Applied Yet D:</p>
+                """
+
+            html += f"""
+                    </div>
+                </div>
+            </div>
+            """
+
         return jsonify({"html": html})
+
 
     def load_penalized_users_table():
         db_conn = dbConnection(
