@@ -1,10 +1,11 @@
-from flask import Flask, render_template, session, request, jsonify, redirect, url_for, render_template_string
+from flask import Flask, render_template, session, request, jsonify, redirect, url_for
 from auth import auth
 from user_profile import user_profile
 # import psycopg2
 import os
 from dotenv import load_dotenv
 from datetime import datetime, timedelta
+from werkzeug.exceptions import HTTPException
 
 
 from ConnectDatabase import dbConnection
@@ -451,13 +452,13 @@ def EditForumPost():
 def EditRecruitmentPost():
     return render_template('editrecruitmentpost.html')
 
-@app.errorhandler(500)
-def page_not_found(e):
-    return render_template_string('Page Not Found {{ errorCode }}', errorCode='500'), 500
+@app.errorhandler(Exception)
+def handle_exception(e):
+    if isinstance(e, HTTPException):
+        return "<h1>Seems like the page you are trying to find does not exist.</h1>"
 
-@app.errorhandler(404)
-def page_not_found(e):
-    return render_template_string('Page Not Found {{ errorCode }}', errorCode='404'), 404
+    return "<h1>Seems like the page you are trying to find does not exist.</h1>"
+
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run()

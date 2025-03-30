@@ -1,0 +1,13 @@
+{% extends "header-c.html" %}
+{% block title %}Banned{% endblock title %}
+{% block content %}
+<body class="banned-body">
+
+    <div class="banned-container">
+        <img src="{{ url_for('static', filename='src/icon/banned.png') }}" alt="Banned Icon" class="banned-image">
+        <h1 class="banned-title">Banned</h1>
+        <p class="banned-message">You have been banned from APNet.</p>
+    </div>
+
+</body>
+{% endblock content %}
