@@ -547,7 +547,7 @@ class Content():
                     applicant_id_tag =""
                     
                 html += f"""
-                    <a class="applicant-card" href="/applicantspecific"
+                    <a class="applicant-card" 
                     {applicant_id_tag} 
                     data-applicant-id="{applicant['applicant_userid']}" 
                     data-recruitment-id="{recruitment['recruitmentid']}" 
