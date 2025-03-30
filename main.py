@@ -391,40 +391,64 @@ def Dashboard():
         return redirect('/')
 
 
+
+
 @app.route('/editpost', methods=['POST', 'GET'])
 def EditPost():
+
     db_conn = dbConnection(
         dbname=os.getenv("DBNAME"),
         user=os.getenv("USER"),
         password=os.getenv("PASSWORD"),
     )
-
     db_conn.connect()
     db_retrieve = dbRetrieve(db_conn)
+    
 
     data = request.get_json()
     postid = data.get('post_id')
     post_type = data.get('post_type')
-    
-    print(post_type)
+
 
     if post_type == "post":
         forumdata = db_retrieve.retrieve_one(post_type, "*", "postid = %s", (postid,))
+        return redirect(url_for('EditPostData', post_id=postid, post_type=post_type))
 
-        session['FORUM_IMAGE'] = forumdata["image"]
-        session['FORUM_DESC'] = forumdata["description"]
-    
     elif post_type == "recruitment":
-        recruitmentdata = db_retrieve.retrieve_one(post_type, "*", "postid = %s", (postid,))
-        return render_template("editrecruitmentpost.html",
-                            header=recruitmentdata["header"],
-                            image=recruitmentdata["image"],
-                            description=recruitmentdata["description"]
-                                )
-    
+        recruitmentdata = db_retrieve.retrieve_one(post_type, "*", "recruitmentid = %s", (postid,))
+        return redirect(url_for('EditPostData', post_id=postid, post_type=post_type))
+
+
 @app.route('/forum-edit', methods=['POST', 'GET'])
 def EditPostData():
-    return render_template("editforumpost.html")
+    post_id = request.args.get('post_id')
+    post_type = request.args.get('post_type')
+
+    db_conn = dbConnection(
+        dbname=os.getenv("DBNAME"),
+        user=os.getenv("USER"),
+        password=os.getenv("PASSWORD"),
+    )
+    db_conn.connect()
+    db_retrieve = dbRetrieve(db_conn)
+
+    if post_type == "post":
+        forumdata = db_retrieve.retrieve_one(post_type, "*", "postid = %s", (post_id,))
+        return render_template("editforumpost.html", 
+                               image=forumdata["image"], 
+                               description=forumdata["description"])
+    elif post_type == "recruitment":
+        recruitmentdata = db_retrieve.retrieve_one(post_type, "*", "recruitmentid = %s", (post_id,))
+        return render_template("editrecruitmentpost.html", 
+                               header=recruitmentdata["header"], 
+                               image=recruitmentdata["image"], 
+                               description=recruitmentdata["description"])
+    else:
+        return
+
+
+
+
 
     # [TODO] Save edited post data into database
 
