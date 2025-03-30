@@ -95,6 +95,14 @@
             .catch(error => console.error("Problem with the loading applicant T-T... AGAIN", error));
         }
 
+        function wait(ms){
+            var start = new Date().getTime();
+            var end = start;
+            while(end < start + ms) {
+                end = new Date().getTime();
+            }
+            }
+
         function IAMLOSINGMYMIND(button) {
             const user_id = button.dataset.applicantId;
             const recruitment_id = button.dataset.recruitmentId;
@@ -105,6 +113,10 @@
                 body: JSON.stringify({ user_id: user_id, recruitment_id: recruitment_id })
             })
             .catch(error => console.error("Error:", error));
+
+            wait(2000)
+
+            window.location.replace("/applicantspecific");
         }
 
         document.addEventListener("DOMContentLoaded", function() {
