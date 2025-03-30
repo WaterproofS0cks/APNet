@@ -4,12 +4,10 @@ document.addEventListener('DOMContentLoaded', function() {
         if (event.key === "Enter") {
             event.preventDefault(); 
 
-            const searchTerm = searchContainer.value.trim();
-
-            if (searchTerm) {
-                const baseUrl = window.location.href.split('?')[0]; 
-                window.location.href = baseUrl + "?search=" + encodeURIComponent(searchTerm);
-            }
+            const searchTerm = searchContainer.value.trim();        
+            const baseUrl = window.location.href.split('?')[0]; 
+            window.location.href = baseUrl + "?search=" + encodeURIComponent(searchTerm);
+            
         }
     });
 

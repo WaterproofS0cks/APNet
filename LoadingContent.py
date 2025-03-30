@@ -73,16 +73,16 @@ class Content():
                                 <div class="fm-dropdown">
                                     <span><img src="../static/src/icon/icons8-ellipsis-48.png" alt="Elipses" id="fm-moreicon" height="24" width="24"></span>
                                     <div class="fm-dropdown-content">
-                                        <button class="fm-dropdown-item">
+                                        <button onclick="editReportPost(this)" class="fm-dropdown-item">
                                             <img src="../static/src/icon/icons8-flag-48.png" alt="Report Post" id="fm-reportposticon" height="20" width="20"> Report Post
                                         </button>
-                                        <button class="fm-dropdown-item">
+                                        <button onclick="editReportUser(this)" class="fm-dropdown-item">
                                             <img src="../static/src/icon/icons8-danger-50.png" alt="Report User" id="fm-reportusericon" height="20" width="20"> Report User
                                         </button>
-                                        <button class="fm-dropdown-item">
+                                        <button onclick="editPost(this)" class="fm-dropdown-item">
                                             <img src="../static/src/icon/icons8-edit-96.png" alt="Edit" id="fm-editicon" height="20" width="20">Edit Post
                                         </button>
-                                        <button href="#" class="fm-dropdown-item">
+                                        <button onclick="deletePost(this)" class="fm-dropdown-item">
                                             <img src="../static/src/icon/icons8-delete-48.png" alt="Delete" id="fm-deleteicon" height="20" width="20">Delete Post
                                         </button>
                                     </div>
@@ -506,6 +506,7 @@ class Content():
         for recruitment in recruitments:
 
             applicant_columns = """
+                users.userid AS applicant_userid, 
                 users.username AS applicant_username, 
                 users.fullname AS applicant_fullname, 
                 users.email AS applicant_email,
@@ -547,22 +548,36 @@ class Content():
                     applicant_id_tag =""
                     
                 html += f"""
-                    <a href="#" class="click-card-url">
-                        <div class="applicant-card {applicant_id_tag}"><p class=applicant-card-text>{applicant['applicant_username']}</p></div>
-                    </a>
+                    <button class="applicant-card" 
+                    {applicant_id_tag} 
+                    data-applicant-id="{applicant['applicant_userid']}" 
+                    data-recruitment-id="{recruitment['recruitmentid']}" 
+                    onclick="IAMLOSINGMYMIND(this)">
+                    {applicant['applicant_username']}
+                    </button>
                 """
+                
 
             for applicant in applicants[4:]:
                 html += f"""
-                    <a href="#" class="click-card-url">
-                        <div class="applicant-card applicant-extra" data-recruitment-id="{recruitment['recruitmentid']}"><p class=applicant-card-text>{applicant['applicant_fullname']}</p></div>
-                    </a>
+                    <button class="applicant-card applicant-extra" 
+                    {applicant_id_tag} 
+                    data-applicant-id="{applicant['applicant_userid']}" 
+                    data-recruitment-id="{recruitment['recruitmentid']}" 
+                    onclick="IAMLOSINGMYMIND(this)">
+                    {applicant['applicant_username']}
+                    </button>
                 """
 
             if len(applicants) > 4:
-                html += f"""
-                    <p id="applicant-view-{recruitment['recruitmentid']}" class="applicant-view" data-recruitment-id="{recruitment['recruitmentid']}" onclick="viewToggle(this)">View more</p>
-                """
+                    html += f"""
+                        <p id="applicant-view-{recruitment['recruitmentid']}" 
+                        class="applicant-view" 
+                        data-recruitment-id="{recruitment['recruitmentid']}" 
+                        onclick="viewToggle(this)">
+                        View more
+                        </p>
+                    """
             elif len(applicants) < 1:
                 html += f"""
                     <p>No One Applied Yet D:</p>

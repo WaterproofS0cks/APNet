@@ -115,6 +115,53 @@
         });
     }
 
+    function reportPost(button) {
+        var postLayout = button.closest('.fm-post-layout');
+        var postId = postLayout.getAttribute('data-post-id');
+        
+        fetch("/report", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ postId: postId, post_type: post_type })
+        });
+    }
+    
+    function reportUser(button) {
+        var postLayout = button.closest('.fm-post-layout');
+        var postId = postLayout.getAttribute('data-post-id');
+        var userId = postLayout.getAttribute('data-user-id');
+        
+        fetch("/report-user", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ postId: postId, userId: userId })
+        });
+    }
+    
+    function editPost(button) {
+        var postLayout = button.closest('.fm-post-layout');
+        var postId = postLayout.getAttribute('data-post-id');
+        
+        fetch("/edit-post", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ postId: postId, post_type: post_type  })
+        });
+    }
+    
+    function deletePost(button) {
+        var postLayout = button.closest('.fm-post-layout');
+        var postId = postLayout.getAttribute('data-post-id');
+        
+        fetch("/delete-post", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ postId: postId, post_type: post_type })
+        });
+    }
+
+
+
     document.addEventListener('DOMContentLoaded', function() {
         document.body.addEventListener('click', function(event) {
             // 3 Dot Menu
@@ -181,35 +228,7 @@
                     }
                 })
                 .catch((error) => console.error("Error:", error));
-
-            } else if (action === "delete") {
-                fetch("/delete", {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({ post_id: postId, post_type: post_type }),
-                })
-
-            } else if (action === "edit") {
-                fetch("/edit", {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({ post_id: postId, post_type: post_type }),
-                })
-
-            } else if (action === "reportpost") {
-                fetch("/reportpost", {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({ post_id: postId, post_type: post_type }),
-                })
-
-            } else if (action === "reportuser") {
-                fetch("/reportuser", {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({ post_id: postUserId, action: action }),
-                })
-            }
+            } 
         });
 
         const urlParams = new URLSearchParams(window.location.search);
