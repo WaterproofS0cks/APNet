@@ -73,18 +73,18 @@ class Content():
                                 <div class="fm-dropdown">
                                     <span><img src="../static/src/icon/icons8-ellipsis-48.png" alt="Elipses" id="fm-moreicon" height="24" width="24"></span>
                                     <div class="fm-dropdown-content">
-                                        <a href="#" class="fm-dropdown-item">
+                                        <button class="fm-dropdown-item">
                                             <img src="../static/src/icon/icons8-flag-48.png" alt="Report Post" id="fm-reportposticon" height="20" width="20"> Report Post
-                                        </a>
-                                        <a href="#" class="fm-dropdown-item">
+                                        </button>
+                                        <button class="fm-dropdown-item">
                                             <img src="../static/src/icon/icons8-danger-50.png" alt="Report User" id="fm-reportusericon" height="20" width="20"> Report User
-                                        </a>
-                                        <a href="#" class="fm-dropdown-item">
+                                        </button>
+                                        <button class="fm-dropdown-item">
                                             <img src="../static/src/icon/icons8-edit-96.png" alt="Edit" id="fm-editicon" height="20" width="20">Edit Post
-                                        </a>
-                                        <a href="#" class="fm-dropdown-item">
+                                        </button>
+                                        <button href="#" class="fm-dropdown-item">
                                             <img src="../static/src/icon/icons8-delete-48.png" alt="Delete" id="fm-deleteicon" height="20" width="20">Delete Post
-                                        </a>
+                                        </button>
                                     </div>
                                 </div>
                             </div>
@@ -173,18 +173,18 @@ class Content():
                                 <div class="fm-dropdown">
                                     <span><img src="../static/src/icon/icons8-ellipsis-48.png" alt="Elipses" id="fm-moreicon" height="24" width="24"></span>
                                     <div class="fm-dropdown-content">
-                                        <a href="#" class="fm-dropdown-item">
+                                        <button class="fm-dropdown-item">
                                             <img src="../static/src/icon/icons8-flag-48.png" alt="Report Post" id="fm-reportposticon" height="20" width="20"> Report Post
-                                        </a>
-                                        <a href="#" class="fm-dropdown-item">
+                                        </button>
+                                        <button class="fm-dropdown-item">
                                             <img src="../static/src/icon/icons8-danger-50.png" alt="Report User" id="fm-reportusericon" height="20" width="20"> Report User
-                                        </a>
-                                        <a href="#" class="fm-dropdown-item">
+                                        </button>
+                                        <button class="fm-dropdown-item">
                                             <img src="../static/src/icon/icons8-edit-96.png" alt="Edit" id="fm-editicon" height="20" width="20">Edit Post
-                                        </a>
-                                        <a href="#" class="fm-dropdown-item">
+                                        </button>
+                                        <button class="fm-dropdown-item">
                                             <img src="../static/src/icon/icons8-delete-48.png" alt="Delete" id="fm-deleteicon" height="20" width="20">Delete Post
-                                        </a>
+                                        </button>
                                     </div>
                                 </div>
                             </div>               

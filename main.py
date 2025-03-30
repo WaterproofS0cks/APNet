@@ -1,11 +1,10 @@
-from flask import Flask, render_template, session, request, jsonify, redirect, url_for, render_template_string
+from flask import Flask, render_template, session, request, jsonify, redirect, url_for
 from auth import auth
 from user_profile import user_profile
 # import psycopg2
 import os
 from dotenv import load_dotenv
 from datetime import datetime, timedelta
-from werkzeug.exceptions import HTTPException
 
 
 from ConnectDatabase import dbConnection
@@ -63,6 +62,8 @@ def forum():
 def post():
     return Content.load_post()
 
+
+
 #Finished
 @app.route('/engagement', methods=['POST'])
 def engagement():
@@ -110,14 +111,12 @@ def create_comment():
 
     if post_type == "post":
         inserted = db_insert.insert("PostComment", (user_id, post_id, comment))
-        comment_id = inserted.get("postcommentid")
     elif post_type == "recruitment":
         inserted = db_insert.insert("RecruitmentComment", (user_id, post_id, comment))
-        comment_id = inserted.get("recruitmentcommentid")
     else:
         return redirect(url_for('auth.login'))
-    
-
+    comment_id = inserted.get("postcommentid")
+    print("creating")
     return jsonify({ "username":user_data["username"], "pfp":user_data["profilepicture"], "comment_id":comment_id})
 
 @app.route("/deletecomment", methods=["POST"])
@@ -272,26 +271,7 @@ def Recruitment():
 
 @app.route('/recruitment-application', methods=['POST', 'GET'])
 def RecruitmentApplication():
-    user_id = session.get('id')
-    if not user_id:
-        return redirect(url_for('auth.login'))
-
-    db_conn = dbConnection(
-        dbname=os.getenv("DBNAME"),
-        user=os.getenv("USER"),
-        password=os.getenv("PASSWORD"),
-    )
-
-    db_conn.connect()
-    db_retrieve = dbRetrieve(db_conn)
-    recruitmentid = request.args.get('postid') 
-
-    recruitment = db_retrieve.retrieve_one("recruitment", "image", "recruitmentid=%s and status=%s", (recruitmentid, "true"))
-
-    if not recruitment:
-        return redirect(url_for('forum'))
-
-    return render_template("recruitment_application.html", image=recruitment["image"], recruitmentid=recruitmentid)
+    return render_template("recruitment_application.html")
 
 
 
@@ -452,21 +432,6 @@ def EditForumPost():
 @app.route('/edit/recruitment', methods=['GET'])
 def EditRecruitmentPost():
     return render_template('editrecruitmentpost.html')
-
-@app.errorhandler(500)
-def page_not_found(e):
-    return render_template_string('Page Not Found {{ errorCode }}', errorCode='500'), 500
-
-@app.errorhandler(404)
-def page_not_found(e):
-    return render_template_string('Page Not Found {{ errorCode }}', errorCode='404'), 404
-
-@app.errorhandler(Exception)
-def handle_exception(e):
-    if isinstance(e, HTTPException):
-        return "<h1>Seems like the page you are trying to find does not exist.</h1>"
-
-    return "<h1>Seems like the page you are trying to find does not exist.</h1>"
 
 
 
