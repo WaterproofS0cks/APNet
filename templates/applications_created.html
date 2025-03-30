@@ -4,7 +4,7 @@
 <body>
     <div class="applications-content-card" id="applications-content-card">
         <div class="card-header">
-            <a href="/user/applications" class="btn-icon">
+            <a href="{{ url_for('user_profile.applications') }}" class="btn-icon">
                 <img src="{{ url_for('static', filename='src/icon/icons8-back-96.png') }}" alt="Back Icon">
             </a>
             <h2>Applications - Created</h2>
@@ -29,9 +29,8 @@
             </div>
             <div class="activity-margin">
                 <h3>Applicants</h3>
-                <div class="applicant-flex"> -->
-                    <!-- The first four applicants will be displayed by default -->
-                    <!-- <a href="#" class="click-card-url">
+                <div class="applicant-flex">
+                    <a href="#" class="click-card-url">
                         <div class="applicant-card" id="applicant-accepted">Emily</div>
                     </a>
                     <a href="#" class="click-card-url">
@@ -41,10 +40,9 @@
                         <div class="applicant-card">Olivia</div>
                     </a>
                     <a href="#" class="click-card-url">
-                        <div class="applicant-card">Lucas</div> -->
+                        <div class="applicant-card">Lucas</div>
                     </a>
-                    <!-- Subsequent applicants will be hidden until the user press "View more" -->
-                    <!-- <a href="#" class="click-card-url">
+                    <a href="#" class="click-card-url">
                         <div class="applicant-card applicant-extra">Sophia</div>
                     </a>
                     <a href="#" class="click-card-url">
@@ -55,8 +53,8 @@
                     </a>
                     <a href="#" class="click-card-url">
                         <div class="applicant-card applicant-extra">Scott</div>
-                    </a> -->
-                <!-- </div>
+                    </a>
+                </div>
                 <p id="applicant-view" class="applicant-view" onclick="viewToggle()">View more</p>
             </div>
         </div> -->
