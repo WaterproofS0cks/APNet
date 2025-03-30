@@ -548,7 +548,7 @@ class Content():
                     
                 html += f"""
                     <a href="#" class="click-card-url">
-                        <div class="applicant-card {applicant_id_tag}">{applicant['applicant_fullname']}</div>
+                        <div class="applicant-card {applicant_id_tag}">{applicant['applicant_username']}</div>
                     </a>
                 """
 
