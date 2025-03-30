@@ -1,4 +1,4 @@
-from flask import Flask, render_template, session, request, jsonify, redirect, url_for
+from flask import Flask, render_template, session, request, jsonify, redirect, url_for, render_template_string
 from auth import auth
 from user_profile import user_profile
 # import psycopg2
@@ -196,28 +196,8 @@ def applicant():
 
 @app.route("/applicantspecific", methods=["GET", "POST"])
 def applicant_specific():
-    db_conn = dbConnection(
-        dbname=os.getenv("DBNAME"),
-        user=os.getenv("USER"),
-        password=os.getenv("PASSWORD"),
-    )
 
-    db_conn.connect()
-    db_insert = dbRetrieve(db_conn)
-
-
-    recruitmentid = request.form["recruitment_id"]
-    userid = request.form["user_id"]
-
-
-
-    return render_template("recruitment-aplication-specific.html", 
-                           fullname= ,
-                           tpnumber= ,
-                           eventposition= ,
-                           phonenumber= ,
-                           description= ,
-                           )
+    return render_template("recruitment-aplication-specific.html")
 
 #Finished
 @app.route('/upload', methods=["GET", "POST"])
@@ -452,12 +432,21 @@ def EditForumPost():
 def EditRecruitmentPost():
     return render_template('editrecruitmentpost.html')
 
+@app.errorhandler(500)
+def page_not_found(e):
+    return render_template_string('Page Not Found {{ errorCode }}', errorCode='500'), 500
+
+@app.errorhandler(404)
+def page_not_found(e):
+    return render_template_string('Page Not Found {{ errorCode }}', errorCode='404'), 404
+
 @app.errorhandler(Exception)
 def handle_exception(e):
     if isinstance(e, HTTPException):
         return "<h1>Seems like the page you are trying to find does not exist.</h1>"
 
     return "<h1>Seems like the page you are trying to find does not exist.</h1>"
+
 
 
 if __name__ == "__main__":
