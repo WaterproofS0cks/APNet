@@ -73,10 +73,10 @@ class Content():
                                 <div class="fm-dropdown">
                                     <span><img src="../static/src/icon/icons8-ellipsis-48.png" alt="Elipses" id="fm-moreicon" height="24" width="24"></span>
                                     <div class="fm-dropdown-content">
-                                        <button onclick="editReportPost(this)" class="fm-dropdown-item">
+                                        <button onclick="reportPost(this)" class="fm-dropdown-item">
                                             <img src="../static/src/icon/icons8-flag-48.png" alt="Report Post" id="fm-reportposticon" height="20" width="20"> Report Post
                                         </button>
-                                        <button onclick="editReportUser(this)" class="fm-dropdown-item">
+                                        <button onclick="reportUser(this)" class="fm-dropdown-item">
                                             <img src="../static/src/icon/icons8-danger-50.png" alt="Report User" id="fm-reportusericon" height="20" width="20"> Report User
                                         </button>
                                         <button onclick="editPost(this)" class="fm-dropdown-item">
@@ -408,7 +408,6 @@ class Content():
                 html += f'<button class="delete-comment-btn" data-comment-id="{comment['id']}">Delete</button>'
 
             html += "</div>"
-        print(html)
         return jsonify({"html": html})
 
     def load_application():

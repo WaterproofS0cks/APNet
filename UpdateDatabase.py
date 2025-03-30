@@ -117,7 +117,6 @@ class dbModify(dbInsert):
         self.db_connection.conn.commit() 
 
         result = cursor.fetchone() 
-        print("Query Result:", result)
 
         return result[0] if result else False 
 

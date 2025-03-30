@@ -43,19 +43,21 @@ db_conn.close()
 
 uploader = imageUploader(app.config["UPLOAD_FOLDER"])
 
+
 #Finished
 @app.route("/get_session")
 def get_session():
     user_id = session.get('id')
-    print(user_id)
     if user_id:
         return jsonify({"session": user_id})
     return redirect(url_for("auth.login"))
+
 
 #Finished
 @app.route('/')
 def forum():
     return render_template('forum.html')
+
 
 #Finished
 @app.route('/load_more')
@@ -63,11 +65,11 @@ def post():
     return Content.load_post()
 
 
-
 #Finished
 @app.route('/engagement', methods=['POST'])
 def engagement():
     return Content.load_engagement()
+
 
 #Finished
 @app.route('/user/specificpost', methods=["GET", "POST"])
@@ -75,15 +77,18 @@ def engagement():
 def specific_post():
     return Content.load_specific_forum()
 
+
 @app.route('/user/specificrecruitment', methods=["GET", "POST"])
 @app.route('/specificrecruitment', methods=["GET", "POST"])
 def specific_recruitment():
     return Content.load_recruitment_forum()
 
+
 #Finished
 @app.route('/comment', methods=['GET'])
 def comment():
     return Content.load_comment()
+
 
 #Finished
 @app.route("/createcomment", methods=["POST"])
@@ -116,9 +121,9 @@ def create_comment():
     else:
         return redirect(url_for('auth.login'))
     comment_id = inserted.get("postcommentid")
-    print("creating")
     return jsonify({ "username":user_data["username"], "pfp":user_data["profilepicture"], "comment_id":comment_id})
 
+#Finished
 @app.route("/deletecomment", methods=["POST"])
 def delete_comment():
 
@@ -144,6 +149,7 @@ def delete_comment():
 
     return jsonify({"delete": True})
 
+
 #Finished  
 @app.route('/create', methods=["GET", "POST"])
 def create_post():
@@ -152,6 +158,8 @@ def create_post():
     else:
         return redirect(url_for('auth.login'))
 
+
+#Finished
 @app.route("/createapplication", methods=["GET", "POST"])
 def create_application():
     user_id = session.get('id')
@@ -173,9 +181,6 @@ def create_application():
     tpnumber = request.form.get("tpnumber")
     description = request.form.get("description")
     status = "Pending"
-    print("fgfgfg")
-    print(recruitment)
-    print("fgfgfg")
     check_recruitment = db_retrieve.retrieve_one("recruitment", "recruitmentid", "recruitmentid=%s and status=%s", (recruitment, True))
     
     if not check_recruitment:
@@ -187,10 +192,12 @@ def create_application():
     except Exception as e:
         return redirect(url_for('Recruitment'))
 
+#Finished
 @app.route("/load_application", methods=["GET", "POST"])
 def application():
     return Content.load_application()
 
+#Finished
 @app.route("/load_applicant", methods=["GET", "POST"])
 def applicant():
     return Content.load_applicants()
@@ -209,12 +216,9 @@ def applicant_specific():
     data = request.get_json()
     user_id = data.get('user_id')
     recruitment_id = data.get('recruitment_id')
-    print(data)
 
     userdata = db_retrieve.retrieve_one("users", "fullname, phone", "userid = %s", (user_id,))
     applicantdata = db_retrieve.retrieve_one("application", "*", "userid = %s and recruitmentid = %s", (user_id, recruitment_id))
-    print(userdata)
-    print(applicantdata)
 
     return redirect(".applicant_specc"
                         #    fullname=userdata["fullname"],
@@ -228,6 +232,7 @@ def applicant_specific():
 @app.route("/test", methods=["GET"])
 def applicant_specc():
     return render_template("recruitment-aplication-specific.html")
+
 
 #Finished
 @app.route('/upload', methods=["GET", "POST"])
@@ -260,25 +265,26 @@ def upload_post():
 
     return redirect("/")
 
+
 #Finished
 @app.route('/terms', methods=['GET'])
 def TermsOfService():
     return render_template("termsofservice.html")
 
 
-
+#Finished
 @app.route('/faq', methods=['GET'])
 def FrequentlyAskedQuestions():
     return render_template("faq.html")
 
 
-
+#Finished
 @app.route('/recruitment', methods=['POST', 'GET'])
 def Recruitment():
     return render_template("recruitment.html")
 
 
-
+#Finished
 @app.route('/recruitment-application', methods=['POST', 'GET'])
 def RecruitmentApplication():
     user_id = session.get('id')
@@ -303,7 +309,7 @@ def RecruitmentApplication():
     return render_template("recruitment_application.html", image=recruitment["image"], recruitmentid=recruitmentid)
 
 
-
+#Finished
 @app.route('/dashboard', methods=['POST', 'GET'])
 def Dashboard():
     db_conn = dbConnection( 
@@ -377,6 +383,60 @@ def Dashboard():
         muted_count=muted_count,
         reported_count=reported_count,
     )
+
+
+@app.route('/editpost', methods=['POST'])
+def EditPost():
+    db_conn = dbConnection(
+        dbname=os.getenv("DBNAME"),
+        user=os.getenv("USER"),
+        password=os.getenv("PASSWORD"),
+    )
+
+    db_conn.connect()
+    db_retrieve = dbRetrieve(db_conn)
+
+    data = request.get_json()
+    post_type = data.get('post_type')
+
+
+
+
+
+
+
+@app.route('/report', methods=['POST'])
+def Report():
+    db_conn = dbConnection(
+        dbname=os.getenv("DBNAME"),
+        user=os.getenv("USER"),
+        password=os.getenv("PASSWORD"),
+    )
+
+    db_conn.connect()
+    db_insert = dbInsert(db_conn)
+
+    data = request.get_json()
+    placementid = data.get('Id')
+    post_type = data.get('post_type')
+    status = "Processing"
+
+
+
+    placement = int(placementid)
+
+    if post_type == "post":
+        post = "Forum"
+    elif post_type == "recruitment":
+        post = "Recruitment"
+    else:
+        post = "User"
+
+    db_insert.insert("Reports", (placement, post, status))
+    
+    return redirect("/")
+
+
 
 
 

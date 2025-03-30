@@ -115,52 +115,6 @@
         });
     }
 
-    function reportPost(button) {
-        var postLayout = button.closest('.fm-post-layout');
-        var postId = postLayout.getAttribute('data-post-id');
-        
-        fetch("/report", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ postId: postId, post_type: post_type })
-        });
-    }
-    
-    function reportUser(button) {
-        var postLayout = button.closest('.fm-post-layout');
-        var postId = postLayout.getAttribute('data-post-id');
-        var userId = postLayout.getAttribute('data-user-id');
-        
-        fetch("/report-user", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ postId: postId, userId: userId })
-        });
-    }
-    
-    function editPost(button) {
-        var postLayout = button.closest('.fm-post-layout');
-        var postId = postLayout.getAttribute('data-post-id');
-        
-        fetch("/edit-post", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ postId: postId, post_type: post_type  })
-        });
-    }
-    
-    function deletePost(button) {
-        var postLayout = button.closest('.fm-post-layout');
-        var postId = postLayout.getAttribute('data-post-id');
-        
-        fetch("/delete-post", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ postId: postId, post_type: post_type })
-        });
-    }
-
-
 
     document.addEventListener('DOMContentLoaded', function() {
         document.body.addEventListener('click', function(event) {
