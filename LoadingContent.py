@@ -61,7 +61,7 @@ class Content():
                     link = f"<a href='/user/profile?uid={entry['username']}'>"
                 
                 html += f'''
-                    <div class="fm-post-layout" data-post-id="{entry['id']}" data-user-id="{entry['userid']}">
+                    <div class="fm-post-layout" data-post-id="{entry['id']}" data-user-id="{entry['userid']}" data-post-type="post">
                         <div class="fm-profiledetails">
                             {link}
                                 <img src="{entry['profilepicture']}" alt="Pfp" id="fm-post-pfp">
@@ -154,7 +154,7 @@ class Content():
                     link = f"<a href='/user/profile?uid={entry['username']}'>"
 
                 html += f'''
-                    <div class="fm-post-layout" data-post-id="{entry['id']}" data-user-id="{entry['userid']}">
+                    <div class="fm-post-layout" data-post-id="{entry['id']}" data-user-id="{entry['userid']}" data-post-type="recruitment">
 
                         <div class="rc-title-container">
                             <h1>{entry["header"]}</h1>
@@ -173,16 +173,16 @@ class Content():
                                 <div class="fm-dropdown">
                                     <span><img src="../static/src/icon/icons8-ellipsis-48.png" alt="Elipses" id="fm-moreicon" height="24" width="24"></span>
                                     <div class="fm-dropdown-content">
-                                        <button class="fm-dropdown-item">
+                                        <button onclick="reportPost(this)" class="fm-dropdown-item">
                                             <img src="../static/src/icon/icons8-flag-48.png" alt="Report Post" id="fm-reportposticon" height="20" width="20"> Report Post
                                         </button>
-                                        <button class="fm-dropdown-item">
+                                        <button onclick="reportUser(this)" class="fm-dropdown-item">
                                             <img src="../static/src/icon/icons8-danger-50.png" alt="Report User" id="fm-reportusericon" height="20" width="20"> Report User
                                         </button>
-                                        <button class="fm-dropdown-item">
+                                        <button onclick="editPost(this)" class="fm-dropdown-item">
                                             <img src="../static/src/icon/icons8-edit-96.png" alt="Edit" id="fm-editicon" height="20" width="20">Edit Post
                                         </button>
-                                        <button class="fm-dropdown-item">
+                                        <button onclick="deletePost(this)" class="fm-dropdown-item">
                                             <img src="../static/src/icon/icons8-delete-48.png" alt="Delete" id="fm-deleteicon" height="20" width="20">Delete Post
                                         </button>
                                     </div>
@@ -552,7 +552,7 @@ class Content():
                     data-applicant-id="{applicant['applicant_userid']}" 
                     data-recruitment-id="{recruitment['recruitmentid']}" 
                     onclick="IAMLOSINGMYMIND(this)">
-                    {applicant['applicant_username']}
+                    <p class="applicant-card-text">{applicant['applicant_username']}</p>
                     </a>
                 """
                 
@@ -564,7 +564,7 @@ class Content():
                     data-applicant-id="{applicant['applicant_userid']}" 
                     data-recruitment-id="{recruitment['recruitmentid']}" 
                     onclick="IAMLOSINGMYMIND(this)">
-                    {applicant['applicant_username']}
+                    <p class="applicant-card-text">{applicant['applicant_username']}</p>
                     </a>
                 """
 

@@ -1,16 +1,14 @@
-const scriptTag = document.currentScript;
-const post_type = scriptTag.getAttribute("data-type") || "";
-
 (function() {
 
     function reportPost(button) {
         var postLayout = button.closest('.fm-post-layout');
         var postId = postLayout.getAttribute('data-post-id');
+        var postType = postLayout.getAttribute('data-post-type');
         
         fetch("/report", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ Id: postId, post_type: post_type })
+            body: JSON.stringify({ id: postId, post_type: postType })
         });
     }
 
@@ -21,17 +19,19 @@ const post_type = scriptTag.getAttribute("data-type") || "";
         fetch("/report", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ Id: userId })
+            body: JSON.stringify({ id: userId })
         });
     }
 
     function editPost(button) {
         var postLayout = button.closest('.fm-post-layout');
-        var postId = postLayout.getAttribute('data-post-id'); 
+        var postId = postLayout.getAttribute('data-post-id');
+        var postType = postLayout.getAttribute('data-post-type');
+        
         fetch("/editpost", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ Id: postId, post_type: post_type })
+            body: JSON.stringify({ post_id: postId, post_type: postType })
         });
     }
 
@@ -43,7 +43,7 @@ const post_type = scriptTag.getAttribute("data-type") || "";
         fetch("/deletepost", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ Id: postId, post_type: postType })
+            body: JSON.stringify({ post_id: postId, post_type: postType })
         })
         .then(response => response.json())
         .then(data => {
@@ -53,7 +53,7 @@ const post_type = scriptTag.getAttribute("data-type") || "";
     }
 
     window.reportPost = reportPost;
-    window.reportUser  = reportUser ;
+    window.reportUser = reportUser;
     window.editPost = editPost;
     window.deletePost = deletePost;
 
