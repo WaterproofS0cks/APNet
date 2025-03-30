@@ -1,8 +1,6 @@
 {% extends "header-b.html" %}
 {% block title %}Profile{% endblock title %}
 {% block content %}
-
-
 <script type="text/javascript" src="{{ url_for('static', filename='scripts/PostFunction.js') }}" data-type="post" data-page="self" data-container="forumContainer" data-user="{{ user_id }}" defer></script>
 <script type="text/javascript" src="{{ url_for('static', filename='scripts/PostFunction.js') }}" data-type="recruitment" data-page="self" data-container="recruitmentContainer" data-user="{{ user_id }}" defer></script>
 
