@@ -32,48 +32,7 @@
                     </a>
                 </div>
 
-                <img src="../static/src/icon/icons8-notification-50.png" alt="Notification Icon" id="ha-notificon">
-                <div class="fm-notif-main-container">
-                    <h2>Notifications</h2>
-                    <!-- INSERT NOTIFICATIONS -->
-                    <ul>
-                        <li>
-                            <img src="../static/src/img/aboutus-eventcollage.png" alt="Notifimg" id="fm-notifimg">
-                            <b>INSERT USERNAME </b> has liked your post <i>1w</i>
-                        </li>
-                        <li>
-                            <img src="../static/src/img/aboutus-eventcollage.png" alt="Notifimg" id="fm-notifimg">
-                            <b>INSERT USERNAME </b> has liked your post <i>1w</i>
-                        </li>
-                        <li>
-                            <img src="../static/src/img/aboutus-eventcollage.png" alt="Notifimg" id="fm-notifimg">
-                            <b>INSERT USERNAME </b> has liked your post <i>1w</i>
-                        </li>
-                        <li>
-                            <img src="../static/src/img/aboutus-eventcollage.png" alt="Notifimg" id="fm-notifimg">
-                            <b>INSERT USERNAME </b> has liked your post <i>1w</i>
-                        </li>
-                        <li>
-                            <img src="../static/src/img/aboutus-eventcollage.png" alt="Notifimg" id="fm-notifimg">
-                            <b>INSERT USERNAME </b> has liked your post <i>1w</i>
-                        </li>
-                        <li>
-                            <img src="../static/src/img/aboutus-eventcollage.png" alt="Notifimg" id="fm-notifimg">
-                            <b>INSERT USERNAME </b> has liked your post <i>1w</i>
-                        </li>
-                        <li>
-                            <img src="../static/src/img/aboutus-eventcollage.png" alt="Notifimg" id="fm-notifimg">
-                            <b>INSERT USERNAME </b> has liked your post <i>1w</i>
-                        </li>
-                        <li>
-                            <img src="../static/src/img/aboutus-eventcollage.png" alt="Notifimg" id="fm-notifimg">
-                            <b>INSERT USERNAME </b> has liked your post <i>1w</i>
-                        </li>
-            
-                    </ul>
-            
-                    <h3><-------- NO NEW NOTIFICATIONS --------></h3>
-                </div>
+                
                 {% if "user" not in session %}
                 <a href="/auth/login" id="ha-signin"><h1 style="color: #007bff; text-decoration: underline;">Sign In</h1></a>
                 {% else %}
@@ -99,8 +58,9 @@
                         {% if session.get('role') == "A" %}
                         <li><a href="/dashboard">Dashboard</a></li>
                         {% endif %}
+                        <li><a href="/create">Create Post</a></li>
                         <li><a href="/faq">FAQ</a></li>
-                        <li><a href="/contact">About Us</a></li>
+                        <li><a href="/about">About Us</a></li>
                         <li><a href="/user/settings">Settings</a></li>
                         <li><a href="/auth/logout">Logout</a></li>
                     </ul>
@@ -113,53 +73,9 @@
     {% block content %}
     {% endblock %}
 
-    <footer>
-        
-        <div class="header-footer-main-container">
-            
-            <div class="header-footer-container1">
-                <img src="../static/src/icon/icons8-forum-blue-50.png" alt="Forum Icon" class="header-footer-forumblueicon">
-                <h2>Forum</h2>
-            </div>
-    
-            <div class="header-footer-container2">
-                <img src="../static/src/icon/icons8-resume-white-50.png" alt="Recruit Icon" class="header-footer-recruitwhiteicon">
-                <h2>Recruitment</h2>
-            </div>
-    
-            <div class="header-footer-container3">
-                <img src="../static/src/icon/icons8-notification-white-48.png" alt="Notification Icon" class="header-footer-notifwhiteicon">
-                <h2>Notifications</h2>
-            </div>
-    
-            <div class="header-footer-container4">
-                <a href="profile.html"><img src="../static/src/img/default-pfp.png" alt="Profile Pic Icon" class="header-footer-pfpicon"></a>
-                <h2>Profile</h2>
-            </div>
-    
-        </div>
-    
-    </footer>
-
-
 
     <script>
         document.addEventListener("DOMContentLoaded", function() {
-
-            // TOGGLING FM-NOTIF-MAIN-CONTAINER
-            var notifIcon = document.getElementById('ha-notificon');
-            var notifContainer = document.querySelector('.fm-notif-main-container');
-
-            notifIcon.addEventListener('click', function(event) {
-                if (notifContainer.style.display === "flex") {
-                    notifContainer.style.display = "none";
-                    notifIcon.src = "../static/src/icon/icons8-notification-50.png"; 
-                } else {
-                    notifContainer.style.display = "flex";
-                    notifIcon.src = "../static/src/icon/icons8-notification-blue-48.png"; 
-                }
-                event.stopPropagation(); 
-            });
 
             // PFP DROPDOWN
             var profileImg = document.getElementById('ha-pfpimg');
