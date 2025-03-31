@@ -187,7 +187,7 @@ def create_application():
         return redirect(url_for('Recruitment'))
 
     try:
-        value = db_insert.insert("Application", (recruitment, user_id, tpnumber, eventposition, description, status))
+        db_insert.insert("Application", (recruitment, user_id, tpnumber, eventposition, description, status))
         return redirect(url_for('Recruitment'))
     except Exception as e:
         return redirect(url_for('Recruitment'))
@@ -213,6 +213,10 @@ def applicant_specific():
 
     return redirect(url_for('applicant_specific_data'))
 
+def popApplicantSession():
+    session.pop('applicantUserId')
+    session.pop('applicantRecruitmentId')
+    return
 
 @app.route('/applicant-specific-data', methods=['POST', 'GET'])
 def applicant_specific_data():
@@ -274,6 +278,36 @@ def upload_post():
             db_insert.insert("Post", [user_id, caption, filename])
         elif post_type == "recruitment":
             db_insert.insert("Recruitment", [user_id, title, caption, filename, True])
+
+    return redirect("/")
+
+@app.route('/updatepost', methods=["GET", "POST"])
+def update_post():
+    db_conn = dbConnection(
+        dbname=os.getenv("DBNAME"),
+        user=os.getenv("USER"),
+        password=os.getenv("PASSWORD"),
+    )
+
+    db_conn.connect()
+    db_modify = dbModify(db_conn)
+
+    post_type = request.form.get("post_type")
+    post_id = request.form.get("post_id")
+    description = request.form.get("description")
+    title = request.form.get("header")
+    file = request.files.get('image')
+    
+    
+    filename = None
+    if file:
+        filename = uploader.upload(file)
+
+    if post_type == "forum":
+        db_modify.update("Post", {"description":description, "image":filename}, {"postid":post_id})
+    elif post_type == "recruitment":
+        db_modify.update("Recruitment", {"header":title, "description":description, "image":filename, "status":True}, {"recruitmentid":post_id})
+    print(file)
 
     return redirect("/")
 
@@ -402,6 +436,10 @@ def EditPost():
 
     return redirect(url_for('EditPostData'))
 
+def popEditSession():
+    session.pop('editId')
+    session.pop('editPostType')
+    return
 
 @app.route('/post-edit', methods=['POST', 'GET'])
 def EditPostData():
@@ -418,16 +456,19 @@ def EditPostData():
     )
     db_conn.connect()
     db_retrieve = dbRetrieve(db_conn)
-
+    print("IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII")
     if post_type == "post":
         forumdata = db_retrieve.retrieve_one(post_type, "*", "postid = %s", (post_id,))
         return render_template("editforumpost.html", 
+                                post_id=post_id,
                                 image=forumdata["image"], 
                                 description=forumdata["description"])
     elif post_type == "recruitment":
         recruitmentdata = db_retrieve.retrieve_one(post_type, "*", "recruitmentid = %s", (post_id,))
-
+        print("dfdfnsdfsdjfnj")
+        print(recruitmentdata["description"])
         return render_template("editrecruitmentpost.html", 
+                                post_id=post_id,
                                 header=recruitmentdata["header"], 
                                 image=recruitmentdata["image"], 
                                 description=recruitmentdata["description"])

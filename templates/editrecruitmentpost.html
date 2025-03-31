@@ -99,15 +99,16 @@
         </div>
 
         <!-- FORUM FIELDS -->
-        <form action="/upload" method="POST" enctype="multipart/form-data" id="erp-recruitment-form">
+        <form action="/updatepost" method="POST" enctype="multipart/form-data" id="erp-recruitment-form">
             <div id="erp-recruitmentInputs">
+                <input type="text" value="{{ post_id }}" name="post_id" hidden>
                 <input type="text" value="recruitment" name="post_type" hidden>
                 <h1>Title</h1>
-                <input type="text" value="{{ header }}" id="erp-recruit-title-text">
+                <input type="text" name="header" value="{{ header }}" id="erp-recruit-title-text">
 
                 <div class="erp-image-title-container">
                     <h1>Image</h1>
-                    <input type="file" id="erp-changeimage-button" value="{{ image }}" hidden>
+                    <input type="file" id="erp-changeimage-button" value="{{ image }}" name= "image" hidden>
                     <label for="erp-changeimage-button" class="erp-change-button">Change</label>
                 </div>
 
@@ -118,7 +119,7 @@
                 </div>
         
                 <h1>Caption</h1>
-                <textarea name="caption" value="{{ description }}" id="erp-recruitment-caption-text" placeholder="Enter your caption here..."></textarea>
+                <textarea name="description" id="erp-recruitment-caption-text" placeholder="Enter your caption here...">{{ description }}</textarea>
         
                 <div class="erp-recruitment-button-container">
                     <button class="erp-recruitment-post-button" id="erp-post-button" type="submit">Post</button>
