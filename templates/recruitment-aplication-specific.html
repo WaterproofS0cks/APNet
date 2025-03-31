@@ -52,10 +52,12 @@
                 <textarea name="" id="" cols="99" rows="18" placeholder="{{ description }}" readonly></textarea>
             </div>
     
-            <form action="" id="rcas-form">
+            <form action="/rejectoraccept" method="POST" id="rcas-form">
                 <div class="rcas-button-container">
-                    <button class="rcas-button" style="background-color: rgb(255, 40, 40); margin-right: 10px;" id="rcas-reject-button">Reject</button>
-                    <button class="rcas-button" style="background-color: rgb(53, 244, 53);" id="rcas-reject-button">Accept</button>
+                    <input type="text" value="{{ user_id }}" name="user_id" hidden>
+                    <input type="text" value="{{ recruitment_id }}" name="recruitment_id" hidden>
+                    <button class="rcas-button" style="background-color: rgb(255, 40, 40); margin-right: 10px;" id="rcas-reject-button" name="action" value="reject">Reject</button>
+                    <button class="rcas-button" style="background-color: rgb(53, 244, 53);" id="rcas-reject-button" name="action" value="accept">Accept</button>
                 </div>
             </form>
 

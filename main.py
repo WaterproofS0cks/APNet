@@ -246,8 +246,33 @@ def applicant_specific_data():
                            phone=userdata["phone"],
                            description=applicantdata["description"],
                            image=recruitmentdata["image"],
-                           recruitment_id=recruitment_id
+                           recruitment_id=recruitment_id,
+                           user_id=user_id
                            )
+
+
+@app.route('/rejectoraccept', methods=["POST"])
+def reject_or_accept():
+    db_conn = dbConnection(
+        dbname=os.getenv("DBNAME"),
+        user=os.getenv("USER"),
+        password=os.getenv("PASSWORD"),
+    )
+
+    db_conn.connect()
+    db_modify = dbModify(db_conn)
+
+    userid = request.form.get("user_id")
+    recruitmentid = request.form.get("recruitment_id")
+    action = request.form.get("action")
+
+    if action == "reject":
+        db_modify.update("Application", {"status": "Rejected"}, {"userid":userid, "recruitmentid":recruitmentid})
+
+    elif action == "accept":
+        db_modify.update("Application", {"status": "Accepted"}, {"userid":userid, "recruitmentid":recruitmentid})
+    return redirect("user/applications-created")
+
 
 #Finished
 @app.route('/upload', methods=["GET", "POST"])
@@ -261,26 +286,25 @@ def upload_post():
     db_conn.connect()
     db_insert = dbInsert(db_conn)
 
-    if request.method == "POST":
+    post_type = request.form["post_type"]
+    user_id = session.get("id")
+    caption = request.form["caption"]
+    title = request.form.get("title", None)
+    file = request.files.get('file')
+    
+    filename = None
+    if file:
+        filename = uploader.upload(file)
 
-        post_type = request.form["post_type"]
-        user_id = session.get("id")
-        caption = request.form["caption"]
-        title = request.form.get("title", None)
-        file = request.files.get('file')
-        
-        
-        filename = None
-        if file:
-            filename = uploader.upload(file)
-
-        if post_type == "forum":
-            db_insert.insert("Post", [user_id, caption, filename])
-        elif post_type == "recruitment":
-            db_insert.insert("Recruitment", [user_id, title, caption, filename, True])
+    if post_type == "forum":
+        db_insert.insert("Post", [user_id, caption, filename])
+    elif post_type == "recruitment":
+        db_insert.insert("Recruitment", [user_id, title, caption, filename, True])
 
     return redirect("/")
 
+
+#Finished
 @app.route('/updatepost', methods=["GET", "POST"])
 def update_post():
     db_conn = dbConnection(
@@ -307,7 +331,6 @@ def update_post():
         db_modify.update("Post", {"description":description, "image":filename}, {"postid":post_id})
     elif post_type == "recruitment":
         db_modify.update("Recruitment", {"header":title, "description":description, "image":filename, "status":True}, {"recruitmentid":post_id})
-    print(file)
 
     return redirect("/")
 
