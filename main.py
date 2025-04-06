@@ -44,6 +44,7 @@ db_conn.close()
 uploader = imageUploader(app.config["UPLOAD_FOLDER"])
 
 
+
 #Finished
 @app.route("/get_session")
 def get_session():
