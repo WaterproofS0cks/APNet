@@ -104,20 +104,26 @@
             }
 
         function IAMLOSINGMYMIND(button) {
-            const user_id = button.dataset.applicantId;
-            const recruitment_id = button.dataset.recruitmentId;
+            var applicantLayout = button.closest('.applicant-card');
+            var userId = applicantLayout.getAttribute('data-applicant-id');
             
+            var recruitmentId = applicantLayout.getAttribute('data-recruitment-id');
+            console.log("dfdfdf")
             fetch('/applicantspecific', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ user_id: user_id, recruitment_id: recruitment_id })
+                body: JSON.stringify({ user_id: userId, recruitment_id: recruitmentId })
             })
-            .catch(error => console.error("Error:", error));
-
-            wait(2000)
-
-            window.location.replace("/applicantspecific");
-        }
+            .then(response => {
+                if (response.redirected) {
+                    window.location.href = response.url;
+                }
+            })
+            .catch(error => {
+                console.error('Error with the fetch request:', error);
+            });
+    }
+        
 
         document.addEventListener("DOMContentLoaded", function() {
             loadApplicants();

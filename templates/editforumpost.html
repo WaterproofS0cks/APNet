@@ -98,12 +98,13 @@
         </div>
 
         <!-- FORUM FIELDS -->
-        <form action="/upload" method="POST" enctype="multipart/form-data" id="efp-forum-form">
+        <form action="/updatepost" method="POST" enctype="multipart/form-data" id="efp-forum-form">
             <div id="efp-forumInputs">
+                <input type="text" value="{{ post_id }}" name="post_id" hidden>
                 <input type="text" value="forum" name="post_type" hidden>
                 <div class="efp-image-title-container">
                     <h1>Image</h1>
-                    <input type="file" id="efp-changeimage-button" hidden>
+                    <input type="file" id="efp-changeimage-button" name="image" value="{{ image }}" hidden>
                     <label for="efp-changeimage-button" class="efp-change-button">Change</label>
                 </div>
 
@@ -114,7 +115,7 @@
                 </div>
         
                 <h1>Caption</h1>
-                <textarea name="caption" id="efp-forum-caption-text" placeholder="">{{ description }}</textarea>
+                <textarea name="description" id="efp-forum-caption-text" placeholder="">{{ description }}</textarea>
         
                 <div class="efp-forum-button-container">
                     <button class="efp-forum-post-button" id="efp-post-button" type="submit">Post</button>

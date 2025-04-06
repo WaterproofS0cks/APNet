@@ -39,7 +39,6 @@ class dbInsert:
 
         column_string = ", ".join(columns)
         placeholder_string = ", ".join(["%s"] * len(columns))
-
         query = f"INSERT INTO {table_name} ({column_string}) VALUES ({placeholder_string}) RETURNING *;"
         
         self.execute_query(query, tuple(data))
@@ -61,7 +60,6 @@ class dbModify(dbInsert):
         valid_columns = self.find_table_columns(table_name)
 
         updates = {columns: update_data[columns] for columns in update_data if columns in valid_columns}
-
         if not updates:
             raise ValueError("No valid columns to update.")
         

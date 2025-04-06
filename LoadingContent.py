@@ -558,6 +558,12 @@ class Content():
                 
 
             for applicant in applicants[4:]:
+                if applicant['application_status'] == 'Accepted':
+                    applicant_id_tag = 'id="applicant-accepted"'
+                elif applicant['application_status'] == 'Rejected':
+                    applicant_id_tag = 'id="applicant-rejected"'
+                else:
+                    applicant_id_tag =""
                 html += f"""
                     <a class="applicant-card applicant-extra"
                     {applicant_id_tag} 

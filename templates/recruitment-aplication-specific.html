@@ -22,47 +22,49 @@
             <div class="rcas-username-container">
                 <h2>Username</h2>
                 <div class="rcas-username-input">
-                    <a href="/user/profile?uid={{ session.get('APP_NAME') }}" id="rcas-username">{{ session.get('APP_NAME') }}</a>
+                    <a href="/user/profile?uid={{ username }}" id="rcas-username">{{ username }}</a>
                 </div>
             </div>
 
             <div class="rcas-fullname-container">
                 <h2>Full Name</h2>   
                                                         
-                <input type="text" id="rcas-fullname" value="{{ session.get('APP_FNAME') }}" readonly>
+                <input type="text" id="rcas-fullname" value="{{ fullname }}" readonly>
             </div>
             
             <div class="rcas-tpno-container">
                 <h2>TP Number</h2>
-                <input type="text" id="rcas-tpno" value="{{ session.get('APP_TPNUMBER') }}" readonly>
+                <input type="text" id="rcas-tpno" value="{{ tpnumber }}" readonly>
             </div>
     
             <div class="rcas-role-container">
                 <h2>Event Position</h2>
-                <input type="text" id="rcas-role" value="{{ session.get('APP_EVPOS') }}" readonly>
+                <input type="text" id="rcas-role" value="{{ eventposition }}" readonly>
             </div>
     
             <div class="rcas-phoneno-container">
                 <h2>Phone Number</h2>
-                <input type="text" id="rcas-phoneno" value="{{ session.get('APP_PHONE') }}" readonly>
+                <input type="text" id="rcas-phoneno" value="{{ phone }}" readonly>
             </div>
 
             <div class="rcas-desc-container">
                 <h2>Tell us a little more about yourself</h2>
-                <textarea name="" id="" cols="99" rows="18" placeholder="{{ session.get('APP_DESC') }}" readonly></textarea>
+                <textarea name="" id="" cols="99" rows="18" placeholder="{{ description }}" readonly></textarea>
             </div>
     
-            <form action="" id="rcas-form">
+            <form action="/rejectoraccept" method="POST" id="rcas-form">
                 <div class="rcas-button-container">
-                    <button class="rcas-button" style="background-color: rgb(255, 40, 40); margin-right: 10px;" id="rcas-reject-button">Reject</button>
-                    <button class="rcas-button" style="background-color: rgb(53, 244, 53);" id="rcas-reject-button">Accept</button>
+                    <input type="text" value="{{ user_id }}" name="user_id" hidden>
+                    <input type="text" value="{{ recruitment_id }}" name="recruitment_id" hidden>
+                    <button class="rcas-button" style="background-color: rgb(255, 40, 40); margin-right: 10px;" id="rcas-reject-button" name="action" value="reject">Reject</button>
+                    <button class="rcas-button" style="background-color: rgb(53, 244, 53);" id="rcas-reject-button" name="action" value="accept">Accept</button>
                 </div>
             </form>
 
         </div>
 
         <div class="rcas-image-container">
-            <img src="{{ session.get('APP_IMG') }}" alt="">
+            <img src="{{ image }}" alt="">
         </div>
 
     </div>
