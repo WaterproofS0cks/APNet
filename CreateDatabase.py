@@ -119,7 +119,7 @@ class dbCreate:
                 placementID INT NOT NULL,
                 type VARCHAR(20) CHECK (type IN ('User', 'Forum', 'Recruitment')),     
                 timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-                status VARCHAR(10) CHECK (status IN ('Processing', 'Accepted', 'Rejected'))
+                status VARCHAR(10) CHECK (status IN ('Processing', 'Processed'))
             );
         """)
 

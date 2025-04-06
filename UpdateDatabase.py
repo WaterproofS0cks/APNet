@@ -70,7 +70,8 @@ class dbModify(dbInsert):
         """
 
         params = tuple(updates.values()) + tuple(condition.values())
-
+        print(params)
+        print(query)
         self.execute_query(query, params)
         self.db_connection.conn.commit() 
 

@@ -4,7 +4,7 @@
         var postLayout = button.closest('.fm-post-layout');
         var postId = postLayout.getAttribute('data-post-id');
         var postType = postLayout.getAttribute('data-post-type');
-        
+
         fetch("/report", {
             method: "POST",
             headers: { "Content-Type": "application/json" },

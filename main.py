@@ -96,6 +96,8 @@ def create_comment():
     user_id = session.get('id')
     if not user_id:
         return redirect(url_for('auth.login'))
+    if session["penalty"] == "M":
+        return
 
     db_conn = dbConnection(
         dbname=os.getenv("DBNAME"),
@@ -107,7 +109,7 @@ def create_comment():
     db_insert = dbInsert(db_conn)
     db_retrieve = dbRetrieve(db_conn)
 
-    user_data = db_retrieve.retrieve_one("users", "username, profilepicture", "userid=%s", (user_id,))
+    user_data = db_retrieve.retrieve_one("users", "username, profilepicture, penalty", "userid=%s", (user_id,))
 
     data = request.get_json()
     post_id = data.get("id")
@@ -153,6 +155,9 @@ def delete_comment():
 #Finished  
 @app.route('/create', methods=["GET", "POST"])
 def create_post():
+    if  session["penalty"] == "M":
+        return
+
     if "user" in session:
         return render_template('createpost.html')
     else:
@@ -320,17 +325,24 @@ def update_post():
     post_id = request.form.get("post_id")
     description = request.form.get("description")
     title = request.form.get("header")
-    file = request.files.get('image')
+    file = request.files.get("image")
     
-    
+    upload_variable = {}
+
+    if post_type == "forum":
+        upload_variable = {"description":description}
+    if post_type == "forum":
+        upload_variable = {"header":title, "description":description, "status":True}
+
     filename = None
     if file:
         filename = uploader.upload(file)
+        upload_variable["image"] = filename
 
     if post_type == "forum":
-        db_modify.update("Post", {"description":description, "image":filename}, {"postid":post_id})
-    elif post_type == "recruitment":
-        db_modify.update("Recruitment", {"header":title, "description":description, "image":filename, "status":True}, {"recruitmentid":post_id})
+        db_modify.update("Post", upload_variable, {"postid":post_id})
+    if post_type == "forum":
+        db_modify.update("Recruitment", upload_variable, {"recruitmentid":post_id})
 
     return redirect("/")
 
@@ -381,6 +393,7 @@ def RecruitmentApplication():
 #Finished
 @app.route('/dashboard', methods=['POST', 'GET'])
 def Dashboard():
+    # TODO
     if session.get("role") == "A":
         db_conn = dbConnection( 
             dbname= os.getenv("DBNAME"),
@@ -479,7 +492,6 @@ def EditPostData():
     )
     db_conn.connect()
     db_retrieve = dbRetrieve(db_conn)
-    print("IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII")
     if post_type == "post":
         forumdata = db_retrieve.retrieve_one(post_type, "*", "postid = %s", (post_id,))
         return render_template("editforumpost.html", 
@@ -488,8 +500,6 @@ def EditPostData():
                                 description=forumdata["description"])
     elif post_type == "recruitment":
         recruitmentdata = db_retrieve.retrieve_one(post_type, "*", "recruitmentid = %s", (post_id,))
-        print("dfdfnsdfsdjfnj")
-        print(recruitmentdata["description"])
         return render_template("editrecruitmentpost.html", 
                                 post_id=post_id,
                                 header=recruitmentdata["header"], 
@@ -602,6 +612,7 @@ def update_reported_user():
 
     db_conn.connect()
     db_modify = dbModify(db_conn)
+    db_insert = dbInsert(db_conn)
 
     data = request.json
     user_id = data.get("userId")
@@ -613,7 +624,8 @@ def update_reported_user():
         penalty_value = "M"
 
     db_modify.update("Users", {"penalty": penalty_value}, {"userid": user_id})
-    db_modify.update("Reports", {"penalty": penalty_value}, {"userid": user_id})
+    db_modify.update("Reports", {"status": "Processed"}, {"placementid": user_id, "type": "User"})
+    #TODO
     return jsonify({"message": f"User {user_id} has been {action.lower()}ed."})
 
 
@@ -635,13 +647,17 @@ def update_reported_post():
 
     if post_type == "Post":
         table_name = "Post"
+        type = "Forum"
     elif post_type == "Recruitment":
         table_name = "Recruitment"
+        type = "Recruitment"
 
     if action == "Remove":
         db_modify.update(table_name, {"status": False}, {"postID": post_id})
+        db_modify.update("Reports", {"status": "Processed"}, {"placementid": post_id, "type": type})
+        #TODO
     elif action == "Dismiss":
-        db_modify.update("Reports", {"status": "Rejected"}, {"placementID": post_id})
+        db_modify.update("Reports", {"status": "Processed"}, {"placementID": post_id})
 
     return jsonify({"message": f"Post {post_id} has been {action.lower()}ed."})
 

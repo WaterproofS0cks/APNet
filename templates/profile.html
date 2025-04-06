@@ -1,8 +1,8 @@
 {% extends "header-b.html" %}
 {% block title %}Profile{% endblock title %}
 {% block content %}
-<script type="text/javascript" src="{{ url_for('static', filename='scripts/PostFunction.js') }}" data-type="post" data-page="self" data-container="forumContainer" data-user="{{ user_id }}" defer></script>
-<script type="text/javascript" src="{{ url_for('static', filename='scripts/PostFunction.js') }}" data-type="recruitment" data-page="self" data-container="recruitmentContainer" data-user="{{ user_id }}" defer></script>
+<script type="text/javascript" src="{{ url_for('static', filename='scripts/ProfilePostFunction.js') }}" data-type="post" data-page="self" data-container="forumContainer" data-user="{{ user_id }}" defer></script>
+<script type="text/javascript" src="{{ url_for('static', filename='scripts/ProfilePostFunction.js') }}" data-type="recruitment" data-page="self" data-container="recruitmentContainer" data-user="{{ user_id }}" defer></script>
 
 <script type="text/javascript" src="{{ url_for('static', filename='scripts/DropDownFunction.js') }}"></script>
 
@@ -119,6 +119,33 @@
         }
 
         document.querySelector(".tablink").click();
+
+        document.body.addEventListener('click', function(event) {
+            // 3 Dot Menu
+            const clickedDropdown = event.target.closest('.fm-dropdown');
+
+            if (clickedDropdown) {
+                const dropdownContent = clickedDropdown.querySelector('.fm-dropdown-content');
+
+                document.querySelectorAll('.fm-dropdown-content').forEach(function(dropdown) {
+                    if (dropdown !== dropdownContent) { 
+                        dropdown.style.display = 'none';
+                    }
+                });
+
+                if (dropdownContent.style.display === "block") {
+                    dropdownContent.style.display = "none"; 
+                } else {
+                    dropdownContent.style.display = "block";
+                }
+
+                event.stopPropagation();
+            } else {
+                document.querySelectorAll('.fm-dropdown-content').forEach(function(dropdown) {
+                    dropdown.style.display = 'none';
+                });
+            }
+        });
     </script>
 </body>
 {% endblock content %}
