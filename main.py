@@ -156,7 +156,7 @@ def delete_comment():
 @app.route('/create', methods=["GET", "POST"])
 def create_post():
     if  session["penalty"] == "M":
-        return
+        return redirect(url_for('forum'))
 
     if "user" in session:
         return render_template('createpost.html')
