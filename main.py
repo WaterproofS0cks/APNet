@@ -395,7 +395,7 @@ def RecruitmentApplication():
 @app.route('/dashboard', methods=['POST', 'GET'])
 def Dashboard():
     # TODO
-    if session.get("role") == "A":
+    if session.get("role") == "U":
         db_conn = dbConnection( 
             dbname= os.getenv("DBNAME"),
             user = os.getenv("USER"),
@@ -614,6 +614,7 @@ def update_reported_user():
     db_conn.connect()
     db_modify = dbModify(db_conn)
     db_insert = dbInsert(db_conn)
+    db_retrieve = dbRetrieve(db_conn)
 
     data = request.json
     user_id = data.get("userId")
@@ -621,12 +622,15 @@ def update_reported_user():
 
     if action == "Ban":
         penalty_value = "B"
+        penalty = "Banned"
     elif action == "Mute":
         penalty_value = "M"
+        penalty = "Muted"
 
     db_modify.update("Users", {"penalty": penalty_value}, {"userid": user_id})
+    reportid = db_retrieve.retrieve_one("reports", "reportid", "placementid = %s AND type = 'User' AND status = 'Processing'", (user_id,))
     db_modify.update("Reports", {"status": "Processed"}, {"placementid": user_id, "type": "User"})
-    #TODO
+    db_insert.insert("PenaltyHistory", (user_id, reportid[0], penalty))
     return jsonify({"message": f"User {user_id} has been {action.lower()}ed."})
 
 
@@ -645,18 +649,24 @@ def update_reported_post():
     post_id = data.get("postId")
     post_type = data.get("postType")
     action = data.get("action")
+    print("jnsjdnsjndjf")
+    print(post_type)
+    table_name = None
+    id = None
 
-    if post_type == "Post":
-        table_name = "Post"
+    if post_type == "Forum":
+        id = "postid"
+        table_name = "post"
         type = "Forum"
     elif post_type == "Recruitment":
-        table_name = "Recruitment"
+        id = "recruitmentid"
+        table_name = "recruitment"
         type = "Recruitment"
 
     if action == "Remove":
-        db_modify.update(table_name, {"status": False}, {"postID": post_id})
+        print(table_name)
+        db_modify.delete(table_name, {id: post_id})
         db_modify.update("Reports", {"status": "Processed"}, {"placementid": post_id, "type": type})
-        #TODO
     elif action == "Dismiss":
         db_modify.update("Reports", {"status": "Processed"}, {"placementID": post_id})
 

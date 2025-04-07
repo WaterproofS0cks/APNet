@@ -68,7 +68,7 @@ class dbCreate:
         # Application Table
         self.execute_query("""
             CREATE TABLE IF NOT EXISTS Application (
-                recruitmentID INT NOT NULL REFERENCES Recruitment(recruitmentID),
+                recruitmentID INT NOT NULL REFERENCES Recruitment(recruitmentID) ON DELETE CASCADE,
                 userID INT NOT NULL REFERENCES Users(userID),
                 TPNumber VARCHAR(10) NOT NULL,
                 eventPosition VARCHAR(100),
