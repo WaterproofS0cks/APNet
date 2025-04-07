@@ -600,7 +600,7 @@ def update_penalty():
         penalty_value = None
 
     db_modify.update("Users", {"penalty": penalty_value}, {"userID": user_id})
-    return jsonify({"message": f"User {user_id} has been {action.lower()}ed."})
+    return jsonify({"message": f"User {user_id} has been {action.lower()}."})
 
 
 @app.route("/update_reported_user", methods=["POST"])
@@ -631,7 +631,7 @@ def update_reported_user():
     reportid = db_retrieve.retrieve_one("reports", "reportid", "placementid = %s AND type = 'User' AND status = 'Processing'", (user_id,))
     db_modify.update("Reports", {"status": "Processed"}, {"placementid": user_id, "type": "User"})
     db_insert.insert("PenaltyHistory", (user_id, reportid[0], penalty))
-    return jsonify({"message": f"User {user_id} has been {action.lower()}ed."})
+    return jsonify({"message": f"User {user_id} has been {action.lower()}."})
 
 
 @app.route("/update_reported_post", methods=["POST"])

@@ -58,11 +58,12 @@ class dbRetrieve:
 
     def retrieve_actively_penalized(self):
         query = """
-            SELECT u.userid, u.username, ph.description, ph.penaltyType
+            SELECT u.userid, u.username, ph.penaltyType
             FROM Users u
             JOIN PenaltyHistory ph ON u.userID = ph.userID
             WHERE u.penalty IS NOT NULL
         """
+        print(query)
         self.execute_query(query, cursor_type='dict')
         return self.db_connection.cur.fetchall()
 
