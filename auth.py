@@ -6,6 +6,9 @@ from datetime import datetime
 import smtplib
 import random
 
+from UpdateDatabase import dbInsert
+from ConnectDatabase import dbConnection
+
 load_dotenv()
 DBNAME = os.getenv("DBNAME")
 USER = os.getenv("USER")
@@ -44,7 +47,19 @@ def login():
                 session['gender'] = user_data[7]
                 session['pfp'] = user_data[8]
                 session['penalty'] = user_data[9]
-                #[TODO] Add entry to Activity Table
+
+                db_conn = dbConnection(
+                    dbname=os.getenv("DBNAME"),
+                    user=os.getenv("USER"),
+                    password=os.getenv("PASSWORD"),
+                )
+
+                db_conn.connect()
+                db_insert = dbInsert(db_conn)
+                print("sadsdasda")
+                print(user_data[0])
+                db_insert.insert("Activity", (user_data[0],))
+
                 return redirect('/')
             elif  penalty[0] == "B":
                 return render_template("banned.html")
@@ -80,7 +95,19 @@ def register():
             session['gender'] = user_data[7]
             session['pfp'] = user_data[8]
             session['penalty'] = user_data[9]
-            #[TODO] Add entry to Activity Table
+
+            db_conn = dbConnection(
+                dbname=os.getenv("DBNAME"),
+                user=os.getenv("USER"),
+                password=os.getenv("PASSWORD"),
+            )
+
+            db_conn.connect()
+            db_insert = dbInsert(db_conn)
+            print("sadsdasda")
+            print(user_data[0])
+            db_insert.insert("Activity", (user_data[0],))
+
             return redirect('/')
         except psycopg2.errors.UniqueViolation:
             return render_template("register.html", errmsg="Username or Email already exist. Please try again")

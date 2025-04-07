@@ -52,6 +52,7 @@ class dbRetrieve:
         if condition:
             query += f' WHERE {condition}'
         query += ";"
+        print(query)
         self.execute_query(query, params, cursor_type='dict')
         return self.db_connection.cur.fetchone()
 

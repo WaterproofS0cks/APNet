@@ -87,7 +87,7 @@ class Content():
                                         </button>
                                     </div>
                                 </div>
-                            </div>
+                            </div> 
 
                         </div>
                         
@@ -219,7 +219,6 @@ class Content():
 
                         <div class="rc-caption-container">
                             <h1>CLUB DESCRIPTION</h1>
-
                             <h2>{entry['description']}</h2>
                         </div>
 
@@ -628,13 +627,13 @@ class Content():
             return table_html
 
         for entry in load_actively_penalized_users_data:
-            if entry["penaltyType"] == "Banned":
+            if entry["penaltytype"] == "Banned":
                 options_html = f"""
                     <td>
                         <u data-user="{entry['userid']}" data-action="Unban">Unban</u>
                     </td>
                 """
-            elif entry["penaltyType"] == "Muted":
+            elif entry["penaltytype"] == "Muted":
                 options_html = f"""
                     <td>
                         <u data-user="{entry['userid']}" data-action="Unmute">Unmute</u>
@@ -744,7 +743,7 @@ class Content():
 
             table_html += f"""
             <tr>
-                <td>{entry['placementid']}</td>
+                <td>{entry['type']}: {entry['placementid']}ID</td>
                 <td>
                     <u data-id="{entry['placementid']}" data-type="{entry['type']}" data-action="Remove">Remove</u> /
                     <u data-id="{entry['placementid']}" data-type="{entry['type']}" data-action="Dismiss">Dismiss</u>

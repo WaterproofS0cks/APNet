@@ -68,7 +68,7 @@ class dbCreate:
         # Application Table
         self.execute_query("""
             CREATE TABLE IF NOT EXISTS Application (
-                recruitmentID INT NOT NULL REFERENCES Recruitment(recruitmentID),
+                recruitmentID INT NOT NULL REFERENCES Recruitment(recruitmentID) ON DELETE CASCADE,
                 userID INT NOT NULL REFERENCES Users(userID),
                 TPNumber VARCHAR(10) NOT NULL,
                 eventPosition VARCHAR(100),
@@ -119,7 +119,7 @@ class dbCreate:
                 placementID INT NOT NULL,
                 type VARCHAR(20) CHECK (type IN ('User', 'Forum', 'Recruitment')),     
                 timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-                status VARCHAR(10) CHECK (status IN ('Processing', 'Accepted', 'Rejected'))
+                status VARCHAR(10) CHECK (status IN ('Processing', 'Processed'))
             );
         """)
 
