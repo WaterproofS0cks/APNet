@@ -395,7 +395,7 @@ def RecruitmentApplication():
 @app.route('/dashboard', methods=['POST', 'GET'])
 def Dashboard():
     # TODO
-    if session.get("role") == "U":
+    if session.get("role") == "A":
         db_conn = dbConnection( 
             dbname= os.getenv("DBNAME"),
             user = os.getenv("USER"),
