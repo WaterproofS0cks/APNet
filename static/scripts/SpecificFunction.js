@@ -205,7 +205,6 @@ document.addEventListener("DOMContentLoaded", function() {
     commentsList.addEventListener('click', function(event) {
         if (event.target && event.target.classList.contains('delete-comment-btn')) {
             const comment_id = event.target.getAttribute('data-comment-id');
-            console.log("deleting")
 
             fetch('/deletecomment', {
                 method: 'POST',
